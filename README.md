@@ -1,2 +1,0 @@
-# CutRatesLawnWebSite
-Website for CutRatesLawn

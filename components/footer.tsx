@@ -59,23 +59,31 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/our-work" className="text-gray-400 hover:text-white">
+                  Our Work
+                </Link>
+              </li>
+              <li>
+                <Link href="/quote" className="text-gray-400 hover:text-white">
+                  Get a Quote
+                </Link>
+              </li>
+              <li>
                 <Link href="/about" className="text-gray-400 hover:text-white">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="text-gray-400 hover:text-white">
-                  Careers
-                </Link>
-              </li>
-              <li>
-                <Link href="/blog" className="text-gray-400 hover:text-white">
-                  Blog
-                </Link>
-              </li>
-              <li>
                 <Link href="/contact" className="text-gray-400 hover:text-white">
                   Contact Us
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="https://cutrateslawn.fieldportals.com/landing/index"
+                  className="text-gray-400 hover:text-white"
+                >
+                  Customer Portal
                 </Link>
               </li>
             </ul>
@@ -90,7 +98,7 @@ export default function Footer() {
                 <span className="text-gray-400">
                   123 Lawn Avenue
                   <br />
-                  Greenville, SC 29601
+                  Valley Center, KS 67147
                 </span>
               </li>
               <li className="flex">

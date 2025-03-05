@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Menu, X, ChevronDown, Phone, Calendar } from "lucide-react"
+import { Search } from "@/components/search"
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -47,7 +48,9 @@ export default function Header() {
                 Services <ChevronDown className="ml-1 h-4 w-4" />
               </button>
               <div
-                className={`absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-200 ${activeDropdown === "services" ? "opacity-100 visible" : "opacity-0 invisible"}`}
+                className={`absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-200 ${
+                  activeDropdown === "services" ? "opacity-100 visible" : "opacity-0 invisible"
+                }`}
               >
                 <div className="py-1">
                   <Link
@@ -61,6 +64,12 @@ export default function Header() {
                   </Link>
                   <Link href="/services/lawn-care" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
                     Lawn Care
+                  </Link>
+                  <Link
+                    href="/services/landscaping"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  >
+                    Landscaping
                   </Link>
                   <Link
                     href="/services/power-washing"
@@ -93,7 +102,9 @@ export default function Header() {
                 Bundles & Subscriptions <ChevronDown className="ml-1 h-4 w-4" />
               </button>
               <div
-                className={`absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-200 ${activeDropdown === "bundles" ? "opacity-100 visible" : "opacity-0 invisible"}`}
+                className={`absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-200 ${
+                  activeDropdown === "bundles" ? "opacity-100 visible" : "opacity-0 invisible"
+                }`}
               >
                 <div className="py-1">
                   <Link href="/bundles/residential" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -115,17 +126,53 @@ export default function Header() {
               </div>
             </div>
 
+            {/* About Us Dropdown */}
+            <div className="relative group">
+              <button
+                onClick={() => toggleDropdown("about")}
+                className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
+              >
+                About Us <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+              <div
+                className={`absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-200 ${
+                  activeDropdown === "about" ? "opacity-100 visible" : "opacity-0 invisible"
+                }`}
+              >
+                <div className="py-1">
+                  <Link href="/about" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    About Us
+                  </Link>
+                  <Link href="/case-studies" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Case Studies
+                  </Link>
+                  <Link href="/certifications" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Certifications
+                  </Link>
+                  <Link href="/community" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                    Community Engagement
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            <Link
+              href="/our-work"
+              className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
+            >
+              Our Work
+            </Link>
+            <Link
+              href="/quote"
+              className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
+            >
+              Get a Quote
+            </Link>
             <Link
               href="/about"
               className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
             >
               About Us
-            </Link>
-            <Link
-              href="/careers"
-              className="px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
-            >
-              Careers
             </Link>
             <Link
               href="/contact"
@@ -135,15 +182,20 @@ export default function Header() {
             </Link>
           </nav>
 
+          {/* Search Component */}
+          <div className="hidden md:block">
+            <Search />
+          </div>
+
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <Link href="/contact" className="flex items-center text-sm font-medium text-gray-700">
               <Phone className="mr-2 h-4 w-4 text-green-600" />
               (555) 123-4567
             </Link>
-            <Link href="/schedule">
+            <Link href="https://cutrateslawn.fieldportals.com/landing/index" target="_blank" rel="noopener noreferrer">
               <Button className="bg-green-600 hover:bg-green-700">
-                Schedule Service <Calendar className="ml-2 h-4 w-4" />
+                Customer Portal <Calendar className="ml-2 h-4 w-4" />
               </Button>
             </Link>
           </div>
@@ -192,6 +244,30 @@ export default function Header() {
                 Commercial Services
               </Link>
               <Link
+                href="/services/lawn-care"
+                className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100"
+              >
+                Lawn Care
+              </Link>
+              <Link
+                href="/services/landscaping"
+                className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100"
+              >
+                Landscaping
+              </Link>
+              <Link
+                href="/services/power-washing"
+                className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100"
+              >
+                Power Washing
+              </Link>
+              <Link
+                href="/services/pest-control"
+                className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100"
+              >
+                Pest Control
+              </Link>
+              <Link
                 href="/services/all"
                 className="block px-3 py-2 text-base font-medium text-green-600 rounded-md hover:bg-gray-100"
               >
@@ -232,17 +308,61 @@ export default function Header() {
             </div>
           )}
 
+          <button
+            onClick={() => toggleDropdown("mobileAbout")}
+            className="w-full flex justify-between items-center px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
+          >
+            About Us{" "}
+            <ChevronDown
+              className={`ml-1 h-4 w-4 transition-transform ${activeDropdown === "mobileAbout" ? "rotate-180" : ""}`}
+            />
+          </button>
+          {activeDropdown === "mobileAbout" && (
+            <div className="pl-4 space-y-1">
+              <Link
+                href="/about"
+                className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100"
+              >
+                About Us
+              </Link>
+              <Link
+                href="/case-studies"
+                className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100"
+              >
+                Case Studies
+              </Link>
+              <Link
+                href="/certifications"
+                className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100"
+              >
+                Certifications
+              </Link>
+              <Link
+                href="/community"
+                className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100"
+              >
+                Community Engagement
+              </Link>
+            </div>
+          )}
+
+          <Link
+            href="/our-work"
+            className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
+          >
+            Our Work
+          </Link>
+          <Link
+            href="/quote"
+            className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
+          >
+            Get a Quote
+          </Link>
           <Link
             href="/about"
             className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
           >
             About Us
-          </Link>
-          <Link
-            href="/careers"
-            className="block px-3 py-2 text-base font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
-          >
-            Careers
           </Link>
           <Link
             href="/contact"
@@ -251,15 +371,25 @@ export default function Header() {
             Contact
           </Link>
 
+          {/* Mobile Search */}
+          <div className="py-2">
+            <Search />
+          </div>
+
           <div className="pt-4 pb-3 border-t border-gray-200">
             <Link href="/contact" className="flex items-center px-3 py-2 text-base font-medium text-gray-700">
               <Phone className="mr-2 h-5 w-5 text-green-600" />
               (555) 123-4567
             </Link>
             <div className="mt-3 px-3">
-              <Link href="/schedule" className="w-full">
+              <Link
+                href="https://cutrateslawn.fieldportals.com/landing/index"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full"
+              >
                 <Button className="w-full bg-green-600 hover:bg-green-700">
-                  Schedule Service <Calendar className="ml-2 h-4 w-4" />
+                  Customer Portal <Calendar className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
             </div>

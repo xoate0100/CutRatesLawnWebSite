@@ -1,53 +1,48 @@
 import Link from "next/link"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Facebook, Twitter, Instagram, Linkedin, Mail, Phone, MapPin } from "lucide-react"
+import { companyInfo } from "@/lib/static-data"
+import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from "lucide-react"
+import { OptimizedImage } from "@/components/ui/optimized-image"
+import { IMAGES, getPlaceholderImage } from "@/lib/image-constants"
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
+    <footer className="bg-gray-900 text-gray-200">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div>
-            <Link href="/" className="inline-block mb-6">
-              <Image
-                src="/placeholder.svg?height=40&width=180"
-                alt="Cut Rates Lawn Care"
-                width={180}
-                height={40}
-                className="h-10 w-auto"
-              />
-            </Link>
-            <p className="text-gray-400 mb-6">
-              Professional exterior property services for residential and commercial clients. Quality service at
-              competitive rates.
+            <div className="mb-6">
+              <Link href="/" className="inline-block">
+                <OptimizedImage
+                  src={IMAGES.LOGO_WHITE || getPlaceholderImage(200, 80, "Cut Rates Lawn")}
+                  alt="Cut Rates Lawn Care Logo"
+                  width={180}
+                  height={72}
+                />
+              </Link>
+            </div>
+            <p className="mb-4 text-gray-400">
+              Professional lawn care services in Wichita and surrounding areas. Licensed, insured, and dedicated to
+              making your lawn the envy of the neighborhood.
             </p>
             <div className="flex space-x-4">
-              <Link href="#" className="text-gray-400 hover:text-white">
+              <a href={companyInfo.social.facebook} className="text-gray-400 hover:text-white" aria-label="Facebook">
                 <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-white">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-white">
+              </a>
+              <a href={companyInfo.social.instagram} className="text-gray-400 hover:text-white" aria-label="Instagram">
                 <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-white">
-                <Linkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </Link>
+              </a>
+              <a href={companyInfo.social.twitter} className="text-gray-400 hover:text-white" aria-label="Twitter">
+                <Twitter className="h-5 w-5" />
+              </a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
-            <ul className="space-y-3">
+            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+            <ul className="space-y-2">
               <li>
                 <Link href="/services" className="text-gray-400 hover:text-white">
                   Services
@@ -55,17 +50,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/bundles" className="text-gray-400 hover:text-white">
-                  Bundles & Subscriptions
-                </Link>
-              </li>
-              <li>
-                <Link href="/our-work" className="text-gray-400 hover:text-white">
-                  Our Work
-                </Link>
-              </li>
-              <li>
-                <Link href="/quote" className="text-gray-400 hover:text-white">
-                  Get a Quote
+                  Packages
                 </Link>
               </li>
               <li>
@@ -74,16 +59,18 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-white">
-                  Contact Us
+                <Link href="/testimonials" className="text-gray-400 hover:text-white">
+                  Testimonials
                 </Link>
               </li>
               <li>
-                <Link
-                  href="https://cutrateslawn.fieldportals.com/landing/index"
-                  className="text-gray-400 hover:text-white"
-                >
-                  Customer Portal
+                <Link href="/contact" className="text-gray-400 hover:text-white">
+                  Contact
+                </Link>
+              </li>
+              <li>
+                <Link href="/quote" className="text-gray-400 hover:text-white">
+                  Get a Quote
                 </Link>
               </li>
             </ul>
@@ -91,74 +78,67 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Contact Us</h3>
-            <ul className="space-y-4">
-              <li className="flex">
-                <MapPin className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                <span className="text-gray-400">
-                  123 Lawn Avenue
-                  <br />
-                  Valley Center, KS 67147
-                </span>
+            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
+            <ul className="space-y-3">
+              <li className="flex items-start">
+                <Phone className="h-5 w-5 mr-2 mt-0.5 text-green-500" />
+                <a href={`tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`} className="text-gray-400 hover:text-white">
+                  {companyInfo.phone}
+                </a>
               </li>
-              <li className="flex">
-                <Phone className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                <Link href="tel:+15551234567" className="text-gray-400 hover:text-white">
-                  (555) 123-4567
-                </Link>
+              <li className="flex items-start">
+                <Mail className="h-5 w-5 mr-2 mt-0.5 text-green-500" />
+                <a href={`mailto:${companyInfo.email}`} className="text-gray-400 hover:text-white">
+                  {companyInfo.email}
+                </a>
               </li>
-              <li className="flex">
-                <Mail className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
-                <Link href="mailto:info@cutrateslawn.com" className="text-gray-400 hover:text-white">
-                  info@cutrateslawn.com
-                </Link>
+              <li className="flex items-start">
+                <MapPin className="h-5 w-5 mr-2 mt-0.5 text-green-500" />
+                <address className="not-italic text-gray-400">{companyInfo.address}</address>
+              </li>
+              <li className="flex items-start">
+                <Clock className="h-5 w-5 mr-2 mt-0.5 text-green-500" />
+                <div className="text-gray-400">
+                  <p>Mon-Fri: {companyInfo.hours.weekdays}</p>
+                  <p>Sat: {companyInfo.hours.saturday}</p>
+                  <p>Sun: {companyInfo.hours.sunday}</p>
+                </div>
               </li>
             </ul>
           </div>
 
-          {/* Newsletter */}
+          {/* Service Areas */}
           <div>
-            <h3 className="text-lg font-semibold mb-6">Newsletter</h3>
-            <p className="text-gray-400 mb-4">
-              Subscribe to our newsletter for seasonal tips, special offers, and more.
-            </p>
-            <form className="space-y-3">
-              <div className="flex">
-                <Input
-                  type="email"
-                  placeholder="Your email"
-                  className="bg-gray-800 border-gray-700 text-white"
-                  required
-                />
-                <Button type="submit" className="ml-2 bg-green-600 hover:bg-green-700">
-                  Subscribe
-                </Button>
-              </div>
-              <p className="text-xs text-gray-500">We respect your privacy. Unsubscribe at any time.</p>
-            </form>
+            <h3 className="text-lg font-semibold mb-4">Service Areas</h3>
+            <div className="grid grid-cols-2 gap-2">
+              {companyInfo.serviceAreas.map((area, index) => (
+                <div key={index} className="text-gray-400">
+                  {area}
+                </div>
+              ))}
+            </div>
+            <div className="mt-6">
+              <Button className="w-full bg-green-600 hover:bg-green-700" asChild>
+                <Link href="/quote">Request a Quote</Link>
+              </Button>
+            </div>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 text-sm">
-              &copy; {new Date().getFullYear()} Cut Rates Lawn Care LLC. All rights reserved.
-            </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">
-                Privacy Policy
-              </Link>
-              <Link href="/terms" className="text-gray-400 hover:text-white text-sm">
-                Terms of Service
-              </Link>
-              <Link href="/sitemap" className="text-gray-400 hover:text-white text-sm">
-                Sitemap
-              </Link>
-            </div>
+        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
+          <p>
+            &copy; {new Date().getFullYear()} {companyInfo.name}. All rights reserved.
+          </p>
+          <div className="mt-2 space-x-4">
+            <Link href="/privacy" className="hover:text-white">
+              Privacy Policy
+            </Link>
+            <Link href="/terms" className="hover:text-white">
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>
     </footer>
   )
 }
-

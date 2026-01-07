@@ -1,21 +1,33 @@
-import Head from "next/head"
+"use client"
+
+import { useEffect, useState } from "react"
+import { JsonLd, createLocalBusinessData, createServiceData } from "./json-ld"
 
 interface StructuredDataProps {
-  type: "Service" | "LocalBusiness" | "Organization"
+  type: "localBusiness" | "service" | "bundle" | "faq"
   data: any
 }
 
 export default function StructuredData({ type, data }: StructuredDataProps) {
-  const schema = {
-    "@context": "https://schema.org",
-    "@type": type,
-    ...data,
-  }
+  const [structuredData, setStructuredData] = useState<any>(null)
 
-  return (
-    <Head>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-    </Head>
-  )
+  useEffect(() => {
+    if (!data) return
+
+    switch (type) {
+      case "localBusiness":
+        setStructuredData(createLocalBusinessData(data))
+        break
+      case "service":
+        setStructuredData(createServiceData(data))
+        break
+      // Add more cases as needed
+      default:
+        setStructuredData(null)
+    }
+  }, [type, data])
+
+  if (!structuredData) return null
+
+  return <JsonLd data={structuredData} />
 }
-

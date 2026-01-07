@@ -1,21 +1,9 @@
-import Head from "next/head"
-
-interface SchemaMarkupProps {
-  type: "Organization" | "LocalBusiness" | "Service" | "Review"
-  data: any
-}
-
-export default function SchemaMarkup({ type, data }: SchemaMarkupProps) {
-  const schema = {
+export function SchemaMarkup({ type, data }) {
+  const schemaData = {
     "@context": "https://schema.org",
     "@type": type,
     ...data,
   }
 
-  return (
-    <Head>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-    </Head>
-  )
+  return <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaData) }} />
 }
-

@@ -1,0 +1,47 @@
+export const fallbackReviews = {
+  businessName: "Cut Rates Lawn Care",
+  overallRating: 4.8,
+  totalReviews: 24,
+  reviews: [
+    {
+      author_name: "John Smith",
+      rating: 5,
+      relative_time_description: "2 months ago",
+      text: "Cut Rates Lawn Care has been maintaining our yard for over a year now. Their attention to detail is impressive, and they're always on time. Highly recommend their services!",
+      profile_photo_url: "/placeholder.svg?height=50&width=50",
+      time: 1677609600000,
+    },
+    {
+      author_name: "Sarah Johnson",
+      rating: 5,
+      relative_time_description: "3 months ago",
+      text: "I've tried several lawn care services in the area, and Cut Rates is by far the best. Their prices are reasonable, and the quality of work is outstanding. My lawn has never looked better!",
+      profile_photo_url: "/placeholder.svg?height=50&width=50",
+      time: 1675017600000,
+    },
+    {
+      author_name: "Michael Williams",
+      rating: 4,
+      relative_time_description: "1 month ago",
+      text: "Reliable service and friendly staff. They've been taking care of my lawn for 6 months, and I've been very satisfied with their work. The only reason for 4 stars instead of 5 is that occasionally they miss a spot, but they're always quick to fix it when I point it out.",
+      profile_photo_url: "/placeholder.svg?height=50&width=50",
+      time: 1680288000000,
+    },
+    {
+      author_name: "Emily Davis",
+      rating: 5,
+      relative_time_description: "2 weeks ago",
+      text: "Cut Rates transformed my neglected yard into the envy of the neighborhood! Their team is professional, efficient, and knowledgeable. I appreciate their suggestions for improving my lawn's health long-term.",
+      profile_photo_url: "/placeholder.svg?height=50&width=50",
+      time: 1682707200000,
+    },
+    {
+      author_name: "Robert Brown",
+      rating: 5,
+      relative_time_description: "1 week ago",
+      text: "Excellent service from start to finish. The online booking was easy, they arrived on time, and did a fantastic job. I've already recommended them to several neighbors.",
+      profile_photo_url: "/placeholder.svg?height=50&width=50",
+      time: 1683312000000,
+    },
+  ],
+}

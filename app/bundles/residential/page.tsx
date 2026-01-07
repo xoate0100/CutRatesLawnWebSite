@@ -117,4 +117,3 @@ export default function ResidentialBundlesPage() {
     </div>
   )
 }
-

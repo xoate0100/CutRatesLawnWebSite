@@ -1,0 +1,215 @@
+import type { ImageKey } from "./image-constants"
+
+export interface ImageMetadata {
+  key: ImageKey
+  alt: string
+  width: number
+  height: number
+  priority?: boolean
+  description: string
+  emotionalPurpose: string
+}
+
+export const IMAGE_METADATA: Record<ImageKey, ImageMetadata> = {
+  HERO_HOME: {
+    key: "HERO_HOME",
+    alt: "Professional lawn care services in Wichita, Kansas",
+    width: 1920,
+    height: 1080,
+    priority: true,
+    description: "Beautiful, well-maintained lawn with vibrant green grass and clean edges",
+    emotionalPurpose: "Create desire and showcase the end result customers want",
+  },
+  HERO_SERVICES: {
+    key: "HERO_SERVICES",
+    alt: "Professional lawn care equipment and services",
+    width: 1920,
+    height: 800,
+    priority: true,
+    description: "Professional lawn care team working with high-quality equipment",
+    emotionalPurpose: "Build trust and demonstrate expertise",
+  },
+  HERO_ABOUT: {
+    key: "HERO_ABOUT",
+    alt: "Cut Rates Lawn Care team",
+    width: 1920,
+    height: 800,
+    priority: true,
+    description: "Friendly team members in branded uniforms",
+    emotionalPurpose: "Create connection and humanize the brand",
+  },
+  HERO_CONTACT: {
+    key: "HERO_CONTACT",
+    alt: "Contact Cut Rates Lawn Care",
+    width: 1920,
+    height: 800,
+    priority: true,
+    description: "Customer service representative helping a client",
+    emotionalPurpose: "Reduce friction and encourage contact",
+  },
+  SERVICE_MOWING: {
+    key: "SERVICE_MOWING",
+    alt: "Professional lawn mowing service",
+    width: 800,
+    height: 600,
+    description: "Professional using a high-quality mower on a residential lawn",
+    emotionalPurpose: "Demonstrate quality and attention to detail",
+  },
+  SERVICE_FERTILIZATION: {
+    key: "SERVICE_FERTILIZATION",
+    alt: "Lawn fertilization service",
+    width: 800,
+    height: 600,
+    description: "Professional applying fertilizer to enhance lawn health",
+    emotionalPurpose: "Showcase expertise and specialized knowledge",
+  },
+  SERVICE_WEED_CONTROL: {
+    key: "SERVICE_WEED_CONTROL",
+    alt: "Weed control treatment",
+    width: 800,
+    height: 600,
+    description: "Targeted weed control application on a lawn",
+    emotionalPurpose: "Highlight problem-solving capabilities",
+  },
+  SERVICE_AERATION: {
+    key: "SERVICE_AERATION",
+    alt: "Lawn aeration service",
+    width: 800,
+    height: 600,
+    description: "Aeration equipment in action on a residential lawn",
+    emotionalPurpose: "Demonstrate specialized equipment and expertise",
+  },
+  SERVICE_CLEANUP: {
+    key: "SERVICE_CLEANUP",
+    alt: "Seasonal lawn cleanup",
+    width: 800,
+    height: 600,
+    description: "Team performing thorough lawn cleanup with professional equipment",
+    emotionalPurpose: "Show thoroughness and attention to detail",
+  },
+  TESTIMONIAL_1: {
+    key: "TESTIMONIAL_1",
+    alt: "Satisfied customer testimonial",
+    width: 300,
+    height: 300,
+    description: "Headshot of a smiling customer in front of their beautiful lawn",
+    emotionalPurpose: "Build trust through social proof",
+  },
+  TESTIMONIAL_2: {
+    key: "TESTIMONIAL_2",
+    alt: "Customer review",
+    width: 300,
+    height: 300,
+    description: "Headshot of a family enjoying their well-maintained yard",
+    emotionalPurpose: "Create relatability and aspiration",
+  },
+  TESTIMONIAL_3: {
+    key: "TESTIMONIAL_3",
+    alt: "Client feedback",
+    width: 300,
+    height: 300,
+    description: "Headshot of a business owner with their commercial property",
+    emotionalPurpose: "Demonstrate versatility and professionalism",
+  },
+  TEAM_OWNER: {
+    key: "TEAM_OWNER",
+    alt: "Cut Rates Lawn Care owner",
+    width: 600,
+    height: 800,
+    description: "Professional portrait of the company owner in branded attire",
+    emotionalPurpose: "Build trust and personal connection with leadership",
+  },
+  TEAM_MANAGER: {
+    key: "TEAM_MANAGER",
+    alt: "Operations manager",
+    width: 600,
+    height: 800,
+    description: "Professional portrait of the operations manager in the field",
+    emotionalPurpose: "Demonstrate expertise and hands-on management",
+  },
+  TEAM_CREW: {
+    key: "TEAM_CREW",
+    alt: "Professional lawn care crew",
+    width: 1200,
+    height: 800,
+    description: "Group photo of the lawn care crew with their equipment",
+    emotionalPurpose: "Showcase team strength and professionalism",
+  },
+  LOGO: {
+    key: "LOGO",
+    alt: "Cut Rates Lawn Care logo",
+    width: 200,
+    height: 80,
+    priority: true,
+    description: "Company logo with green color scheme and lawn imagery",
+    emotionalPurpose: "Brand recognition and professionalism",
+  },
+  LOGO_WHITE: {
+    key: "LOGO_WHITE",
+    alt: "Cut Rates Lawn Care logo",
+    width: 200,
+    height: 80,
+    description: "White version of company logo for dark backgrounds",
+    emotionalPurpose: "Brand consistency across different contexts",
+  },
+  PARTNER_KWCH: {
+    key: "PARTNER_KWCH",
+    alt: "As seen on KWCH News",
+    width: 120,
+    height: 40,
+    description: "KWCH News logo",
+    emotionalPurpose: "Build credibility through media recognition",
+  },
+  PARTNER_GOOGLE: {
+    key: "PARTNER_GOOGLE",
+    alt: "Google Reviews",
+    width: 120,
+    height: 40,
+    description: "Google Reviews logo with star rating",
+    emotionalPurpose: "Establish trust through recognized review platform",
+  },
+  PARTNER_YELP: {
+    key: "PARTNER_YELP",
+    alt: "Yelp Reviews",
+    width: 120,
+    height: 40,
+    description: "Yelp logo with star rating",
+    emotionalPurpose: "Reinforce credibility through multiple review sources",
+  },
+  EQUIPMENT_MOWER: {
+    key: "EQUIPMENT_MOWER",
+    alt: "Professional lawn mower",
+    width: 800,
+    height: 600,
+    description: "Close-up of professional-grade lawn mower",
+    emotionalPurpose: "Demonstrate investment in quality equipment",
+  },
+  EQUIPMENT_SPREADER: {
+    key: "EQUIPMENT_SPREADER",
+    alt: "Professional fertilizer spreader",
+    width: 800,
+    height: 600,
+    description: "Professional using a calibrated spreader for precise application",
+    emotionalPurpose: "Showcase precision and professional-grade tools",
+  },
+  BEFORE_AFTER_1: {
+    key: "BEFORE_AFTER_1",
+    alt: "Lawn transformation before and after",
+    width: 1200,
+    height: 600,
+    description: "Side-by-side comparison of a lawn before and after professional care",
+    emotionalPurpose: "Demonstrate tangible results and transformation",
+  },
+  BEFORE_AFTER_2: {
+    key: "BEFORE_AFTER_2",
+    alt: "Property improvement before and after",
+    width: 1200,
+    height: 600,
+    description: "Before and after of a neglected lawn transformed to showcase property",
+    emotionalPurpose: "Create desire by showing dramatic improvement",
+  },
+}
+
+export const getImageMetadata = (key: ImageKey): ImageMetadata => {
+  return IMAGE_METADATA[key]
+}

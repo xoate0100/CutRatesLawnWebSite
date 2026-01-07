@@ -3,56 +3,74 @@
 import type React from "react"
 
 import { useState } from "react"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { SearchIcon } from "lucide-react"
-import Link from "next/link"
-
-// This is a mock function. In a real application, this would be an API call or server action.
-const searchSite = async (query: string) => {
-  // Mock search results
-  const results = [
-    { title: "Lawn Mowing Service", url: "/services/lawn-care" },
-    { title: "Residential Bundles", url: "/bundles/residential" },
-    { title: "About Us", url: "/about" },
-  ].filter((item) => item.title.toLowerCase().includes(query.toLowerCase()))
-
-  return results
-}
+import { Input } from "./ui/input"
+import { Button } from "./ui/button"
+import { searchContent } from "../lib/api-client"
 
 export function Search() {
   const [query, setQuery] = useState("")
-  const [results, setResults] = useState<Array<{ title: string; url: string }>>([])
+  const [results, setResults] = useState<any[]>([])
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault()
-    const searchResults = await searchSite(query)
-    setResults(searchResults)
+
+    if (!query.trim()) return
+
+    setIsLoading(true)
+    setError(null)
+
+    try {
+      const data = await searchContent(query)
+      setResults(data.data || [])
+    } catch (err) {
+      setError("Failed to search. Please try again.")
+      console.error("Search error:", err)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
-    <div className="relative">
-      <form onSubmit={handleSearch} className="flex w-full max-w-sm items-center space-x-2">
-        <Input type="search" placeholder="Search..." value={query} onChange={(e) => setQuery(e.target.value)} />
-        <Button type="submit">
-          <SearchIcon className="h-4 w-4" />
-          <span className="sr-only">Search</span>
+    <div className="w-full max-w-md mx-auto">
+      <form onSubmit={handleSearch} className="flex gap-2">
+        <Input
+          type="search"
+          placeholder="Search..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          className="flex-1"
+        />
+        <Button type="submit" disabled={isLoading}>
+          {isLoading ? "Searching..." : "Search"}
         </Button>
       </form>
+
+      {error && <div className="mt-4 p-2 bg-red-50 text-red-800 rounded-md text-sm">{error}</div>}
+
       {results.length > 0 && (
-        <div className="absolute top-full left-0 w-full bg-white shadow-md mt-1 rounded-md">
-          <ul className="py-2">
-            {results.map((result, index) => (
-              <li key={index}>
-                <Link href={result.url} className="block px-4 py-2 hover:bg-gray-100">
-                  {result.title}
-                </Link>
+        <div className="mt-4">
+          <h3 className="text-lg font-medium mb-2">Results</h3>
+          <ul className="space-y-2">
+            {results.map((result) => (
+              <li key={result.id} className="p-3 bg-gray-50 rounded-md">
+                <h4 className="font-medium">{result.attributes.title}</h4>
+                {result.attributes.description && (
+                  <p className="text-sm text-gray-600 mt-1">
+                    {result.attributes.description.substring(0, 100)}
+                    {result.attributes.description.length > 100 ? "..." : ""}
+                  </p>
+                )}
               </li>
             ))}
           </ul>
         </div>
       )}
+
+      {query && !isLoading && results.length === 0 && (
+        <div className="mt-4 p-2 bg-gray-50 rounded-md text-sm text-center">No results found for "{query}"</div>
+      )}
     </div>
   )
 }
-

@@ -25,7 +25,7 @@ const MAX_RETRY_ATTEMPTS = 3
  * @returns {string} Full Strapi URL
  */
 export function getStrapiURL(path = "") {
-  return `${process.env.STRAPI_API_URL || "http://localhost:1337"}${path}`
+  return `${process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337"}${path}`
 }
 
 /**
@@ -532,4 +532,121 @@ export async function submitQuoteForm(formData: QuoteFormData): Promise<ApiRespo
   }
 }
 
-// Export all functions;
+/**
+ * Get all FAQs from the API
+ */
+export async function getFAQs() {
+  try {
+    const endpoint = await getEndpoint("faqs")
+    return await fetchApi(`${endpoint}?populate=*`, {})
+  } catch (error) {
+    logDetailedError("FAQs endpoint failed, using fallback data", error, {}, ErrorSeverity.WARNING)
+    return { data: [] }
+  }
+}
+
+/**
+ * Get FAQ categories from the API
+ */
+export async function getFAQCategories() {
+  try {
+    const endpoint = await getEndpoint("faq-categories")
+    return await fetchApi(`${endpoint}?populate=*`, {})
+  } catch (error) {
+    logDetailedError("FAQ categories endpoint failed, using fallback data", error, {}, ErrorSeverity.WARNING)
+    return { data: [] }
+  }
+}
+
+/**
+ * Subscribe to newsletter
+ */
+export async function subscribeToNewsletter(email: string): Promise<ApiResponse> {
+  try {
+    console.log("Subscribing to newsletter:", email)
+
+    // Simulate API delay
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    // Simulate successful response
+    return {
+      success: true,
+      message: "Successfully subscribed to newsletter",
+    }
+  } catch (error) {
+    console.error("Error subscribing to newsletter:", error)
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : "An unknown error occurred",
+    }
+  }
+}
+
+/**
+ * Submit a testimonial
+ */
+export async function submitTestimonial(testimonialData: {
+  name: string
+  email: string
+  rating: number
+  text: string
+  serviceId?: string
+}): Promise<ApiResponse> {
+  try {
+    console.log("Submitting testimonial:", testimonialData)
+
+    // Simulate API delay
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    // Simulate successful response
+    return {
+      success: true,
+      message: "Testimonial submitted successfully",
+    }
+  } catch (error) {
+    console.error("Error submitting testimonial:", error)
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : "An unknown error occurred",
+    }
+  }
+}
+
+/**
+ * Get service areas from the API
+ */
+export async function getServiceAreas() {
+  try {
+    const endpoint = await getEndpoint("service-areas")
+    return await fetchApi(`${endpoint}?populate=*`, {})
+  } catch (error) {
+    logDetailedError("Service areas endpoint failed, using fallback data", error, {}, ErrorSeverity.WARNING)
+    return { data: [] }
+  }
+}
+
+/**
+ * Submit a quote request
+ */
+export async function submitQuoteRequest(quoteData: QuoteFormData): Promise<ApiResponse> {
+  try {
+    console.log("Submitting quote request:", quoteData)
+
+    // Simulate API delay
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    // Simulate successful response
+    return {
+      success: true,
+      message: "Quote request submitted successfully",
+    }
+  } catch (error) {
+    console.error("Error submitting quote request:", error)
+    return {
+      success: false,
+      message: error instanceof Error ? error.message : "An unknown error occurred",
+    }
+  }
+}
+
+// Export all functions

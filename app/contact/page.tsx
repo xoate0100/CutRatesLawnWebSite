@@ -21,10 +21,10 @@ export default function ContactPage() {
             </CardHeader>
             <CardContent>
               <address className="not-italic">
-                <p>123 Green Street</p>
-                <p>Wichita, KS 67201</p>
+                <p>PO BOX 407</p>
+                <p>Valley Center, KS 67147</p>
                 <p className="mt-4">
-                  <strong>Phone:</strong> (316) 555-1234
+                  <strong>Phone:</strong> (316) 925-5050
                 </p>
                 <p>
                   <strong>Email:</strong> info@cutrateslawn.com

@@ -131,3 +131,16 @@ export function truncateString(str: string, length = 100): string {
   if (str.length <= length) return str
   return str.slice(0, length) + "..."
 }
+
+/**
+ * Formats a number as currency
+ * @param amount - The amount to format
+ * @param currency - The currency code (default: USD)
+ * @returns Formatted currency string
+ */
+export function formatCurrency(amount: number, currency = "USD"): string {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
+  }).format(amount)
+}

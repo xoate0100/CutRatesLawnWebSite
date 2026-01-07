@@ -144,3 +144,21 @@ export const fallbackData = {
     meta: {},
   },
 }
+
+export function getFallbackData(contentType: string) {
+  return fallbackData[contentType as keyof typeof fallbackData] || null
+}
+
+export function getBundleFallbackData() {
+  return {
+    data: [],
+    meta: {
+      pagination: {
+        page: 1,
+        pageSize: 25,
+        pageCount: 0,
+        total: 0,
+      },
+    },
+  }
+}

@@ -266,3 +266,23 @@ export function validateResponse(contentType: string, response: any): any {
 
   return response
 }
+
+export function validate(data: any, schema: any) {
+  return validateData("generic", data)
+}
+
+export function enhanceSchemaDiscovery(endpoint: string) {
+  return getValidatedEndpoint(endpoint)
+}
+
+export function getContentTypeSchema(contentType: string) {
+  return {
+    endpoint: getValidatedEndpoint(contentType),
+    fields: fieldMappings[contentType as keyof typeof fieldMappings] || {},
+  }
+}
+
+export function getFieldNamesFromSchema(contentType: string) {
+  const schema = fieldMappings[contentType as keyof typeof fieldMappings]
+  return schema ? Object.keys(schema) : []
+}

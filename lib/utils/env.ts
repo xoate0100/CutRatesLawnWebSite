@@ -46,3 +46,14 @@ export function getStrapiApiToken(): string {
 export function isDevelopment(): boolean {
   return getEnv("NODE_ENV", "development") === "development"
 }
+
+export const ENV = {
+  STRAPI_API_URL: getStrapiApiUrl(),
+  STRAPI_API_TOKEN: getStrapiApiToken(),
+  NODE_ENV: getEnv("NODE_ENV", "development"),
+  IS_DEVELOPMENT: isDevelopment(),
+}
+
+export function isProduction(): boolean {
+  return getEnv("NODE_ENV", "development") === "production"
+}

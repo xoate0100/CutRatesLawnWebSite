@@ -1,0 +1,43 @@
+---
+description: Agentic session workflow — read context, follow plan, verify before done
+alwaysApply: true
+---
+
+# Agentic Session (required)
+
+At the **start** of every session:
+
+1. Read `6_ai_runtime_context/AI_CONTEXT.md`.
+2. Read `docs/DEV_COLD_START_KNOWLEDGE.md` before implementing features.
+3. Check `6_ai_runtime_context/ACTIVE_PLAN.yaml` and `ACTIVE_TASK_POINTER.yaml`.
+
+## Agent roles (simplified graph)
+
+| Role | When | Must do |
+|------|------|---------|
+| `spec_reader` | Session start | Load plan, decisions, cold-start doc |
+| `implementer` | Writing code | Stay in `feature_flags.yml` write_to paths |
+| `validator` | Before marking done | `npm run verify` |
+| `reviewer` | Before commit | No resurrection keywords in diff |
+| `decision_proposer` | Open fork only | Add proposals under `proposals/` |
+
+See `5_reference_architectures/AGENT_REGISTRY.yaml` for full graph.
+
+## Before considering work complete
+
+```bash
+npm run verify
+```
+
+## After governance changes
+
+```bash
+npm run agentic:context
+```
+
+## Never
+
+- Edit `5_reference_architectures/DECISION_REGISTRY.yaml` directly.
+- Re-introduce `resurrection_trigger_keywords` from the decision registry.
+- Delete or rewrite existing working page code to fit patterns.
+- Change CI/CD deployment or `.env` without human review.

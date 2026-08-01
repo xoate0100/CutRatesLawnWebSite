@@ -1,0 +1,42 @@
+# Simplified agent role graph for L2.5 single-agent sandbox
+version: 1
+updated: "2026-07-15"
+entry_role: spec_reader
+max_review_loops: 3
+
+roles:
+  - id: spec_reader
+    responsibility: Load cold-start doc, active plan, and open decisions
+    must_read:
+      - 6_ai_runtime_context/AI_CONTEXT.md
+      - docs/DEV_COLD_START_KNOWLEDGE.md
+      - 5_reference_architectures/DECISION_REGISTRY.yaml
+    hands_off_to: implementer
+
+  - id: implementer
+    responsibility: Write code within feature_flags write_to paths
+    constraints:
+      - query decisions before architectural changes
+      - no edits to locked registries
+    hands_off_to: validator
+
+  - id: validator
+    responsibility: Run npm run verify before marking task complete
+    must_run:
+      - npm run verify
+    hands_off_to: reviewer
+
+  - id: reviewer
+    responsibility: Check staged diff against decisions and drift vectors
+    must_check:
+      - resurrection_trigger_keywords absent from diff
+      - task scope matches ACTIVE_PLAN
+    hands_off_to: null
+
+  - id: decision_proposer
+    responsibility: Propose new decisions via proposals/ only
+    write_policy:
+      allowed:
+        - proposals/
+      forbidden:
+        - 5_reference_architectures/DECISION_REGISTRY.yaml

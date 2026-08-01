@@ -1,0 +1,4 @@
+agentic_scaffold_version: "1.0.0-spoke"
+initialized_at: "2026-07-15"
+layout_preset: nextjs_root
+# Re-running agentic migration: check META_FRAMEWORK_VERSION.yaml for version bumps

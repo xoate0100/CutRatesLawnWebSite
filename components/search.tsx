@@ -1,75 +1,94 @@
 "use client"
 
 import type React from "react"
+import { useMemo, useState } from "react"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
+import { SearchIcon } from "lucide-react"
+import Link from "next/link"
 
-import { useState } from "react"
-import { Input } from "./ui/input"
-import { Button } from "./ui/button"
-import { searchContent } from "../lib/api-client"
+/** Curated in-repo index — not a CMS search API. */
+const SITE_INDEX = [
+  { title: "Home", url: "/", keywords: "home lawn" },
+  { title: "Lawn Care", url: "/services/lawn-care", keywords: "mowing fertilization lawn" },
+  { title: "Power Washing", url: "/services/power-washing", keywords: "wash pressure" },
+  { title: "Pest Control", url: "/services/pest-control", keywords: "pest insects" },
+  { title: "Gutter Cleaning", url: "/services/gutter-cleaning", keywords: "gutter" },
+  { title: "Hardscaping", url: "/services/hardscaping", keywords: "patio hardscape" },
+  { title: "Snow Removal", url: "/services/snow-removal", keywords: "snow winter" },
+  { title: "Residential Services", url: "/services/residential", keywords: "home residential" },
+  { title: "Commercial Services", url: "/services/commercial", keywords: "business commercial" },
+  { title: "Landscaping", url: "/services/landscaping", keywords: "landscape plants" },
+  { title: "Bundles", url: "/bundles", keywords: "subscription package" },
+  { title: "Get a Quote", url: "/quote", keywords: "price estimate quote" },
+  { title: "Schedule", url: "/schedule", keywords: "book appointment" },
+  { title: "Contact", url: "/contact", keywords: "phone email" },
+  { title: "About Us", url: "/about", keywords: "company team" },
+  { title: "Our Work", url: "/our-work", keywords: "gallery portfolio" },
+  { title: "FAQ", url: "/faq", keywords: "questions" },
+  { title: "Careers", url: "/careers", keywords: "jobs hiring" },
+  { title: "Privacy Policy", url: "/privacy", keywords: "privacy" },
+  { title: "Customer Portal", url: "/portal", keywords: "login account" },
+]
 
 export function Search() {
   const [query, setQuery] = useState("")
-  const [results, setResults] = useState<any[]>([])
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [submitted, setSubmitted] = useState("")
 
-  const handleSearch = async (e: React.FormEvent) => {
+  const results = useMemo(() => {
+    const q = submitted.trim().toLowerCase()
+    if (!q) return []
+    return SITE_INDEX.filter(
+      (item) =>
+        item.title.toLowerCase().includes(q) ||
+        item.keywords.includes(q) ||
+        item.url.toLowerCase().includes(q),
+    ).slice(0, 8)
+  }, [submitted])
+
+  const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
-
-    if (!query.trim()) return
-
-    setIsLoading(true)
-    setError(null)
-
-    try {
-      const data = await searchContent(query)
-      setResults(data.data || [])
-    } catch (err) {
-      setError("Failed to search. Please try again.")
-      console.error("Search error:", err)
-    } finally {
-      setIsLoading(false)
-    }
+    setSubmitted(query)
   }
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <form onSubmit={handleSearch} className="flex gap-2">
+    <div className="relative">
+      <form onSubmit={handleSearch} className="flex w-full max-w-sm items-center space-x-2">
         <Input
           type="search"
-          placeholder="Search..."
+          placeholder="Search pages…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1"
+          aria-label="Search site pages"
         />
-        <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Searching..." : "Search"}
+        <Button type="submit">
+          <SearchIcon className="h-4 w-4" />
+          <span className="sr-only">Search</span>
         </Button>
       </form>
-
-      {error && <div className="mt-4 p-2 bg-red-50 text-red-800 rounded-md text-sm">{error}</div>}
-
-      {results.length > 0 && (
-        <div className="mt-4">
-          <h3 className="text-lg font-medium mb-2">Results</h3>
-          <ul className="space-y-2">
-            {results.map((result) => (
-              <li key={result.id} className="p-3 bg-gray-50 rounded-md">
-                <h4 className="font-medium">{result.attributes.title}</h4>
-                {result.attributes.description && (
-                  <p className="text-sm text-gray-600 mt-1">
-                    {result.attributes.description.substring(0, 100)}
-                    {result.attributes.description.length > 100 ? "..." : ""}
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
+      {submitted && (
+        <div className="absolute top-full left-0 z-50 w-full bg-white shadow-md mt-1 rounded-md border">
+          {results.length === 0 ? (
+            <p className="px-4 py-3 text-sm text-gray-600">No matching pages. Try Contact or Services.</p>
+          ) : (
+            <ul className="py-2">
+              {results.map((result) => (
+                <li key={result.url}>
+                  <Link
+                    href={result.url}
+                    className="block px-4 py-2 hover:bg-gray-100 text-sm"
+                    onClick={() => {
+                      setSubmitted("")
+                      setQuery("")
+                    }}
+                  >
+                    {result.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-      )}
-
-      {query && !isLoading && results.length === 0 && (
-        <div className="mt-4 p-2 bg-gray-50 rounded-md text-sm text-center">No results found for "{query}"</div>
       )}
     </div>
   )

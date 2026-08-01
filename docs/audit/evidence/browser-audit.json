@@ -1,0 +1,729 @@
+{
+  "generatedAt": "2026-08-01T08:34:54.530Z",
+  "baseURL": "http://localhost:3001",
+  "browser": "Microsoft Edge",
+  "expectedRouteCount": 29,
+  "routeResults": [
+    {
+      "route": "/",
+      "status": 200,
+      "finalURL": "http://localhost:3001/",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Complete Exterior Property Solutions",
+      "placeholderImages": 4,
+      "forms": 3,
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/about",
+      "status": 200,
+      "finalURL": "http://localhost:3001/about",
+      "title": "Cut Rates Lawn Care",
+      "h1": "About Cut Rates Lawn Care",
+      "placeholderImages": 7,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/blog",
+      "status": 200,
+      "finalURL": "http://localhost:3001/blog",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Lawn Care Blog",
+      "placeholderImages": 5,
+      "forms": 4,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/bundles",
+      "status": 200,
+      "finalURL": "http://localhost:3001/bundles",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Service Bundles & Subscriptions",
+      "placeholderImages": 2,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/bundles/all",
+      "status": 200,
+      "finalURL": "http://localhost:3001/bundles/all",
+      "title": "Cut Rates Lawn Care",
+      "h1": "All Service Bundles",
+      "placeholderImages": 5,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/bundles/commercial",
+      "status": 200,
+      "finalURL": "http://localhost:3001/bundles/commercial",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Commercial Bundles",
+      "placeholderImages": 2,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/bundles/residential",
+      "status": 200,
+      "finalURL": "http://localhost:3001/bundles/residential",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Residential Bundles",
+      "placeholderImages": 2,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/bundles/seasonal",
+      "status": 200,
+      "finalURL": "http://localhost:3001/bundles/seasonal",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Seasonal Bundles",
+      "placeholderImages": 2,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/careers",
+      "status": 200,
+      "finalURL": "http://localhost:3001/careers",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Join Our Team",
+      "placeholderImages": 3,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/case-studies",
+      "status": 200,
+      "finalURL": "http://localhost:3001/case-studies",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Case Studies",
+      "placeholderImages": 5,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/certifications",
+      "status": 200,
+      "finalURL": "http://localhost:3001/certifications",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Our Certifications",
+      "placeholderImages": 5,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/community",
+      "status": 200,
+      "finalURL": "http://localhost:3001/community",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Community Engagement",
+      "placeholderImages": 5,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/contact",
+      "status": 200,
+      "finalURL": "http://localhost:3001/contact",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Contact Us",
+      "placeholderImages": 2,
+      "forms": 4,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/dashboard",
+      "status": 200,
+      "finalURL": "http://localhost:3001/dashboard",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Your Dashboard",
+      "placeholderImages": 2,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/faq",
+      "status": 200,
+      "finalURL": "http://localhost:3001/faq",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Frequently Asked Questions",
+      "placeholderImages": 2,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/our-work",
+      "status": 200,
+      "finalURL": "http://localhost:3001/our-work",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Our Work",
+      "placeholderImages": 14,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/pricing",
+      "status": 200,
+      "finalURL": "http://localhost:3001/pricing",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Transparent Pricing",
+      "placeholderImages": 2,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/quote",
+      "status": 200,
+      "finalURL": "http://localhost:3001/quote",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Get an Instant Quote",
+      "placeholderImages": 2,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/referral",
+      "status": 200,
+      "finalURL": "http://localhost:3001/referral",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Refer a Friend",
+      "placeholderImages": 2,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/schedule",
+      "status": 200,
+      "finalURL": "http://localhost:3001/schedule",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Schedule a Service",
+      "placeholderImages": 2,
+      "forms": 4,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/service-areas",
+      "status": 200,
+      "finalURL": "http://localhost:3001/service-areas",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Our Service Areas",
+      "placeholderImages": 2,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/services",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Our Services",
+      "placeholderImages": 2,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/services/all",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/all",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Our Complete Service Offerings",
+      "placeholderImages": 6,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/services/commercial",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/commercial",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Commercial Services",
+      "placeholderImages": 8,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/services/landscaping",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/landscaping",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Landscaping Services",
+      "placeholderImages": 6,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/services/lawn-care",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/lawn-care",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Professional Lawn Care Services",
+      "placeholderImages": 4,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/services/pest-control",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/pest-control",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Pest Control Services",
+      "placeholderImages": 6,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/services/power-washing",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/power-washing",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Power Washing Services",
+      "placeholderImages": 6,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    },
+    {
+      "route": "/services/residential",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/residential",
+      "title": "Cut Rates Lawn Care",
+      "h1": "Residential Services",
+      "placeholderImages": 8,
+      "forms": 3,
+      "consoleErrors": [],
+      "failedRequests": [],
+      "navigationError": null
+    }
+  ],
+  "internalLinkResults": [
+    {
+      "path": "/",
+      "status": 200,
+      "finalURL": "http://localhost:3001/",
+      "error": null
+    },
+    {
+      "path": "/about",
+      "status": 200,
+      "finalURL": "http://localhost:3001/about",
+      "error": null
+    },
+    {
+      "path": "/account",
+      "status": 404,
+      "finalURL": "http://localhost:3001/account",
+      "error": null
+    },
+    {
+      "path": "/blog/10-tips-for-lush-green-lawn",
+      "status": 404,
+      "finalURL": "http://localhost:3001/blog/10-tips-for-lush-green-lawn",
+      "error": null
+    },
+    {
+      "path": "/blog/benefits-of-professional-pest-control",
+      "status": 404,
+      "finalURL": "http://localhost:3001/blog/benefits-of-professional-pest-control",
+      "error": null
+    },
+    {
+      "path": "/blog/seasonal-lawn-care-spring",
+      "status": 404,
+      "finalURL": "http://localhost:3001/blog/seasonal-lawn-care-spring",
+      "error": null
+    },
+    {
+      "path": "/bundles",
+      "status": 200,
+      "finalURL": "http://localhost:3001/bundles",
+      "error": null
+    },
+    {
+      "path": "/bundles/all",
+      "status": 200,
+      "finalURL": "http://localhost:3001/bundles/all",
+      "error": null
+    },
+    {
+      "path": "/bundles/commercial",
+      "status": 200,
+      "finalURL": "http://localhost:3001/bundles/commercial",
+      "error": null
+    },
+    {
+      "path": "/bundles/landscape",
+      "status": 404,
+      "finalURL": "http://localhost:3001/bundles/landscape",
+      "error": null
+    },
+    {
+      "path": "/bundles/residential",
+      "status": 200,
+      "finalURL": "http://localhost:3001/bundles/residential",
+      "error": null
+    },
+    {
+      "path": "/bundles/seasonal",
+      "status": 200,
+      "finalURL": "http://localhost:3001/bundles/seasonal",
+      "error": null
+    },
+    {
+      "path": "/bundles/total-home",
+      "status": 404,
+      "finalURL": "http://localhost:3001/bundles/total-home",
+      "error": null
+    },
+    {
+      "path": "/careers",
+      "status": 200,
+      "finalURL": "http://localhost:3001/careers",
+      "error": null
+    },
+    {
+      "path": "/careers/apply",
+      "status": 404,
+      "finalURL": "http://localhost:3001/careers/apply",
+      "error": null
+    },
+    {
+      "path": "/case-studies",
+      "status": 200,
+      "finalURL": "http://localhost:3001/case-studies",
+      "error": null
+    },
+    {
+      "path": "/case-studies/commercial-maintenance",
+      "status": 404,
+      "finalURL": "http://localhost:3001/case-studies/commercial-maintenance",
+      "error": null
+    },
+    {
+      "path": "/case-studies/residential-transformation",
+      "status": 404,
+      "finalURL": "http://localhost:3001/case-studies/residential-transformation",
+      "error": null
+    },
+    {
+      "path": "/case-studies/sustainable-landscaping",
+      "status": 404,
+      "finalURL": "http://localhost:3001/case-studies/sustainable-landscaping",
+      "error": null
+    },
+    {
+      "path": "/certifications",
+      "status": 200,
+      "finalURL": "http://localhost:3001/certifications",
+      "error": null
+    },
+    {
+      "path": "/community",
+      "status": 200,
+      "finalURL": "http://localhost:3001/community",
+      "error": null
+    },
+    {
+      "path": "/contact",
+      "status": 200,
+      "finalURL": "http://localhost:3001/contact",
+      "error": null
+    },
+    {
+      "path": "/invoices",
+      "status": 404,
+      "finalURL": "http://localhost:3001/invoices",
+      "error": null
+    },
+    {
+      "path": "/our-work",
+      "status": 200,
+      "finalURL": "http://localhost:3001/our-work",
+      "error": null
+    },
+    {
+      "path": "/privacy",
+      "status": 404,
+      "finalURL": "http://localhost:3001/privacy",
+      "error": null
+    },
+    {
+      "path": "/quote",
+      "status": 200,
+      "finalURL": "http://localhost:3001/quote",
+      "error": null
+    },
+    {
+      "path": "/schedule",
+      "status": 200,
+      "finalURL": "http://localhost:3001/schedule",
+      "error": null
+    },
+    {
+      "path": "/services",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services",
+      "error": null
+    },
+    {
+      "path": "/services/all",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/all",
+      "error": null
+    },
+    {
+      "path": "/services/commercial",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/commercial",
+      "error": null
+    },
+    {
+      "path": "/services/gutter-cleaning",
+      "status": 404,
+      "finalURL": "http://localhost:3001/services/gutter-cleaning",
+      "error": null
+    },
+    {
+      "path": "/services/hardscapes",
+      "status": 404,
+      "finalURL": "http://localhost:3001/services/hardscapes",
+      "error": null
+    },
+    {
+      "path": "/services/hardscaping",
+      "status": 404,
+      "finalURL": "http://localhost:3001/services/hardscaping",
+      "error": null
+    },
+    {
+      "path": "/services/landscaping",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/landscaping",
+      "error": null
+    },
+    {
+      "path": "/services/lawn-care",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/lawn-care",
+      "error": null
+    },
+    {
+      "path": "/services/pest-control",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/pest-control",
+      "error": null
+    },
+    {
+      "path": "/services/power-washing",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/power-washing",
+      "error": null
+    },
+    {
+      "path": "/services/residential",
+      "status": 200,
+      "finalURL": "http://localhost:3001/services/residential",
+      "error": null
+    },
+    {
+      "path": "/services/snow-removal",
+      "status": 404,
+      "finalURL": "http://localhost:3001/services/snow-removal",
+      "error": null
+    },
+    {
+      "path": "/sitemap",
+      "status": 404,
+      "finalURL": "http://localhost:3001/sitemap",
+      "error": null
+    },
+    {
+      "path": "/terms",
+      "status": 404,
+      "finalURL": "http://localhost:3001/terms",
+      "error": null
+    }
+  ],
+  "workflowProbes": [
+    {
+      "name": "contact-form",
+      "ok": true,
+      "details": {
+        "dialogText": "Thank you for your message. We will get back to you soon!",
+        "firstNameAfterSubmit": "",
+        "hasSuccessRegion": 0
+      },
+      "requests": [
+        {
+          "method": "GET",
+          "resourceType": "document",
+          "url": "http://localhost:3001/contact"
+        },
+        {
+          "method": "GET",
+          "resourceType": "document",
+          "url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3158.7440000000003!2d-97.3733!3d37.8339!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x87bae4a3b8f8f8f8%3A0x1a1a1a1a1a1a1a1a!2sValley%20Center%2C%20KS%2067147!5e0!3m2!1sen!2sus!4v1620000000000!5m2!1sen!2sus"
+        },
+        {
+          "method": "GET",
+          "resourceType": "xhr",
+          "url": "https://maps.googleapis.com/maps/api/mapsjs/gen_204?csp_test=true"
+        },
+        {
+          "method": "POST",
+          "resourceType": "xhr",
+          "url": "https://maps.googleapis.com/$rpc/google.internal.maps.mapsjs.v1.MapsJsInternalService/GetViewportInfo"
+        },
+        {
+          "method": "GET",
+          "resourceType": "xhr",
+          "url": "https://www.google.com/maps/vt?pb=!1m4!1m3!1i15!2i7518!3i12659!1m4!1m3!1i15!2i7519!3i12659!1m4!1m3!1i15!2i7520!3i12659!1m4!1m3!1i15!2i7521!3i12659!1m4!1m3!1i15!2i7522!3i12659!1m4!1m3!1i15!2i7523!3i12659!2m3!1e0!2sm!3i788554504!2m3!1e2!2sspotlit!5i1!3m13!2sen!3sUS!5e289!12m5!1e68!2m2!1sset!2sRoadmap!4e2!12m3!1e37!2m1!1ssmartmaps!4e3!12m2!5b1!6b1!27m23!299174093m22!14m21!1m16!1m2!1y9780438733364913705!2y18154226414825617327!2zL20vMHRicHg!4m2!1x378323292!2x3321247089!8b1!12m6!1m2!1x377958619!2x3320903686!2m2!1x378609760!2x3321634116!15sgcid%3Alocality!2b0!3b1!6b0!8b0&key=AIzaSyCmL18misQw9KdwqGaw3zHkitj8vG6QF2Y&token=122832"
+        }
+      ]
+    },
+    {
+      "name": "newsletter",
+      "ok": true,
+      "details": {
+        "finalURL": "http://localhost:3001/?",
+        "hasSuccessText": 0
+      },
+      "requests": [
+        {
+          "method": "GET",
+          "resourceType": "document",
+          "url": "http://localhost:3001/"
+        },
+        {
+          "method": "GET",
+          "resourceType": "document",
+          "url": "http://localhost:3001/?"
+        }
+      ]
+    },
+    {
+      "name": "site-search",
+      "ok": true,
+      "details": {
+        "finalURL": "http://localhost:3001/",
+        "resultTextCount": 0,
+        "queryValue": "lawn care"
+      },
+      "requests": [
+        {
+          "method": "GET",
+          "resourceType": "document",
+          "url": "http://localhost:3001/"
+        }
+      ]
+    },
+    {
+      "name": "schedule",
+      "ok": true,
+      "details": {
+        "finalURL": "http://localhost:3001/schedule",
+        "successTextCount": 0
+      },
+      "requests": [
+        {
+          "method": "GET",
+          "resourceType": "document",
+          "url": "http://localhost:3001/schedule"
+        }
+      ]
+    },
+    {
+      "name": "quote-default",
+      "ok": true,
+      "details": {
+        "quoteText": "$0 per service"
+      },
+      "requests": [
+        {
+          "method": "GET",
+          "resourceType": "document",
+          "url": "http://localhost:3001/quote"
+        }
+      ]
+    },
+    {
+      "name": "dashboard-direct-access",
+      "ok": true,
+      "details": {
+        "status": 200,
+        "finalURL": "http://localhost:3001/dashboard",
+        "heading": "Your Dashboard"
+      },
+      "requests": [
+        {
+          "method": "GET",
+          "resourceType": "document",
+          "url": "http://localhost:3001/dashboard"
+        }
+      ]
+    }
+  ],
+  "mobileResult": {
+    "menuButtonVisible": true,
+    "horizontalOverflow": false
+  }
+}

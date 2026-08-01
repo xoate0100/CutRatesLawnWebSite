@@ -1,0 +1,20 @@
+decision_id: DEC-MEDIA-PIPELINE
+status: proposed
+title: Envato MCP + GCS drop-folder media pipeline
+decision_basis: >
+  Official Envato MCP provides search/metadata/item links, not binary download.
+  Licensed files are human-confirmed into media/inbox/; Node scripts ingest,
+  optimize (sharp), upload to existing gs://site_photo_storage, and register
+  assets in docs/media/MEDIA_REGISTRY.yaml. Pages resolve slots via lib/media.ts
+  and lib/generated/media-map.json — never hardcoded GCS paths.
+locked_choices:
+  - bucket: site_photo_storage
+  - prefix: cutrateslawn/{env}/{category}/{slot}/{assetId}/
+  - public_url: https://storage.googleapis.com/site_photo_storage/<object_key>
+  - envato_mcp: global ~/.cursor/mcp.json → https://mcp.envato.com/mcp (OAuth)
+  - auth: gcloud ADC / gcloud auth login only; no keys in repo
+feature_flags_followup: >
+  After human approval, add media/ to permissions.write_to in feature_flags.yml
+  (README + .gitkeep only; binaries remain gitignored). docs/ and scripts/ already allowed.
+resurrection_trigger_keywords: []
+reopen_requires: Human approval to change bucket, CDN domain, or download automation that bypasses license confirmation

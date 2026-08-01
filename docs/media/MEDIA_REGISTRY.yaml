@@ -1,0 +1,32 @@
+version: 1
+bucket: site_photo_storage
+default_prefix: cutrateslawn/prod
+public_base_url: https://storage.googleapis.com/site_photo_storage
+assets:
+  - asset_id: gcs-lawn-watering
+    slug: lawn-watering
+    status: published
+    title: Lawn with automatic watering system
+    object_prefix: ""
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        object: lawn-with-automatic-watering-system-2023-11-27-04-52-32-utc.jpg
+        url: https://storage.googleapis.com/site_photo_storage/lawn-with-automatic-watering-system-2023-11-27-04-52-32-utc.jpg
+    slots: [home.hero]
+    alt: Residential lawn with watering system
+    usage: hero
+    notes: Bound from existing bucket object during audit remediation (F-009/F-020)
+  - asset_id: gcs-cutrates-logo
+    slug: cutrates-logo
+    status: published
+    title: Cut Rates hi-res logo
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        object: cutrateshireslogo.png
+        url: https://storage.googleapis.com/site_photo_storage/cutrateshireslogo.png
+    slots: [header.logo]
+    alt: Cut Rates Lawn Care
+    usage: logo
+    notes: Bound from existing bucket object during audit remediation (F-009/F-020)

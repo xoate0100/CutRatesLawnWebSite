@@ -18,6 +18,36 @@ const nextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      { source: '/services/hardscapes', destination: '/services/hardscaping', permanent: true },
+      { source: '/account', destination: '/portal', permanent: false },
+      { source: '/invoices', destination: '/portal', permanent: false },
+      { source: '/testimonials', destination: '/our-work', permanent: true },
+      { source: '/bundles/total-home', destination: '/bundles/residential', permanent: true },
+      { source: '/bundles/landscape', destination: '/bundles/residential', permanent: true },
+      {
+        source: '/blog/10-tips-for-lush-green-lawn',
+        destination: '/blog',
+        permanent: false,
+      },
+      {
+        source: '/blog/benefits-of-professional-pest-control',
+        destination: '/blog',
+        permanent: false,
+      },
+      {
+        source: '/blog/seasonal-lawn-care-spring',
+        destination: '/blog',
+        permanent: false,
+      },
+      {
+        source: '/case-studies/:slug',
+        destination: '/case-studies',
+        permanent: false,
+      },
+    ]
+  },
 }
 
 export default nextConfig

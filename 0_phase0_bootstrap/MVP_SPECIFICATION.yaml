@@ -1,0 +1,45 @@
+Project_Name: CutRatesLawnWebSite
+Project_Type: programming
+Maturity: "L2.5"
+Execution_Mode: "Controlled Agentic Execution"
+Layout_Preset: nextjs_root
+
+DEV_AI_ONBOARDING:
+  cold_start: docs/DEV_COLD_START_KNOWLEDGE.md
+  context: 6_ai_runtime_context/AI_CONTEXT.md
+  decisions: 5_reference_architectures/DECISION_REGISTRY.yaml
+
+PROJECT_LAYOUT:
+  preset: nextjs_root
+  app_router: app/
+  components: components/
+  utilities: lib/
+  hooks: hooks/
+  static_assets: public/
+  styles: styles/
+
+DEVELOPMENT_PHASES:
+  - phase: 1_agentic_scaffold
+    name: Agentic development scaffold
+    outcomes:
+      - Governance files and decision registry
+      - Cursor rules and verification scripts
+      - CI smoke pipeline
+    exit_criteria: npm run verify passes; AGENTIC_UPGRADE_PLAN.md items verified
+
+  - phase: 2_quality_hardening
+    name: Quality hardening
+    outcomes:
+      - ESLint enforced during build
+      - TypeScript errors enforced during build
+      - themeColor via viewport export
+      - Deployment scaffolding (.env.example, vercel.json)
+    exit_criteria: npm run build passes with strict gates; verified 2026-07-15
+    status: completed
+
+OUT_OF_SCOPE:
+  - Backend API implementation
+  - Payment processing
+  - Customer portal authentication (portal page is static UI only)
+
+FEATURE_FLAGS_REFERENCE: 0_phase0_bootstrap/feature_flags.yml

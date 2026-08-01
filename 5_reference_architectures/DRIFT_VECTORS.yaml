@@ -1,0 +1,28 @@
+# Named anti-patterns — recognizable across agent sessions
+version: 1
+updated: "2026-07-15"
+
+drift_vectors:
+  - id: DV_RESTRUCTURE_WITHOUT_DECISION
+    description: Moving app/, components/, or lib/ without DEC-0001 reopen
+    enforcement: decision_registry resurrection keywords
+
+  - id: DV_BUILD_STRICTNESS_CREEP
+    description: Enabling strict TS/lint build without phase 2 human approval
+    enforcement: decision_registry DEC-0003 keywords
+
+  - id: DV_GOVERNANCE_PATH_DRIFT
+    description: AI_SANDBOX_RULES paths contradict feature_flags write_to
+    enforcement: scripts/verify.mjs drift check
+
+  - id: DV_POINTER_WITHOUT_DELIVERABLES
+    description: ACTIVE_TASK_POINTER advanced while task outputs missing
+    enforcement: manual review + verify script
+
+  - id: DV_BUSINESS_LOGIC_REWRITE
+    description: Deleting or rewriting working page code to fit agentic patterns
+    enforcement: sandbox rules forbidden section
+
+  - id: DV_DOC_LIFECYCLE_DRIFT
+    description: Code changes without docs or stale AI_CONTEXT.md
+    enforcement: require_doc_sync guardrail

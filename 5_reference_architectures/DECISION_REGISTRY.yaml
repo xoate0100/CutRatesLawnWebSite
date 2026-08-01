@@ -1,0 +1,91 @@
+# Machine-checkable decision registry — source of truth for settled choices.
+# Direct edits forbidden; add proposals under proposals/ and merge via human review.
+version: 1
+updated: "2026-07-15"
+
+decisions:
+  - decision_id: DEC-0001-LAYOUT-PRESET
+    status: accepted
+    decided_at: "2026-07-15"
+    decision_basis: >
+      Keep flat nextjs_root layout (app/, components/, lib/, hooks/) at repo root.
+      Do not normalize to frontend/ monorepo structure — existing v0-generated
+      site works and migration must not break paths or imports.
+    supersedes: null
+    forbidden_resurrection_in: ["any PR", "any agent session"]
+    resurrection_trigger_keywords:
+      - "move app to frontend/"
+      - "normalize to monorepo frontend backend"
+      - "restructure into packages/"
+    reopen_requires: >
+      Explicit human decision with migration plan and full regression test pass.
+
+  - decision_id: DEC-0002-VERIFY-GATE
+    status: accepted
+    decided_at: "2026-07-15"
+    decision_basis: >
+      Use npm-based verify gate (scripts/verify.mjs) instead of full Python
+      pre-commit stack for this spoke. Rationale: no Python runtime dependency,
+      matches Node/Next.js stack, sufficient for static marketing site.
+    supersedes: null
+    forbidden_resurrection_in: ["any agent session without human approval"]
+    resurrection_trigger_keywords:
+      - "add full pre-commit python stack"
+      - "copy project_initializer hooks verbatim"
+    reopen_requires: >
+      Human approval citing need for TDD/SOLID blocking gates or hub sync.
+
+  - decision_id: DEC-0003-BUILD-LENIENCY
+    status: deprecated
+    decided_at: "2026-07-15"
+    decision_basis: >
+      Superseded by DEC-0006-QUALITY-HARDENING. Build now enforces TypeScript
+      and ESLint; themeColor uses viewport export.
+    supersedes: null
+    forbidden_resurrection_in: []
+    resurrection_trigger_keywords: []
+    reopen_requires: N/A — superseded
+
+  - decision_id: DEC-0004-AGENTIC-SPOKE-DEPTH
+    status: accepted
+    decided_at: "2026-07-15"
+    decision_basis: >
+      Adopt slim L2.5 spoke: governance dirs, decision registry, cursor rules,
+      npm verify, basic CI. Defer intent declarations, hub-and-spoke sync,
+      Python guardrail scripts, and phase_gate automation.
+    supersedes: null
+    forbidden_resurrection_in: ["any agent session"]
+    resurrection_trigger_keywords:
+      - "full project_initializer bootstrap"
+      - "numbered dirs 0 through 8 complete copy"
+    reopen_requires: >
+      Human decision to upgrade spoke depth with migration plan.
+
+  - decision_id: DEC-0005-SHADCN-UI-PATTERN
+    status: accepted
+    decided_at: "2026-07-15"
+    decision_basis: >
+      Continue using shadcn/ui components in components/ui/. New UI primitives
+      follow existing Radix + CVA + tailwind-merge patterns per components.json.
+    supersedes: null
+    forbidden_resurrection_in: []
+    resurrection_trigger_keywords:
+      - "replace shadcn with material-ui"
+      - "replace radix with headless ui wholesale"
+    reopen_requires: >
+      Human product/design decision with component migration plan.
+
+  - decision_id: DEC-0006-QUALITY-HARDENING
+    status: accepted
+    decided_at: "2026-07-15"
+    decision_basis: >
+      Phase 2 quality hardening completed: strict TypeScript and ESLint during
+      build, themeColor moved to viewport export, deployment scaffolding added.
+      Marketing copy uses react/no-unescaped-entities off (prose-heavy site).
+    supersedes: DEC-0003-BUILD-LENIENCY
+    forbidden_resurrection_in: ["any agent session"]
+    resurrection_trigger_keywords:
+      - "ignoreBuildErrors: true"
+      - "ignoreDuringBuilds: true"
+    reopen_requires: >
+      Human decision documenting why build leniency must return.

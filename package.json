@@ -3,10 +3,26 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "build": "next build",
     "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "lint": "next lint",
-    "start": "next start"
+    "verify": "node scripts/verify.mjs",
+    "agentic:context": "node scripts/generate-ai-context.mjs",
+    "test:e2e": "playwright test",
+    "test:e2e:edge": "playwright test --project=\"Microsoft Edge\"",
+    "test:e2e:report": "playwright show-report",
+    "audit:browser": "node scripts/pre-release-browser-audit.mjs",
+    "audit:adversarial": "node scripts/adversarial-audit-probes.mjs",
+    "audit:links": "node scripts/ci-link-smoke.mjs",
+    "audit:npm-critical": "npm audit --audit-level=critical",
+    "media:ingest": "node scripts/media/ingest.mjs",
+    "media:prepare": "node scripts/media/prepare.mjs",
+    "media:upload": "node scripts/media/upload.mjs",
+    "media:register": "node scripts/media/register.mjs",
+    "media:sync-site": "node scripts/media/sync-site.mjs",
+    "media:publish": "node scripts/media/publish.mjs",
+    "media:validate": "node scripts/media/validate.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -29,7 +45,7 @@
     "@radix-ui/react-scroll-area": "^1.2.2",
     "@radix-ui/react-select": "^2.1.4",
     "@radix-ui/react-separator": "^1.1.1",
-    "@radix-ui/react-slider": "^1.2.2",
+    "@radix-ui/react-slider": "^1.4.7",
     "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-switch": "^1.1.2",
     "@radix-ui/react-tabs": "^1.1.2",
@@ -56,18 +72,24 @@
     "react-hook-form": "^7.54.1",
     "react-resizable-panels": "^2.1.7",
     "recharts": "2.15.0",
+    "sharp": "^0.35.3",
     "sonner": "^1.7.1",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.6",
+    "yaml": "^2.9.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.51.0",
     "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",
-    "postcss": "^8",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.35",
+    "postcss": "^8.5.6",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5"
+    "typescript": "^5",
+    "wait-on": "^7.2.0"
   }
 }

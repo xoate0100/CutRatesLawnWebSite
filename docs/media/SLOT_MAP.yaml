@@ -1,0 +1,12 @@
+version: 1
+slots:
+  home.hero:
+    asset_id: gcs-lawn-watering
+    variant: original
+    fallback: /placeholder.svg?height=800&width=1920
+    alt: Residential lawn with watering system
+  header.logo:
+    asset_id: gcs-cutrates-logo
+    variant: original
+    fallback: /placeholder.svg?height=40&width=180
+    alt: Cut Rates Lawn Care

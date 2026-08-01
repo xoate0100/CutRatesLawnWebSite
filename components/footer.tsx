@@ -1,48 +1,55 @@
 import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { companyInfo } from "@/lib/static-data"
-import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from "lucide-react"
-import { OptimizedImage } from "@/components/ui/optimized-image"
-import { IMAGES, getPlaceholderImage } from "@/lib/image-constants"
+import Image from "next/image"
+import { Facebook, Instagram, Mail, Phone, MapPin } from "lucide-react"
+import { siteConfig } from "@/lib/site-config"
+import { mediaAlt, mediaSrc } from "@/lib/media"
+import { NewsletterSignup } from "@/components/newsletter-signup"
+
+const social = [
+  // TODO(owner-approval): Confirm official social profile URLs before enabling.
+  process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK_URL
+    ? { href: process.env.NEXT_PUBLIC_SOCIAL_FACEBOOK_URL, label: "Facebook", Icon: Facebook }
+    : null,
+  process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM_URL
+    ? { href: process.env.NEXT_PUBLIC_SOCIAL_INSTAGRAM_URL, label: "Instagram", Icon: Instagram }
+    : null,
+].filter(Boolean) as { href: string; label: string; Icon: typeof Facebook }[]
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-200">
+    <footer className="bg-gray-900 text-white">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
           <div>
-            <div className="mb-6">
-              <Link href="/" className="inline-block">
-                <OptimizedImage
-                  src={IMAGES.LOGO_WHITE || getPlaceholderImage(200, 80, "Cut Rates Lawn")}
-                  alt="Cut Rates Lawn Care Logo"
-                  width={180}
-                  height={72}
-                />
-              </Link>
-            </div>
-            <p className="mb-4 text-gray-400">
-              Professional lawn care services in Wichita and surrounding areas. Licensed, insured, and dedicated to
-              making your lawn the envy of the neighborhood.
+            <Link href="/" className="inline-block mb-6">
+              <Image
+                src={mediaSrc("header.logo")}
+                alt={mediaAlt("header.logo", "Cut Rates Lawn Care")}
+                width={180}
+                height={40}
+                className="h-10 w-auto"
+              />
+            </Link>
+            <p className="text-gray-400 mb-6">
+              Professional exterior property services for residential and commercial clients. Quality service at
+              competitive rates.
             </p>
-            <div className="flex space-x-4">
-              <a href={companyInfo.social.facebook} className="text-gray-400 hover:text-white" aria-label="Facebook">
-                <Facebook className="h-5 w-5" />
-              </a>
-              <a href={companyInfo.social.instagram} className="text-gray-400 hover:text-white" aria-label="Instagram">
-                <Instagram className="h-5 w-5" />
-              </a>
-              <a href={companyInfo.social.twitter} className="text-gray-400 hover:text-white" aria-label="Twitter">
-                <Twitter className="h-5 w-5" />
-              </a>
-            </div>
+            {social.length > 0 && (
+              <div className="flex space-x-4">
+                {social.map(({ href, label, Icon }) => (
+                  <a key={label} href={href} className="text-gray-400 hover:text-white" target="_blank" rel="noreferrer">
+                    <Icon className="h-5 w-5" />
+                    <span className="sr-only">{label}</span>
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
+            <h3 className="text-lg font-semibold mb-6">Quick Links</h3>
+            <ul className="space-y-3">
               <li>
                 <Link href="/services" className="text-gray-400 hover:text-white">
                   Services
@@ -50,7 +57,17 @@ export default function Footer() {
               </li>
               <li>
                 <Link href="/bundles" className="text-gray-400 hover:text-white">
-                  Packages
+                  Bundles & Subscriptions
+                </Link>
+              </li>
+              <li>
+                <Link href="/our-work" className="text-gray-400 hover:text-white">
+                  Our Work
+                </Link>
+              </li>
+              <li>
+                <Link href="/quote" className="text-gray-400 hover:text-white">
+                  Get a Quote
                 </Link>
               </li>
               <li>
@@ -59,18 +76,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/testimonials" className="text-gray-400 hover:text-white">
-                  Testimonials
-                </Link>
-              </li>
-              <li>
                 <Link href="/contact" className="text-gray-400 hover:text-white">
-                  Contact
+                  Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="/quote" className="text-gray-400 hover:text-white">
-                  Get a Quote
+                <Link
+                  href={siteConfig.customerPortalUrl}
+                  className="text-gray-400 hover:text-white"
+                >
+                  Customer Portal
                 </Link>
               </li>
             </ul>
@@ -78,67 +93,61 @@ export default function Footer() {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start">
-                <Phone className="h-5 w-5 mr-2 mt-0.5 text-green-500" />
-                <a href={`tel:${companyInfo.phone.replace(/[^0-9]/g, "")}`} className="text-gray-400 hover:text-white">
-                  {companyInfo.phone}
-                </a>
+            <h3 className="text-lg font-semibold mb-6">Contact Us</h3>
+            <ul className="space-y-4">
+              <li className="flex">
+                <MapPin className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                <span className="text-gray-400">
+                  {siteConfig.address.line1}
+                  <br />
+                  {siteConfig.address.cityStateZip}
+                </span>
               </li>
-              <li className="flex items-start">
-                <Mail className="h-5 w-5 mr-2 mt-0.5 text-green-500" />
-                <a href={`mailto:${companyInfo.email}`} className="text-gray-400 hover:text-white">
-                  {companyInfo.email}
-                </a>
+              <li className="flex">
+                <Phone className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                <Link href={`tel:${siteConfig.phone.e164}`} className="text-gray-400 hover:text-white">
+                  {siteConfig.phone.display}
+                </Link>
               </li>
-              <li className="flex items-start">
-                <MapPin className="h-5 w-5 mr-2 mt-0.5 text-green-500" />
-                <address className="not-italic text-gray-400">{companyInfo.address}</address>
-              </li>
-              <li className="flex items-start">
-                <Clock className="h-5 w-5 mr-2 mt-0.5 text-green-500" />
-                <div className="text-gray-400">
-                  <p>Mon-Fri: {companyInfo.hours.weekdays}</p>
-                  <p>Sat: {companyInfo.hours.saturday}</p>
-                  <p>Sun: {companyInfo.hours.sunday}</p>
-                </div>
+              <li className="flex">
+                <Mail className="h-5 w-5 text-green-500 mr-3 flex-shrink-0" />
+                <Link href={`mailto:${siteConfig.email}`} className="text-gray-400 hover:text-white">
+                  {siteConfig.email}
+                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Service Areas */}
+          {/* Newsletter */}
           <div>
-            <h3 className="text-lg font-semibold mb-4">Service Areas</h3>
-            <div className="grid grid-cols-2 gap-2">
-              {companyInfo.serviceAreas.map((area, index) => (
-                <div key={index} className="text-gray-400">
-                  {area}
-                </div>
-              ))}
-            </div>
-            <div className="mt-6">
-              <Button className="w-full bg-green-600 hover:bg-green-700" asChild>
-                <Link href="/quote">Request a Quote</Link>
-              </Button>
-            </div>
+            <h3 className="text-lg font-semibold mb-6">Newsletter</h3>
+            <p className="text-gray-400 mb-4">
+              Subscribe to our newsletter for seasonal tips, special offers, and more.
+            </p>
+            <NewsletterSignup variant="footer" />
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-sm">
-          <p>
-            &copy; {new Date().getFullYear()} {companyInfo.name}. All rights reserved.
-          </p>
-          <div className="mt-2 space-x-4">
-            <Link href="/privacy" className="hover:text-white">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="hover:text-white">
-              Terms of Service
-            </Link>
+        <div className="border-t border-gray-800 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-400 text-sm">
+              &copy; {new Date().getFullYear()} Cut Rates Lawn Care LLC. All rights reserved.
+            </p>
+            <div className="flex space-x-6 mt-4 md:mt-0">
+              <Link href="/privacy" className="text-gray-400 hover:text-white text-sm">
+                Privacy Policy
+              </Link>
+              <Link href="/terms" className="text-gray-400 hover:text-white text-sm">
+                Terms of Service
+              </Link>
+              <Link href="/sitemap" className="text-gray-400 hover:text-white text-sm">
+                Sitemap
+              </Link>
+            </div>
           </div>
         </div>
       </div>
     </footer>
   )
 }
+

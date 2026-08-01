@@ -1,0 +1,26 @@
+template_version: "1.0.0-spoke"
+template_source: "project_initializer + kiwi_project patterns (slim spoke)"
+migrated_at: "2026-07-15"
+layout_preset: nextjs_root
+
+features:
+  decision_registry: true
+  drift_vectors: true
+  agent_registry: true
+  ai_context_generation: true
+  cursor_rules: true
+  npm_verify_gate: true
+  python_pre_commit: false
+  intent_declaration: false
+  hub_and_spoke_sync: false
+
+protected_files:
+  - 0_phase0_bootstrap/AI_SANDBOX_RULES.md
+  - 5_reference_architectures/DECISION_REGISTRY.yaml
+
+project_directories:
+  - app/
+  - components/
+  - lib/
+  - hooks/
+  - public/

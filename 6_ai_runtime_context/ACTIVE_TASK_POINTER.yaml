@@ -1,0 +1,5 @@
+plan_id: agentic-upgrade-phase-1
+current_task: 6
+status: completed
+last_run: "2026-07-15"
+notes: Agentic scaffold migration complete; see AGENTIC_UPGRADE_PLAN.md

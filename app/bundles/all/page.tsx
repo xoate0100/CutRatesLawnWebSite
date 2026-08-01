@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight } from "lucide-react"
@@ -44,9 +45,11 @@ export default function AllBundlesPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {bundleCategories.map((category, index) => (
                 <Card key={index} className="flex flex-col">
-                  <img
+                  <Image
                     src={category.image || "/placeholder.svg"}
                     alt={category.title}
+                    width={300}
+                    height={200}
                     className="w-full h-48 object-cover rounded-t-lg"
                   />
                   <CardHeader>

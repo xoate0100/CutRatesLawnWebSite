@@ -1,0 +1,62 @@
+plan_id: agentic-upgrade-phase-1
+component: web
+goal: Establish L2.5 agentic development scaffold without breaking existing site
+status: completed
+auto_commit: false
+commit_frequency: checkpoint_based
+commit_checkpoints:
+  after_phases: true
+  after_task_count: 5
+  after_file_threshold: 15
+  force_commit_on_checkpoint: true
+
+tasks:
+  - id: 1
+    name: Scaffold governance and feature flags
+    outputs:
+      - 0_phase0_bootstrap/feature_flags.yml
+      - 0_phase0_bootstrap/AI_SANDBOX_RULES.md
+      - 0_phase0_bootstrap/MVP_SPECIFICATION.yaml
+      - 0_phase0_bootstrap/META_FRAMEWORK_VERSION.yaml
+    status: completed
+
+  - id: 2
+    name: Initialize decision registry and agent graph
+    outputs:
+      - 5_reference_architectures/DECISION_REGISTRY.yaml
+      - 5_reference_architectures/DRIFT_VECTORS.yaml
+      - 5_reference_architectures/AGENT_REGISTRY.yaml
+    status: completed
+
+  - id: 3
+    name: Add runtime context and documentation
+    outputs:
+      - 6_ai_runtime_context/AI_CONTEXT.md
+      - 6_ai_runtime_context/ACTIVE_TASK_POINTER.yaml
+      - docs/DEV_COLD_START_KNOWLEDGE.md
+      - docs/MASTER_INDEX.md
+    status: completed
+
+  - id: 4
+    name: Add Cursor rules and verification scripts
+    outputs:
+      - .cursor/rules/agentic-session.mdc
+      - .cursor/rules/agentic-commit.mdc
+      - scripts/verify.mjs
+      - scripts/generate-ai-context.mjs
+    status: completed
+
+  - id: 5
+    name: Add CI and package scripts
+    outputs:
+      - .github/workflows/ci.yml
+      - package.json scripts
+      - .eslintrc.json
+    status: completed
+
+  - id: 6
+    name: Full verification pass
+    outputs:
+      - AGENTIC_UPGRADE_PLAN.md
+      - .agentic-initialized
+    status: completed

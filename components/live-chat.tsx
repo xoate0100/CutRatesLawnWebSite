@@ -1,73 +1,61 @@
 "use client"
 
-import type React from "react"
-
 import { useState } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 import { MessageCircle, X } from "lucide-react"
+import { siteConfig } from "@/lib/site-config"
 
+/** Honest offline help — not a live agent simulation. */
 export default function LiveChat() {
   const [isOpen, setIsOpen] = useState(false)
-  const [messages, setMessages] = useState<{ text: string; sender: "user" | "agent" }[]>([])
-  const [inputValue, setInputValue] = useState("")
-
-  const toggleChat = () => setIsOpen(!isOpen)
-
-  const sendMessage = (e: React.FormEvent) => {
-    e.preventDefault()
-    if (inputValue.trim()) {
-      setMessages([...messages, { text: inputValue, sender: "user" }])
-      setInputValue("")
-      // Here you would typically send the message to your backend
-      // and then receive a response from an agent or chatbot
-      setTimeout(() => {
-        setMessages((prev) => [
-          ...prev,
-          { text: "Thanks for your message! An agent will respond shortly.", sender: "agent" },
-        ])
-      }, 1000)
-    }
-  }
 
   return (
     <>
       {!isOpen && (
-        <Button className="fixed bottom-4 right-4 rounded-full p-4" onClick={toggleChat}>
+        <Button
+          className="fixed bottom-4 right-4 z-50 rounded-full p-4"
+          onClick={() => setIsOpen(true)}
+          aria-label="Open contact help"
+        >
           <MessageCircle className="h-6 w-6" />
         </Button>
       )}
       {isOpen && (
-        <Card className="fixed bottom-4 right-4 w-80">
-          <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Live Chat</CardTitle>
-            <Button variant="ghost" size="sm" onClick={toggleChat}>
+        <Card className="fixed bottom-4 right-4 z-50 w-80 shadow-xl">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0">
+            <CardTitle className="text-base">Talk with us</CardTitle>
+            <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)} aria-label="Close">
               <X className="h-4 w-4" />
             </Button>
           </CardHeader>
-          <CardContent className="h-64 overflow-y-auto">
-            {messages.map((message, index) => (
-              <div key={index} className={`mb-2 ${message.sender === "user" ? "text-right" : "text-left"}`}>
-                <span
-                  className={`inline-block p-2 rounded ${message.sender === "user" ? "bg-blue-500 text-white" : "bg-gray-200"}`}
-                >
-                  {message.text}
-                </span>
-              </div>
-            ))}
+          <CardContent className="space-y-3 text-sm text-gray-700">
+            <p>We do not run live chat agents on this site yet. Reach us directly:</p>
+            <ul className="space-y-2">
+              <li>
+                <a className="text-green-700 underline" href={`tel:${siteConfig.phone.e164}`}>
+                  {siteConfig.phone.display}
+                </a>
+              </li>
+              <li>
+                <a className="text-green-700 underline" href={`mailto:${siteConfig.email}`}>
+                  {siteConfig.email}
+                </a>
+              </li>
+              <li>
+                <Link className="text-green-700 underline" href="/contact" onClick={() => setIsOpen(false)}>
+                  Contact form
+                </Link>
+              </li>
+            </ul>
           </CardContent>
           <CardFooter>
-            <form onSubmit={sendMessage} className="flex w-full">
-              <Input
-                type="text"
-                placeholder="Type your message..."
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                className="flex-grow mr-2"
-              />
-              <Button type="submit">Send</Button>
-            </form>
+            <Button asChild className="w-full bg-green-600 hover:bg-green-700">
+              <Link href="/contact" onClick={() => setIsOpen(false)}>
+                Go to contact
+              </Link>
+            </Button>
           </CardFooter>
         </Card>
       )}

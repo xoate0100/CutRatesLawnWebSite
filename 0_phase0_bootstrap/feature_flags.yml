@@ -1,0 +1,68 @@
+# Agentic permission registry — nextjs_root layout
+# Schema: lightweight; full JSON Schema optional in future hub sync
+mode:
+  cursor_agent_mode: sandboxed
+  agentic_write_ops: true
+  modify_meta_framework: false
+  human_review_required_for_merge: true
+
+permissions:
+  write_to:
+    - app/
+    - components/
+    - lib/
+    - hooks/
+    - public/
+    - styles/
+    - docs/
+    - scripts/
+    - tests/
+    - proposals/
+    - 6_ai_runtime_context/
+    - .cursor/
+  readonly:
+    - 0_phase0_bootstrap/
+    - 5_reference_architectures/
+    - .github/
+  governance_write_exceptions:
+    - README.md
+    - AGENTIC_UPGRADE_PLAN.md
+    - package.json
+
+components:
+  web:
+    language: typescript
+    package_manager: npm
+    directories:
+      - app/
+      - components/
+      - lib/
+      - hooks/
+
+gates:
+  block_on_build_failure: true
+  block_on_registry_violation: true
+  warn_on_large_changeset: true
+
+thresholds:
+  max_files_without_commit: 20
+  line_length: 100
+
+ai_guardrails:
+  enforce_task_scope: true
+  forbid_folder_creation_outside_scope: true
+  enforce_tdd_cycle: false  # enable when tests/ exists
+  require_doc_sync: true
+  require_commit_plan_tags: true
+  enforce_decision_registry: true
+
+agentic:
+  live_calls_env_gate: CUTRATES_AGENTIC_LIVE_ENABLED
+  verify_script: scripts/verify.mjs
+  context_generator: scripts/generate-ai-context.mjs
+
+meta:
+  schema_version: "1.0.0"
+  layout_preset: nextjs_root
+  last_updated: "2026-07-15"
+  maturity: "L2.5"

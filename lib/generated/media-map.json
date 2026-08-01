@@ -1,0 +1,40 @@
+{
+  "generated_at": "2026-08-01T12:00:00.000Z",
+  "public_base_url": "https://storage.googleapis.com/site_photo_storage",
+  "slots": {
+    "home.hero": {
+      "slot": "home.hero",
+      "asset_id": "gcs-lawn-watering",
+      "variant": "original",
+      "url": "https://storage.googleapis.com/site_photo_storage/lawn-with-automatic-watering-system-2023-11-27-04-52-32-utc.jpg",
+      "fallback": "/placeholder.svg?height=800&width=1920",
+      "alt": "Residential lawn with watering system",
+      "width": null,
+      "height": null,
+      "attribution": {
+        "title": "Lawn with automatic watering system",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "header.logo": {
+      "slot": "header.logo",
+      "asset_id": "gcs-cutrates-logo",
+      "variant": "original",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateshireslogo.png",
+      "fallback": "/placeholder.svg?height=40&width=180",
+      "alt": "Cut Rates Lawn Care",
+      "width": null,
+      "height": null,
+      "attribution": {
+        "title": "Cut Rates hi-res logo",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    }
+  }
+}

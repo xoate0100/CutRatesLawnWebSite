@@ -1,0 +1,125 @@
+{
+  "generatedAt": "2026-08-01T08:36:31.854Z",
+  "baseURL": "http://localhost:3001",
+  "results": [
+    {
+      "name": "contact-xss-payload",
+      "ok": true,
+      "details": {
+        "dialog": "Thank you for your message. We will get back to you soon!",
+        "xssFlag": false,
+        "firstNameStillPresent": ""
+      },
+      "network": [
+        {
+          "method": "GET",
+          "url": "https://maps.googleapis.com/maps/api/mapsjs/gen_204?csp_test=true"
+        }
+      ]
+    },
+    {
+      "name": "contact-invalid-email",
+      "ok": true,
+      "details": {
+        "emailValidity": false,
+        "stillOnContact": true
+      },
+      "network": [
+        {
+          "method": "GET",
+          "url": "https://maps.googleapis.com/maps/api/mapsjs/gen_204?csp_test=true"
+        }
+      ]
+    },
+    {
+      "name": "contact-duplicate-submit",
+      "ok": true,
+      "details": {
+        "dialogs": 1
+      },
+      "network": [
+        {
+          "method": "GET",
+          "url": "https://maps.googleapis.com/maps/api/mapsjs/gen_204?csp_test=true"
+        }
+      ]
+    },
+    {
+      "name": "quote-empty-defaults",
+      "ok": true,
+      "details": {
+        "quoteText": "$0 per service"
+      },
+      "network": []
+    },
+    {
+      "name": "referral-copy-button",
+      "ok": true,
+      "details": {
+        "copyButtons": 1,
+        "clipboardHint": 0
+      },
+      "network": []
+    },
+    {
+      "name": "api-guess-404",
+      "ok": true,
+      "details": {
+        "statuses": {
+          "/api": 404,
+          "/api/contact": 404,
+          "/api/auth/session": 404,
+          "/api/leads": 404,
+          "/.env": 404,
+          "/admin": 404
+        }
+      },
+      "network": []
+    },
+    {
+      "name": "dashboard-refresh-persistence",
+      "ok": true,
+      "details": {
+        "before": "Your Dashboard",
+        "after": "Your Dashboard",
+        "stillPublic": true
+      },
+      "network": []
+    },
+    {
+      "name": "back-forward-contact-quote",
+      "ok": false,
+      "error": "Error: page.goForward: net::ERR_ABORTED; maybe frame was detached?\nCall log:\n  - waiting for navigation until \"domcontentloaded\"\n",
+      "network": [
+        {
+          "method": "GET",
+          "url": "https://maps.googleapis.com/maps/api/mapsjs/gen_204?csp_test=true"
+        }
+      ]
+    },
+    {
+      "name": "portal-redirect",
+      "ok": true,
+      "details": {
+        "finalURL": "https://cutrateslawn.fieldportals.com/landing/index",
+        "status": 200,
+        "isExternal": true
+      },
+      "network": [
+        {
+          "method": "POST",
+          "url": "https://cutrateslawn.fieldportals.com/resources/delegates/companyDelegate"
+        }
+      ]
+    },
+    {
+      "name": "placeholder-svg-status",
+      "ok": true,
+      "details": {
+        "status": 200,
+        "contentType": "image/svg+xml"
+      },
+      "network": []
+    }
+  ]
+}

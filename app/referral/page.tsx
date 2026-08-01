@@ -1,10 +1,35 @@
+"use client"
+
+import { useMemo, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Gift, DollarSign, Users } from "lucide-react"
 import CTASection from "@/components/cta-section"
+import { siteConfig } from "@/lib/site-config"
+import { toast } from "sonner"
 
 export default function ReferralPage() {
+  const [name, setName] = useState("")
+  const referralUrl = useMemo(() => {
+    const slug = name
+      .trim()
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "")
+    const code = slug || "friend"
+    return `${siteConfig.url}/contact?ref=${encodeURIComponent(code)}`
+  }, [name])
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(referralUrl)
+      toast.success("Referral link copied")
+    } catch {
+      toast.error("Could not copy — select the link and copy manually")
+    }
+  }
+
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
@@ -12,8 +37,9 @@ export default function ReferralPage() {
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Refer a Friend</h1>
             <p className="text-xl mb-8 max-w-3xl">
-              Share the love for a beautiful lawn and earn rewards. Refer your friends and family to Cut Rates Lawn
-              Care!
+              {/* TODO(owner-approval): Confirm referral discount amounts ($50 / 20%) before advertising as policy. */}
+              Share Cut Rates Lawn Care with neighbors. Rewards listed below are pending owner confirmation — ask us
+              when you refer someone.
             </p>
           </div>
         </section>
@@ -27,17 +53,19 @@ export default function ReferralPage() {
                   {
                     icon: Users,
                     title: "Refer",
-                    description: "Share your unique referral link with friends and family.",
+                    description: "Share your personal referral link with friends and family.",
                   },
                   {
                     icon: Gift,
-                    title: "They Sign Up",
-                    description: "When your friend signs up for a service, they get 20% off their first service.",
+                    title: "They Contact Us",
+                    description:
+                      "When they reach out through your link, mention your name so we can track the referral.",
                   },
                   {
                     icon: DollarSign,
-                    title: "You Earn",
-                    description: "You earn a $50 credit towards your next service for each successful referral.",
+                    title: "Ask About Rewards",
+                    description:
+                      "TODO(owner-approval): Published credit amounts require owner approval before we promise them.",
                   },
                 ].map((step, index) => (
                   <Card key={index} className="text-center">
@@ -55,58 +83,42 @@ export default function ReferralPage() {
               <Card>
                 <CardHeader>
                   <CardTitle>Your Referral Link</CardTitle>
-                  <CardDescription>Share this link with your friends to start earning rewards!</CardDescription>
+                  <CardDescription>Enter your name to personalize the link, then copy it.</CardDescription>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="space-y-3">
+                  <Input
+                    placeholder="Your first name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    aria-label="Name for referral code"
+                  />
                   <div className="flex">
-                    <Input value="https://cutratelawn.com/ref/yourname" readOnly className="flex-grow" />
-                    <Button className="ml-2">Copy</Button>
+                    <Input value={referralUrl} readOnly className="flex-grow" aria-label="Referral link" />
+                    <Button type="button" className="ml-2 bg-green-600 hover:bg-green-700" onClick={copy}>
+                      Copy
+                    </Button>
                   </div>
                 </CardContent>
-                <CardFooter className="flex justify-between">
-                  <p className="text-sm text-gray-600">Referrals made: 0</p>
-                  <p className="text-sm text-gray-600">Credits earned: $0</p>
+                <CardFooter>
+                  <p className="text-sm text-gray-600">
+                    Prefer email?{" "}
+                    <a className="text-green-700 underline" href={`mailto:${siteConfig.email}`}>
+                      {siteConfig.email}
+                    </a>
+                  </p>
                 </CardFooter>
               </Card>
             </div>
           </div>
         </section>
 
-        <section className="bg-gray-100 py-16">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-8 text-center">Referral Program FAQ</h2>
-            <div className="max-w-3xl mx-auto space-y-6">
-              {[
-                {
-                  question: "Is there a limit to how many people I can refer?",
-                  answer: "No, there's no limit! The more you refer, the more you can earn.",
-                },
-                {
-                  question: "How long does it take to receive my credit?",
-                  answer:
-                    "Credits are typically applied to your account within 7 days after your referred friend's first service is completed.",
-                },
-                {
-                  question: "Can I use multiple credits on one service?",
-                  answer: "Yes, you can use multiple credits on a single service, up to the full value of the service.",
-                },
-              ].map((faq, index) => (
-                <div key={index} className="bg-white p-6 rounded-lg shadow">
-                  <h3 className="text-xl font-semibold mb-2">{faq.question}</h3>
-                  <p>{faq.answer}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         <CTASection
-          title="Ready to Start Referring?"
-          description="Share your love for a beautiful lawn and earn rewards. It's a win-win!"
-          primaryButtonText="Share Your Link"
-          primaryButtonLink="#"
-          secondaryButtonText="Learn More"
-          secondaryButtonLink="/contact"
+          title="Ready to get started?"
+          description="Contact us to set up service — and tell us who referred you."
+          primaryButtonText="Contact us"
+          primaryButtonLink="/contact"
+          secondaryButtonText="Call now"
+          secondaryButtonLink={`tel:${siteConfig.phone.e164}`}
         />
       </main>
     </div>

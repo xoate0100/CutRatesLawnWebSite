@@ -1,5 +1,8 @@
 import { ReviewsServiceFactory } from "@/lib/services/reviews/reviews-service-factory"
 
+export const dynamic = "force-dynamic"
+
+
 export async function GET(request: Request) {
   try {
     // Get query parameters

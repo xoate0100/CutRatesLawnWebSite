@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server"
 import { runApiDiagnostics } from "@/lib/api-diagnostics"
 
+// Avoid build-time static generation (diagnostics call external APIs that may hang).
+export const dynamic = "force-dynamic"
+
 export async function GET() {
   try {
     // Run API diagnostics

@@ -1,5 +1,8 @@
 import { isValidGoogleApiKeyFormat, isValidGooglePlaceIdFormat } from "@/lib/utils/api-key-validator"
 
+export const dynamic = "force-dynamic"
+
+
 export async function GET(request: Request) {
   try {
     // Get API key and place ID from environment variables

@@ -3,6 +3,9 @@ import { container } from "@/lib/di/container"
 import { type LoggerService, LOGGER_SERVICE_TOKEN } from "@/lib/services/logger/logger-service.interface"
 import { initializeServices } from "@/lib/services/service-registry"
 
+export const dynamic = "force-dynamic"
+
+
 // Initialize services
 initializeServices()
 

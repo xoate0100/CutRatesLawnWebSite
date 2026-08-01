@@ -2,6 +2,8 @@ import { NextResponse } from "next/server"
 import { getStrapiURL } from "@/lib/api"
 import { getContentTypeSchema } from "@/lib/schema-validator"
 
+export const dynamic = "force-dynamic"
+
 export async function GET() {
   try {
     // Check if Strapi is reachable

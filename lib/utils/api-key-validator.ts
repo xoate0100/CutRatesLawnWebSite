@@ -1,5 +1,3 @@
-"use client"
-
 // Function to validate Google API key format
 export function isValidGoogleApiKeyFormat(apiKey: string): boolean {
   // Basic check for API key format (e.g., AIza...)

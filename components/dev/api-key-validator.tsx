@@ -2,11 +2,10 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { isValidGoogleApiKeyFormat, isValidGooglePlaceIdFormat } from "@/lib/utils/api-key-validator"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
 export default function ApiKeyValidator() {
-  const [diagnosticData, setDiagnosticData] = useState<any>(null)
+  const [diagnosticData, setDiagnosticData] = useState<Record<string, unknown> | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -30,6 +29,11 @@ export default function ApiKeyValidator() {
     }
   }
 
+  const diagnostics =
+    diagnosticData && typeof diagnosticData === "object" && "diagnostics" in diagnosticData
+      ? (diagnosticData.diagnostics as Record<string, unknown>)
+      : null
+
   return (
     <div className="container mx-auto py-10">
       <h1 className="text-3xl font-bold mb-6">API Diagnostics</h1>
@@ -48,7 +52,7 @@ export default function ApiKeyValidator() {
         </div>
       )}
 
-      {diagnosticData && (
+      {diagnostics && (
         <div className="space-y-6">
           <Card>
             <CardHeader>
@@ -59,7 +63,28 @@ export default function ApiKeyValidator() {
               <dl className="space-y-2">
                 <div className="grid grid-cols-3 gap-4">
                   <dt className="font-semibold">API Key Exists:</dt>
-                  <dd className="col-span-2">{diagnosticData.diagnostics.apiKeyExists ? "✅ Yes" : "❌ No"}</dd>
+                  <dd className="col-span-2">{diagnostics.apiKeyExists ? "Yes" : "No"}</dd>
                 </div>
+                <div className="grid grid-cols-3 gap-4">
+                  <dt className="font-semibold">Place ID Exists:</dt>
+                  <dd className="col-span-2">{diagnostics.placeIdExists ? "Yes" : "No"}</dd>
+                </div>
+              </dl>
+            </CardContent>
+          </Card>
 
-                <div className=
+          <Card>
+            <CardHeader>
+              <CardTitle>Raw Response</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <pre className="overflow-auto rounded bg-muted p-4 text-sm">
+                {JSON.stringify(diagnosticData, null, 2)}
+              </pre>
+            </CardContent>
+          </Card>
+        </div>
+      )}
+    </div>
+  )
+}

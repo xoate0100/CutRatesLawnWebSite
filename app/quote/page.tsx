@@ -34,7 +34,13 @@ export default function QuotePage() {
                   <Clock className="h-5 w-5 text-green-600 mr-3 mt-0.5" />
                   <div>
                     <h3 className="font-medium">Business Hours</h3>
-                    <p className="text-muted-foreground">{companyInfo.hours}</p>
+                    <p className="text-muted-foreground">
+                      Mon-Fri: {companyInfo.hours.weekdays}
+                      <br />
+                      Sat: {companyInfo.hours.saturday}
+                      <br />
+                      Sun: {companyInfo.hours.sunday}
+                    </p>
                   </div>
                 </div>
                 <div className="flex items-start">

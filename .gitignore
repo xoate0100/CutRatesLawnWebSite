@@ -1,0 +1,48 @@
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files
+.env
+.env*.local
+
+# vercel
+.vercel
+
+# Visual Studio
+.vs/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# test / playwright
+playwright-report/
+test-results/
+
+# media pipeline binaries
+media/inbox/*
+!media/inbox/.gitkeep
+media/staging/*
+!media/staging/.gitkeep
+media/processed/*
+!media/processed/.gitkeep
+media/quarantine/*
+!media/quarantine/.gitkeep
+
+.vercel
+.env*

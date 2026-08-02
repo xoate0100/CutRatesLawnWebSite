@@ -47,7 +47,7 @@ Agent completed everything that can run without your credentials, licenses, or G
 
 | ID | Task | Why you | Done when |
 |----|------|---------|-----------|
-| H-CNT-01 | Verify phone, address, hours in `lib/site-config.ts` | Business truth | Matches Google Business |
+| H-CNT-01 | Verify phone, address, hours in `lib/site-config.ts` | Business truth | ~~Defaults updated 2026-08-01~~ — also set same values on Vercel if env vars override |
 | H-CNT-02 | Replace placeholder team names if fictitious | Trust | Real names or remove section |
 
 ---

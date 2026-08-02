@@ -14,21 +14,21 @@ export const siteConfig = {
   url: siteUrl,
   name: process.env.NEXT_PUBLIC_BUSINESS_NAME ?? "Cut Rates Lawn Care",
   phone: {
-    e164: process.env.NEXT_PUBLIC_BUSINESS_PHONE_E164 ?? "+15551234567",
-    display: process.env.NEXT_PUBLIC_BUSINESS_PHONE_DISPLAY ?? "(555) 123-4567",
+    e164: process.env.NEXT_PUBLIC_BUSINESS_PHONE_E164 ?? "+13169255050",
+    display: process.env.NEXT_PUBLIC_BUSINESS_PHONE_DISPLAY ?? "(316) 925-5050",
   },
   email: process.env.NEXT_PUBLIC_BUSINESS_EMAIL ?? "info@cutrateslawn.com",
   address: {
-    line1: process.env.NEXT_PUBLIC_BUSINESS_ADDRESS_LINE1 ?? "123 Lawn Avenue",
+    line1: process.env.NEXT_PUBLIC_BUSINESS_ADDRESS_LINE1 ?? "226 W. Main Street Suite 1",
     cityStateZip:
       process.env.NEXT_PUBLIC_BUSINESS_ADDRESS_CITY_STATE_ZIP ?? "Valley Center, KS 67147",
     full: [
-      process.env.NEXT_PUBLIC_BUSINESS_ADDRESS_LINE1 ?? "123 Lawn Avenue",
+      process.env.NEXT_PUBLIC_BUSINESS_ADDRESS_LINE1 ?? "226 W. Main Street Suite 1",
       process.env.NEXT_PUBLIC_BUSINESS_ADDRESS_CITY_STATE_ZIP ?? "Valley Center, KS 67147",
     ].join(", "),
     mapsQuery: encodeURIComponent(
       [
-        process.env.NEXT_PUBLIC_BUSINESS_ADDRESS_LINE1 ?? "123 Lawn Avenue",
+        process.env.NEXT_PUBLIC_BUSINESS_ADDRESS_LINE1 ?? "226 W. Main Street Suite 1",
         process.env.NEXT_PUBLIC_BUSINESS_ADDRESS_CITY_STATE_ZIP ?? "Valley Center, KS 67147",
       ].join(", "),
     ),

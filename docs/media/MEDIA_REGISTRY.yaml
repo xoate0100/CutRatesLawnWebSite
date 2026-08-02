@@ -13,12 +13,18 @@ assets:
       - name: original
         object: lawn-with-automatic-watering-system-2023-11-27-04-52-32-utc.jpg
         url: https://storage.googleapis.com/site_photo_storage/lawn-with-automatic-watering-system-2023-11-27-04-52-32-utc.jpg
-    slots:
-      - home.hero
+    slots: []
     alt: Residential lawn with watering system
     usage: hero
-    notes: Bound from existing bucket object during audit remediation (F-009/F-020)
-    updated_at: 2026-08-02T02:58:59.089Z
+    notes: Legacy root-bucket object; home.hero now uses env-A9DYSMH
+    updated_at: 2026-08-02T03:50:28.881Z
+    author: Cut Rates Lawn Care
+    license_notes: Legacy root-bucket object; home.hero now uses env-A9DYSMH
+    envato_url: null
+    envato_item_id: null
+    sha256: 86e080752e502ccf6320096e6458f0e5fcfeabf306ff0cca3b506261a80851ba
+    bytes: 7194088
+    category: legacy
   - asset_id: gcs-cutrates-logo
     slug: cutrates-logo
     status: published
@@ -32,8 +38,16 @@ assets:
       - header.logo
     alt: Cut Rates Lawn Care
     usage: logo
-    notes: Bound from existing bucket object during audit remediation (F-009/F-020)
-    updated_at: 2026-08-02T02:58:59.091Z
+    notes: Registered for media:validate integrity
+    updated_at: 2026-08-02T03:50:29.316Z
+    author: Cut Rates Lawn Care
+    license_notes: Pre-existing GCS object (not Envato Elements)
+    envato_url: null
+    envato_item_id: null
+    sha256: b0724b006b48b4b5d53076d9b068761bec9696ded3b9d2e87de6b1a5757f4881
+    bytes: 96483
+    object_prefix: ""
+    category: legacy
   - asset_id: env-3J7CC29
     slug: farmer-spraying-fertilizer
     status: published
@@ -222,7 +236,7 @@ assets:
     envato_item_id: null
     envato_url: null
     title: Lawn care professional sprays fertilizer
-    author: null
+    author: Envato Elements (attribution pending)
     license_notes: Envato Elements — confirm license before publish
     downloaded_at: 2026-08-02T02:58:09.0642348Z
     source_filename: lawn-care-professional-sprays-garden-with-fertiliz-2026-03-20-06-20-43-utc.jpg
@@ -275,7 +289,7 @@ assets:
     staged_path: media/staging/sha-1a0ddae6797d.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T03:24:05.814Z
+    updated_at: 2026-08-02T03:50:46.304Z
   - asset_id: env-ETDTNU6
     slug: lawn-care-worker-mows-grass
     status: published
@@ -395,7 +409,7 @@ assets:
     envato_item_id: null
     envato_url: null
     title: Man fertilizing lawn with spreader in suburban yard
-    author: null
+    author: Envato Elements (attribution pending)
     license_notes: Envato Elements — confirm license before publish
     downloaded_at: 2026-08-02T02:58:08.8867389Z
     source_filename: man-fertilizing-lawn-with-spreader-in-suburban-yar-2026-03-17-00-02-10-utc.jpg
@@ -440,15 +454,15 @@ assets:
     category: services
     staged_path: media/staging/sha-5c1d1dd0095b.jpg
     ingested_by: andre
-    notes: ""
-    updated_at: 2026-08-02T03:26:40.749Z
+    notes: Licensed inbox asset; Envato URL not captured at ingest
+    updated_at: 2026-08-02T03:50:46.305Z
   - asset_id: sha-ba20accbcd23
     slug: man-mowing-the-lawn-in-his-backyard
     status: published
     envato_item_id: null
     envato_url: null
     title: Man mowing the lawn in his backyard
-    author: null
+    author: Envato Elements (attribution pending)
     license_notes: Envato Elements — confirm license before publish
     downloaded_at: 2026-08-02T02:58:09.0223307Z
     source_filename: man-mowing-the-lawn-in-his-backyard-2026-03-16-23-00-56-utc.jpg
@@ -501,7 +515,7 @@ assets:
     staged_path: media/staging/sha-ba20accbcd23.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T03:27:40.206Z
+    updated_at: 2026-08-02T03:50:46.305Z
   - asset_id: env-J4XCY2H
     slug: man-pushing-lawn-mower
     status: published
@@ -628,7 +642,7 @@ assets:
     envato_item_id: null
     envato_url: null
     title: Residential houses in suburban neighborhood in summer
-    author: null
+    author: Envato Elements (attribution pending)
     license_notes: Envato Elements — confirm license before publish
     downloaded_at: 2026-08-02T02:58:08.8516441Z
     source_filename: residential-houses-in-suburban-neighborhood-in-sum-2026-03-17-20-17-10-utc.jpg
@@ -681,8 +695,8 @@ assets:
     category: heroes
     staged_path: media/staging/sha-50ea64d6a870.jpg
     ingested_by: andre
-    notes: ""
-    updated_at: 2026-08-02T03:31:02.601Z
+    notes: Licensed inbox asset; Envato URL not captured at ingest
+    updated_at: 2026-08-02T03:50:46.305Z
   - asset_id: env-BQ2DHJ4
     slug: row-of-traditional-suburban-homes-with-lush-green-front-lawns
     status: published
@@ -750,7 +764,7 @@ assets:
     envato_item_id: null
     envato_url: null
     title: Suburban home exterior with manicured lawn
-    author: null
+    author: Envato Elements (attribution pending)
     license_notes: Envato Elements — confirm license before publish
     downloaded_at: 2026-08-02T02:58:09.0047925Z
     source_filename: suburban-home-exterior-with-manicured-lawn-and-pat-2026-03-25-01-32-34-utc.jpg
@@ -803,14 +817,14 @@ assets:
     staged_path: media/staging/sha-17ae8109f02b.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T03:32:59.453Z
+    updated_at: 2026-08-02T03:50:46.305Z
   - asset_id: sha-df83cbfdd6a5
     slug: water-droplets-on-green-grass-field
     status: published
     envato_item_id: null
     envato_url: null
     title: Water droplets on green grass field
-    author: null
+    author: Envato Elements (attribution pending)
     license_notes: Envato Elements — confirm license before publish
     downloaded_at: 2026-08-02T02:58:08.9259136Z
     source_filename: water-droplets-on-green-grass-field-2026-03-19-05-42-07-utc.JPG
@@ -856,7 +870,7 @@ assets:
     staged_path: media/staging/sha-df83cbfdd6a5.jpg
     ingested_by: andre
     notes: Interim stand-in for aeration
-    updated_at: 2026-08-02T03:33:42.335Z
+    updated_at: 2026-08-02T03:50:46.305Z
   - asset_id: env-L66HWHJ
     slug: worker-spraying-pesticide-onto-green-lawn-outdoors
     status: published
@@ -910,4 +924,188 @@ assets:
     ingested_by: andre
     notes: ""
     updated_at: 2026-08-02T03:34:25.727Z
-updated_at: 2026-08-02T03:34:34.248Z
+  - asset_id: legacy-logo-white
+    slug: logo-white
+    status: published
+    title: Cut Rates logo (white)
+    author: Cut Rates Lawn Care
+    license_notes: Pre-existing GCS object (not Envato Elements)
+    envato_url: null
+    envato_item_id: null
+    sha256: 98bf6ab54cb9cb7ba5ccf9c1b3382b01db5d6ec9022a4a509afea7085b362b34
+    bytes: 268584
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    object_prefix: ""
+    variants:
+      - name: original
+        object: images/branding/logo-white.svg
+        url: https://storage.googleapis.com/site_photo_storage/images/branding/logo-white.svg
+    slots:
+      - branding.logo-white
+    alt: Cut Rates Lawn Care
+    usage: logo
+    category: legacy
+    notes: Registered for media:validate integrity
+    updated_at: 2026-08-02T03:50:29.546Z
+  - asset_id: legacy-service-cleanup
+    slug: service-cleanup
+    status: published
+    title: Seasonal cleanup / irrigation stand-in
+    author: Cut Rates Lawn Care
+    license_notes: Pre-existing GCS object (not Envato Elements)
+    envato_url: null
+    envato_item_id: null
+    sha256: 8ea9c917954bcc3722afb9318286d6e86edfeeadbfea503b7fbdfc17be7fc89e
+    bytes: 23837379
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    object_prefix: ""
+    variants:
+      - name: original
+        object: images/services/cleanup.jpg
+        url: https://storage.googleapis.com/site_photo_storage/images/services/cleanup.jpg
+    slots:
+      - services.cleanup
+    alt: Seasonal cleanup service
+    usage: card
+    category: legacy
+    notes: Registered for media:validate integrity
+    updated_at: 2026-08-02T03:50:35.221Z
+  - asset_id: legacy-testimonial-1
+    slug: testimonial-1
+    status: published
+    title: Testimonial customer 1
+    author: Cut Rates Lawn Care
+    license_notes: Pre-existing GCS object (not Envato Elements)
+    envato_url: null
+    envato_item_id: null
+    sha256: 6d2ec4eb8decfa5fd0f36597100d3bc162a32923d676a499a18ba98774f7f7fa
+    bytes: 13133652
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    object_prefix: ""
+    variants:
+      - name: original
+        object: images/testimonials/customer-1.jpg
+        url: https://storage.googleapis.com/site_photo_storage/images/testimonials/customer-1.jpg
+    slots:
+      - testimonials.1
+    alt: Customer photo
+    usage: avatar
+    category: legacy
+    notes: Registered for media:validate integrity
+    updated_at: 2026-08-02T03:50:39.096Z
+  - asset_id: legacy-testimonial-2
+    slug: testimonial-2
+    status: published
+    title: Testimonial customer 2
+    author: Cut Rates Lawn Care
+    license_notes: Pre-existing GCS object (not Envato Elements)
+    envato_url: null
+    envato_item_id: null
+    sha256: 3f020c7cad397b364c126f282f35982407db3276b933397a01f9b2148aaf4c71
+    bytes: 14467956
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    object_prefix: ""
+    variants:
+      - name: original
+        object: images/testimonials/customer-2.jpg
+        url: https://storage.googleapis.com/site_photo_storage/images/testimonials/customer-2.jpg
+    slots:
+      - testimonials.2
+    alt: Customer photo
+    usage: avatar
+    category: legacy
+    notes: Registered for media:validate integrity
+    updated_at: 2026-08-02T03:50:42.440Z
+  - asset_id: legacy-testimonial-3
+    slug: testimonial-3
+    status: published
+    title: Testimonial customer 3
+    author: Cut Rates Lawn Care
+    license_notes: Pre-existing GCS object (not Envato Elements)
+    envato_url: null
+    envato_item_id: null
+    sha256: 38fd483f393202adac6a41de34eacd8eacb6c174a022ca2814b11d1a3c750fe0
+    bytes: 15345662
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    object_prefix: ""
+    variants:
+      - name: original
+        object: images/testimonials/customer-3.jpg
+        url: https://storage.googleapis.com/site_photo_storage/images/testimonials/customer-3.jpg
+    slots:
+      - testimonials.3
+    alt: Customer photo
+    usage: avatar
+    category: legacy
+    notes: Registered for media:validate integrity
+    updated_at: 2026-08-02T03:50:45.816Z
+  - asset_id: legacy-partner-kwch
+    slug: partner-kwch
+    status: published
+    title: KWCH 12 News logo
+    author: Cut Rates Lawn Care
+    license_notes: Pre-existing GCS object (not Envato Elements)
+    envato_url: null
+    envato_item_id: null
+    sha256: 507f26ae9970a0bbe50f615023ae30f382b7b59ed5bacc24b6a43be0176a587e
+    bytes: 4897
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    object_prefix: ""
+    variants:
+      - name: original
+        object: images/partners/kwch-logo.png
+        url: https://storage.googleapis.com/site_photo_storage/images/partners/kwch-logo.png
+    slots:
+      - partners.kwch
+    alt: KWCH 12 News
+    usage: logo
+    category: legacy
+    notes: Registered for media:validate integrity
+    updated_at: 2026-08-02T03:50:45.930Z
+  - asset_id: legacy-partner-google
+    slug: partner-google
+    status: published
+    title: Google Reviews badge
+    author: Cut Rates Lawn Care
+    license_notes: Pre-existing GCS object (not Envato Elements)
+    envato_url: null
+    envato_item_id: null
+    sha256: c965a3e43622bd0aebcce6e7cc0a3d045c3c2ddd9fe91acca0e27b22bd2180bd
+    bytes: 20633
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    object_prefix: ""
+    variants:
+      - name: original
+        object: images/partners/google-reviews.png
+        url: https://storage.googleapis.com/site_photo_storage/images/partners/google-reviews.png
+    slots:
+      - partners.google
+    alt: Google Reviews
+    usage: logo
+    category: legacy
+    notes: Registered for media:validate integrity
+    updated_at: 2026-08-02T03:50:46.108Z
+  - asset_id: legacy-partner-yelp
+    slug: partner-yelp
+    status: published
+    title: Yelp logo
+    author: Cut Rates Lawn Care
+    license_notes: Pre-existing GCS object (not Envato Elements)
+    envato_url: null
+    envato_item_id: null
+    sha256: 42cd7860ef5017675402b52632c8ff03009664da7bd87f73f3332e08d3ea6fde
+    bytes: 53802
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    object_prefix: ""
+    variants:
+      - name: original
+        object: images/partners/yelp-logo.png
+        url: https://storage.googleapis.com/site_photo_storage/images/partners/yelp-logo.png
+    slots:
+      - partners.yelp
+    alt: Yelp
+    usage: logo
+    category: legacy
+    notes: Registered for media:validate integrity
+    updated_at: 2026-08-02T03:50:46.304Z
+updated_at: 2026-08-02T03:50:46.305Z

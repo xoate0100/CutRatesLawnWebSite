@@ -71,20 +71,23 @@ slots:
     fallback: /placeholder.svg?height=96&width=96
     alt: Customer photo
   team.owner:
-    asset_id: legacy-team-owner
-    variant: original
+    asset_id: null
+    variant: null
     fallback: /placeholder.svg?height=400&width=400
     alt: Company owner
+    notes: No GCS object yet — using placeholder fallback
   team.manager:
-    asset_id: legacy-team-manager
-    variant: original
+    asset_id: null
+    variant: null
     fallback: /placeholder.svg?height=400&width=400
     alt: Operations manager
+    notes: No GCS object yet — using placeholder fallback
   team.crew:
-    asset_id: legacy-team-crew
-    variant: original
+    asset_id: null
+    variant: null
     fallback: /placeholder.svg?height=400&width=400
     alt: Field crew
+    notes: No GCS object yet — using placeholder fallback
   partners.kwch:
     asset_id: legacy-partner-kwch
     variant: original

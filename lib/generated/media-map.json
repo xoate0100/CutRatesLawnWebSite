@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T03:34:36.066Z",
+  "generated_at": "2026-08-02T03:50:49.245Z",
   "public_base_url": "https://storage.googleapis.com/site_photo_storage",
   "slots": {
     "home.hero": {
@@ -30,7 +30,7 @@
       "height": null,
       "attribution": {
         "title": "Cut Rates hi-res logo",
-        "author": null,
+        "author": "Cut Rates Lawn Care",
         "envato_url": null,
         "envato_item_id": null
       },
@@ -40,13 +40,18 @@
       "slot": "branding.logo-white",
       "asset_id": "legacy-logo-white",
       "variant": "original",
-      "url": "/placeholder.svg?height=40&width=180",
+      "url": "https://storage.googleapis.com/site_photo_storage/images/branding/logo-white.svg",
       "fallback": "/placeholder.svg?height=40&width=180",
       "alt": "Cut Rates Lawn Care",
       "width": null,
       "height": null,
-      "attribution": null,
-      "status": null
+      "attribution": {
+        "title": "Cut Rates logo (white)",
+        "author": "Cut Rates Lawn Care",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "services.hero": {
       "slot": "services.hero",
@@ -93,7 +98,7 @@
       "height": 1440,
       "attribution": {
         "title": "Residential houses in suburban neighborhood in summer",
-        "author": null,
+        "author": "Envato Elements (attribution pending)",
         "envato_url": null,
         "envato_item_id": null
       },
@@ -127,7 +132,7 @@
       "height": 533,
       "attribution": {
         "title": "Man fertilizing lawn with spreader in suburban yard",
-        "author": null,
+        "author": "Envato Elements (attribution pending)",
         "envato_url": null,
         "envato_item_id": null
       },
@@ -161,7 +166,7 @@
       "height": 533,
       "attribution": {
         "title": "Water droplets on green grass field",
-        "author": null,
+        "author": "Envato Elements (attribution pending)",
         "envato_url": null,
         "envato_item_id": null
       },
@@ -171,54 +176,74 @@
       "slot": "services.cleanup",
       "asset_id": "legacy-service-cleanup",
       "variant": "original",
-      "url": "/placeholder.svg?height=480&width=720",
+      "url": "https://storage.googleapis.com/site_photo_storage/images/services/cleanup.jpg",
       "fallback": "/placeholder.svg?height=480&width=720",
       "alt": "Seasonal cleanup service",
       "width": null,
       "height": null,
-      "attribution": null,
-      "status": null
+      "attribution": {
+        "title": "Seasonal cleanup / irrigation stand-in",
+        "author": "Cut Rates Lawn Care",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "testimonials.1": {
       "slot": "testimonials.1",
       "asset_id": "legacy-testimonial-1",
       "variant": "original",
-      "url": "/placeholder.svg?height=96&width=96",
+      "url": "https://storage.googleapis.com/site_photo_storage/images/testimonials/customer-1.jpg",
       "fallback": "/placeholder.svg?height=96&width=96",
       "alt": "Customer photo",
       "width": null,
       "height": null,
-      "attribution": null,
-      "status": null
+      "attribution": {
+        "title": "Testimonial customer 1",
+        "author": "Cut Rates Lawn Care",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "testimonials.2": {
       "slot": "testimonials.2",
       "asset_id": "legacy-testimonial-2",
       "variant": "original",
-      "url": "/placeholder.svg?height=96&width=96",
+      "url": "https://storage.googleapis.com/site_photo_storage/images/testimonials/customer-2.jpg",
       "fallback": "/placeholder.svg?height=96&width=96",
       "alt": "Customer photo",
       "width": null,
       "height": null,
-      "attribution": null,
-      "status": null
+      "attribution": {
+        "title": "Testimonial customer 2",
+        "author": "Cut Rates Lawn Care",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "testimonials.3": {
       "slot": "testimonials.3",
       "asset_id": "legacy-testimonial-3",
       "variant": "original",
-      "url": "/placeholder.svg?height=96&width=96",
+      "url": "https://storage.googleapis.com/site_photo_storage/images/testimonials/customer-3.jpg",
       "fallback": "/placeholder.svg?height=96&width=96",
       "alt": "Customer photo",
       "width": null,
       "height": null,
-      "attribution": null,
-      "status": null
+      "attribution": {
+        "title": "Testimonial customer 3",
+        "author": "Cut Rates Lawn Care",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "team.owner": {
       "slot": "team.owner",
-      "asset_id": "legacy-team-owner",
-      "variant": "original",
+      "asset_id": null,
+      "variant": null,
       "url": "/placeholder.svg?height=400&width=400",
       "fallback": "/placeholder.svg?height=400&width=400",
       "alt": "Company owner",
@@ -229,8 +254,8 @@
     },
     "team.manager": {
       "slot": "team.manager",
-      "asset_id": "legacy-team-manager",
-      "variant": "original",
+      "asset_id": null,
+      "variant": null,
       "url": "/placeholder.svg?height=400&width=400",
       "fallback": "/placeholder.svg?height=400&width=400",
       "alt": "Operations manager",
@@ -241,8 +266,8 @@
     },
     "team.crew": {
       "slot": "team.crew",
-      "asset_id": "legacy-team-crew",
-      "variant": "original",
+      "asset_id": null,
+      "variant": null,
       "url": "/placeholder.svg?height=400&width=400",
       "fallback": "/placeholder.svg?height=400&width=400",
       "alt": "Field crew",
@@ -255,37 +280,52 @@
       "slot": "partners.kwch",
       "asset_id": "legacy-partner-kwch",
       "variant": "original",
-      "url": "/placeholder.svg?height=40&width=120",
+      "url": "https://storage.googleapis.com/site_photo_storage/images/partners/kwch-logo.png",
       "fallback": "/placeholder.svg?height=40&width=120",
       "alt": "KWCH 12 News",
       "width": null,
       "height": null,
-      "attribution": null,
-      "status": null
+      "attribution": {
+        "title": "KWCH 12 News logo",
+        "author": "Cut Rates Lawn Care",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "partners.google": {
       "slot": "partners.google",
       "asset_id": "legacy-partner-google",
       "variant": "original",
-      "url": "/placeholder.svg?height=40&width=120",
+      "url": "https://storage.googleapis.com/site_photo_storage/images/partners/google-reviews.png",
       "fallback": "/placeholder.svg?height=40&width=120",
       "alt": "Google Reviews",
       "width": null,
       "height": null,
-      "attribution": null,
-      "status": null
+      "attribution": {
+        "title": "Google Reviews badge",
+        "author": "Cut Rates Lawn Care",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "partners.yelp": {
       "slot": "partners.yelp",
       "asset_id": "legacy-partner-yelp",
       "variant": "original",
-      "url": "/placeholder.svg?height=40&width=120",
+      "url": "https://storage.googleapis.com/site_photo_storage/images/partners/yelp-logo.png",
       "fallback": "/placeholder.svg?height=40&width=120",
       "alt": "Yelp",
       "width": null,
       "height": null,
-      "attribution": null,
-      "status": null
+      "attribution": {
+        "title": "Yelp logo",
+        "author": "Cut Rates Lawn Care",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "og.default": {
       "slot": "og.default",

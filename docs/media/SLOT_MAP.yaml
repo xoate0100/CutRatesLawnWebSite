@@ -6,8 +6,8 @@ slots:
     fallback: /placeholder.svg?height=800&width=1920
     alt: House with a green lawn under blue sky
   header.logo:
-    asset_id: gcs-cutrates-logo
-    variant: original
+    asset_id: sha-bab7b1635fc6
+    variant: w512
     fallback: /placeholder.svg?height=40&width=180
     alt: Cut Rates Lawn Care
   branding.logo-white:

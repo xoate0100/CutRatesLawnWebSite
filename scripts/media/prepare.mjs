@@ -2,7 +2,7 @@
 /**
  * Generate WebP variants from staged originals into media/processed/
  */
-import { statSync } from 'node:fs'
+import { statSync, copyFileSync } from 'node:fs'
 import sharp from 'sharp'
 import {
   PATHS,
@@ -16,6 +16,7 @@ import {
   mkdirSync,
   join,
   readdirSync,
+  isSvg,
 } from './lib.mjs'
 
 const HERO_WIDTHS = [1920, 1280, 768]
@@ -41,32 +42,49 @@ async function prepareAsset(asset, { force = false } = {}) {
   const outDir = join(PATHS.processed, asset.asset_id)
   mkdirSync(outDir, { recursive: true })
   const ext = source.match(/\.[^.]+$/)?.[0] || '.jpg'
+  const svg = isSvg(ext)
 
   const variants = []
   const originalDest = join(outDir, `original${ext}`)
   if (!existsSync(originalDest) || force) {
-    await sharp(source).rotate().toFile(originalDest)
+    if (svg) {
+      // Keep vector original intact (sharp re-encode can alter SVGs).
+      copyFileSync(source, originalDest)
+    } else {
+      await sharp(source).rotate().toFile(originalDest)
+    }
   }
-  const origMeta = await sharp(originalDest).metadata()
+
+  let origMeta = { width: null, height: null, format: svg ? 'svg' : undefined }
+  if (!svg) {
+    origMeta = await sharp(originalDest).metadata()
+  } else {
+    try {
+      origMeta = await sharp(source, { density: 300 }).metadata()
+    } catch {
+      // SVG metadata optional
+    }
+  }
+
   variants.push({
     name: 'original',
     file: `media/processed/${asset.asset_id}/original${ext}`,
-    width: origMeta.width,
-    height: origMeta.height,
-    format: origMeta.format,
+    width: origMeta.width ?? null,
+    height: origMeta.height ?? null,
+    format: svg ? 'svg' : origMeta.format,
     bytes: statSync(originalDest).size,
   })
 
+  // Raster variants — including SVG logos so next/image can use WebP.
   for (const w of widthsForUsage(asset.usage)) {
     const name = `w${w}`
     const fileName = `${name}.webp`
     const dest = join(outDir, fileName)
     if (!existsSync(dest) || force) {
-      await sharp(source)
-        .rotate()
-        .resize({ width: w, withoutEnlargement: true })
-        .webp({ quality: 82 })
-        .toFile(dest)
+      const pipeline = svg
+        ? sharp(source, { density: 300 }).resize({ width: w, withoutEnlargement: true }).webp({ quality: 90 })
+        : sharp(source).rotate().resize({ width: w, withoutEnlargement: true }).webp({ quality: 82 })
+      await pipeline.toFile(dest)
     }
     const meta = await sharp(dest).metadata()
     variants.push({
@@ -89,10 +107,9 @@ async function main() {
   const opts = parseArgs()
   const registry = loadRegistry()
   const filterId = opts['asset-id'] || opts.asset
-  let targets = registry.assets.filter(
-    (a) => a.status === 'staged' || a.status === 'uploaded' || a.status === 'published',
-  )
-  if (filterId) targets = targets.filter((a) => a.asset_id === filterId)
+  // Default: only staged assets (avoid reprocessing entire published library)
+  let targets = registry.assets.filter((a) => a.status === 'staged')
+  if (filterId) targets = registry.assets.filter((a) => a.asset_id === filterId)
 
   if (!targets.length) {
     const staged = existsSync(PATHS.staging)

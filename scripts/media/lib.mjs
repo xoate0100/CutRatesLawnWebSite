@@ -24,7 +24,17 @@ export const PUBLIC_BASE =
   process.env.NEXT_PUBLIC_MEDIA_BASE_URL ||
   `https://storage.googleapis.com/${BUCKET}`
 
-export const ALLOWED_EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.gif', '.avif', '.tif', '.tiff'])
+export const ALLOWED_EXT = new Set([
+  '.jpg',
+  '.jpeg',
+  '.png',
+  '.webp',
+  '.gif',
+  '.avif',
+  '.tif',
+  '.tiff',
+  '.svg',
+])
 export const REJECT_EXT = new Set(['.zip', '.exe', '.msi', '.bat', '.cmd', '.ps1', '.js', '.mjs', '.sh'])
 
 export function ensureDirs() {
@@ -224,8 +234,13 @@ export function mimeFromExt(ext) {
     '.avif': 'image/avif',
     '.tif': 'image/tiff',
     '.tiff': 'image/tiff',
+    '.svg': 'image/svg+xml',
   }
   return map[ext.toLowerCase()] || 'application/octet-stream'
+}
+
+export function isSvg(extOrPath) {
+  return String(extOrPath || '').toLowerCase().endsWith('.svg') || String(extOrPath || '').toLowerCase() === '.svg'
 }
 
 export { basename, dirname, extname, join, existsSync, mkdirSync, readFileSync, writeFileSync, renameSync, copyFileSync, unlinkSync, readdirSync }

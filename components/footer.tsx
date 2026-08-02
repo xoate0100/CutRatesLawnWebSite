@@ -25,9 +25,9 @@ export default function Footer() {
               <Image
                 src={mediaSrc("header.logo")}
                 alt={mediaAlt("header.logo", "Cut Rates Lawn Care")}
-                width={180}
-                height={40}
-                className="h-10 w-auto"
+                width={160}
+                height={128}
+                className="h-12 w-auto"
               />
             </Link>
             <p className="text-gray-400 mb-6">

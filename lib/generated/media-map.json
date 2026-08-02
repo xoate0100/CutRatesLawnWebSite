@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T04:36:32.903Z",
+  "generated_at": "2026-08-02T19:49:46.712Z",
   "public_base_url": "https://storage.googleapis.com/site_photo_storage",
   "slots": {
     "home.hero": {
@@ -21,15 +21,15 @@
     },
     "header.logo": {
       "slot": "header.logo",
-      "asset_id": "sha-bab7b1635fc6",
+      "asset_id": "sha-1804e39e6138",
       "variant": "w512",
-      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/branding/header-logo/sha-bab7b1635fc6/w512.webp",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/branding/header-logo/sha-1804e39e6138/w512.webp",
       "fallback": "/placeholder.svg?height=40&width=180",
       "alt": "Cut Rates Lawn Care",
       "width": 512,
       "height": 408,
       "attribution": {
-        "title": "Cut Rates Lawn Care logo (new)",
+        "title": "Cut Rates Lawn Care logo (transparent)",
         "author": "Cut Rates Lawn Care",
         "envato_url": null,
         "envato_item_id": null

@@ -1185,4 +1185,57 @@ assets:
     ingested_by: andre
     notes: Inbox filename cutrateslogonew.svg; binds to header.logo
     updated_at: 2026-08-02T04:34:37.752Z
-updated_at: 2026-08-02T04:34:37.752Z
+  - asset_id: sha-1804e39e6138
+    slug: cut-rates-lawn-care-logo-transparent
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: Cut Rates Lawn Care logo (transparent)
+    author: Cut Rates Lawn Care
+    license_notes: Owned brand mark — transparent background; supersedes sha-bab7b1635fc6
+    downloaded_at: 2026-08-02T19:28:26.363Z
+    source_filename: cutrateslogo_transparent.svg
+    sha256: 1804e39e61383808157af8d8e03d5e0f1225d6ee59554bfdfd0027e8609e7819
+    bytes: 16593
+    width: 354
+    height: 282
+    mime: image/svg+xml
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/branding/header-logo/sha-1804e39e6138
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-1804e39e6138/original.svg
+        width: 1474
+        height: 1175
+        format: svg
+        bytes: 16593
+        object: cutrateslawn/prod/branding/header-logo/sha-1804e39e6138/original.svg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/branding/header-logo/sha-1804e39e6138/original.svg
+      - name: w512
+        file: media/processed/sha-1804e39e6138/w512.webp
+        width: 512
+        height: 408
+        format: webp
+        bytes: 30788
+        object: cutrateslawn/prod/branding/header-logo/sha-1804e39e6138/w512.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/branding/header-logo/sha-1804e39e6138/w512.webp
+      - name: w256
+        file: media/processed/sha-1804e39e6138/w256.webp
+        width: 256
+        height: 204
+        format: webp
+        bytes: 14226
+        object: cutrateslawn/prod/branding/header-logo/sha-1804e39e6138/w256.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/branding/header-logo/sha-1804e39e6138/w256.webp
+    slots:
+      - header.logo
+    alt: Cut Rates Lawn Care
+    tags: []
+    usage: logo
+    category: branding
+    staged_path: media/staging/sha-1804e39e6138.svg
+    ingested_by: andre
+    notes: cutrateslogo_transparent.svg
+    updated_at: 2026-08-02T19:49:45.145Z
+updated_at: 2026-08-02T19:49:45.149Z

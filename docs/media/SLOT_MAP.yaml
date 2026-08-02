@@ -6,7 +6,7 @@ slots:
     fallback: /placeholder.svg?height=800&width=1920
     alt: House with a green lawn under blue sky
   header.logo:
-    asset_id: sha-bab7b1635fc6
+    asset_id: sha-1804e39e6138
     variant: w512
     fallback: /placeholder.svg?height=40&width=180
     alt: Cut Rates Lawn Care

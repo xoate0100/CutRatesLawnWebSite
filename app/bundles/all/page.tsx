@@ -30,7 +30,7 @@ export default function AllBundlesPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
-        <section className="bg-gradient-to-r from-green-600 to-blue-600 text-white py-20">
+        <section className="atm-cta-band text-primary-foreground py-20">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">All Service Bundles</h1>
             <p className="text-xl mb-8 max-w-3xl">

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
+import { isGhlConfigured, upsertLeadContact } from "@/lib/ghl"
 
 export const runtime = "nodejs"
 
@@ -61,12 +62,13 @@ async function deliverLead(lead: LeadBody, requestId: string): Promise<{ ok: tru
   const webhook = process.env.CONTACT_FORM_WEBHOOK_URL
   const resendKey = process.env.RESEND_API_KEY
   const notifyTo = process.env.LEAD_NOTIFY_EMAIL || process.env.NEXT_PUBLIC_BUSINESS_EMAIL
+  const ghlReady = isGhlConfigured()
 
-  if (!webhook && !resendKey) {
+  if (!webhook && !resendKey && !ghlReady) {
     return {
       ok: false,
       reason:
-        "Lead delivery is not configured. Set CONTACT_FORM_WEBHOOK_URL or RESEND_API_KEY on the server.",
+        "Lead delivery is not configured. Set GHL_PRIVATE_INTEGRATION_TOKEN + GHL_LOCATION_ID, CONTACT_FORM_WEBHOOK_URL, or RESEND_API_KEY.",
     }
   }
 
@@ -83,6 +85,29 @@ async function deliverLead(lead: LeadBody, requestId: string): Promise<{ ok: tru
     receivedAt: new Date().toISOString(),
   }
 
+  let delivered = false
+  const failures: string[] = []
+
+  if (ghlReady) {
+    const ghl = await upsertLeadContact({
+      firstName: lead.firstName,
+      lastName: lead.lastName,
+      email: lead.email,
+      phone: lead.phone,
+      service: lead.service,
+      message: lead.message,
+      source: lead.source,
+      requestId,
+    })
+    if (ghl.ok) {
+      delivered = true
+      console.info("lead_delivered_ghl", { requestId, contactId: ghl.contactId, source: lead.source })
+    } else {
+      failures.push(ghl.reason)
+      console.error("lead_ghl_failed", { requestId, reason: ghl.reason })
+    }
+  }
+
   if (webhook) {
     const res = await fetch(webhook, {
       method: "POST",
@@ -93,12 +118,13 @@ async function deliverLead(lead: LeadBody, requestId: string): Promise<{ ok: tru
       },
       body: JSON.stringify(payload),
     })
-    if (!res.ok) {
+    if (res.ok) {
+      delivered = true
+      console.info("lead_delivered_webhook", { requestId, source: lead.source })
+    } else {
+      failures.push("Delivery provider rejected the lead.")
       console.error("lead_webhook_failed", { requestId, status: res.status })
-      return { ok: false, reason: "Delivery provider rejected the lead." }
     }
-    console.info("lead_delivered_webhook", { requestId, source: lead.source })
-    return { ok: true }
   }
 
   if (resendKey && notifyTo) {
@@ -125,15 +151,17 @@ async function deliverLead(lead: LeadBody, requestId: string): Promise<{ ok: tru
         ].join("\n"),
       }),
     })
-    if (!res.ok) {
+    if (res.ok) {
+      delivered = true
+      console.info("lead_delivered_resend", { requestId, source: lead.source })
+    } else {
+      failures.push("Email provider rejected the lead.")
       console.error("lead_resend_failed", { requestId, status: res.status })
-      return { ok: false, reason: "Email provider rejected the lead." }
     }
-    console.info("lead_delivered_resend", { requestId, source: lead.source })
-    return { ok: true }
   }
 
-  return { ok: false, reason: "Lead delivery is not fully configured." }
+  if (delivered) return { ok: true }
+  return { ok: false, reason: failures[0] || "Lead delivery is not fully configured." }
 }
 
 export async function POST(req: NextRequest) {

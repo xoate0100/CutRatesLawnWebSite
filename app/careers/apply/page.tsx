@@ -14,7 +14,7 @@ export default function CareersApplyPage() {
         us to apply.
       </p>
       <div className="flex flex-col sm:flex-row gap-3">
-        <Button asChild className="bg-green-600 hover:bg-green-700">
+        <Button asChild>
           <a href={mailto}>Email {siteConfig.email}</a>
         </Button>
         <Button asChild variant="outline">

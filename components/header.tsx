@@ -25,7 +25,8 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white border-b shadow-sm">
+    <header className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/85 backdrop-blur-md atm-elev-1">
+      <div className="h-0.5 w-full bg-gradient-to-r from-primary/80 via-primary to-primary/40" aria-hidden />
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">
           {/* Logo */}
@@ -36,6 +37,7 @@ export default function Header() {
               width={180}
               height={40}
               className="h-10 w-auto"
+              priority
             />
           </Link>
 
@@ -45,19 +47,19 @@ export default function Header() {
             <div className="relative group">
               <button
                 onClick={() => toggleDropdown("services")}
-                className="flex items-center px-3 py-2 text-sm font-medium text-gray-700 rounded-md hover:bg-gray-100 hover:text-gray-900"
+                className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-foreground/80 hover:bg-muted hover:text-foreground"
               >
                 Services <ChevronDown className="ml-1 h-4 w-4" />
               </button>
               <div
-                className={`absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 transition-all duration-200 ${
-                  activeDropdown === "services" ? "opacity-100 visible" : "opacity-0 invisible"
+                className={`absolute left-0 mt-2 w-56 rounded-md bg-card ring-1 ring-border transition-all duration-200 atm-elev-2 ${
+                  activeDropdown === "services" ? "visible opacity-100" : "invisible opacity-0"
                 }`}
               >
                 <div className="py-1">
                   <Link
                     href="/services/residential"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    className="block px-4 py-2 text-sm text-foreground/80 hover:bg-muted"
                   >
                     Residential Services
                   </Link>
@@ -186,11 +188,11 @@ export default function Header() {
           {/* CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <Link href={`tel:${siteConfig.phone.e164}`} className="flex items-center text-sm font-medium text-gray-700">
-              <Phone className="mr-2 h-4 w-4 text-green-600" />
+              <Phone className="mr-2 h-4 w-4 text-primary" />
               {siteConfig.phone.display}
             </Link>
             <Link href={siteConfig.customerPortalUrl} target="_blank" rel="noopener noreferrer">
-              <Button className="bg-green-600 hover:bg-green-700">
+              <Button>
                 Customer Portal <Calendar className="ml-2 h-4 w-4" />
               </Button>
             </Link>
@@ -374,7 +376,7 @@ export default function Header() {
 
           <div className="pt-4 pb-3 border-t border-gray-200">
             <Link href={`tel:${siteConfig.phone.e164}`} className="flex items-center px-3 py-2 text-base font-medium text-gray-700">
-              <Phone className="mr-2 h-5 w-5 text-green-600" />
+              <Phone className="mr-2 h-5 w-5 text-primary" />
               {siteConfig.phone.display}
             </Link>
             <div className="mt-3 px-3">
@@ -384,7 +386,7 @@ export default function Header() {
                 rel="noopener noreferrer"
                 className="w-full"
               >
-                <Button className="w-full bg-green-600 hover:bg-green-700">
+                <Button className="w-full">
                   Customer Portal <Calendar className="ml-2 h-4 w-4" />
                 </Button>
               </Link>

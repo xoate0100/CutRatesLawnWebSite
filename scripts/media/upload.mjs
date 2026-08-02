@@ -47,7 +47,7 @@ async function uploadAsset(asset, { dryRun = false } = {}) {
         'cp',
         local,
         gsUri,
-        `--cache-control=public, max-age=31536000, immutable`,
+        '--cache-control=public,max-age=31536000,immutable',
         `--content-type=${ct}`,
       ],
       { dryRun },

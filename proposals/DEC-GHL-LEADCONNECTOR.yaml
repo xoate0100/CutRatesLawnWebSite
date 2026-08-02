@@ -1,0 +1,31 @@
+# Proposal: DEC-GHL-LEADCONNECTOR
+
+**Status:** proposed  
+**Date:** 2026-08-01  
+**Decision id (if accepted):** DEC-GHL-LEADCONNECTOR
+
+## Summary
+
+Adopt Go High Level (LeadConnector) as the CRM destination for website lead forms, and use the official LeadConnector MCP in Cursor to build/maintain automations.
+
+## Options
+
+1. **Webhook-only** (n8n / Make) — flexible, but CRM modeling stays outside GHL.
+2. **GHL Contacts API + tag-triggered workflows** (recommended) — site upserts contacts; GHL owns nurture/SMS/pipeline.
+3. **Embed GHL forms** — fastest, weaker control of site UX and spam defenses.
+
+## Recommendation
+
+Option 2. Keep Next.js forms + `/api/lead`; deliver via `lib/ghl.ts` upsert + tags (`website-lead`, `source:*`, `service:*`). Use LeadConnector MCP for workflow authoring.
+
+## Risks
+
+- PIT scopes too broad → agent over-permissioned. Mitigate: least privilege + human review of write actions.
+- Tag overwrite on upsert → we add tags via dedicated tags endpoint after upsert.
+
+## Acceptance
+
+- [ ] PIT + location ID in local + Vercel env  
+- [ ] Cursor MCP `leadconnector` connected  
+- [ ] Test lead creates contact with `website-lead` tag  
+- [ ] Workflow triggers on that tag  

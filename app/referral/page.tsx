@@ -33,7 +33,7 @@ export default function ReferralPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
-        <section className="bg-green-600 text-white py-20">
+        <section className="atm-cta-band text-primary-foreground py-16">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Refer a Friend</h1>
             <p className="text-xl mb-8 max-w-3xl">

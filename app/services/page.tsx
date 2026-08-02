@@ -3,9 +3,11 @@ import Image from "next/image"
 import { Check, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 export default function ServicesPage() {
   return (
+    <div className="atm-canvas">
     <div className="container mx-auto px-4 py-12">
       <div className="mb-12 text-center">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">Professional Lawn Care Services</h1>
@@ -50,10 +52,10 @@ export default function ServicesPage() {
                 </Link>
               </Button>
             </div>
-            <div className="md:w-1/2 relative h-[300px] md:h-[400px] rounded-lg overflow-hidden">
+            <div className="md:w-1/2 relative h-[300px] md:h-[400px] rounded-lg overflow-hidden atm-elev-1">
               <Image
-                src="/placeholder.svg?height=800&width=1200&text=Lawn+Mowing"
-                alt="Professional lawn mowing service"
+                src={mediaSrc("services.mowing")}
+                alt={mediaAlt("services.mowing", "Professional lawn mowing service")}
                 fill
                 className="object-cover"
               />
@@ -98,10 +100,10 @@ export default function ServicesPage() {
                 </Link>
               </Button>
             </div>
-            <div className="md:w-1/2 relative h-[300px] md:h-[400px] rounded-lg overflow-hidden">
+            <div className="md:w-1/2 relative h-[300px] md:h-[400px] rounded-lg overflow-hidden atm-elev-1">
               <Image
-                src="/placeholder.svg?height=800&width=1200&text=Lawn+Treatments"
-                alt="Lawn fertilization and treatments"
+                src={mediaSrc("services.fertilization")}
+                alt={mediaAlt("services.fertilization", "Lawn fertilization and treatments")}
                 fill
                 className="object-cover"
               />
@@ -146,10 +148,10 @@ export default function ServicesPage() {
                 </Link>
               </Button>
             </div>
-            <div className="md:w-1/2 relative h-[300px] md:h-[400px] rounded-lg overflow-hidden">
+            <div className="md:w-1/2 relative h-[300px] md:h-[400px] rounded-lg overflow-hidden atm-elev-1">
               <Image
-                src="/placeholder.svg?height=800&width=1200&text=Irrigation+Services"
-                alt="Irrigation system installation and maintenance"
+                src={mediaSrc("services.cleanup")}
+                alt={mediaAlt("services.cleanup", "Irrigation system installation and maintenance")}
                 fill
                 className="object-cover"
               />
@@ -356,6 +358,7 @@ export default function ServicesPage() {
           </div>
         </section>
       </div>
+    </div>
     </div>
   )
 }

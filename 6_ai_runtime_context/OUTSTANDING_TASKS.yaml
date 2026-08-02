@@ -1,0 +1,129 @@
+# Durable backlog for agents — read at session start with ACTIVE_PLAN / ACTIVE_TASK_POINTER.
+# Status: pending | in_progress | blocked | completed | cancelled
+# Do not put secrets here.
+
+updated: "2026-08-01"
+source_docs:
+  - docs/integrations/GOHIGHLEVEL.md
+  - proposals/DEC-GHL-LEADCONNECTOR.yaml
+  - docs/atmosphere/RECON.md
+  - docs/atmosphere/AUDIT.md
+  - docs/atmosphere/SYSTEM.md
+  - docs/atmosphere/HUMAN_TASKS.md
+  - docs/media/ENVATO_PROPOSALS.md
+
+items:
+  - id: ATM-GO-001
+    title: Atmosphere Phase 1 go-ahead (scope S1/S2/S3 + media cutover A/B)
+    area: atmosphere
+    priority: high
+    status: completed
+    depends_on: []
+    acceptance:
+      - Human confirms scope in docs/atmosphere/AUDIT.md §8
+      - Then Phase 2 SYSTEM.md may proceed
+    notes: >
+      User directed S1+S2+S3 + media migrate A + Envato proposals on 2026-08-01.
+      SYSTEM + 3A + slot expansion shipped; licenses still human.
+
+  - id: ATM-3A-001
+    title: Atmosphere tokens/components + Tier1–3 high-reach application
+    area: atmosphere
+    priority: high
+    status: completed
+    depends_on: [ATM-GO-001]
+    acceptance:
+      - SYSTEM.md exists
+      - globals.css atmosphere utilities + PRM
+      - Home/about/services/chrome use system
+    notes: See docs/atmosphere/HUMAN_TASKS.md for visual sign-off.
+
+  - id: ATM-MEDIA-001
+    title: Human license Envato picks and publish to GCS slots
+    area: media
+    priority: high
+    status: completed
+    depends_on: []
+    acceptance:
+      - Picks from ENVATO_PROPOSALS.md licensed into media/inbox
+      - media:publish + media:sync-site for priority slots
+    notes: >
+      Completed 2026-08-02: 15 assets uploaded under cutrateslawn/prod; priority slots
+      rebound in SLOT_MAP + media-map.json. Needs commit/push for production.
+
+  - id: GHL-WF-001
+    title: Website lead nurture workflow (tag website-lead)
+    area: gohighlevel
+    priority: high
+    status: pending
+    depends_on: []
+    acceptance:
+      - Workflow trigger is Contact Tag Added → website-lead
+      - Creates/moves opportunity in New Leads pipeline → Fresh Lead
+      - Sends internal staff notification (email and/or SMS)
+      - Sends customer thank-you SMS or email (TCPA-safe copy)
+    notes: >
+      API upsert + tags already work (lib/ghl.ts). Automation not built yet.
+      Pipeline id F0DVnJbjW0nJMm8HlYpG (New Leads), stage Fresh Lead.
+
+  - id: GHL-WF-002
+    title: Source-specific branching (contact vs quote vs newsletter)
+    area: gohighlevel
+    priority: medium
+    status: pending
+    depends_on: [GHL-WF-001]
+    acceptance:
+      - source:contact / source:quote / source:newsletter tags drive distinct paths or opportunity names
+      - Newsletter path does not spam sales SMS the same as quote leads
+
+  - id: GHL-WF-003
+    title: Map website service tags to opportunity naming / pipeline fields
+    area: gohighlevel
+    priority: medium
+    status: pending
+    depends_on: [GHL-WF-001]
+    acceptance:
+      - service:* tags from site appear on contact and are visible to staff
+      - Optional custom fields Service Requested + Your Message populated from env CF IDs
+
+  - id: GHL-OPS-001
+    title: Add GHL_* secrets to Vercel production env
+    area: deploy
+    priority: high
+    status: pending
+    depends_on: []
+    acceptance:
+      - GHL_PRIVATE_INTEGRATION_TOKEN and GHL_LOCATION_ID set on Vercel for v0-cut-rates-lawn-main-page
+      - Optional GHL_CF_SERVICE_ID / GHL_CF_MESSAGE_ID set
+      - Production contact form creates a tagged contact in GHL
+
+  - id: GHL-OPS-002
+    title: Grant Locations View scope on Private Integration (optional cleanup)
+    area: gohighlevel
+    priority: low
+    status: pending
+    depends_on: []
+    acceptance:
+      - GET /locations/{id} succeeds with PIT (currently returns scope unauthorized; contacts already work)
+
+  - id: GHL-DEC-001
+    title: Accept or revise DEC-GHL-LEADCONNECTOR proposal
+    area: governance
+    priority: medium
+    status: pending
+    depends_on: []
+    acceptance:
+      - Human accepts proposal → promote into DECISION_REGISTRY via normal proposal flow
+      - Or cancel with note if webhook-only preferred
+
+  - id: GHL-TEST-001
+    title: End-to-end form → GHL smoke test
+    area: qa
+    priority: high
+    status: pending
+    depends_on: [GHL-WF-001, GHL-OPS-001]
+    acceptance:
+      - Submit contact form locally and on production
+      - Contact appears with website-lead (+ source/service tags)
+      - Workflow fires within expected SLA
+      - Remove or archive test contacts afterward

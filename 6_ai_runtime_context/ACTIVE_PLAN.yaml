@@ -1,62 +1,57 @@
-plan_id: agentic-upgrade-phase-1
+plan_id: ghl-lead-workflows
 component: web
-goal: Establish L2.5 agentic development scaffold without breaking existing site
-status: completed
+goal: Finish Go High Level workflows and production wiring for website lead forms
+status: active
 auto_commit: false
 commit_frequency: checkpoint_based
-commit_checkpoints:
-  after_phases: true
-  after_task_count: 5
-  after_file_threshold: 15
-  force_commit_on_checkpoint: true
+related:
+  - docs/integrations/GOHIGHLEVEL.md
+  - 6_ai_runtime_context/OUTSTANDING_TASKS.yaml
+  - proposals/DEC-GHL-LEADCONNECTOR.yaml
+  - lib/ghl.ts
+  - app/api/lead/route.ts
 
+# Canonical backlog lives in OUTSTANDING_TASKS.yaml — keep these in sync when status changes.
 tasks:
-  - id: 1
-    name: Scaffold governance and feature flags
+  - id: GHL-OPS-001
+    name: Add GHL_* secrets to Vercel production env
+    status: pending
     outputs:
-      - 0_phase0_bootstrap/feature_flags.yml
-      - 0_phase0_bootstrap/AI_SANDBOX_RULES.md
-      - 0_phase0_bootstrap/MVP_SPECIFICATION.yaml
-      - 0_phase0_bootstrap/META_FRAMEWORK_VERSION.yaml
-    status: completed
+      - Vercel env for v0-cut-rates-lawn-main-page
 
-  - id: 2
-    name: Initialize decision registry and agent graph
+  - id: GHL-WF-001
+    name: Website lead nurture workflow (tag website-lead)
+    status: pending
     outputs:
-      - 5_reference_architectures/DECISION_REGISTRY.yaml
-      - 5_reference_architectures/DRIFT_VECTORS.yaml
-      - 5_reference_architectures/AGENT_REGISTRY.yaml
-    status: completed
+      - GHL workflow triggered by website-lead
+      - Opportunity in New Leads / Fresh Lead
 
-  - id: 3
-    name: Add runtime context and documentation
+  - id: GHL-WF-002
+    name: Source-specific branching (contact vs quote vs newsletter)
+    status: pending
     outputs:
-      - 6_ai_runtime_context/AI_CONTEXT.md
-      - 6_ai_runtime_context/ACTIVE_TASK_POINTER.yaml
-      - docs/DEV_COLD_START_KNOWLEDGE.md
-      - docs/MASTER_INDEX.md
-    status: completed
+      - Differentiated GHL paths by source:* tags
 
-  - id: 4
-    name: Add Cursor rules and verification scripts
+  - id: GHL-WF-003
+    name: Map service tags / custom fields into staff-visible CRM data
+    status: pending
     outputs:
-      - .cursor/rules/agentic-session.mdc
-      - .cursor/rules/agentic-commit.mdc
-      - scripts/verify.mjs
-      - scripts/generate-ai-context.mjs
-    status: completed
+      - Service + message custom fields populated from site leads
 
-  - id: 5
-    name: Add CI and package scripts
+  - id: GHL-TEST-001
+    name: End-to-end form → GHL smoke test (local + production)
+    status: pending
     outputs:
-      - .github/workflows/ci.yml
-      - package.json scripts
-      - .eslintrc.json
-    status: completed
+      - Verified tagged contact + workflow fire
 
-  - id: 6
-    name: Full verification pass
+  - id: GHL-DEC-001
+    name: Accept or revise DEC-GHL-LEADCONNECTOR proposal
+    status: pending
     outputs:
-      - AGENTIC_UPGRADE_PLAN.md
-      - .agentic-initialized
-    status: completed
+      - Decision registry entry or cancelled proposal note
+
+  - id: GHL-OPS-002
+    name: Optional — grant Locations View on PIT
+    status: pending
+    outputs:
+      - locations.get succeeds with current PIT

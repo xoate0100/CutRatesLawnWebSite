@@ -172,9 +172,27 @@ export function runGcloud(args, { dryRun = false } = {}) {
     console.log(`[dry-run] ${bin} ${args.join(' ')}`)
     return { status: 0, stdout: '', stderr: '' }
   }
-  const r = spawnSync(bin, args, { encoding: 'utf8', shell: false })
+
+  let r
+  if (process.platform === 'win32') {
+    // Avoid shell splitting on commas/spaces inside flag values (e.g. cache-control).
+    const quotedArgs = args.map((a) => {
+      if (!/[ \t,"&<>^|%]/.test(a)) return a
+      return `"${String(a).replace(/"/g, '\\"')}"`
+    })
+    r = spawnSync(`"${bin}" ${quotedArgs.join(' ')}`, {
+      encoding: 'utf8',
+      shell: true,
+      windowsHide: true,
+    })
+  } else {
+    r = spawnSync(bin, args, { encoding: 'utf8', shell: false })
+  }
+
   if (r.status !== 0) {
-    throw new Error(`gcloud failed (${r.status}): ${r.stderr || r.stdout}`)
+    throw new Error(
+      `gcloud failed (${r.status}): ${r.stderr || r.stdout || r.error?.message || 'no output'}`,
+    )
   }
   return r
 }

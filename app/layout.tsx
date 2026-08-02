@@ -7,6 +7,7 @@ import Footer from "@/components/footer"
 import LiveChat from "@/components/live-chat"
 import { Toaster } from "@/components/ui/sonner"
 import { siteConfig } from "@/lib/site-config"
+import { mediaSrc } from "@/lib/media"
 import { Providers } from "./providers"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -34,12 +35,14 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteConfig.url,
     siteName: siteConfig.name,
+    images: [{ url: mediaSrc("og.default"), width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: "Professional lawn care and property maintenance services",
     creator: siteConfig.twitterHandle,
+    images: [mediaSrc("og.default")],
   },
   robots: {
     index: true,

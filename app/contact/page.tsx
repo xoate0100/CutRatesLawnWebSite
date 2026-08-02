@@ -175,7 +175,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        <section className="bg-gray-100 py-16">
+        <section className="bg-muted/60 py-16">
           <div className="container mx-auto px-4">
             <h2 className="text-3xl font-bold mb-8 text-center">Get in Touch</h2>
             <Card className="max-w-2xl mx-auto">

@@ -91,11 +91,16 @@ npm run media:validate   # Registry integrity (+ optional --urls)
 |------|------|
 | Current task state | `6_ai_runtime_context/AI_CONTEXT.md` |
 | Active plan | `6_ai_runtime_context/ACTIVE_PLAN.yaml` |
+| Task pointer | `6_ai_runtime_context/ACTIVE_TASK_POINTER.yaml` |
+| Open backlog | `6_ai_runtime_context/OUTSTANDING_TASKS.yaml` |
 | Settled decisions | `5_reference_architectures/DECISION_REGISTRY.yaml` |
 | Write permissions | `0_phase0_bootstrap/feature_flags.yml` |
 | Sandbox rules | `0_phase0_bootstrap/AI_SANDBOX_RULES.md` |
 | Migration status | `AGENTIC_UPGRADE_PLAN.md` |
 | Media assets | `docs/media/MEDIA_PIPELINE.md` |
+| Go High Level / leads | `docs/integrations/GOHIGHLEVEL.md` |
+
+**Current focus (2026-08-01):** plan `ghl-lead-workflows` — finish GHL tag workflows, Vercel `GHL_*` env, and E2E lead smoke tests. See outstanding IDs `GHL-OPS-001`, `GHL-WF-001`, `GHL-TEST-001`.
 
 ---
 

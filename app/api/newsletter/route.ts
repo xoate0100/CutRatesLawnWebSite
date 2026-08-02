@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import { z } from "zod"
+import { isGhlConfigured, upsertLeadContact } from "@/lib/ghl"
 
 export const runtime = "nodejs"
 
@@ -33,17 +34,38 @@ export async function POST(req: NextRequest) {
   const webhook = process.env.NEWSLETTER_WEBHOOK_URL || process.env.CONTACT_FORM_WEBHOOK_URL
   const resendKey = process.env.RESEND_API_KEY
   const notifyTo = process.env.LEAD_NOTIFY_EMAIL || process.env.NEXT_PUBLIC_BUSINESS_EMAIL
+  const ghlReady = isGhlConfigured()
 
-  if (!webhook && !resendKey) {
+  if (!webhook && !resendKey && !ghlReady) {
     return NextResponse.json(
       {
         ok: false,
         error:
-          "Newsletter delivery is not configured. Set NEWSLETTER_WEBHOOK_URL or RESEND_API_KEY.",
+          "Newsletter delivery is not configured. Set GHL_PRIVATE_INTEGRATION_TOKEN + GHL_LOCATION_ID, NEWSLETTER_WEBHOOK_URL, or RESEND_API_KEY.",
         requestId,
       },
       { status: 503 },
     )
+  }
+
+  let delivered = false
+
+  if (ghlReady) {
+    const ghl = await upsertLeadContact({
+      firstName: "Newsletter",
+      lastName: "Subscriber",
+      email: parsed.data.email,
+      service: "newsletter",
+      message: "Newsletter subscribe",
+      source: parsed.data.source || "newsletter",
+      requestId,
+    })
+    if (ghl.ok) {
+      delivered = true
+      console.info("newsletter_delivered_ghl", { requestId, contactId: ghl.contactId })
+    } else {
+      console.error("newsletter_ghl_failed", { requestId, reason: ghl.reason })
+    }
   }
 
   if (webhook) {
@@ -61,11 +83,14 @@ export async function POST(req: NextRequest) {
         requestId,
       }),
     })
-    if (!res.ok) {
+    if (res.ok) {
+      delivered = true
+    } else {
       console.error("newsletter_webhook_failed", { requestId, status: res.status })
-      return NextResponse.json({ ok: false, error: "Provider rejected subscription.", requestId }, { status: 502 })
     }
-  } else if (resendKey && notifyTo) {
+  }
+
+  if (!delivered && resendKey && notifyTo) {
     const res = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -80,10 +105,15 @@ export async function POST(req: NextRequest) {
         text: `Newsletter subscribe request\nEmail: ${parsed.data.email}\nSource: ${parsed.data.source}\nRequest: ${requestId}`,
       }),
     })
-    if (!res.ok) {
+    if (res.ok) {
+      delivered = true
+    } else {
       console.error("newsletter_resend_failed", { requestId, status: res.status })
-      return NextResponse.json({ ok: false, error: "Email provider rejected subscription.", requestId }, { status: 502 })
     }
+  }
+
+  if (!delivered) {
+    return NextResponse.json({ ok: false, error: "Newsletter delivery failed.", requestId }, { status: 502 })
   }
 
   seen.set(parsed.data.idempotencyKey, Date.now())

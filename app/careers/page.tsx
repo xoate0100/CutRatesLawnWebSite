@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight } from "lucide-react"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const jobOpenings = [
   {
@@ -37,8 +38,8 @@ export default function CareersPage() {
         <section className="relative">
           <div className="absolute inset-0 z-0">
             <Image
-              src="/placeholder.svg?height=600&width=1920"
-              alt="Cut Rates Lawn Care team at work"
+              src={mediaSrc("about.hero")}
+              alt={mediaAlt("about.hero", "Cut Rates Lawn Care team at work")}
               fill
               className="object-cover brightness-50"
               priority
@@ -51,7 +52,7 @@ export default function CareersPage() {
               us deliver exceptional property care services.
             </p>
             <Link href="#openings">
-              <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
+              <Button size="lg">
                 View Open Positions
               </Button>
             </Link>

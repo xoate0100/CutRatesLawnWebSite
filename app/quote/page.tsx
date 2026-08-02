@@ -57,7 +57,7 @@ export default function QuotePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
-        <section className="bg-green-600 text-white py-20">
+        <section className="bg-primary text-primary-foreground py-16">
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Get an Estimate</h1>
             <p className="text-xl mb-8 max-w-3xl">
@@ -73,11 +73,11 @@ export default function QuotePage() {
                 <CardTitle>Lawn Care Estimate Tool</CardTitle>
                 <CardDescription>
                   Prefer a real quote?{" "}
-                  <a className="text-green-700 underline" href={`tel:${siteConfig.phone.e164}`}>
+                  <a className="text-primary underline" href={`tel:${siteConfig.phone.e164}`}>
                     Call {siteConfig.phone.display}
                   </a>{" "}
                   or{" "}
-                  <Link href="/contact" className="text-green-700 underline">
+                  <Link href="/contact" className="text-primary underline">
                     contact us
                   </Link>
                   .
@@ -145,7 +145,7 @@ export default function QuotePage() {
                 )}
               </CardContent>
               <CardFooter>
-                <Button onClick={calculateQuote} className="w-full bg-green-600 hover:bg-green-700">
+                <Button onClick={calculateQuote} className="w-full">
                   Calculate Estimate
                 </Button>
               </CardFooter>
@@ -158,12 +158,12 @@ export default function QuotePage() {
                 </CardHeader>
                 <CardContent>
                   <p className="text-3xl font-bold text-center">${quote} per visit (estimate)</p>
-                  <p className="text-center mt-4 text-gray-600">
+                  <p className="text-center mt-4 text-muted-foreground">
                     Not a binding price. Site conditions, access, and add-ons change the final amount.
                   </p>
                 </CardContent>
                 <CardFooter className="flex flex-col sm:flex-row gap-3 justify-center">
-                  <Button asChild className="bg-green-600 hover:bg-green-700">
+                  <Button asChild>
                     <Link href="/contact">Request a confirmed quote</Link>
                   </Button>
                   <Button asChild variant="outline">

@@ -10,6 +10,7 @@ At the **start** of every session:
 1. Read `6_ai_runtime_context/AI_CONTEXT.md`.
 2. Read `docs/DEV_COLD_START_KNOWLEDGE.md` before implementing features.
 3. Check `6_ai_runtime_context/ACTIVE_PLAN.yaml` and `ACTIVE_TASK_POINTER.yaml`.
+4. Check `6_ai_runtime_context/OUTSTANDING_TASKS.yaml` for open backlog items (GHL workflows, deploy env, etc.).
 
 ## Agent roles (simplified graph)
 

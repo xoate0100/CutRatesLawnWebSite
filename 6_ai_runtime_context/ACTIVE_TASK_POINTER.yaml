@@ -1,5 +1,14 @@
-plan_id: agentic-upgrade-phase-1
-current_task: 6
-status: completed
-last_run: "2026-07-15"
-notes: Agentic scaffold migration complete; see AGENTIC_UPGRADE_PLAN.md
+plan_id: ghl-lead-workflows
+current_task: GHL-OPS-001
+status: active
+last_run: "2026-08-01"
+notes: >
+  Atmosphere S1–S3 code path completed 2026-08-01 (SYSTEM, tokens, home/about/services/chrome,
+  mediaSrc cutover, Envato proposals). Human list: docs/atmosphere/HUMAN_TASKS.md.
+  GHL API + Cursor MCP verified. Outstanding work is workflows, Vercel env, and E2E.
+  Full backlog: 6_ai_runtime_context/OUTSTANDING_TASKS.yaml
+next_suggested:
+  - GHL-OPS-001
+  - ATM-MEDIA-001
+  - GHL-WF-001
+  - GHL-TEST-001

@@ -1,21 +1,21 @@
 {
-  "generated_at": "2026-08-01T12:00:00.000Z",
+  "generated_at": "2026-08-02T03:34:36.066Z",
   "public_base_url": "https://storage.googleapis.com/site_photo_storage",
   "slots": {
     "home.hero": {
       "slot": "home.hero",
-      "asset_id": "gcs-lawn-watering",
-      "variant": "original",
-      "url": "https://storage.googleapis.com/site_photo_storage/lawn-with-automatic-watering-system-2023-11-27-04-52-32-utc.jpg",
+      "asset_id": "env-A9DYSMH",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w1920.webp",
       "fallback": "/placeholder.svg?height=800&width=1920",
-      "alt": "Residential lawn with watering system",
-      "width": null,
-      "height": null,
+      "alt": "House with a green lawn under blue sky",
+      "width": 1920,
+      "height": 1280,
       "attribution": {
-        "title": "Lawn with automatic watering system",
-        "author": null,
-        "envato_url": null,
-        "envato_item_id": null
+        "title": "House with a green lawn under blue sky",
+        "author": "wirestock",
+        "envato_url": "https://elements.envato.com/house-with-a-green-lawn-under-blue-sky-A9DYSMH",
+        "envato_item_id": "A9DYSMH"
       },
       "status": "published"
     },
@@ -35,6 +35,286 @@
         "envato_item_id": null
       },
       "status": "published"
+    },
+    "branding.logo-white": {
+      "slot": "branding.logo-white",
+      "asset_id": "legacy-logo-white",
+      "variant": "original",
+      "url": "/placeholder.svg?height=40&width=180",
+      "fallback": "/placeholder.svg?height=40&width=180",
+      "alt": "Cut Rates Lawn Care",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "services.hero": {
+      "slot": "services.hero",
+      "asset_id": "env-BQ2DHJ4",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w1920.webp",
+      "fallback": "/placeholder.svg?height=600&width=1600",
+      "alt": "Suburban homes with lush green front lawns",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Row of traditional suburban homes with lush green front lawns",
+        "author": "krisprahl",
+        "envato_url": "https://elements.envato.com/row-of-traditional-suburban-homes-with-lush-green--BQ2DHJ4",
+        "envato_item_id": "BQ2DHJ4"
+      },
+      "status": "published"
+    },
+    "about.hero": {
+      "slot": "about.hero",
+      "asset_id": "env-NVY3VZW",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/about-hero/env-NVY3VZW/w1920.webp",
+      "fallback": "/placeholder.svg?height=600&width=1600",
+      "alt": "Suburban home exterior — about Cut Rates Lawn Care",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Home sweet home real estate exterior",
+        "author": "maginnislaura",
+        "envato_url": "https://elements.envato.com/home-sweet-home-real-estate-exterior-design-mortga-NVY3VZW",
+        "envato_item_id": "NVY3VZW"
+      },
+      "status": "published"
+    },
+    "contact.hero": {
+      "slot": "contact.hero",
+      "asset_id": "sha-50ea64d6a870",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/contact-hero/sha-50ea64d6a870/w1920.webp",
+      "fallback": "/placeholder.svg?height=400&width=1600",
+      "alt": "Residential houses in a suburban neighborhood",
+      "width": 1920,
+      "height": 1440,
+      "attribution": {
+        "title": "Residential houses in suburban neighborhood in summer",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "services.mowing": {
+      "slot": "services.mowing",
+      "asset_id": "env-WL6S6J5",
+      "variant": "w800",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-mowing/env-WL6S6J5/w800.webp",
+      "fallback": "/placeholder.svg?height=480&width=720",
+      "alt": "Lawn mower on green grass",
+      "width": 800,
+      "height": 534,
+      "attribution": {
+        "title": "Lawn mover on green grass",
+        "author": "erika8213",
+        "envato_url": "https://elements.envato.com/lawn-mover-on-green-grass-machine-for-cutting-lawn-WL6S6J5",
+        "envato_item_id": "WL6S6J5"
+      },
+      "status": "published"
+    },
+    "services.fertilization": {
+      "slot": "services.fertilization",
+      "asset_id": "sha-5c1d1dd0095b",
+      "variant": "w800",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-fertilization/sha-5c1d1dd0095b/w800.webp",
+      "fallback": "/placeholder.svg?height=480&width=720",
+      "alt": "Man fertilizing lawn with spreader",
+      "width": 800,
+      "height": 533,
+      "attribution": {
+        "title": "Man fertilizing lawn with spreader in suburban yard",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "services.weed-control": {
+      "slot": "services.weed-control",
+      "asset_id": "env-L66HWHJ",
+      "variant": "w800",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-weed-control/env-L66HWHJ/w800.webp",
+      "fallback": "/placeholder.svg?height=480&width=720",
+      "alt": "Worker spraying pesticide onto green lawn",
+      "width": 800,
+      "height": 533,
+      "attribution": {
+        "title": "Worker spraying pesticide onto green lawn outdoors",
+        "author": "africaimages",
+        "envato_url": "https://elements.envato.com/worker-spraying-pesticide-onto-green-lawn-outdoors-L66HWHJ",
+        "envato_item_id": "L66HWHJ"
+      },
+      "status": "published"
+    },
+    "services.aeration": {
+      "slot": "services.aeration",
+      "asset_id": "sha-df83cbfdd6a5",
+      "variant": "w800",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-aeration/sha-df83cbfdd6a5/w800.webp",
+      "fallback": "/placeholder.svg?height=480&width=720",
+      "alt": "Water droplets on green grass",
+      "width": 800,
+      "height": 533,
+      "attribution": {
+        "title": "Water droplets on green grass field",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "services.cleanup": {
+      "slot": "services.cleanup",
+      "asset_id": "legacy-service-cleanup",
+      "variant": "original",
+      "url": "/placeholder.svg?height=480&width=720",
+      "fallback": "/placeholder.svg?height=480&width=720",
+      "alt": "Seasonal cleanup service",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "testimonials.1": {
+      "slot": "testimonials.1",
+      "asset_id": "legacy-testimonial-1",
+      "variant": "original",
+      "url": "/placeholder.svg?height=96&width=96",
+      "fallback": "/placeholder.svg?height=96&width=96",
+      "alt": "Customer photo",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "testimonials.2": {
+      "slot": "testimonials.2",
+      "asset_id": "legacy-testimonial-2",
+      "variant": "original",
+      "url": "/placeholder.svg?height=96&width=96",
+      "fallback": "/placeholder.svg?height=96&width=96",
+      "alt": "Customer photo",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "testimonials.3": {
+      "slot": "testimonials.3",
+      "asset_id": "legacy-testimonial-3",
+      "variant": "original",
+      "url": "/placeholder.svg?height=96&width=96",
+      "fallback": "/placeholder.svg?height=96&width=96",
+      "alt": "Customer photo",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "team.owner": {
+      "slot": "team.owner",
+      "asset_id": "legacy-team-owner",
+      "variant": "original",
+      "url": "/placeholder.svg?height=400&width=400",
+      "fallback": "/placeholder.svg?height=400&width=400",
+      "alt": "Company owner",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "team.manager": {
+      "slot": "team.manager",
+      "asset_id": "legacy-team-manager",
+      "variant": "original",
+      "url": "/placeholder.svg?height=400&width=400",
+      "fallback": "/placeholder.svg?height=400&width=400",
+      "alt": "Operations manager",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "team.crew": {
+      "slot": "team.crew",
+      "asset_id": "legacy-team-crew",
+      "variant": "original",
+      "url": "/placeholder.svg?height=400&width=400",
+      "fallback": "/placeholder.svg?height=400&width=400",
+      "alt": "Field crew",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "partners.kwch": {
+      "slot": "partners.kwch",
+      "asset_id": "legacy-partner-kwch",
+      "variant": "original",
+      "url": "/placeholder.svg?height=40&width=120",
+      "fallback": "/placeholder.svg?height=40&width=120",
+      "alt": "KWCH 12 News",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "partners.google": {
+      "slot": "partners.google",
+      "asset_id": "legacy-partner-google",
+      "variant": "original",
+      "url": "/placeholder.svg?height=40&width=120",
+      "fallback": "/placeholder.svg?height=40&width=120",
+      "alt": "Google Reviews",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "partners.yelp": {
+      "slot": "partners.yelp",
+      "asset_id": "legacy-partner-yelp",
+      "variant": "original",
+      "url": "/placeholder.svg?height=40&width=120",
+      "fallback": "/placeholder.svg?height=40&width=120",
+      "alt": "Yelp",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "og.default": {
+      "slot": "og.default",
+      "asset_id": "env-A9DYSMH",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w1920.webp",
+      "fallback": "/placeholder.svg?height=630&width=1200",
+      "alt": "Cut Rates Lawn Care — Wichita KS",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "House with a green lawn under blue sky",
+        "author": "wirestock",
+        "envato_url": "https://elements.envato.com/house-with-a-green-lawn-under-blue-sky-A9DYSMH",
+        "envato_item_id": "A9DYSMH"
+      },
+      "status": "published"
+    },
+    "empty.state": {
+      "slot": "empty.state",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.svg?height=240&width=320",
+      "fallback": "/placeholder.svg?height=240&width=320",
+      "alt": "Empty state illustration",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
     }
   }
 }

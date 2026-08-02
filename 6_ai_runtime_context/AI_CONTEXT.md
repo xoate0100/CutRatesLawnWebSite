@@ -1,6 +1,6 @@
 # AI Execution Context — Auto-Generated
 
-**Generated:** 2026-08-01 07:51:35
+**Generated:** 2026-08-01 19:39:58
 **Authority:** `0_phase0_bootstrap/AI_SANDBOX_RULES.md`
 **Purpose:** Consolidated constraint context for AI sessions
 
@@ -37,10 +37,10 @@
 
 | Field | Value |
 |-------|-------|
-| Plan | `agentic-upgrade-phase-1` |
+| Plan | `ghl-lead-workflows` |
 | Component | `web` |
-| Current task | 6 |
-| Pointer status | completed |
+| Current task | GHL-OPS-001 |
+| Pointer status | active |
 
 ---
 

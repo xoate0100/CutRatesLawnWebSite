@@ -26,7 +26,22 @@
 |----------|---------|--------|
 | [`COMMIT_STRATEGY.md`](./COMMIT_STRATEGY.md) | Commit frequency and traceability tags | ✅ |
 | [`../6_ai_runtime_context/ACTIVE_PLAN.yaml`](../6_ai_runtime_context/ACTIVE_PLAN.yaml) | Current plan and tasks | ✅ |
+| [`../6_ai_runtime_context/ACTIVE_TASK_POINTER.yaml`](../6_ai_runtime_context/ACTIVE_TASK_POINTER.yaml) | Current task pointer | ✅ |
+| [`../6_ai_runtime_context/OUTSTANDING_TASKS.yaml`](../6_ai_runtime_context/OUTSTANDING_TASKS.yaml) | Durable open backlog (GHL workflows, etc.) | ✅ |
 | [`../6_ai_runtime_context/BOOTSTRAP_LAYOUT_GUIDANCE.md`](../6_ai_runtime_context/BOOTSTRAP_LAYOUT_GUIDANCE.md) | nextjs_root layout contract | ✅ |
+
+## Integrations
+
+| Document | Purpose | Status |
+|----------|---------|--------|
+| [`integrations/GOHIGHLEVEL.md`](./integrations/GOHIGHLEVEL.md) | GHL MCP + lead API / tag workflows | ✅ |
+
+## Atmosphere
+
+| Document | Purpose | Status |
+|----------|---------|--------|
+| [`atmosphere/RECON.md`](./atmosphere/RECON.md) | Stack, tokens, media pipeline, surfaces | ✅ Phase 0 |
+| [`atmosphere/AUDIT.md`](./atmosphere/AUDIT.md) | Dimension scores + backlog (awaiting go-ahead) | ⏳ Phase 1 |
 
 ## Proposals
 

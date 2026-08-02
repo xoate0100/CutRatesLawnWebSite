@@ -1,12 +1,112 @@
 version: 1
 slots:
   home.hero:
-    asset_id: gcs-lawn-watering
-    variant: original
+    asset_id: env-A9DYSMH
+    variant: w1920
     fallback: /placeholder.svg?height=800&width=1920
-    alt: Residential lawn with watering system
+    alt: House with a green lawn under blue sky
   header.logo:
     asset_id: gcs-cutrates-logo
     variant: original
     fallback: /placeholder.svg?height=40&width=180
     alt: Cut Rates Lawn Care
+  branding.logo-white:
+    asset_id: legacy-logo-white
+    variant: original
+    fallback: /placeholder.svg?height=40&width=180
+    alt: Cut Rates Lawn Care
+  services.hero:
+    asset_id: env-BQ2DHJ4
+    variant: w1920
+    fallback: /placeholder.svg?height=600&width=1600
+    alt: Suburban homes with lush green front lawns
+  about.hero:
+    asset_id: env-NVY3VZW
+    variant: w1920
+    fallback: /placeholder.svg?height=600&width=1600
+    alt: Suburban home exterior — about Cut Rates Lawn Care
+  contact.hero:
+    asset_id: sha-50ea64d6a870
+    variant: w1920
+    fallback: /placeholder.svg?height=400&width=1600
+    alt: Residential houses in a suburban neighborhood
+  services.mowing:
+    asset_id: env-WL6S6J5
+    variant: w800
+    fallback: /placeholder.svg?height=480&width=720
+    alt: Lawn mower on green grass
+  services.fertilization:
+    asset_id: sha-5c1d1dd0095b
+    variant: w800
+    fallback: /placeholder.svg?height=480&width=720
+    alt: Man fertilizing lawn with spreader
+  services.weed-control:
+    asset_id: env-L66HWHJ
+    variant: w800
+    fallback: /placeholder.svg?height=480&width=720
+    alt: Worker spraying pesticide onto green lawn
+  services.aeration:
+    asset_id: sha-df83cbfdd6a5
+    variant: w800
+    fallback: /placeholder.svg?height=480&width=720
+    alt: Water droplets on green grass
+  services.cleanup:
+    asset_id: legacy-service-cleanup
+    variant: original
+    fallback: /placeholder.svg?height=480&width=720
+    alt: Seasonal cleanup service
+  testimonials.1:
+    asset_id: legacy-testimonial-1
+    variant: original
+    fallback: /placeholder.svg?height=96&width=96
+    alt: Customer photo
+  testimonials.2:
+    asset_id: legacy-testimonial-2
+    variant: original
+    fallback: /placeholder.svg?height=96&width=96
+    alt: Customer photo
+  testimonials.3:
+    asset_id: legacy-testimonial-3
+    variant: original
+    fallback: /placeholder.svg?height=96&width=96
+    alt: Customer photo
+  team.owner:
+    asset_id: legacy-team-owner
+    variant: original
+    fallback: /placeholder.svg?height=400&width=400
+    alt: Company owner
+  team.manager:
+    asset_id: legacy-team-manager
+    variant: original
+    fallback: /placeholder.svg?height=400&width=400
+    alt: Operations manager
+  team.crew:
+    asset_id: legacy-team-crew
+    variant: original
+    fallback: /placeholder.svg?height=400&width=400
+    alt: Field crew
+  partners.kwch:
+    asset_id: legacy-partner-kwch
+    variant: original
+    fallback: /placeholder.svg?height=40&width=120
+    alt: KWCH 12 News
+  partners.google:
+    asset_id: legacy-partner-google
+    variant: original
+    fallback: /placeholder.svg?height=40&width=120
+    alt: Google Reviews
+  partners.yelp:
+    asset_id: legacy-partner-yelp
+    variant: original
+    fallback: /placeholder.svg?height=40&width=120
+    alt: Yelp
+  og.default:
+    asset_id: env-A9DYSMH
+    variant: w1920
+    fallback: /placeholder.svg?height=630&width=1200
+    alt: Cut Rates Lawn Care — Wichita KS
+  empty.state:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.svg?height=240&width=320
+    alt: Empty state illustration

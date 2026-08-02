@@ -13,10 +13,12 @@ assets:
       - name: original
         object: lawn-with-automatic-watering-system-2023-11-27-04-52-32-utc.jpg
         url: https://storage.googleapis.com/site_photo_storage/lawn-with-automatic-watering-system-2023-11-27-04-52-32-utc.jpg
-    slots: [home.hero]
+    slots:
+      - home.hero
     alt: Residential lawn with watering system
     usage: hero
     notes: Bound from existing bucket object during audit remediation (F-009/F-020)
+    updated_at: 2026-08-02T02:58:59.089Z
   - asset_id: gcs-cutrates-logo
     slug: cutrates-logo
     status: published
@@ -26,7 +28,886 @@ assets:
       - name: original
         object: cutrateshireslogo.png
         url: https://storage.googleapis.com/site_photo_storage/cutrateshireslogo.png
-    slots: [header.logo]
+    slots:
+      - header.logo
     alt: Cut Rates Lawn Care
     usage: logo
     notes: Bound from existing bucket object during audit remediation (F-009/F-020)
+    updated_at: 2026-08-02T02:58:59.091Z
+  - asset_id: env-3J7CC29
+    slug: farmer-spraying-fertilizer
+    status: published
+    envato_item_id: 3J7CC29
+    envato_url: https://elements.envato.com/farmer-spraying-fertilizer-pest-control-and-plant--3J7CC29
+    title: Farmer spraying fertilizer
+    author: erika8213
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:09.0725967Z
+    source_filename: farmer-spraying-fertilizer-pest-control-and-plan-2026-01-09-10-34-58-utc.JPG
+    sha256: 6d8be748b1a2ae818a6d88ce037c31166ce02a53c8afffa4bc55495870d1c75f
+    bytes: 12065315
+    width: 5535
+    height: 3690
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/library/unassigned/env-3J7CC29
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-3J7CC29/original.jpg
+        width: 5535
+        height: 3690
+        format: jpeg
+        bytes: 2128689
+        object: cutrateslawn/prod/library/unassigned/env-3J7CC29/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-3J7CC29/original.jpg
+      - name: w1920
+        file: media/processed/env-3J7CC29/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 268780
+        object: cutrateslawn/prod/library/unassigned/env-3J7CC29/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-3J7CC29/w1920.webp
+      - name: w1280
+        file: media/processed/env-3J7CC29/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 156172
+        object: cutrateslawn/prod/library/unassigned/env-3J7CC29/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-3J7CC29/w1280.webp
+      - name: w768
+        file: media/processed/env-3J7CC29/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 75010
+        object: cutrateslawn/prod/library/unassigned/env-3J7CC29/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-3J7CC29/w768.webp
+    slots: []
+    alt: Farmer spraying fertilizer
+    tags: []
+    usage: stock
+    category: library
+    staged_path: media/staging/env-3J7CC29.jpg
+    ingested_by: andre
+    notes: Library alternate — not bound to a slot yet
+    updated_at: 2026-08-02T03:20:12.982Z
+  - asset_id: env-NVY3VZW
+    slug: home-sweet-home-real-estate-exterior
+    status: published
+    envato_item_id: NVY3VZW
+    envato_url: https://elements.envato.com/home-sweet-home-real-estate-exterior-design-mortga-NVY3VZW
+    title: Home sweet home real estate exterior
+    author: maginnislaura
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:08.7442968Z
+    source_filename: home-sweet-home-real-estate-exterior-design-mortga-2026-03-16-23-02-09-utc.jpg
+    sha256: 452d523fc371ebc6147a9cc5bdded25e171d357e2ad33935661d9d2bce3c28d0
+    bytes: 6957335
+    width: 4608
+    height: 3072
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/heroes/about-hero/env-NVY3VZW
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-NVY3VZW/original.jpg
+        width: 4608
+        height: 3072
+        format: jpeg
+        bytes: 2728865
+        object: cutrateslawn/prod/heroes/about-hero/env-NVY3VZW/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/about-hero/env-NVY3VZW/original.jpg
+      - name: w1920
+        file: media/processed/env-NVY3VZW/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 613882
+        object: cutrateslawn/prod/heroes/about-hero/env-NVY3VZW/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/about-hero/env-NVY3VZW/w1920.webp
+      - name: w1280
+        file: media/processed/env-NVY3VZW/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 308350
+        object: cutrateslawn/prod/heroes/about-hero/env-NVY3VZW/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/about-hero/env-NVY3VZW/w1280.webp
+      - name: w768
+        file: media/processed/env-NVY3VZW/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 120660
+        object: cutrateslawn/prod/heroes/about-hero/env-NVY3VZW/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/about-hero/env-NVY3VZW/w768.webp
+    slots:
+      - about.hero
+    alt: Suburban home exterior — about Cut Rates Lawn Care
+    tags: []
+    usage: hero
+    category: heroes
+    staged_path: media/staging/env-NVY3VZW.jpg
+    ingested_by: andre
+    notes: ""
+    updated_at: 2026-08-02T03:21:35.367Z
+  - asset_id: env-A9DYSMH
+    slug: house-with-a-green-lawn-under-blue-sky
+    status: published
+    envato_item_id: A9DYSMH
+    envato_url: https://elements.envato.com/house-with-a-green-lawn-under-blue-sky-A9DYSMH
+    title: House with a green lawn under blue sky
+    author: wirestock
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:08.9634169Z
+    source_filename: house-with-a-green-lawn-under-blue-sky-2026-03-18-16-04-37-utc.jpeg
+    sha256: 8a30da7b22a6a1959d889703c5ff1865914ffc20957e957fce5f2a06a630245d
+    bytes: 32798430
+    width: 5980
+    height: 3987
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/heroes/home-hero/env-A9DYSMH
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-A9DYSMH/original.jpeg
+        width: 5980
+        height: 3987
+        format: jpeg
+        bytes: 5353095
+        object: cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/original.jpeg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/original.jpeg
+      - name: w1920
+        file: media/processed/env-A9DYSMH/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 690928
+        object: cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w1920.webp
+      - name: w1280
+        file: media/processed/env-A9DYSMH/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 315152
+        object: cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w1280.webp
+      - name: w768
+        file: media/processed/env-A9DYSMH/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 114332
+        object: cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w768.webp
+    slots:
+      - home.hero
+    alt: House with a green lawn under blue sky
+    tags: []
+    usage: hero
+    category: heroes
+    staged_path: media/staging/env-A9DYSMH.jpeg
+    ingested_by: andre
+    notes: ""
+    updated_at: 2026-08-02T03:23:01.882Z
+  - asset_id: sha-1a0ddae6797d
+    slug: lawn-care-professional-sprays-fertilizer
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: Lawn care professional sprays fertilizer
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:09.0642348Z
+    source_filename: lawn-care-professional-sprays-garden-with-fertiliz-2026-03-20-06-20-43-utc.jpg
+    sha256: 1a0ddae6797d5ed7c0b2220c30c84d062042a6110bf4a1085edf04325708903d
+    bytes: 2871219
+    width: 5400
+    height: 3600
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/library/unassigned/sha-1a0ddae6797d
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-1a0ddae6797d/original.jpg
+        width: 5400
+        height: 3600
+        format: jpeg
+        bytes: 1514941
+        object: cutrateslawn/prod/library/unassigned/sha-1a0ddae6797d/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-1a0ddae6797d/original.jpg
+      - name: w1920
+        file: media/processed/sha-1a0ddae6797d/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 136778
+        object: cutrateslawn/prod/library/unassigned/sha-1a0ddae6797d/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-1a0ddae6797d/w1920.webp
+      - name: w1280
+        file: media/processed/sha-1a0ddae6797d/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 82462
+        object: cutrateslawn/prod/library/unassigned/sha-1a0ddae6797d/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-1a0ddae6797d/w1280.webp
+      - name: w768
+        file: media/processed/sha-1a0ddae6797d/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 42140
+        object: cutrateslawn/prod/library/unassigned/sha-1a0ddae6797d/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-1a0ddae6797d/w768.webp
+    slots: []
+    alt: Lawn care professional sprays fertilizer
+    tags: []
+    usage: stock
+    category: library
+    staged_path: media/staging/sha-1a0ddae6797d.jpg
+    ingested_by: andre
+    notes: Library alternate — not bound to a slot yet
+    updated_at: 2026-08-02T03:24:05.814Z
+  - asset_id: env-ETDTNU6
+    slug: lawn-care-worker-mows-grass
+    status: published
+    envato_item_id: ETDTNU6
+    envato_url: https://elements.envato.com/lawn-care-worker-mows-grass-in-a-sunny-garden-duri-ETDTNU6
+    title: Lawn care worker mows grass
+    author: duallogic
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:09.0137945Z
+    source_filename: lawn-care-worker-mows-grass-in-a-sunny-garden-duri-2026-07-23-18-38-57-utc.jpg
+    sha256: cf27d3a25e66176e24038ee46791fe1d87fd8e1df9db21a07dd5c2d68bbf218e
+    bytes: 23807367
+    width: 7000
+    height: 4667
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/library/unassigned/env-ETDTNU6
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-ETDTNU6/original.jpg
+        width: 7000
+        height: 4667
+        format: jpeg
+        bytes: 4750455
+        object: cutrateslawn/prod/library/unassigned/env-ETDTNU6/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-ETDTNU6/original.jpg
+      - name: w1920
+        file: media/processed/env-ETDTNU6/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 455260
+        object: cutrateslawn/prod/library/unassigned/env-ETDTNU6/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-ETDTNU6/w1920.webp
+      - name: w1280
+        file: media/processed/env-ETDTNU6/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 224790
+        object: cutrateslawn/prod/library/unassigned/env-ETDTNU6/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-ETDTNU6/w1280.webp
+      - name: w768
+        file: media/processed/env-ETDTNU6/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 92932
+        object: cutrateslawn/prod/library/unassigned/env-ETDTNU6/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-ETDTNU6/w768.webp
+    slots: []
+    alt: Lawn care worker mows grass
+    tags: []
+    usage: stock
+    category: library
+    staged_path: media/staging/env-ETDTNU6.jpg
+    ingested_by: andre
+    notes: Library alternate — not bound to a slot yet
+    updated_at: 2026-08-02T03:25:04.269Z
+  - asset_id: env-WL6S6J5
+    slug: lawn-mover-on-green-grass
+    status: published
+    envato_item_id: WL6S6J5
+    envato_url: https://elements.envato.com/lawn-mover-on-green-grass-machine-for-cutting-lawn-WL6S6J5
+    title: Lawn mover on green grass
+    author: erika8213
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:08.9144939Z
+    source_filename: lawn-mover-on-green-grass-machine-for-cutting-law-2026-03-24-23-07-43-utc.jpg
+    sha256: 4222c72308c17e0dcb88813d682683fd1fbf3ddd65afe7ef116a20f4fb202569
+    bytes: 19056034
+    width: 6139
+    height: 4093
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/services-mowing/env-WL6S6J5
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-WL6S6J5/original.jpg
+        width: 6139
+        height: 4093
+        format: jpeg
+        bytes: 4636752
+        object: cutrateslawn/prod/services/services-mowing/env-WL6S6J5/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-mowing/env-WL6S6J5/original.jpg
+      - name: w800
+        file: media/processed/env-WL6S6J5/w800.webp
+        width: 800
+        height: 534
+        format: webp
+        bytes: 127114
+        object: cutrateslawn/prod/services/services-mowing/env-WL6S6J5/w800.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-mowing/env-WL6S6J5/w800.webp
+      - name: w400
+        file: media/processed/env-WL6S6J5/w400.webp
+        width: 400
+        height: 266
+        format: webp
+        bytes: 34862
+        object: cutrateslawn/prod/services/services-mowing/env-WL6S6J5/w400.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-mowing/env-WL6S6J5/w400.webp
+    slots:
+      - services.mowing
+    alt: Lawn mower on green grass
+    tags: []
+    usage: card
+    category: services
+    staged_path: media/staging/env-WL6S6J5.jpg
+    ingested_by: andre
+    notes: ""
+    updated_at: 2026-08-02T03:25:57.919Z
+  - asset_id: sha-5c1d1dd0095b
+    slug: man-fertilizing-lawn-with-spreader-in-suburban-yard
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: Man fertilizing lawn with spreader in suburban yard
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:08.8867389Z
+    source_filename: man-fertilizing-lawn-with-spreader-in-suburban-yar-2026-03-17-00-02-10-utc.jpg
+    sha256: 5c1d1dd0095b14846707cfb100298255d3a44fc047e8141c5ff9aac480f032d0
+    bytes: 23143888
+    width: 8688
+    height: 5792
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/services-fertilization/sha-5c1d1dd0095b
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-5c1d1dd0095b/original.jpg
+        width: 8688
+        height: 5792
+        format: jpeg
+        bytes: 3753851
+        object: cutrateslawn/prod/services/services-fertilization/sha-5c1d1dd0095b/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-fertilization/sha-5c1d1dd0095b/original.jpg
+      - name: w800
+        file: media/processed/sha-5c1d1dd0095b/w800.webp
+        width: 800
+        height: 533
+        format: webp
+        bytes: 60882
+        object: cutrateslawn/prod/services/services-fertilization/sha-5c1d1dd0095b/w800.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-fertilization/sha-5c1d1dd0095b/w800.webp
+      - name: w400
+        file: media/processed/sha-5c1d1dd0095b/w400.webp
+        width: 400
+        height: 267
+        format: webp
+        bytes: 20570
+        object: cutrateslawn/prod/services/services-fertilization/sha-5c1d1dd0095b/w400.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-fertilization/sha-5c1d1dd0095b/w400.webp
+    slots:
+      - services.fertilization
+    alt: Man fertilizing lawn with spreader
+    tags: []
+    usage: card
+    category: services
+    staged_path: media/staging/sha-5c1d1dd0095b.jpg
+    ingested_by: andre
+    notes: ""
+    updated_at: 2026-08-02T03:26:40.749Z
+  - asset_id: sha-ba20accbcd23
+    slug: man-mowing-the-lawn-in-his-backyard
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: Man mowing the lawn in his backyard
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:09.0223307Z
+    source_filename: man-mowing-the-lawn-in-his-backyard-2026-03-16-23-00-56-utc.jpg
+    sha256: ba20accbcd23aac488e63cc73e535b391a96c9770c32426ea961fdf69cc35056
+    bytes: 12029087
+    width: 5448
+    height: 3632
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/library/unassigned/sha-ba20accbcd23
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-ba20accbcd23/original.jpg
+        width: 5448
+        height: 3632
+        format: jpeg
+        bytes: 2793850
+        object: cutrateslawn/prod/library/unassigned/sha-ba20accbcd23/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-ba20accbcd23/original.jpg
+      - name: w1920
+        file: media/processed/sha-ba20accbcd23/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 450580
+        object: cutrateslawn/prod/library/unassigned/sha-ba20accbcd23/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-ba20accbcd23/w1920.webp
+      - name: w1280
+        file: media/processed/sha-ba20accbcd23/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 258536
+        object: cutrateslawn/prod/library/unassigned/sha-ba20accbcd23/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-ba20accbcd23/w1280.webp
+      - name: w768
+        file: media/processed/sha-ba20accbcd23/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 107550
+        object: cutrateslawn/prod/library/unassigned/sha-ba20accbcd23/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-ba20accbcd23/w768.webp
+    slots: []
+    alt: Man mowing the lawn in his backyard
+    tags: []
+    usage: stock
+    category: library
+    staged_path: media/staging/sha-ba20accbcd23.jpg
+    ingested_by: andre
+    notes: Library alternate — not bound to a slot yet
+    updated_at: 2026-08-02T03:27:40.206Z
+  - asset_id: env-J4XCY2H
+    slug: man-pushing-lawn-mower
+    status: published
+    envato_item_id: J4XCY2H
+    envato_url: https://elements.envato.com/man-pushing-lawn-mower-lawn-care-background-place--J4XCY2H
+    title: Man pushing lawn mower
+    author: Olena_Mykhaylova
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:09.0476729Z
+    source_filename: man-pushing-lawn-mower-lawn-care-background-plac-2026-03-24-10-14-26-utc.jpg
+    sha256: 7b64170b8598e168858117a3abf878345c819f538ff8635dd67d91e93c3847e2
+    bytes: 14200240
+    width: 5244
+    height: 3500
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/library/unassigned/env-J4XCY2H
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-J4XCY2H/original.jpg
+        width: 5244
+        height: 3500
+        format: jpeg
+        bytes: 2463754
+        object: cutrateslawn/prod/library/unassigned/env-J4XCY2H/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-J4XCY2H/original.jpg
+      - name: w1920
+        file: media/processed/env-J4XCY2H/w1920.webp
+        width: 1920
+        height: 1281
+        format: webp
+        bytes: 337884
+        object: cutrateslawn/prod/library/unassigned/env-J4XCY2H/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-J4XCY2H/w1920.webp
+      - name: w1280
+        file: media/processed/env-J4XCY2H/w1280.webp
+        width: 1280
+        height: 854
+        format: webp
+        bytes: 182640
+        object: cutrateslawn/prod/library/unassigned/env-J4XCY2H/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-J4XCY2H/w1280.webp
+      - name: w768
+        file: media/processed/env-J4XCY2H/w768.webp
+        width: 768
+        height: 513
+        format: webp
+        bytes: 84172
+        object: cutrateslawn/prod/library/unassigned/env-J4XCY2H/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-J4XCY2H/w768.webp
+    slots: []
+    alt: Man pushing lawn mower
+    tags: []
+    usage: stock
+    category: library
+    staged_path: media/staging/env-J4XCY2H.jpg
+    ingested_by: andre
+    notes: Library alternate — not bound to a slot yet
+    updated_at: 2026-08-02T03:28:49.568Z
+  - asset_id: env-HBA9N9D
+    slug: mowed-green-frontyard
+    status: published
+    envato_item_id: HBA9N9D
+    envato_url: https://elements.envato.com/mowed-green-frontyard-grass-before-residential-sub-HBA9N9D
+    title: Mowed green frontyard
+    author: Olena_Mykhaylova
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:08.9956810Z
+    source_filename: mowed-green-frontyard-grass-before-residential-sub-2026-03-19-09-25-06-utc.jpg
+    sha256: 1e0feb965b0015306aaedfe3b2e5fd1495df60aa566dea61b83a22caebe74590
+    bytes: 30856659
+    width: 7213
+    height: 4814
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/library/unassigned/env-HBA9N9D
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-HBA9N9D/original.jpg
+        width: 7213
+        height: 4814
+        format: jpeg
+        bytes: 3893429
+        object: cutrateslawn/prod/library/unassigned/env-HBA9N9D/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-HBA9N9D/original.jpg
+      - name: w1920
+        file: media/processed/env-HBA9N9D/w1920.webp
+        width: 1920
+        height: 1282
+        format: webp
+        bytes: 147830
+        object: cutrateslawn/prod/library/unassigned/env-HBA9N9D/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-HBA9N9D/w1920.webp
+      - name: w1280
+        file: media/processed/env-HBA9N9D/w1280.webp
+        width: 1280
+        height: 854
+        format: webp
+        bytes: 82492
+        object: cutrateslawn/prod/library/unassigned/env-HBA9N9D/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-HBA9N9D/w1280.webp
+      - name: w768
+        file: media/processed/env-HBA9N9D/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 38814
+        object: cutrateslawn/prod/library/unassigned/env-HBA9N9D/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-HBA9N9D/w768.webp
+    slots: []
+    alt: Mowed green frontyard
+    tags: []
+    usage: stock
+    category: library
+    staged_path: media/staging/env-HBA9N9D.jpg
+    ingested_by: andre
+    notes: Library alternate — not bound to a slot yet
+    updated_at: 2026-08-02T03:30:01.990Z
+  - asset_id: sha-50ea64d6a870
+    slug: residential-houses-in-suburban-neighborhood-in-summer
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: Residential houses in suburban neighborhood in summer
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:08.8516441Z
+    source_filename: residential-houses-in-suburban-neighborhood-in-sum-2026-03-17-20-17-10-utc.jpg
+    sha256: 50ea64d6a870e645f87b3517071f523e283d45a0e75448589265fa2ee0c568cd
+    bytes: 9663532
+    width: 4032
+    height: 3024
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/heroes/contact-hero/sha-50ea64d6a870
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-50ea64d6a870/original.jpg
+        width: 4032
+        height: 3024
+        format: jpeg
+        bytes: 3228978
+        object: cutrateslawn/prod/heroes/contact-hero/sha-50ea64d6a870/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/contact-hero/sha-50ea64d6a870/original.jpg
+      - name: w1920
+        file: media/processed/sha-50ea64d6a870/w1920.webp
+        width: 1920
+        height: 1440
+        format: webp
+        bytes: 940856
+        object: cutrateslawn/prod/heroes/contact-hero/sha-50ea64d6a870/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/contact-hero/sha-50ea64d6a870/w1920.webp
+      - name: w1280
+        file: media/processed/sha-50ea64d6a870/w1280.webp
+        width: 1280
+        height: 960
+        format: webp
+        bytes: 461506
+        object: cutrateslawn/prod/heroes/contact-hero/sha-50ea64d6a870/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/contact-hero/sha-50ea64d6a870/w1280.webp
+      - name: w768
+        file: media/processed/sha-50ea64d6a870/w768.webp
+        width: 768
+        height: 576
+        format: webp
+        bytes: 178258
+        object: cutrateslawn/prod/heroes/contact-hero/sha-50ea64d6a870/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/contact-hero/sha-50ea64d6a870/w768.webp
+    slots:
+      - contact.hero
+    alt: Residential houses in a suburban neighborhood
+    tags: []
+    usage: hero
+    category: heroes
+    staged_path: media/staging/sha-50ea64d6a870.jpg
+    ingested_by: andre
+    notes: ""
+    updated_at: 2026-08-02T03:31:02.601Z
+  - asset_id: env-BQ2DHJ4
+    slug: row-of-traditional-suburban-homes-with-lush-green-front-lawns
+    status: published
+    envato_item_id: BQ2DHJ4
+    envato_url: https://elements.envato.com/row-of-traditional-suburban-homes-with-lush-green--BQ2DHJ4
+    title: Row of traditional suburban homes with lush green front lawns
+    author: krisprahl
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:08.9469464Z
+    source_filename: row-of-traditional-suburban-homes-with-lush-green-2026-03-17-08-23-41-utc.jpg
+    sha256: 5f5015ad874f89feba9745d396758a4fa01b1a533969b657aa431c5028cb3d02
+    bytes: 10218405
+    width: 6000
+    height: 4000
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-BQ2DHJ4/original.jpg
+        width: 6000
+        height: 4000
+        format: jpeg
+        bytes: 3066515
+        object: cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/original.jpg
+      - name: w1920
+        file: media/processed/env-BQ2DHJ4/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 550068
+        object: cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w1920.webp
+      - name: w1280
+        file: media/processed/env-BQ2DHJ4/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 264746
+        object: cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w1280.webp
+      - name: w768
+        file: media/processed/env-BQ2DHJ4/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 93334
+        object: cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w768.webp
+    slots:
+      - services.hero
+    alt: Suburban homes with lush green front lawns
+    tags: []
+    usage: hero
+    category: heroes
+    staged_path: media/staging/env-BQ2DHJ4.jpg
+    ingested_by: andre
+    notes: ""
+    updated_at: 2026-08-02T03:32:01.279Z
+  - asset_id: sha-17ae8109f02b
+    slug: suburban-home-exterior-with-manicured-lawn
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: Suburban home exterior with manicured lawn
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:09.0047925Z
+    source_filename: suburban-home-exterior-with-manicured-lawn-and-pat-2026-03-25-01-32-34-utc.jpg
+    sha256: 17ae8109f02bedb275bf3fc4c8c9fe42bf6043e35ee11a78fff8ea54b331f591
+    bytes: 20189773
+    width: 5002
+    height: 3494
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/library/unassigned/sha-17ae8109f02b
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-17ae8109f02b/original.jpg
+        width: 5002
+        height: 3494
+        format: jpeg
+        bytes: 3400626
+        object: cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/original.jpg
+      - name: w1920
+        file: media/processed/sha-17ae8109f02b/w1920.webp
+        width: 1920
+        height: 1341
+        format: webp
+        bytes: 789260
+        object: cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1920.webp
+      - name: w1280
+        file: media/processed/sha-17ae8109f02b/w1280.webp
+        width: 1280
+        height: 894
+        format: webp
+        bytes: 367674
+        object: cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1280.webp
+      - name: w768
+        file: media/processed/sha-17ae8109f02b/w768.webp
+        width: 768
+        height: 536
+        format: webp
+        bytes: 132236
+        object: cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w768.webp
+    slots: []
+    alt: Suburban home exterior with manicured lawn
+    tags: []
+    usage: stock
+    category: library
+    staged_path: media/staging/sha-17ae8109f02b.jpg
+    ingested_by: andre
+    notes: Library alternate — not bound to a slot yet
+    updated_at: 2026-08-02T03:32:59.453Z
+  - asset_id: sha-df83cbfdd6a5
+    slug: water-droplets-on-green-grass-field
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: Water droplets on green grass field
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:08.9259136Z
+    source_filename: water-droplets-on-green-grass-field-2026-03-19-05-42-07-utc.JPG
+    sha256: df83cbfdd6a595d317ef6108517ca93999f195d2985393887cb8bd5769dd3b04
+    bytes: 9692241
+    width: 5184
+    height: 3456
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/services-aeration/sha-df83cbfdd6a5
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-df83cbfdd6a5/original.jpg
+        width: 5184
+        height: 3456
+        format: jpeg
+        bytes: 1742868
+        object: cutrateslawn/prod/services/services-aeration/sha-df83cbfdd6a5/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-aeration/sha-df83cbfdd6a5/original.jpg
+      - name: w800
+        file: media/processed/sha-df83cbfdd6a5/w800.webp
+        width: 800
+        height: 533
+        format: webp
+        bytes: 96008
+        object: cutrateslawn/prod/services/services-aeration/sha-df83cbfdd6a5/w800.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-aeration/sha-df83cbfdd6a5/w800.webp
+      - name: w400
+        file: media/processed/sha-df83cbfdd6a5/w400.webp
+        width: 400
+        height: 267
+        format: webp
+        bytes: 31768
+        object: cutrateslawn/prod/services/services-aeration/sha-df83cbfdd6a5/w400.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-aeration/sha-df83cbfdd6a5/w400.webp
+    slots:
+      - services.aeration
+    alt: Water droplets on green grass
+    tags: []
+    usage: card
+    category: services
+    staged_path: media/staging/sha-df83cbfdd6a5.jpg
+    ingested_by: andre
+    notes: Interim stand-in for aeration
+    updated_at: 2026-08-02T03:33:42.335Z
+  - asset_id: env-L66HWHJ
+    slug: worker-spraying-pesticide-onto-green-lawn-outdoors
+    status: published
+    envato_item_id: L66HWHJ
+    envato_url: https://elements.envato.com/worker-spraying-pesticide-onto-green-lawn-outdoors-L66HWHJ
+    title: Worker spraying pesticide onto green lawn outdoors
+    author: africaimages
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T02:58:08.9534746Z
+    source_filename: worker-spraying-pesticide-onto-green-lawn-outdoors-2026-03-18-08-19-16-utc.jpg
+    sha256: a3a9bac9e2142813de8613ef7300ca86617b4987e799ae06031880e14fd41292
+    bytes: 15352221
+    width: 6720
+    height: 4480
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/services-weed-control/env-L66HWHJ
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-L66HWHJ/original.jpg
+        width: 6720
+        height: 4480
+        format: jpeg
+        bytes: 2670301
+        object: cutrateslawn/prod/services/services-weed-control/env-L66HWHJ/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-weed-control/env-L66HWHJ/original.jpg
+      - name: w800
+        file: media/processed/env-L66HWHJ/w800.webp
+        width: 800
+        height: 533
+        format: webp
+        bytes: 81322
+        object: cutrateslawn/prod/services/services-weed-control/env-L66HWHJ/w800.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-weed-control/env-L66HWHJ/w800.webp
+      - name: w400
+        file: media/processed/env-L66HWHJ/w400.webp
+        width: 400
+        height: 267
+        format: webp
+        bytes: 28180
+        object: cutrateslawn/prod/services/services-weed-control/env-L66HWHJ/w400.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-weed-control/env-L66HWHJ/w400.webp
+    slots:
+      - services.weed-control
+    alt: Worker spraying pesticide onto green lawn
+    tags: []
+    usage: card
+    category: services
+    staged_path: media/staging/env-L66HWHJ.jpg
+    ingested_by: andre
+    notes: ""
+    updated_at: 2026-08-02T03:34:25.727Z
+updated_at: 2026-08-02T03:34:34.248Z

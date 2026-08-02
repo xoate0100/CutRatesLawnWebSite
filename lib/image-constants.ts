@@ -1,4 +1,5 @@
-// Base URL for Google Cloud Storage bucket
+// Legacy image URL table — prefer lib/media.ts + SLOT_MAP for production pages.
+// Kept for image-test / transitional references only.
 const CLOUD_STORAGE_BASE_URL = "https://storage.googleapis.com/site_photo_storage"
 
 export const IMAGES = {

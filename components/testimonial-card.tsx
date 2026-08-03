@@ -19,7 +19,7 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
       <CardContent className="p-6">
         <div className="flex items-center mb-4">
           <div className="relative w-12 h-12 rounded-full overflow-hidden mr-4">
-            <Image src={testimonial.image || "/placeholder.svg"} alt={testimonial.name} fill className="object-cover" />
+            <Image src={testimonial.image || "/placeholder.jpg"} alt={testimonial.name} fill className="object-cover" />
           </div>
           <div>
             <h3 className="font-bold">{testimonial.name}</h3>

@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "verify": "node scripts/verify.mjs",
+    "test:pricing": "npx --yes tsx lib/pricing/estimate.test.ts",
     "agentic:context": "node scripts/generate-ai-context.mjs",
     "test:e2e": "playwright test",
     "test:e2e:edge": "playwright test --project=\"Microsoft Edge\"",

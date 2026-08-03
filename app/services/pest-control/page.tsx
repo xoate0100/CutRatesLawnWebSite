@@ -4,27 +4,28 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const pestControlServices = [
   {
     title: "General Pest Control",
     description: "Comprehensive treatment for common household pests including ants, roaches, and spiders.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.pest.1",
   },
   {
     title: "Mosquito Control",
     description: "Reduce mosquito populations in your yard for a more enjoyable outdoor experience.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.pest.2",
   },
   {
     title: "Termite Inspection and Treatment",
     description: "Protect your home from destructive termites with our thorough inspection and treatment services.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.pest.3",
   },
   {
     title: "Rodent Control",
     description: "Effective solutions for mice and rat infestations, including prevention and exclusion.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.pest.4",
   },
 ]
 
@@ -48,8 +49,8 @@ export default function PestControlPage() {
               {pestControlServices.map((service, index) => (
                 <Card key={index} className="flex flex-col">
                   <Image
-                    src={service.image || "/placeholder.svg"}
-                    alt={service.title}
+                    src={mediaSrc(service.slot)}
+                    alt={mediaAlt(service.slot, service.title)}
                     width={300}
                     height={200}
                     className="w-full h-48 object-cover rounded-t-lg"

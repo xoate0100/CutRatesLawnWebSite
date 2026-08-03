@@ -51,7 +51,7 @@ export function getMedia(slot: string): MediaSlot {
 /** Prefer published CDN URL; otherwise fallback placeholder. */
 export function mediaSrc(slot: string, fallback?: string): string {
   const m = getMedia(slot)
-  return m.url || m.fallback || fallback || '/placeholder.svg'
+  return m.url || m.fallback || fallback || '/placeholder.jpg'
 }
 
 export function mediaAlt(slot: string, fallback = ''): string {

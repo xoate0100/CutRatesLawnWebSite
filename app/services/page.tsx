@@ -7,7 +7,7 @@ import { mediaAlt, mediaSrc } from "@/lib/media"
 
 export default function ServicesPage() {
   return (
-    <div className="atm-canvas">
+    <div className="atm-wash">
     <div className="container mx-auto px-4 py-12">
       <div className="mb-12 text-center">
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-4">Professional Lawn Care Services</h1>
@@ -59,6 +59,8 @@ export default function ServicesPage() {
                 fill
                 className="object-cover"
               />
+              <div className="atm-photo-tint" aria-hidden />
+              <div className="atm-photo-scrim" aria-hidden />
             </div>
           </div>
         </section>
@@ -107,6 +109,8 @@ export default function ServicesPage() {
                 fill
                 className="object-cover"
               />
+              <div className="atm-photo-tint" aria-hidden />
+              <div className="atm-photo-scrim" aria-hidden />
             </div>
           </div>
         </section>
@@ -155,6 +159,8 @@ export default function ServicesPage() {
                 fill
                 className="object-cover"
               />
+              <div className="atm-photo-tint" aria-hidden />
+              <div className="atm-photo-scrim" aria-hidden />
             </div>
           </div>
         </section>

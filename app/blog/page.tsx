@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight } from "lucide-react"
 import { NewsletterSignup } from "@/components/newsletter-signup"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 // This would typically come from a CMS or API
 const blogPosts = [
@@ -11,7 +12,7 @@ const blogPosts = [
     id: 1,
     title: "10 Tips for a Lush, Green Lawn",
     excerpt: "Discover the secrets to maintaining a beautiful lawn all year round.",
-    image: "/placeholder.svg?height=200&width=400",
+    slot: "page.blog.1",
     date: "2023-05-15",
     author: "John Johnson",
     slug: "10-tips-for-lush-green-lawn",
@@ -20,7 +21,7 @@ const blogPosts = [
     id: 2,
     title: "The Benefits of Professional Pest Control",
     excerpt: "Learn why professional pest control is crucial for your property's health.",
-    image: "/placeholder.svg?height=200&width=400",
+    slot: "page.blog.2",
     date: "2023-05-22",
     author: "Sarah Smith",
     slug: "benefits-of-professional-pest-control",
@@ -29,7 +30,7 @@ const blogPosts = [
     id: 3,
     title: "Seasonal Lawn Care: What to Do in Spring",
     excerpt: "Prepare your lawn for the growing season with these essential spring tasks.",
-    image: "/placeholder.svg?height=200&width=400",
+    slot: "page.blog.3",
     date: "2023-05-29",
     author: "Mike Brown",
     slug: "seasonal-lawn-care-spring",
@@ -58,8 +59,8 @@ export default function BlogPage() {
                 <Card key={post.id} className="flex flex-col">
                   <CardHeader>
                     <Image
-                      src={post.image || "/placeholder.svg"}
-                      alt={post.title}
+                      src={mediaSrc(post.slot)}
+                      alt={mediaAlt(post.slot, post.title)}
                       width={400}
                       height={200}
                       className="rounded-t-lg"

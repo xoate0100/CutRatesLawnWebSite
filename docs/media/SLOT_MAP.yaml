@@ -51,10 +51,11 @@ slots:
     fallback: /placeholder.svg?height=480&width=720
     alt: Water droplets on green grass
   services.cleanup:
-    asset_id: legacy-service-cleanup
-    variant: original
+    asset_id: sha-f22b5ee0b651
+    variant: w1920
     fallback: /placeholder.svg?height=480&width=720
-    alt: Seasonal cleanup service
+    alt: Professional landscaper trimming tall grass
+    notes: New 2026-08-02 ingest — landscaper trim (not bush spray)
   testimonials.1:
     asset_id: legacy-testimonial-1
     variant: original
@@ -73,19 +74,19 @@ slots:
   team.owner:
     asset_id: null
     variant: null
-    fallback: /placeholder.svg?height=400&width=400
+    fallback: /placeholder.jpg?height=400&width=400
     alt: Company owner
     notes: No GCS object yet — using placeholder fallback
   team.manager:
     asset_id: null
     variant: null
-    fallback: /placeholder.svg?height=400&width=400
+    fallback: /placeholder.jpg?height=400&width=400
     alt: Operations manager
     notes: No GCS object yet — using placeholder fallback
   team.crew:
     asset_id: null
     variant: null
-    fallback: /placeholder.svg?height=400&width=400
+    fallback: /placeholder.jpg?height=400&width=400
     alt: Field crew
     notes: No GCS object yet — using placeholder fallback
   partners.kwch:
@@ -111,5 +112,389 @@ slots:
   empty.state:
     asset_id: null
     variant: null
-    fallback: /placeholder.svg?height=240&width=320
+    fallback: /placeholder.jpg?height=240&width=320
     alt: Empty state illustration
+  ourwork.lawn.1.before:
+    asset_id: sha-7b1c0a70183b
+    variant: w1920
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Lawn work in progress before finished revitalization
+    notes: Library stand-in (mowing action) until real before photo
+  ourwork.lawn.1.after:
+    asset_id: env-A9DYSMH
+    variant: w1920
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Lawn after comprehensive care package
+    notes: Library stand-in until real B/A portfolio
+  ourwork.lawn.2.before:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Yard before drought-resistant landscaping
+    notes: Upload before photo; bind env-/sha- asset_id
+  ourwork.lawn.2.after:
+    asset_id: env-HBA9N9D
+    variant: w1920
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Yard after drought-resistant landscaping
+    notes: Library stand-in until real B/A portfolio
+  ourwork.hardscape.1.before:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Patio area before hardscaping
+    notes: Upload before photo; bind env-/sha- asset_id
+  ourwork.hardscape.1.after:
+    asset_id: sha-17ae8109f02b
+    variant: w1920
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Custom patio with built-in fire pit
+    notes: Library stand-in (patio visible)
+  ourwork.hardscape.2.before:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Walkway area before installation
+    notes: Upload before photo; bind env-/sha- asset_id
+  ourwork.hardscape.2.after:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Walkway and retaining wall completed
+    notes: Upload after photo; bind env-/sha- asset_id
+  ourwork.commercial.1.before:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Office park grounds before overhaul
+    notes: Upload before photo; bind env-/sha- asset_id
+  ourwork.commercial.1.after:
+    asset_id: env-BQ2DHJ4
+    variant: w1920
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Office park grounds after overhaul
+    notes: Library stand-in until real B/A
+  ourwork.commercial.2.before:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Shopping center landscaping before
+    notes: Upload before photo; bind env-/sha- asset_id
+  ourwork.commercial.2.after:
+    asset_id: env-NVY3VZW
+    variant: w1920
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Shopping center landscaping after
+    notes: Library stand-in until real B/A
+  casestudies.1:
+    asset_id: env-A9DYSMH
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Residential lawn transformation case study
+    notes: Library stand-in until real case photo
+  casestudies.2:
+    asset_id: env-BQ2DHJ4
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Commercial property maintenance case study
+    notes: Library stand-in until real case photo
+  casestudies.3:
+    asset_id: env-HBA9N9D
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Sustainable landscaping case study
+    notes: Library stand-in until real case photo
+  gallery.before:
+    asset_id: sha-ba20accbcd23
+    variant: w1920
+    fallback: /placeholder.jpg?height=600&width=800
+    alt: Before transformation
+    notes: Library stand-in (mowing in progress — not true before)
+  gallery.after:
+    asset_id: env-HBA9N9D
+    variant: w1920
+    fallback: /placeholder.jpg?height=600&width=800
+    alt: After transformation
+    notes: Library stand-in
+  gallery.thumb:
+    asset_id: env-HBA9N9D
+    variant: w768
+    fallback: /placeholder.jpg?height=100&width=150
+    alt: Transformation thumbnail
+    notes: Library stand-in
+  services.pest-control:
+    asset_id: sha-9a459a99270d
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Worker spraying pesticide onto green bush
+    notes: New 2026-08-02 ingest (bush spray); prefer over farmer spraying for pest card
+  services.power-washing:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Power washing service
+    notes: Upload power-washing photo; bind asset_id
+  services.landscaping:
+    asset_id: sha-17ae8109f02b
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Landscaping service
+    notes: Reuse library manicured lawn+patio
+  services.hardscaping:
+    asset_id: sha-17ae8109f02b
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Hardscaping service
+    notes: Stand-in until dedicated hardscape photo
+  page.residential.pest:
+    asset_id: env-L66HWHJ
+    variant: original
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Residential pest control
+    notes: Reuse weed-control spray
+  page.commercial.1:
+    asset_id: env-BQ2DHJ4
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Commercial property maintenance
+    notes: Reuse services.hero suburban row
+  page.commercial.2:
+    asset_id: sha-17ae8109f02b
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Commercial landscaping
+    notes: Reuse manicured exterior
+  page.commercial.3:
+    asset_id: sha-7b1c0a70183b
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Man mowing lawn on a sunny day
+    notes: New 2026-08-02 ingest — commercial mowing stand-in
+  page.commercial.4:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Commercial irrigation
+    notes: Upload commercial service photo; bind asset_id
+  page.commercial.5:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Commercial parking lot care
+    notes: Upload commercial service photo; bind asset_id
+  page.commercial.6:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Commercial seasonal services
+    notes: Upload commercial service photo; bind asset_id
+  page.powerwashing.1:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: House exterior washing
+    notes: Upload; bind asset_id
+  page.powerwashing.2:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Driveway and sidewalk cleaning
+    notes: Upload; bind asset_id
+  page.powerwashing.3:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Deck and fence washing
+    notes: Upload; bind asset_id
+  page.powerwashing.4:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Additional power washing service
+    notes: Upload; bind asset_id
+  page.pest.1:
+    asset_id: env-3J7CC29
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: General pest control
+    notes: Reuse farmer spraying
+  page.pest.2:
+    asset_id: env-L66HWHJ
+    variant: original
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Mosquito control
+    notes: Reuse lawn spray
+  page.pest.3:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Termite protection
+    notes: Upload; bind asset_id
+  page.pest.4:
+    asset_id: sha-9a459a99270d
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Worker spraying pesticide onto green bush
+    notes: New 2026-08-02 bush-spray ingest
+  page.landscaping.1:
+    asset_id: sha-17ae8109f02b
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Landscape design
+    notes: Reuse manicured exterior
+  page.landscaping.2:
+    asset_id: sha-17ae8109f02b
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Hardscaping
+    notes: Patio-visible stand-in for hardscaping
+  page.landscaping.3:
+    asset_id: sha-f22b5ee0b651
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Professional landscaper trimming tall grass
+    notes: Reuse cleanup landscaper for tree/shrub care card
+  page.landscaping.4:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Mulching and bed maintenance
+    notes: Upload; bind asset_id
+  page.services-all.lawn:
+    asset_id: env-WL6S6J5
+    variant: w800
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Lawn care category
+    notes: Reuse first-batch services.mowing
+  page.services-all.landscaping:
+    asset_id: sha-17ae8109f02b
+    variant: w1920
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Landscaping category
+    notes: Reuse library suburban manicured lawn
+  page.services-all.pest:
+    asset_id: env-L66HWHJ
+    variant: original
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Pest control category
+    notes: Reuse first-batch weed-control spray
+  page.services-all.powerwashing:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Power washing category
+    notes: Upload; bind asset_id
+  page.community.1:
+    asset_id: env-HBA9N9D
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Community initiative
+    notes: Library stand-in
+  page.community.2:
+    asset_id: env-NVY3VZW
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Community initiative
+    notes: Library stand-in
+  page.community.3:
+    asset_id: sha-17ae8109f02b
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Community initiative
+    notes: Library stand-in
+  page.certifications.1:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=100&width=100
+    alt: Certification badge
+    notes: Upload logo; bind asset_id
+  page.certifications.2:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=100&width=100
+    alt: Certification badge
+    notes: Upload logo; bind asset_id
+  page.certifications.3:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=100&width=100
+    alt: Certification badge
+    notes: Upload logo; bind asset_id
+  page.bundles-all.1:
+    asset_id: env-A9DYSMH
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Service bundle category
+    notes: Reuse home hero
+  page.bundles-all.2:
+    asset_id: env-BQ2DHJ4
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Service bundle category
+    notes: Reuse services hero
+  page.bundles-all.3:
+    asset_id: sha-50ea64d6a870
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Service bundle category
+    notes: Reuse contact hero
+  page.blog.1:
+    asset_id: env-WL6S6J5
+    variant: w800
+    fallback: /placeholder.jpg?height=200&width=400
+    alt: Blog post cover
+    notes: Reuse mowing
+  page.blog.2:
+    asset_id: env-L66HWHJ
+    variant: original
+    fallback: /placeholder.jpg?height=200&width=400
+    alt: Blog post cover
+    notes: Reuse spray
+  page.blog.3:
+    asset_id: sha-5c1d1dd0095b
+    variant: original
+    fallback: /placeholder.jpg?height=200&width=400
+    alt: Blog post cover
+    notes: Reuse fert
+  page.blog.post.hero:
+    asset_id: env-A9DYSMH
+    variant: w1920
+    fallback: /placeholder.jpg?height=600&width=1200
+    alt: Blog post featured image
+    notes: Reuse home hero
+  page.blog.post.avatar:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=100&width=100
+    alt: Blog author avatar
+    notes: Upload; bind asset_id
+  page.services-slug.hero:
+    asset_id: env-BQ2DHJ4
+    variant: w1920
+    fallback: /placeholder.jpg?height=600&width=1200
+    alt: Service page hero
+    notes: Reuse services hero
+  page.services-slug.before:
+    asset_id: sha-ba20accbcd23
+    variant: w1920
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Service before photo
+    notes: Library stand-in
+  page.services-slug.after:
+    asset_id: env-HBA9N9D
+    variant: w1920
+    fallback: /placeholder.jpg?height=300&width=400
+    alt: Service after photo
+    notes: Library stand-in
+  page.bundles-slug.hero:
+    asset_id: env-A9DYSMH
+    variant: w1920
+    fallback: /placeholder.jpg?height=600&width=1200
+    alt: Bundle page hero
+    notes: Reuse home hero
+  page.bundles-slug.avatar:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=40&width=40
+    alt: Customer avatar
+    notes: Upload; bind asset_id

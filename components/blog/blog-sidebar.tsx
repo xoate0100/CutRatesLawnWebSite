@@ -73,7 +73,7 @@ export function BlogSidebar({ categories, recentPosts, activeCategorySlug }: Blo
                 {post.attributes.coverImage && (
                   <Link href={`/blog/${post.attributes.slug}`} className="flex-shrink-0">
                     <img
-                      src={getSafeImageUrl(post.attributes.coverImage, "thumbnail") || "/placeholder.svg"}
+                      src={getSafeImageUrl(post.attributes.coverImage, "thumbnail") || "/placeholder.jpg"}
                       alt={post.attributes.title}
                       className="w-16 h-16 object-cover rounded"
                       width={64}

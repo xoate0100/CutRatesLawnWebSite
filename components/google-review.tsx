@@ -31,7 +31,7 @@ export function GoogleReview({
       <div className="flex items-start gap-3 mb-3">
         {authorPhotoUrl ? (
           <img
-            src={authorPhotoUrl || "/placeholder.svg"}
+            src={authorPhotoUrl || "/placeholder.jpg"}
             alt={`${authorName}'s profile`}
             className="w-10 h-10 rounded-full object-cover"
           />

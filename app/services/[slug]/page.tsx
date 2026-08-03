@@ -9,6 +9,7 @@ import { companyInfo } from "@/lib/static-data"
 import { Phone, Calendar, CheckCircle, Star, Clock, Shield, Award } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 interface ServicePageProps {
   params: {
@@ -30,9 +31,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
     const { attributes } = service
     const { title, description, content, price, priceUnit, coverImage } = attributes
 
-    // Get the cover image URL or use a placeholder
-    const imageUrl =
-      coverImage?.data?.attributes?.url || `/placeholder.svg?height=600&width=1200&text=${encodeURIComponent(title)}`
+    // Get the cover image URL or use a media-pipeline placeholder slot
+    const imageUrl = coverImage?.data?.attributes?.url || mediaSrc("page.services-slug.hero")
 
     return (
       <div className="container mx-auto px-4 py-8">
@@ -60,14 +60,14 @@ export default async function ServicePage({ params }: ServicePageProps) {
         <div className="mb-8 grid gap-8 md:grid-cols-2">
           <div>
             <div className="relative aspect-video overflow-hidden rounded-lg">
-              <Image src={imageUrl || "/placeholder.svg"} alt={title} fill className="object-cover" priority />
+              <Image src={imageUrl || mediaSrc("page.services-slug.hero")} alt={title} fill className="object-cover" priority />
 
               {/* Featured on badge */}
               <div className="absolute top-4 left-4 bg-white/90 rounded-lg px-3 py-2 shadow-md">
                 <p className="text-sm font-medium flex items-center">
                   <Image
-                    src="/placeholder.svg?height=20&width=60&text=KWCH"
-                    alt="KWCH News"
+                    src={mediaSrc("partners.kwch")}
+                    alt={mediaAlt("partners.kwch", "KWCH News")}
                     width={60}
                     height={20}
                     className="mr-2"
@@ -91,8 +91,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
                     <p className="text-center mb-2 font-medium text-gray-600">Before</p>
                     <div className="relative aspect-video overflow-hidden rounded-lg">
                       <Image
-                        src="/placeholder.svg?height=300&width=400&text=Before"
-                        alt="Before service"
+                        src={mediaSrc("page.services-slug.before")}
+                        alt={mediaAlt("page.services-slug.before", "Before service")}
                         fill
                         className="object-cover"
                       />
@@ -102,8 +102,8 @@ export default async function ServicePage({ params }: ServicePageProps) {
                     <p className="text-center mb-2 font-medium text-green-600">After</p>
                     <div className="relative aspect-video overflow-hidden rounded-lg">
                       <Image
-                        src="/placeholder.svg?height=300&width=400&text=After"
-                        alt="After service"
+                        src={mediaSrc("page.services-slug.after")}
+                        alt={mediaAlt("page.services-slug.after", "After service")}
                         fill
                         className="object-cover"
                       />

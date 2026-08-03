@@ -45,3 +45,6 @@ media/processed/*
 !media/processed/.gitkeep
 media/quarantine/*
 !media/quarantine/.gitkeep
+media/archive/*
+!media/archive/.gitkeep
+media/archive/already_in_registry/**

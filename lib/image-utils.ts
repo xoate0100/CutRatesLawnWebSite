@@ -66,7 +66,7 @@ export interface ImageTransformOptions {
 export function getStrapiImageUrl(
   imageData: any,
   size: ImageFormat = "medium",
-  fallback = "/placeholder.svg?height=400&width=600",
+  fallback = "/placeholder.jpg?height=400&width=600",
 ): string {
   if (!imageData) return fallback
 
@@ -112,13 +112,13 @@ export function getStrapiImageUrl(
  */
 export function getSafeImageUrl(
   url: string | undefined | null,
-  fallback = "/placeholder.svg?height=400&width=600",
+  fallback = "/placeholder.jpg?height=400&width=600",
 ): string {
   console.log("getSafeImageUrl called with:", url)
 
   if (!url) {
     console.log("No URL provided, returning placeholder")
-    return "/placeholder.svg?height=600&width=800"
+    return fallback
   }
 
   // If the URL is already absolute, return it
@@ -150,7 +150,7 @@ export enum ResponsiveImageSize {
  */
 export function getResponsiveImageUrl(image: any, size: ResponsiveImageSize = ResponsiveImageSize.MEDIUM): string {
   if (!image || !image.data || !image.data.attributes) {
-    return "/placeholder.svg?height=600&width=800"
+    return "/placeholder.jpg?height=600&width=800"
   }
 
   const { formats } = image.data.attributes
@@ -179,7 +179,7 @@ export function getResponsiveImageUrl(image: any, size: ResponsiveImageSize = Re
  */
 export function getResponsiveImageSources(
   image: any,
-  fallback = "/placeholder.svg?height=400&width=600",
+  fallback = "/placeholder.jpg?height=400&width=600",
 ): { src: string; srcSet: string; sizes: string } {
   // Check if image exists
   if (!image || !image.data || !image.data.attributes) {
@@ -238,7 +238,7 @@ export function getResponsiveImageSources(
  * @returns A placeholder image URL
  */
 export function getPlaceholderImageUrl(width = 600, height = 400, text = "Image"): string {
-  return `/placeholder.svg?height=${height}&width=${width}&text=${encodeURIComponent(text)}`
+  return `/placeholder.jpg?height=${height}&width=${width}&text=${encodeURIComponent(text)}`
 }
 
 /**
@@ -250,7 +250,7 @@ export function getPlaceholderImageUrl(width = 600, height = 400, text = "Image"
  */
 export function createPlaceholder(width = 600, height = 400, text = ""): string {
   const encodedText = encodeURIComponent(text)
-  return `/placeholder.svg?width=${width}&height=${height}${text ? `&text=${encodedText}` : ""}`
+  return `/placeholder.jpg?width=${width}&height=${height}${text ? `&text=${encodedText}` : ""}`
 }
 
 /**
@@ -262,7 +262,7 @@ export function createPlaceholder(width = 600, height = 400, text = ""): string 
  */
 export function optimizeImageUrl(url: string, width: number, height: number): string {
   // If it's already a placeholder, update the dimensions
-  if (url.includes("/placeholder.svg")) {
+  if (url.includes("/placeholder.jpg")) {
     const urlObj = new URL(url, "http://example.com")
     urlObj.searchParams.set("width", width.toString())
     urlObj.searchParams.set("height", height.toString())

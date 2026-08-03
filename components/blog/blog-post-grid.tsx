@@ -29,7 +29,7 @@ export function BlogPostCard({ post }: BlogPostCardProps) {
       <Link href={`/blog/${slug}`} className="block">
         <div className="relative h-48 overflow-hidden">
           <img
-            src={getSafeImageUrl(coverImage) || "/placeholder.svg?height=300&width=400"}
+            src={getSafeImageUrl(coverImage) || "/placeholder.jpg?height=300&width=400"}
             alt={title}
             className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
             width={400}

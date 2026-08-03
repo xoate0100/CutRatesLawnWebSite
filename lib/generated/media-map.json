@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-02T19:49:46.712Z",
+  "generated_at": "2026-08-02T22:08:35.221Z",
   "public_base_url": "https://storage.googleapis.com/site_photo_storage",
   "slots": {
     "home.hero": {
@@ -174,16 +174,16 @@
     },
     "services.cleanup": {
       "slot": "services.cleanup",
-      "asset_id": "legacy-service-cleanup",
-      "variant": "original",
-      "url": "https://storage.googleapis.com/site_photo_storage/images/services/cleanup.jpg",
+      "asset_id": "sha-f22b5ee0b651",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/w1920.webp",
       "fallback": "/placeholder.svg?height=480&width=720",
-      "alt": "Seasonal cleanup service",
-      "width": null,
-      "height": null,
+      "alt": "Professional landscaper trimming tall grass",
+      "width": 1920,
+      "height": 1280,
       "attribution": {
-        "title": "Seasonal cleanup / irrigation stand-in",
-        "author": "Cut Rates Lawn Care",
+        "title": "professional-landscaper-trimming-tall-grass-with-s-2026-07-09-19-44-04-utc",
+        "author": null,
         "envato_url": null,
         "envato_item_id": null
       },
@@ -244,8 +244,8 @@
       "slot": "team.owner",
       "asset_id": null,
       "variant": null,
-      "url": "/placeholder.svg?height=400&width=400",
-      "fallback": "/placeholder.svg?height=400&width=400",
+      "url": "/placeholder.jpg?height=400&width=400",
+      "fallback": "/placeholder.jpg?height=400&width=400",
       "alt": "Company owner",
       "width": null,
       "height": null,
@@ -256,8 +256,8 @@
       "slot": "team.manager",
       "asset_id": null,
       "variant": null,
-      "url": "/placeholder.svg?height=400&width=400",
-      "fallback": "/placeholder.svg?height=400&width=400",
+      "url": "/placeholder.jpg?height=400&width=400",
+      "fallback": "/placeholder.jpg?height=400&width=400",
       "alt": "Operations manager",
       "width": null,
       "height": null,
@@ -268,8 +268,8 @@
       "slot": "team.crew",
       "asset_id": null,
       "variant": null,
-      "url": "/placeholder.svg?height=400&width=400",
-      "fallback": "/placeholder.svg?height=400&width=400",
+      "url": "/placeholder.jpg?height=400&width=400",
+      "fallback": "/placeholder.jpg?height=400&width=400",
       "alt": "Field crew",
       "width": null,
       "height": null,
@@ -348,9 +348,987 @@
       "slot": "empty.state",
       "asset_id": null,
       "variant": null,
-      "url": "/placeholder.svg?height=240&width=320",
-      "fallback": "/placeholder.svg?height=240&width=320",
+      "url": "/placeholder.jpg?height=240&width=320",
+      "fallback": "/placeholder.jpg?height=240&width=320",
       "alt": "Empty state illustration",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "ourwork.lawn.1.before": {
+      "slot": "ourwork.lawn.1.before",
+      "asset_id": "sha-7b1c0a70183b",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-7b1c0a70183b/w1920.webp",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Lawn work in progress before finished revitalization",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "man-mows-the-lawn-on-a-sunny-day-2026-01-05-22-50-01-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "ourwork.lawn.1.after": {
+      "slot": "ourwork.lawn.1.after",
+      "asset_id": "env-A9DYSMH",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w1920.webp",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Lawn after comprehensive care package",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "House with a green lawn under blue sky",
+        "author": "wirestock",
+        "envato_url": "https://elements.envato.com/house-with-a-green-lawn-under-blue-sky-A9DYSMH",
+        "envato_item_id": "A9DYSMH"
+      },
+      "status": "published"
+    },
+    "ourwork.lawn.2.before": {
+      "slot": "ourwork.lawn.2.before",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=300&width=400",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Yard before drought-resistant landscaping",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "ourwork.lawn.2.after": {
+      "slot": "ourwork.lawn.2.after",
+      "asset_id": "env-HBA9N9D",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-HBA9N9D/w1920.webp",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Yard after drought-resistant landscaping",
+      "width": 1920,
+      "height": 1282,
+      "attribution": {
+        "title": "Mowed green frontyard",
+        "author": "Olena_Mykhaylova",
+        "envato_url": "https://elements.envato.com/mowed-green-frontyard-grass-before-residential-sub-HBA9N9D",
+        "envato_item_id": "HBA9N9D"
+      },
+      "status": "published"
+    },
+    "ourwork.hardscape.1.before": {
+      "slot": "ourwork.hardscape.1.before",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=300&width=400",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Patio area before hardscaping",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "ourwork.hardscape.1.after": {
+      "slot": "ourwork.hardscape.1.after",
+      "asset_id": "sha-17ae8109f02b",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1920.webp",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Custom patio with built-in fire pit",
+      "width": 1920,
+      "height": 1341,
+      "attribution": {
+        "title": "Suburban home exterior with manicured lawn",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "ourwork.hardscape.2.before": {
+      "slot": "ourwork.hardscape.2.before",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=300&width=400",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Walkway area before installation",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "ourwork.hardscape.2.after": {
+      "slot": "ourwork.hardscape.2.after",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=300&width=400",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Walkway and retaining wall completed",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "ourwork.commercial.1.before": {
+      "slot": "ourwork.commercial.1.before",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=300&width=400",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Office park grounds before overhaul",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "ourwork.commercial.1.after": {
+      "slot": "ourwork.commercial.1.after",
+      "asset_id": "env-BQ2DHJ4",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w1920.webp",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Office park grounds after overhaul",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Row of traditional suburban homes with lush green front lawns",
+        "author": "krisprahl",
+        "envato_url": "https://elements.envato.com/row-of-traditional-suburban-homes-with-lush-green--BQ2DHJ4",
+        "envato_item_id": "BQ2DHJ4"
+      },
+      "status": "published"
+    },
+    "ourwork.commercial.2.before": {
+      "slot": "ourwork.commercial.2.before",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=300&width=400",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Shopping center landscaping before",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "ourwork.commercial.2.after": {
+      "slot": "ourwork.commercial.2.after",
+      "asset_id": "env-NVY3VZW",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/about-hero/env-NVY3VZW/w1920.webp",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Shopping center landscaping after",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Home sweet home real estate exterior",
+        "author": "maginnislaura",
+        "envato_url": "https://elements.envato.com/home-sweet-home-real-estate-exterior-design-mortga-NVY3VZW",
+        "envato_item_id": "NVY3VZW"
+      },
+      "status": "published"
+    },
+    "casestudies.1": {
+      "slot": "casestudies.1",
+      "asset_id": "env-A9DYSMH",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Residential lawn transformation case study",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "House with a green lawn under blue sky",
+        "author": "wirestock",
+        "envato_url": "https://elements.envato.com/house-with-a-green-lawn-under-blue-sky-A9DYSMH",
+        "envato_item_id": "A9DYSMH"
+      },
+      "status": "published"
+    },
+    "casestudies.2": {
+      "slot": "casestudies.2",
+      "asset_id": "env-BQ2DHJ4",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Commercial property maintenance case study",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Row of traditional suburban homes with lush green front lawns",
+        "author": "krisprahl",
+        "envato_url": "https://elements.envato.com/row-of-traditional-suburban-homes-with-lush-green--BQ2DHJ4",
+        "envato_item_id": "BQ2DHJ4"
+      },
+      "status": "published"
+    },
+    "casestudies.3": {
+      "slot": "casestudies.3",
+      "asset_id": "env-HBA9N9D",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-HBA9N9D/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Sustainable landscaping case study",
+      "width": 1920,
+      "height": 1282,
+      "attribution": {
+        "title": "Mowed green frontyard",
+        "author": "Olena_Mykhaylova",
+        "envato_url": "https://elements.envato.com/mowed-green-frontyard-grass-before-residential-sub-HBA9N9D",
+        "envato_item_id": "HBA9N9D"
+      },
+      "status": "published"
+    },
+    "gallery.before": {
+      "slot": "gallery.before",
+      "asset_id": "sha-ba20accbcd23",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-ba20accbcd23/w1920.webp",
+      "fallback": "/placeholder.jpg?height=600&width=800",
+      "alt": "Before transformation",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Man mowing the lawn in his backyard",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "gallery.after": {
+      "slot": "gallery.after",
+      "asset_id": "env-HBA9N9D",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-HBA9N9D/w1920.webp",
+      "fallback": "/placeholder.jpg?height=600&width=800",
+      "alt": "After transformation",
+      "width": 1920,
+      "height": 1282,
+      "attribution": {
+        "title": "Mowed green frontyard",
+        "author": "Olena_Mykhaylova",
+        "envato_url": "https://elements.envato.com/mowed-green-frontyard-grass-before-residential-sub-HBA9N9D",
+        "envato_item_id": "HBA9N9D"
+      },
+      "status": "published"
+    },
+    "gallery.thumb": {
+      "slot": "gallery.thumb",
+      "asset_id": "env-HBA9N9D",
+      "variant": "w768",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-HBA9N9D/w768.webp",
+      "fallback": "/placeholder.jpg?height=100&width=150",
+      "alt": "Transformation thumbnail",
+      "width": 768,
+      "height": 512,
+      "attribution": {
+        "title": "Mowed green frontyard",
+        "author": "Olena_Mykhaylova",
+        "envato_url": "https://elements.envato.com/mowed-green-frontyard-grass-before-residential-sub-HBA9N9D",
+        "envato_item_id": "HBA9N9D"
+      },
+      "status": "published"
+    },
+    "services.pest-control": {
+      "slot": "services.pest-control",
+      "asset_id": "sha-9a459a99270d",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Worker spraying pesticide onto green bush",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "worker-spraying-pesticide-onto-green-bush-outdoors-2026-01-07-15-33-30-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "services.power-washing": {
+      "slot": "services.power-washing",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=200&width=300",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Power washing service",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "services.landscaping": {
+      "slot": "services.landscaping",
+      "asset_id": "sha-17ae8109f02b",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Landscaping service",
+      "width": 1920,
+      "height": 1341,
+      "attribution": {
+        "title": "Suburban home exterior with manicured lawn",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "services.hardscaping": {
+      "slot": "services.hardscaping",
+      "asset_id": "sha-17ae8109f02b",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Hardscaping service",
+      "width": 1920,
+      "height": 1341,
+      "attribution": {
+        "title": "Suburban home exterior with manicured lawn",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.residential.pest": {
+      "slot": "page.residential.pest",
+      "asset_id": "env-L66HWHJ",
+      "variant": "original",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-weed-control/env-L66HWHJ/original.jpg",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Residential pest control",
+      "width": 6720,
+      "height": 4480,
+      "attribution": {
+        "title": "Worker spraying pesticide onto green lawn outdoors",
+        "author": "africaimages",
+        "envato_url": "https://elements.envato.com/worker-spraying-pesticide-onto-green-lawn-outdoors-L66HWHJ",
+        "envato_item_id": "L66HWHJ"
+      },
+      "status": "published"
+    },
+    "page.commercial.1": {
+      "slot": "page.commercial.1",
+      "asset_id": "env-BQ2DHJ4",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Commercial property maintenance",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Row of traditional suburban homes with lush green front lawns",
+        "author": "krisprahl",
+        "envato_url": "https://elements.envato.com/row-of-traditional-suburban-homes-with-lush-green--BQ2DHJ4",
+        "envato_item_id": "BQ2DHJ4"
+      },
+      "status": "published"
+    },
+    "page.commercial.2": {
+      "slot": "page.commercial.2",
+      "asset_id": "sha-17ae8109f02b",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Commercial landscaping",
+      "width": 1920,
+      "height": 1341,
+      "attribution": {
+        "title": "Suburban home exterior with manicured lawn",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.commercial.3": {
+      "slot": "page.commercial.3",
+      "asset_id": "sha-7b1c0a70183b",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-7b1c0a70183b/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Man mowing lawn on a sunny day",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "man-mows-the-lawn-on-a-sunny-day-2026-01-05-22-50-01-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.commercial.4": {
+      "slot": "page.commercial.4",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=200&width=300",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Commercial irrigation",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.commercial.5": {
+      "slot": "page.commercial.5",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=200&width=300",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Commercial parking lot care",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.commercial.6": {
+      "slot": "page.commercial.6",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=200&width=300",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Commercial seasonal services",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.powerwashing.1": {
+      "slot": "page.powerwashing.1",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=200&width=300",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "House exterior washing",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.powerwashing.2": {
+      "slot": "page.powerwashing.2",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=200&width=300",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Driveway and sidewalk cleaning",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.powerwashing.3": {
+      "slot": "page.powerwashing.3",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=200&width=300",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Deck and fence washing",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.powerwashing.4": {
+      "slot": "page.powerwashing.4",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=200&width=300",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Additional power washing service",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.pest.1": {
+      "slot": "page.pest.1",
+      "asset_id": "env-3J7CC29",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-3J7CC29/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "General pest control",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Farmer spraying fertilizer",
+        "author": "erika8213",
+        "envato_url": "https://elements.envato.com/farmer-spraying-fertilizer-pest-control-and-plant--3J7CC29",
+        "envato_item_id": "3J7CC29"
+      },
+      "status": "published"
+    },
+    "page.pest.2": {
+      "slot": "page.pest.2",
+      "asset_id": "env-L66HWHJ",
+      "variant": "original",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-weed-control/env-L66HWHJ/original.jpg",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Mosquito control",
+      "width": 6720,
+      "height": 4480,
+      "attribution": {
+        "title": "Worker spraying pesticide onto green lawn outdoors",
+        "author": "africaimages",
+        "envato_url": "https://elements.envato.com/worker-spraying-pesticide-onto-green-lawn-outdoors-L66HWHJ",
+        "envato_item_id": "L66HWHJ"
+      },
+      "status": "published"
+    },
+    "page.pest.3": {
+      "slot": "page.pest.3",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=200&width=300",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Termite protection",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.pest.4": {
+      "slot": "page.pest.4",
+      "asset_id": "sha-9a459a99270d",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Worker spraying pesticide onto green bush",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "worker-spraying-pesticide-onto-green-bush-outdoors-2026-01-07-15-33-30-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.landscaping.1": {
+      "slot": "page.landscaping.1",
+      "asset_id": "sha-17ae8109f02b",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Landscape design",
+      "width": 1920,
+      "height": 1341,
+      "attribution": {
+        "title": "Suburban home exterior with manicured lawn",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.landscaping.2": {
+      "slot": "page.landscaping.2",
+      "asset_id": "sha-17ae8109f02b",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Hardscaping",
+      "width": 1920,
+      "height": 1341,
+      "attribution": {
+        "title": "Suburban home exterior with manicured lawn",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.landscaping.3": {
+      "slot": "page.landscaping.3",
+      "asset_id": "sha-f22b5ee0b651",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Professional landscaper trimming tall grass",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "professional-landscaper-trimming-tall-grass-with-s-2026-07-09-19-44-04-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.landscaping.4": {
+      "slot": "page.landscaping.4",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=200&width=300",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Mulching and bed maintenance",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.services-all.lawn": {
+      "slot": "page.services-all.lawn",
+      "asset_id": "env-WL6S6J5",
+      "variant": "w800",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-mowing/env-WL6S6J5/w800.webp",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Lawn care category",
+      "width": 800,
+      "height": 534,
+      "attribution": {
+        "title": "Lawn mover on green grass",
+        "author": "erika8213",
+        "envato_url": "https://elements.envato.com/lawn-mover-on-green-grass-machine-for-cutting-lawn-WL6S6J5",
+        "envato_item_id": "WL6S6J5"
+      },
+      "status": "published"
+    },
+    "page.services-all.landscaping": {
+      "slot": "page.services-all.landscaping",
+      "asset_id": "sha-17ae8109f02b",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1920.webp",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Landscaping category",
+      "width": 1920,
+      "height": 1341,
+      "attribution": {
+        "title": "Suburban home exterior with manicured lawn",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.services-all.pest": {
+      "slot": "page.services-all.pest",
+      "asset_id": "env-L66HWHJ",
+      "variant": "original",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-weed-control/env-L66HWHJ/original.jpg",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Pest control category",
+      "width": 6720,
+      "height": 4480,
+      "attribution": {
+        "title": "Worker spraying pesticide onto green lawn outdoors",
+        "author": "africaimages",
+        "envato_url": "https://elements.envato.com/worker-spraying-pesticide-onto-green-lawn-outdoors-L66HWHJ",
+        "envato_item_id": "L66HWHJ"
+      },
+      "status": "published"
+    },
+    "page.services-all.powerwashing": {
+      "slot": "page.services-all.powerwashing",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=300&width=400",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Power washing category",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.community.1": {
+      "slot": "page.community.1",
+      "asset_id": "env-HBA9N9D",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-HBA9N9D/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Community initiative",
+      "width": 1920,
+      "height": 1282,
+      "attribution": {
+        "title": "Mowed green frontyard",
+        "author": "Olena_Mykhaylova",
+        "envato_url": "https://elements.envato.com/mowed-green-frontyard-grass-before-residential-sub-HBA9N9D",
+        "envato_item_id": "HBA9N9D"
+      },
+      "status": "published"
+    },
+    "page.community.2": {
+      "slot": "page.community.2",
+      "asset_id": "env-NVY3VZW",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/about-hero/env-NVY3VZW/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Community initiative",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Home sweet home real estate exterior",
+        "author": "maginnislaura",
+        "envato_url": "https://elements.envato.com/home-sweet-home-real-estate-exterior-design-mortga-NVY3VZW",
+        "envato_item_id": "NVY3VZW"
+      },
+      "status": "published"
+    },
+    "page.community.3": {
+      "slot": "page.community.3",
+      "asset_id": "sha-17ae8109f02b",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Community initiative",
+      "width": 1920,
+      "height": 1341,
+      "attribution": {
+        "title": "Suburban home exterior with manicured lawn",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.certifications.1": {
+      "slot": "page.certifications.1",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=100&width=100",
+      "fallback": "/placeholder.jpg?height=100&width=100",
+      "alt": "Certification badge",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.certifications.2": {
+      "slot": "page.certifications.2",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=100&width=100",
+      "fallback": "/placeholder.jpg?height=100&width=100",
+      "alt": "Certification badge",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.certifications.3": {
+      "slot": "page.certifications.3",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=100&width=100",
+      "fallback": "/placeholder.jpg?height=100&width=100",
+      "alt": "Certification badge",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.bundles-all.1": {
+      "slot": "page.bundles-all.1",
+      "asset_id": "env-A9DYSMH",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Service bundle category",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "House with a green lawn under blue sky",
+        "author": "wirestock",
+        "envato_url": "https://elements.envato.com/house-with-a-green-lawn-under-blue-sky-A9DYSMH",
+        "envato_item_id": "A9DYSMH"
+      },
+      "status": "published"
+    },
+    "page.bundles-all.2": {
+      "slot": "page.bundles-all.2",
+      "asset_id": "env-BQ2DHJ4",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Service bundle category",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Row of traditional suburban homes with lush green front lawns",
+        "author": "krisprahl",
+        "envato_url": "https://elements.envato.com/row-of-traditional-suburban-homes-with-lush-green--BQ2DHJ4",
+        "envato_item_id": "BQ2DHJ4"
+      },
+      "status": "published"
+    },
+    "page.bundles-all.3": {
+      "slot": "page.bundles-all.3",
+      "asset_id": "sha-50ea64d6a870",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/contact-hero/sha-50ea64d6a870/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Service bundle category",
+      "width": 1920,
+      "height": 1440,
+      "attribution": {
+        "title": "Residential houses in suburban neighborhood in summer",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.blog.1": {
+      "slot": "page.blog.1",
+      "asset_id": "env-WL6S6J5",
+      "variant": "w800",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-mowing/env-WL6S6J5/w800.webp",
+      "fallback": "/placeholder.jpg?height=200&width=400",
+      "alt": "Blog post cover",
+      "width": 800,
+      "height": 534,
+      "attribution": {
+        "title": "Lawn mover on green grass",
+        "author": "erika8213",
+        "envato_url": "https://elements.envato.com/lawn-mover-on-green-grass-machine-for-cutting-lawn-WL6S6J5",
+        "envato_item_id": "WL6S6J5"
+      },
+      "status": "published"
+    },
+    "page.blog.2": {
+      "slot": "page.blog.2",
+      "asset_id": "env-L66HWHJ",
+      "variant": "original",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-weed-control/env-L66HWHJ/original.jpg",
+      "fallback": "/placeholder.jpg?height=200&width=400",
+      "alt": "Blog post cover",
+      "width": 6720,
+      "height": 4480,
+      "attribution": {
+        "title": "Worker spraying pesticide onto green lawn outdoors",
+        "author": "africaimages",
+        "envato_url": "https://elements.envato.com/worker-spraying-pesticide-onto-green-lawn-outdoors-L66HWHJ",
+        "envato_item_id": "L66HWHJ"
+      },
+      "status": "published"
+    },
+    "page.blog.3": {
+      "slot": "page.blog.3",
+      "asset_id": "sha-5c1d1dd0095b",
+      "variant": "original",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-fertilization/sha-5c1d1dd0095b/original.jpg",
+      "fallback": "/placeholder.jpg?height=200&width=400",
+      "alt": "Blog post cover",
+      "width": 8688,
+      "height": 5792,
+      "attribution": {
+        "title": "Man fertilizing lawn with spreader in suburban yard",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.blog.post.hero": {
+      "slot": "page.blog.post.hero",
+      "asset_id": "env-A9DYSMH",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w1920.webp",
+      "fallback": "/placeholder.jpg?height=600&width=1200",
+      "alt": "Blog post featured image",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "House with a green lawn under blue sky",
+        "author": "wirestock",
+        "envato_url": "https://elements.envato.com/house-with-a-green-lawn-under-blue-sky-A9DYSMH",
+        "envato_item_id": "A9DYSMH"
+      },
+      "status": "published"
+    },
+    "page.blog.post.avatar": {
+      "slot": "page.blog.post.avatar",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=100&width=100",
+      "fallback": "/placeholder.jpg?height=100&width=100",
+      "alt": "Blog author avatar",
+      "width": null,
+      "height": null,
+      "attribution": null,
+      "status": null
+    },
+    "page.services-slug.hero": {
+      "slot": "page.services-slug.hero",
+      "asset_id": "env-BQ2DHJ4",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/services-hero/env-BQ2DHJ4/w1920.webp",
+      "fallback": "/placeholder.jpg?height=600&width=1200",
+      "alt": "Service page hero",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Row of traditional suburban homes with lush green front lawns",
+        "author": "krisprahl",
+        "envato_url": "https://elements.envato.com/row-of-traditional-suburban-homes-with-lush-green--BQ2DHJ4",
+        "envato_item_id": "BQ2DHJ4"
+      },
+      "status": "published"
+    },
+    "page.services-slug.before": {
+      "slot": "page.services-slug.before",
+      "asset_id": "sha-ba20accbcd23",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-ba20accbcd23/w1920.webp",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Service before photo",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Man mowing the lawn in his backyard",
+        "author": "Envato Elements (attribution pending)",
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.services-slug.after": {
+      "slot": "page.services-slug.after",
+      "asset_id": "env-HBA9N9D",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-HBA9N9D/w1920.webp",
+      "fallback": "/placeholder.jpg?height=300&width=400",
+      "alt": "Service after photo",
+      "width": 1920,
+      "height": 1282,
+      "attribution": {
+        "title": "Mowed green frontyard",
+        "author": "Olena_Mykhaylova",
+        "envato_url": "https://elements.envato.com/mowed-green-frontyard-grass-before-residential-sub-HBA9N9D",
+        "envato_item_id": "HBA9N9D"
+      },
+      "status": "published"
+    },
+    "page.bundles-slug.hero": {
+      "slot": "page.bundles-slug.hero",
+      "asset_id": "env-A9DYSMH",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/heroes/home-hero/env-A9DYSMH/w1920.webp",
+      "fallback": "/placeholder.jpg?height=600&width=1200",
+      "alt": "Bundle page hero",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "House with a green lawn under blue sky",
+        "author": "wirestock",
+        "envato_url": "https://elements.envato.com/house-with-a-green-lawn-under-blue-sky-A9DYSMH",
+        "envato_item_id": "A9DYSMH"
+      },
+      "status": "published"
+    },
+    "page.bundles-slug.avatar": {
+      "slot": "page.bundles-slug.avatar",
+      "asset_id": null,
+      "variant": null,
+      "url": "/placeholder.jpg?height=40&width=40",
+      "fallback": "/placeholder.jpg?height=40&width=40",
+      "alt": "Customer avatar",
       "width": null,
       "height": null,
       "attribution": null,

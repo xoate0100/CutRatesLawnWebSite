@@ -23,7 +23,7 @@ export function ReviewCard({ review, businessName = "Cut Rates Lawn Care", class
       case "yelp":
         return "https://storage.googleapis.com/site_photo_storage/images/partners/yelp-logo.png"
       case "facebook":
-        return "/placeholder.svg?height=20&width=60"
+        return "/placeholder.jpg?height=20&width=60"
       default:
         return ""
     }
@@ -36,7 +36,7 @@ export function ReviewCard({ review, businessName = "Cut Rates Lawn Care", class
       <div className="flex items-start gap-3 mb-3">
         {review.author.photoUrl ? (
           <img
-            src={review.author.photoUrl || "/placeholder.svg"}
+            src={review.author.photoUrl || "/placeholder.jpg"}
             alt={`${review.author.name}'s profile`}
             className="w-10 h-10 rounded-full object-cover"
           />
@@ -90,7 +90,7 @@ export function ReviewCard({ review, businessName = "Cut Rates Lawn Care", class
 
       <div className="mt-2 pt-2 border-t border-gray-100 flex items-center">
         <div className="flex items-center">
-          <img src={getSourceLogo() || "/placeholder.svg"} alt={`${review.source} Review`} className="h-4" />
+          <img src={getSourceLogo() || "/placeholder.jpg"} alt={`${review.source} Review`} className="h-4" />
           <span className="text-xs text-gray-500 ml-1">Verified Review</span>
         </div>
       </div>

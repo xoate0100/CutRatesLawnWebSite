@@ -1,25 +1,26 @@
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const communityInitiatives = [
   {
     title: "Annual Park Clean-Up",
     description:
       "We organize an annual clean-up event at local parks, bringing the community together to maintain our shared spaces.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.community.1",
   },
   {
     title: "Green Education Program",
     description:
       "Our team visits local schools to educate students about sustainable landscaping and the importance of environmental stewardship.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.community.2",
   },
   {
     title: "Community Garden Support",
     description:
       "We provide resources and expertise to help establish and maintain community gardens throughout Valley Center.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.community.3",
   },
 ]
 
@@ -43,8 +44,8 @@ export default function CommunityPage() {
               {communityInitiatives.map((initiative, index) => (
                 <Card key={index} className="flex flex-col">
                   <Image
-                    src={initiative.image || "/placeholder.svg"}
-                    alt={initiative.title}
+                    src={mediaSrc(initiative.slot)}
+                    alt={mediaAlt(initiative.slot, initiative.title)}
                     width={300}
                     height={200}
                     className="w-full h-48 object-cover rounded-t-lg"

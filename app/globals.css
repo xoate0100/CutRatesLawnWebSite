@@ -25,16 +25,16 @@
     --ring: 142 76% 36%;
     --radius: 0.5rem;
 
-    /* Atmosphere tokens */
-    --atm-earth: 32 28% 88%;
-    --atm-mist: 150 20% 96%;
-    --atm-deep: 150 30% 12%;
+    /* Atmosphere tokens — calibrated for perceptible banding */
+    --atm-earth: 32 34% 86%;
+    --atm-mist: 150 28% 91%;
+    --atm-deep: 150 32% 10%;
     --atm-dur-fast: 150ms;
     --atm-dur: 280ms;
     --atm-dur-slow: 450ms;
     --atm-ease: cubic-bezier(0.22, 1, 0.36, 1);
-    --atm-shadow-1: 0 1px 2px hsl(150 20% 10% / 0.06), 0 4px 12px hsl(150 20% 10% / 0.06);
-    --atm-shadow-2: 0 4px 8px hsl(150 20% 10% / 0.08), 0 12px 28px hsl(150 20% 10% / 0.1);
+    --atm-shadow-1: 0 1px 3px hsl(150 20% 10% / 0.08), 0 6px 16px hsl(150 20% 10% / 0.08);
+    --atm-shadow-2: 0 6px 12px hsl(150 20% 10% / 0.1), 0 16px 36px hsl(150 20% 10% / 0.14);
   }
 
   .dark {
@@ -57,9 +57,9 @@
     --border: 150 12% 20%;
     --input: 150 12% 20%;
     --ring: 142 70% 45%;
-    --atm-earth: 32 12% 18%;
-    --atm-mist: 150 14% 14%;
-    --atm-deep: 150 20% 6%;
+    --atm-earth: 32 16% 16%;
+    --atm-mist: 150 18% 12%;
+    --atm-deep: 150 22% 5%;
   }
 }
 
@@ -77,12 +77,26 @@
     background-color: hsl(var(--background));
   }
 
+  /* Warmer earth band — alternates with canvas/mist for visible section banding */
+  .atm-canvas-alt {
+    background-color: hsl(var(--atm-earth));
+  }
+
   .atm-wash {
     background: linear-gradient(
       180deg,
       hsl(var(--atm-mist)) 0%,
+      hsl(var(--atm-earth) / 0.55) 55%,
       hsl(var(--background)) 100%
     );
+  }
+
+  /* Soft mesh behind proof / mid bands */
+  .atm-deep-band {
+    background:
+      radial-gradient(ellipse 70% 50% at 15% 20%, hsl(var(--primary) / 0.08), transparent 55%),
+      radial-gradient(ellipse 60% 45% at 85% 80%, hsl(var(--atm-earth) / 0.9), transparent 50%),
+      hsl(var(--atm-mist));
   }
 
   .atm-cta-band {
@@ -97,9 +111,22 @@
   .atm-hero-scrim {
     background: linear-gradient(
       105deg,
-      hsl(var(--atm-deep) / 0.78) 0%,
-      hsl(var(--atm-deep) / 0.55) 45%,
-      hsl(var(--atm-deep) / 0.35) 100%
+      hsl(var(--atm-deep) / 0.86) 0%,
+      hsl(var(--atm-deep) / 0.64) 42%,
+      hsl(var(--atm-deep) / 0.42) 100%
+    );
+  }
+
+  /* Bottom-up scrim for card / proof photos */
+  .atm-photo-scrim {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(
+      180deg,
+      transparent 40%,
+      hsl(var(--atm-deep) / 0.28) 100%
     );
   }
 
@@ -108,10 +135,14 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    opacity: 0.055;
+    opacity: 0.12;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-repeat: repeat;
     background-size: 180px 180px;
+  }
+
+  .atm-grain-strong {
+    opacity: 0.18;
   }
 
   .atm-vignette {
@@ -121,8 +152,8 @@
     z-index: 1;
     background: radial-gradient(
       ellipse at center,
-      transparent 45%,
-      hsl(var(--atm-deep) / 0.35) 100%
+      transparent 40%,
+      hsl(var(--atm-deep) / 0.48) 100%
     );
   }
 
@@ -131,7 +162,7 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: hsl(var(--primary) / 0.12);
+    background: hsl(var(--primary) / 0.18);
     mix-blend-mode: multiply;
   }
 
@@ -148,12 +179,13 @@
   }
 
   .atm-seam-fade {
-    height: 1px;
+    height: 2px;
     background: linear-gradient(
       90deg,
       transparent,
-      hsl(var(--border)) 20%,
-      hsl(var(--border)) 80%,
+      hsl(var(--border)) 15%,
+      hsl(var(--primary) / 0.25) 50%,
+      hsl(var(--border)) 85%,
       transparent
     );
   }
@@ -164,10 +196,16 @@
   }
 
   .atm-hover-lift:hover {
-    transform: translateY(-3px);
+    transform: translateY(-6px);
     box-shadow: var(--atm-shadow-2);
   }
 
+  .atm-hover-lift:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+  }
+
+  /* Load-once (hero / above-the-fold) */
   .atm-enter {
     animation: atm-fade-up var(--atm-dur-slow) var(--atm-ease) both;
   }
@@ -184,8 +222,40 @@
     animation-delay: 240ms;
   }
 
+  /* Scroll-triggered reveal (below-the-fold) */
+  .atm-reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity var(--atm-dur-slow) var(--atm-ease),
+      transform var(--atm-dur-slow) var(--atm-ease);
+  }
+
+  .atm-reveal.atm-reveal-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .atm-reveal-delay-1 {
+    transition-delay: 80ms;
+  }
+
+  .atm-reveal-delay-2 {
+    transition-delay: 160ms;
+  }
+
+  .atm-reveal-delay-3 {
+    transition-delay: 240ms;
+  }
+
   .atm-media-fallback {
     background: hsl(var(--muted));
+  }
+
+  /* Optional hero parallax layer (PRM-gated below) */
+  .atm-parallax-media {
+    transform: scale(1.06);
+    will-change: transform;
   }
 }
 
@@ -210,9 +280,20 @@
     transform: none !important;
   }
 
+  .atm-reveal,
+  .atm-reveal.atm-reveal-visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
   .atm-hover-lift,
   .atm-hover-lift:hover {
     transition: none !important;
+    transform: none !important;
+  }
+
+  .atm-parallax-media {
     transform: none !important;
   }
 
@@ -228,8 +309,10 @@
 
 @media print {
   .atm-grain,
+  .atm-grain-strong,
   .atm-vignette,
-  .atm-photo-tint {
+  .atm-photo-tint,
+  .atm-photo-scrim {
     display: none !important;
   }
 }

@@ -13,7 +13,7 @@ export function BlogAuthor({ author }: BlogAuthorProps) {
       {avatar && (
         <div className="flex-shrink-0">
           <img
-            src={getSafeImageUrl(avatar) || "/placeholder.svg?height=80&width=80"}
+            src={getSafeImageUrl(avatar) || "/placeholder.jpg?height=80&width=80"}
             alt={name}
             className="w-16 h-16 rounded-full object-cover"
             width={64}

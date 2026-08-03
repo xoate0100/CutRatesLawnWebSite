@@ -58,7 +58,7 @@ export function TestimonialCarousel({
                 {testimonial.attributes.image && (
                   <div className="mb-4">
                     <img
-                      src={getSafeImageUrl(testimonial.attributes.image) || "/placeholder.svg?height=80&width=80"}
+                      src={getSafeImageUrl(testimonial.attributes.image) || "/placeholder.jpg?height=80&width=80"}
                       alt={testimonial.attributes.name}
                       className="w-20 h-20 rounded-full object-cover border-4 border-green-100"
                       width={80}

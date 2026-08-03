@@ -9,49 +9,36 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
 import { siteConfig } from "@/lib/site-config"
+import {
+  calculateEstimate,
+  type EstimateResult,
+  type Frequency,
+  type PropertyType,
+  type ServiceType,
+} from "@/lib/pricing/estimate"
 
 export default function QuotePage() {
-  const [propertyType, setPropertyType] = useState("residential")
-  const [serviceType, setServiceType] = useState("")
+  const [propertyType, setPropertyType] = useState<PropertyType>("residential")
+  const [serviceType, setServiceType] = useState<ServiceType | "">("")
   const [lawnSize, setLawnSize] = useState(2000)
-  const [frequency, setFrequency] = useState("weekly")
-  const [quote, setQuote] = useState<number | null>(null)
+  const [frequency, setFrequency] = useState<Frequency>("weekly")
+  const [quote, setQuote] = useState<EstimateResult | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   const calculateQuote = () => {
-    if (!serviceType) {
-      setError("Select a service type to estimate.")
-      setQuote(null)
-      return
-    }
-    if (lawnSize < 500) {
-      setError("Enter a lawn size of at least 500 sq ft.")
+    const outcome = calculateEstimate({
+      propertyType,
+      serviceType: serviceType as ServiceType,
+      lawnSizeSqFt: lawnSize,
+      frequency,
+    })
+    if (!outcome.ok) {
+      setError(outcome.error)
       setQuote(null)
       return
     }
     setError(null)
-
-    const basePrice = propertyType === "residential" ? 50 : 100
-    const sizeMultiplier = Math.max(lawnSize, 500) / 1000
-    const frequencyMultiplier = frequency === "weekly" ? 1 : 0.65
-    let total = basePrice * sizeMultiplier * frequencyMultiplier
-
-    switch (serviceType) {
-      case "mowing":
-        break
-      case "fertilization":
-        total *= 1.2
-        break
-      case "weed-control":
-        total *= 1.1
-        break
-      case "full-service":
-        total *= 1.5
-        break
-    }
-
-    const rounded = Math.max(45, Math.round(total))
-    setQuote(rounded)
+    setQuote(outcome.result)
   }
 
   return (
@@ -86,7 +73,10 @@ export default function QuotePage() {
               <CardContent className="space-y-6">
                 <div>
                   <Label>Property Type</Label>
-                  <RadioGroup defaultValue="residential" onValueChange={setPropertyType}>
+                  <RadioGroup
+                    value={propertyType}
+                    onValueChange={(v) => setPropertyType(v as PropertyType)}
+                  >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="residential" id="residential" />
                       <Label htmlFor="residential">Residential</Label>
@@ -100,7 +90,10 @@ export default function QuotePage() {
 
                 <div>
                   <Label>Service Type</Label>
-                  <Select value={serviceType} onValueChange={setServiceType}>
+                  <Select
+                    value={serviceType}
+                    onValueChange={(v) => setServiceType(v as ServiceType)}
+                  >
                     <SelectTrigger>
                       <SelectValue placeholder="Select a service" />
                     </SelectTrigger>
@@ -127,7 +120,10 @@ export default function QuotePage() {
 
                 <div>
                   <Label>Service Frequency</Label>
-                  <RadioGroup defaultValue="weekly" onValueChange={setFrequency}>
+                  <RadioGroup
+                    value={frequency}
+                    onValueChange={(v) => setFrequency(v as Frequency)}
+                  >
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem value="weekly" id="weekly" />
                       <Label htmlFor="weekly">Weekly</Label>
@@ -137,6 +133,9 @@ export default function QuotePage() {
                       <Label htmlFor="biweekly">Bi-weekly</Label>
                     </div>
                   </RadioGroup>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    Frequency changes full-service monthly totals. Per-visit mowing rates stay the same.
+                  </p>
                 </div>
                 {error && (
                   <p role="alert" className="text-sm text-red-600">
@@ -157,10 +156,12 @@ export default function QuotePage() {
                   <CardTitle>Planning Estimate</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-3xl font-bold text-center">${quote} per visit (estimate)</p>
-                  <p className="text-center mt-4 text-muted-foreground">
-                    Not a binding price. Site conditions, access, and add-ons change the final amount.
-                  </p>
+                  <p className="text-3xl font-bold text-center">{quote.displayAmount} (estimate)</p>
+                  <ul className="mt-4 space-y-1 text-center text-sm text-muted-foreground">
+                    {quote.notes.map((note) => (
+                      <li key={note}>{note}</li>
+                    ))}
+                  </ul>
                 </CardContent>
                 <CardFooter className="flex flex-col sm:flex-row gap-3 justify-center">
                   <Button asChild>

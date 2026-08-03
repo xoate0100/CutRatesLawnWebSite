@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { HeroPlane } from "@/components/atmosphere/hero-plane"
 import { SectionShell } from "@/components/atmosphere/section-shell"
+import { AtmReveal } from "@/components/atmosphere/atm-reveal"
 import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const team = [
@@ -40,49 +41,76 @@ export default function AboutPage() {
         </div>
       </HeroPlane>
 
-      <SectionShell tone="canvas" motif className="py-16">
+      <SectionShell
+        tone="canvas-alt"
+        motif
+        motifCoverage="full"
+        motifIntensity="medium"
+        texture
+        seam
+        seamFade
+        className="py-16"
+      >
         <div className="container mx-auto px-4">
-          <div className="mx-auto max-w-4xl">
-            <h2 className="mb-6 text-center text-3xl font-bold">About Cut Rates Lawn Care</h2>
-            <p className="mb-6 text-lg text-muted-foreground">
-              Founded in 2015, Cut Rates Lawn Care has been providing exceptional lawn care services to homeowners and
-              businesses in Wichita and surrounding areas. Our team of experienced professionals is dedicated to
-              delivering high-quality results that exceed our customers&apos; expectations.
-            </p>
-            <p className="mb-6 text-lg text-muted-foreground">
-              We take pride in our work and are committed to using the best equipment and techniques to ensure your lawn
-              looks its best year-round. From regular maintenance to specialized treatments, we have the expertise to
-              handle all your lawn care needs.
-            </p>
-            <p className="text-lg text-muted-foreground">
-              Our mission is simple: to provide reliable, professional lawn care services at competitive rates, while
-              building lasting relationships with our customers based on trust and satisfaction.
-            </p>
-          </div>
+          <AtmReveal>
+            <div className="mx-auto max-w-4xl">
+              <h2 className="mb-6 text-center text-3xl font-bold">About Cut Rates Lawn Care</h2>
+              <p className="mb-6 text-lg text-muted-foreground">
+                Founded in 2015, Cut Rates Lawn Care has been providing exceptional lawn care services to homeowners and
+                businesses in Wichita and surrounding areas. Our team of experienced professionals is dedicated to
+                delivering high-quality results that exceed our customers&apos; expectations.
+              </p>
+              <p className="mb-6 text-lg text-muted-foreground">
+                We take pride in our work and are committed to using the best equipment and techniques to ensure your lawn
+                looks its best year-round. From regular maintenance to specialized treatments, we have the expertise to
+                handle all your lawn care needs.
+              </p>
+              <p className="text-lg text-muted-foreground">
+                Our mission is simple: to provide reliable, professional lawn care services at competitive rates, while
+                building lasting relationships with our customers based on trust and satisfaction.
+              </p>
+            </div>
+          </AtmReveal>
         </div>
       </SectionShell>
 
-      <SectionShell tone="wash" seam className="py-16">
+      <SectionShell
+        tone="deep-band"
+        motif
+        motifCoverage="full"
+        motifVariant="ribs"
+        motifIntensity="soft"
+        texture
+        seam
+        seamFade
+        className="py-16"
+      >
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold">Meet Our Team</h2>
+          <AtmReveal>
+            <h2 className="mb-12 text-center text-3xl font-bold">Meet Our Team</h2>
+          </AtmReveal>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {team.map((member) => (
-              <article key={member.slot} className="overflow-hidden rounded-lg bg-card atm-elev-1 atm-hover-lift">
-                <div className="relative h-80">
-                  <Image
-                    src={mediaSrc(member.slot)}
-                    alt={mediaAlt(member.slot, member.name)}
-                    fill
-                    className="object-cover object-center"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="mb-2 text-xl font-bold">{member.name}</h3>
-                  <p className="mb-4 font-medium text-primary">{member.role}</p>
-                  <p className="text-muted-foreground">{member.bio}</p>
-                </div>
-              </article>
+            {team.map((member, i) => (
+              <AtmReveal key={member.slot} delay={(Math.min(i + 1, 3)) as 1 | 2 | 3}>
+                <article className="overflow-hidden rounded-lg bg-card atm-elev-1 atm-hover-lift">
+                  <div className="relative h-80">
+                    <Image
+                      src={mediaSrc(member.slot)}
+                      alt={mediaAlt(member.slot, member.name)}
+                      fill
+                      className="object-cover object-center"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className="atm-photo-tint" aria-hidden />
+                    <div className="atm-photo-scrim" aria-hidden />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="mb-2 text-xl font-bold">{member.name}</h3>
+                    <p className="mb-4 font-medium text-primary">{member.role}</p>
+                    <p className="text-muted-foreground">{member.bio}</p>
+                  </div>
+                </article>
+              </AtmReveal>
             ))}
           </div>
         </div>

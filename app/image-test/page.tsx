@@ -20,7 +20,7 @@ export default function ImageTestPage() {
         <div>
           <h2 className="text-xl font-semibold mb-4">Using Constants with IMG Tag</h2>
           <img
-            src={IMAGES.EQUIPMENT_MOWER || "/placeholder.svg"}
+            src={IMAGES.EQUIPMENT_MOWER || "/placeholder.jpg"}
             alt="Professional Mower"
             width={400}
             height={300}
@@ -32,7 +32,7 @@ export default function ImageTestPage() {
           <h2 className="text-xl font-semibold mb-4">Using Next.js Image Component</h2>
           <div className="relative w-[400px] h-[300px] border border-gray-300">
             <img
-              src={IMAGES.EQUIPMENT_MOWER || "/placeholder.svg"}
+              src={IMAGES.EQUIPMENT_MOWER || "/placeholder.jpg"}
               alt="Professional Mower"
               className="w-full h-full object-cover"
             />
@@ -47,7 +47,7 @@ export default function ImageTestPage() {
             <div key={key} className="border border-gray-300 p-4">
               <h3 className="text-lg font-medium mb-2">{key}</h3>
               <div className="relative h-48">
-                <img src={src || "/placeholder.svg"} alt={key} className="w-full h-full object-cover" />
+                <img src={src || "/placeholder.jpg"} alt={key} className="w-full h-full object-cover" />
               </div>
               <p className="mt-2 text-sm text-gray-500 break-all">{src}</p>
             </div>

@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, renameSync, copyFileSync, unlinkSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync, readdirSync, renameSync, copyFileSync, unlinkSync, statSync } from 'node:fs'
 import { basename, dirname, extname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { spawnSync } from 'node:child_process'
@@ -211,8 +211,16 @@ export function listInboxFiles() {
   ensureDirs()
   return readdirSync(PATHS.inbox)
     .filter((name) => !name.startsWith('.'))
+    .filter((name) => !name.startsWith('_'))
     .filter((name) => !name.endsWith('.meta.json'))
     .map((name) => join(PATHS.inbox, name))
+    .filter((p) => {
+      try {
+        return statSync(p).isFile()
+      } catch {
+        return false
+      }
+    })
 }
 
 export function quarantine(filePath, reason) {

@@ -19,7 +19,7 @@ export function ServiceCard({ service, featured = false, className = "" }: Servi
   // Safe price formatting with null check
   const formattedPrice = price !== undefined && price !== null ? `$${price}` : "Contact for pricing"
 
-  const imageUrl = coverImage?.data?.attributes?.url || "/placeholder.svg?height=400&width=600&text=Lawn+Care+Service"
+  const imageUrl = coverImage?.data?.attributes?.url || "/placeholder.jpg?height=400&width=600&text=Lawn+Care+Service"
 
   return (
     <Card
@@ -31,7 +31,7 @@ export function ServiceCard({ service, featured = false, className = "" }: Servi
     >
       <div className="relative aspect-video overflow-hidden">
         <Image
-          src={imageUrl || "/placeholder.svg"}
+          src={imageUrl || "/placeholder.jpg"}
           alt={title}
           fill
           className="object-cover transition-transform group-hover:scale-105"

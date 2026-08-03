@@ -1,8 +1,25 @@
 # Atmosphere System — Cut Rates Lawn
 
-**Date:** 2026-08-01  
+**Date:** 2026-08-02 (intensity dial-up)  
 **Thesis:** Trusted Midwestern outdoor craft — deep lawn greens, soft earth warmth, photographic heroes with careful scrims, quiet motion.  
 **Depends on:** [`RECON.md`](./RECON.md), [`AUDIT.md`](./AUDIT.md)
+
+---
+
+## Intensity calibration (2026-08-02)
+
+| Layer | Before (invisible) | After (perceptible) |
+|-------|--------------------|---------------------|
+| `.atm-grain` opacity | 0.055 | **0.12** |
+| `.atm-grain-strong` | — | **0.18** (hero default) |
+| Section tones | Near-white only | `canvas` / `canvas-alt` / `wash` / `deep-band` / earth muted |
+| Turf motif | 112px strip @ 0.4 | `motifCoverage="full"` @ **0.10–0.18** + `ribs` variant |
+| Hero scrim / vignette | Soft | Stronger deep greens for AA + drama |
+| Photo treatment | Rare | `.atm-photo-tint` + `.atm-photo-scrim` on service/proof imagery |
+| Motion | Load-once `.atm-enter` | Hero keeps enter; below-fold uses **scroll** `.atm-reveal` via `useReveal` / `AtmReveal` |
+| Hover lift | −3px | **−6px** + stronger `--atm-shadow-2` + `:focus-visible` |
+
+Thesis preserved: depth and life without kitsch. PRM gate still forces static/visible.
 
 ---
 
@@ -11,11 +28,13 @@
 | Recipe | Utility class | Use |
 |--------|---------------|-----|
 | Hero plane | `.atm-hero-scrim` | Dark green→black gradient over hero photos for AA text |
-| Soft canvas | `.atm-canvas` | Page/section base (warm off-white from tokens) |
-| Accent wash | `.atm-wash` | Soft primary tint behind CTAs / proof bands |
+| Soft canvas | `.atm-canvas` | Page/section base |
+| Earth band | `.atm-canvas-alt` | Warmer alternate section |
+| Accent wash | `.atm-wash` | Mist → earth → background |
+| Soft mesh | `.atm-deep-band` | Proof / mid marketing bands |
 | Brand CTA | `.atm-cta-band` | Solid primary with subtle radial depth |
 
-All colors from `--primary`, `--background`, `--foreground`, `--atm-earth`, `--atm-mist`.
+Colors from `--primary`, `--background`, `--foreground`, `--atm-earth`, `--atm-mist`, `--atm-deep`.
 
 ---
 
@@ -23,11 +42,13 @@ All colors from `--primary`, `--background`, `--foreground`, `--atm-earth`, `--a
 
 | Layer | Class | Rules |
 |-------|-------|-------|
-| Film grain | `.atm-grain` | `aria-hidden`, `pointer-events-none`, absolute, opacity ≤ 0.07; SVG feTurbulence data-URI |
-| Vignette | `.atm-vignette` | Soft radial edge darkening on heroes only |
-| Photo tint | `.atm-photo-tint` | Optional green duotone wash on imagery |
+| Film grain | `.atm-grain` | `aria-hidden`, `pointer-events-none`, opacity **0.12** |
+| Strong grain | `.atm-grain-strong` | opacity **0.18** (heroes) |
+| Vignette | `.atm-vignette` | Soft radial edge darkening on heroes |
+| Photo tint | `.atm-photo-tint` | Green duotone multiply on imagery |
+| Photo scrim | `.atm-photo-scrim` | Bottom-up depth on cards |
 
-Print: `@media print { .atm-grain, .atm-vignette, .atm-photo-tint { display: none } }`
+Print: grain / vignette / tint / photo-scrim hidden.
 
 ---
 
@@ -40,10 +61,13 @@ Print: `@media print { .atm-grain, .atm-vignette, .atm-photo-tint { display: non
 | `--atm-dur-slow` | 450ms | Section reveal |
 | `--atm-ease` | cubic-bezier(0.22, 1, 0.36, 1) | Default |
 
-Classes: `.atm-enter`, `.atm-hover-lift`  
-**Required:** `@media (prefers-reduced-motion: reduce)` disables transforms/animations; static opacity fallbacks.
+| Class | When |
+|-------|------|
+| `.atm-enter` (+ delays) | Above-the-fold / hero load |
+| `.atm-reveal` → `.atm-reveal-visible` | Scroll into view (`hooks/use-reveal.ts`, `AtmReveal`) |
+| `.atm-hover-lift` | Cards / interactive surfaces |
 
-Reuse `tailwindcss-animate` for Radix; no new animation libraries.
+**Required:** `@media (prefers-reduced-motion: reduce)` disables transforms/animations; reveal resolves to fully visible/static.
 
 ---
 
@@ -54,14 +78,16 @@ Reuse `tailwindcss-animate` for Radix; no new animation libraries.
 | Flat | none |
 | Raised | `--atm-shadow-1` / `.atm-elev-1` |
 | Floating | `--atm-shadow-2` / `.atm-elev-2` |
-| Section seam | `.atm-seam` hairline using `--border` |
-| Soft fade seam | `.atm-seam-fade` |
+| Section seam | `.atm-seam` |
+| Soft fade seam | `.atm-seam-fade` (stronger hairline + primary mid tint) |
 
 ---
 
 ## 5. Motif
 
-Single motif: **contour turf lines** — inline SVG `components/atmosphere/turf-motif.tsx`, token-colored (`primary` at low opacity). Use sparingly on Tier 1 section backgrounds only. `aria-hidden`.
+**Contour turf lines** + **ribs** variant — `components/atmosphere/turf-motif.tsx`.
+
+`SectionShell` props: `motif`, `motifCoverage="band"|"full"`, `motifVariant`, `motifIntensity`, `texture`.
 
 ---
 
@@ -69,7 +95,7 @@ Single motif: **contour turf lines** — inline SVG `components/atmosphere/turf-
 
 | Surface tier | Photo | Illustration | Pure CSS |
 |--------------|-------|--------------|----------|
-| 1 Full | Heroes, proof, service cards | Empty-state spot only | Gradients + grain |
+| 1 Full | Heroes, proof, service cards | Empty-state spot only | Gradients + grain + motif |
 | 2 Medium | Optional thumbs | Empty states | Canvas + elev |
 | 3 Focus | None competing with fields | None | Token surfaces only |
 
@@ -87,8 +113,8 @@ Always: text over photo needs `.atm-hero-scrim`; set width/height on media; lazy
 
 ## 8. Fallback contract
 
-Every `SLOT_MAP` entry has `fallback: /placeholder.svg?...`.  
-`mediaSrc(slot)` always returns a string. CSS `.atm-media-fallback` provides muted canvas if image errors (optional onError).
+Every `SLOT_MAP` entry has a fallback URL.  
+`mediaSrc(slot)` always returns a string. Prefer `/placeholder.jpg` for optimizer safety.
 
 ---
 
@@ -105,8 +131,8 @@ Every `SLOT_MAP` entry has `fallback: /placeholder.svg?...`.
 | Piece | Path |
 |-------|------|
 | Tokens + utilities | `app/globals.css` |
-| Tailwind shadows/duration | `tailwind.config.ts` (extend) |
-| Grain / motif / section | `components/atmosphere/*` |
-| Empty / skeleton | `components/atmosphere/empty-state.tsx`, reuse `components/ui/skeleton.tsx` |
-| Media accessor | `lib/media.ts` (unchanged API) |
+| Grain / motif / section / reveal | `components/atmosphere/*` |
+| Scroll reveal hook | `hooks/use-reveal.ts` |
+| Empty / skeleton | `components/atmosphere/empty-state.tsx`, `components/ui/skeleton.tsx` |
+| Media accessor | `lib/media.ts` |
 | Slots | `docs/media/SLOT_MAP.yaml` → `lib/generated/media-map.json` |

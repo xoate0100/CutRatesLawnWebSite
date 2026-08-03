@@ -24,19 +24,19 @@ export function BlogCard({ post }: BlogCardProps) {
   // Use the global getSafeImageUrl function if available, otherwise use a fallback
   const safeImageUrl =
     typeof window !== "undefined" && window.getSafeImageUrl
-      ? window.getSafeImageUrl(featuredImage, "/placeholder.svg?height=300&width=400")
-      : featuredImage || "/placeholder.svg?height=300&width=400"
+      ? window.getSafeImageUrl(featuredImage, "/placeholder.jpg?height=300&width=400")
+      : featuredImage || "/placeholder.jpg?height=300&width=400"
 
   const safeAvatarUrl =
     typeof window !== "undefined" && window.getSafeImageUrl
-      ? window.getSafeImageUrl(author.avatar, "/placeholder.svg?height=50&width=50")
-      : author.avatar || "/placeholder.svg?height=50&width=50"
+      ? window.getSafeImageUrl(author.avatar, "/placeholder.jpg?height=50&width=50")
+      : author.avatar || "/placeholder.jpg?height=50&width=50"
 
   return (
     <Card className="overflow-hidden h-full flex flex-col">
       <div className="relative h-48 w-full">
         <Image
-          src={safeImageUrl || "/placeholder.svg"}
+          src={safeImageUrl || "/placeholder.jpg"}
           alt={title}
           fill
           className="object-cover"
@@ -59,7 +59,7 @@ export function BlogCard({ post }: BlogCardProps) {
       <CardFooter className="border-t pt-4">
         <div className="flex items-center gap-3">
           <div className="relative h-8 w-8 rounded-full overflow-hidden">
-            <Image src={safeAvatarUrl || "/placeholder.svg"} alt={author.name} fill className="object-cover" />
+            <Image src={safeAvatarUrl || "/placeholder.jpg"} alt={author.name} fill className="object-cover" />
           </div>
           <div>
             <p className="text-sm font-medium">{author.name}</p>

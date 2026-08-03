@@ -4,12 +4,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const landscapingServices = [
   {
     title: "Landscape Design",
     description: "Create a stunning outdoor space with our professional landscape design services.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.landscaping.1",
     benefits: [
       "Customized designs tailored to your preferences and property",
       "Enhance curb appeal and property value",
@@ -19,7 +20,7 @@ const landscapingServices = [
   {
     title: "Hardscaping",
     description: "Add structure and functionality to your landscape with our hardscaping solutions.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.landscaping.2",
     benefits: [
       "Custom patios, walkways, and retaining walls",
       "Durable materials for long-lasting beauty",
@@ -29,7 +30,7 @@ const landscapingServices = [
   {
     title: "Planting and Softscaping",
     description: "Bring life and color to your landscape with our expert planting services.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.landscaping.3",
     benefits: [
       "Selection of plants suited to your local climate",
       "Professional installation for optimal growth",
@@ -39,7 +40,7 @@ const landscapingServices = [
   {
     title: "Irrigation Systems",
     description: "Ensure your landscape stays healthy with our efficient irrigation solutions.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.landscaping.4",
     benefits: [
       "Water conservation through smart irrigation technology",
       "Customized watering schedules for different plant needs",
@@ -69,8 +70,8 @@ export default function LandscapingPage() {
               {landscapingServices.map((service, index) => (
                 <Card key={index} className="flex flex-col">
                   <Image
-                    src={service.image || "/placeholder.svg"}
-                    alt={service.title}
+                    src={mediaSrc(service.slot)}
+                    alt={mediaAlt(service.slot, service.title)}
                     width={300}
                     height={200}
                     className="w-full h-48 object-cover rounded-t-lg"

@@ -92,7 +92,7 @@ export function SearchResultItem({ result }: SearchResultItemProps) {
         {image && (
           <div className="ml-4 flex-shrink-0">
             <img
-              src={image || "/placeholder.svg"}
+              src={image || "/placeholder.jpg"}
               alt={title}
               className="w-16 h-16 object-cover rounded"
               width={64}

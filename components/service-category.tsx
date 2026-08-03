@@ -36,7 +36,7 @@ export function ServiceCategory({
         </Button>
       </div>
       <div className="md:w-1/2 relative h-[300px] md:h-[400px] rounded-lg overflow-hidden">
-        <Image src={imageSrc || "/placeholder.svg"} alt={imageAlt} fill className="object-cover" />
+        <Image src={imageSrc || "/placeholder.jpg"} alt={imageAlt} fill className="object-cover" />
       </div>
     </div>
   )

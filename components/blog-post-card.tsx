@@ -14,14 +14,14 @@ interface BlogPostCardProps {
 export default function BlogPostCard({ post }: BlogPostCardProps) {
   const { title, slug, excerpt, publishedAt, coverImage, author } = post.attributes
 
-  const imageUrl = getSafeImageUrl(coverImage, "/placeholder.svg?height=200&width=400")
+  const imageUrl = getSafeImageUrl(coverImage, "/placeholder.jpg?height=200&width=400")
 
   const formattedDate = formatDate(publishedAt)
 
   return (
     <Card className="flex flex-col h-full">
       <div className="relative h-48 w-full">
-        <Image src={imageUrl || "/placeholder.svg"} alt={title} fill className="object-cover rounded-t-lg" />
+        <Image src={imageUrl || "/placeholder.jpg"} alt={title} fill className="object-cover rounded-t-lg" />
       </div>
       <CardHeader>
         <CardTitle className="line-clamp-2">{title}</CardTitle>

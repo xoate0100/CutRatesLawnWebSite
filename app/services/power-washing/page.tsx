@@ -4,27 +4,28 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const powerWashingServices = [
   {
     title: "House Exterior Washing",
     description: "Revitalize your home's exterior, removing dirt, grime, and mildew.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.powerwashing.1",
   },
   {
     title: "Driveway and Sidewalk Cleaning",
     description: "Restore the appearance of your concrete surfaces, removing stains and buildup.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.powerwashing.2",
   },
   {
     title: "Deck and Fence Washing",
     description: "Bring new life to your wooden structures, preparing them for staining or sealing.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.powerwashing.3",
   },
   {
     title: "Roof Cleaning",
     description: "Safely remove algae, moss, and stains from your roof, extending its lifespan.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.powerwashing.4",
   },
 ]
 
@@ -49,8 +50,8 @@ export default function PowerWashingPage() {
               {powerWashingServices.map((service, index) => (
                 <Card key={index} className="flex flex-col">
                   <Image
-                    src={service.image || "/placeholder.svg"}
-                    alt={service.title}
+                    src={mediaSrc(service.slot)}
+                    alt={mediaAlt(service.slot, service.title)}
                     width={300}
                     height={200}
                     className="w-full h-48 object-cover rounded-t-lg"

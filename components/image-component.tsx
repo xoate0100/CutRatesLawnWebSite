@@ -23,7 +23,7 @@ export function ImageComponent({
   return (
     <div className={`relative overflow-hidden ${className}`}>
       <Image
-        src={safeImageUrl || "/placeholder.svg"}
+        src={safeImageUrl || "/placeholder.jpg"}
         alt={alt || "Image"}
         width={width}
         height={height}

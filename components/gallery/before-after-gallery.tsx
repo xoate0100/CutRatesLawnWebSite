@@ -5,6 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import type { ImageObject } from "@/lib/types"
 import { getSafeImageUrl } from "@/lib/image-utils"
+import { mediaSrc } from "@/lib/media"
 
 interface BeforeAfterImagePair {
   id: string
@@ -39,7 +40,7 @@ export function BeforeAfterGallery({ imagePairs, className = "" }: BeforeAfterGa
         {/* Before Image (Full width) */}
         <div className="absolute inset-0">
           <img
-            src={getSafeImageUrl(activePair.before) || "/placeholder.svg?height=600&width=800"}
+            src={getSafeImageUrl(activePair.before) || mediaSrc("gallery.before")}
             alt={`Before: ${activePair.title || "Transformation"}`}
             className="w-full h-full object-cover"
             width={800}
@@ -50,7 +51,7 @@ export function BeforeAfterGallery({ imagePairs, className = "" }: BeforeAfterGa
         {/* After Image (Clipped based on slider) */}
         <div className="absolute inset-0 overflow-hidden" style={{ width: `${sliderPosition}%` }}>
           <img
-            src={getSafeImageUrl(activePair.after) || "/placeholder.svg?height=600&width=800"}
+            src={getSafeImageUrl(activePair.after) || mediaSrc("gallery.after")}
             alt={`After: ${activePair.title || "Transformation"}`}
             className="w-full h-full object-cover"
             style={{ width: `${100 / (sliderPosition / 100)}%` }}
@@ -106,7 +107,7 @@ export function BeforeAfterGallery({ imagePairs, className = "" }: BeforeAfterGa
               aria-current={index === activeIndex ? "true" : "false"}
             >
               <img
-                src={getSafeImageUrl(pair.after, "thumbnail") || "/placeholder.svg?height=100&width=150"}
+                src={getSafeImageUrl(pair.after, "thumbnail") || mediaSrc("gallery.thumb")}
                 alt={pair.title || `Transformation ${index + 1}`}
                 className="w-full h-full object-cover"
                 width={150}

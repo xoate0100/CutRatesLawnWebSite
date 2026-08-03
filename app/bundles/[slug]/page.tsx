@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { QuoteForm } from "@/components/quote-form"
 import { ServicesList } from "@/components/services-list"
 import { companyInfo } from "@/lib/static-data"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 import { Phone, Calendar, CheckCircle, Star, Clock, Shield, Award, Percent } from "lucide-react"
 
 interface BundleDetailPageProps {
@@ -58,7 +59,7 @@ export default async function BundleDetailPage({ params }: BundleDetailPageProps
     const { title, description, content, price, priceUnit, coverImage, services } = bundle.attributes
 
     const imageUrl =
-      coverImage?.data?.attributes?.url || `/placeholder.svg?height=600&width=1200&text=${encodeURIComponent(title)}`
+      coverImage?.data?.attributes?.url || mediaSrc("page.bundles-slug.hero")
     const serviceIds = services?.data?.map((service: any) => service.id) || []
 
     // Calculate savings compared to individual services
@@ -103,14 +104,14 @@ export default async function BundleDetailPage({ params }: BundleDetailPageProps
             {description && <p className="text-xl text-muted-foreground mb-6">{description}</p>}
 
             <div className="relative aspect-video w-full mb-6 overflow-hidden rounded-lg">
-              <Image src={imageUrl || "/placeholder.svg"} alt={title} fill className="object-cover" priority />
+              <Image src={imageUrl || mediaSrc("page.bundles-slug.hero")} alt={title} fill className="object-cover" priority />
 
               {/* Featured on badge */}
               <div className="absolute top-4 left-4 bg-white/90 rounded-lg px-3 py-2 shadow-md">
                 <p className="text-sm font-medium flex items-center">
                   <Image
-                    src="/placeholder.svg?height=20&width=60&text=KWCH"
-                    alt="KWCH News"
+                    src={mediaSrc("partners.kwch")}
+                    alt={mediaAlt("partners.kwch", "KWCH News")}
                     width={60}
                     height={20}
                     className="mr-2"
@@ -224,7 +225,7 @@ export default async function BundleDetailPage({ params }: BundleDetailPageProps
               </p>
               <div className="flex items-center">
                 <div className="w-10 h-10 rounded-full bg-gray-300 mr-3 overflow-hidden">
-                  <Image src="/placeholder.svg?height=40&width=40&text=JD" alt="Customer" width={40} height={40} />
+                  <Image src={mediaSrc("page.bundles-slug.avatar")} alt="Customer" width={40} height={40} />
                 </div>
                 <div>
                   <p className="font-medium">Jennifer D.</p>

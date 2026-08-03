@@ -4,7 +4,7 @@
  * @param fallbackUrl - Fallback URL to use if the provided URL is invalid
  * @returns A safe image URL
  */
-export function getSafeImageUrl(imageData: any, fallbackUrl = "/placeholder.svg?height=400&width=600"): string {
+export function getSafeImageUrl(imageData: any, fallbackUrl = "/placeholder.jpg?height=400&width=600"): string {
   // If no image data, return fallback
   if (!imageData) return fallbackUrl
 

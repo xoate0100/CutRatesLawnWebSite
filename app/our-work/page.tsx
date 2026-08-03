@@ -1,19 +1,20 @@
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const projectCategories = [
   {
     name: "Lawn Transformations",
     projects: [
       {
-        before: "/placeholder.svg?height=300&width=400",
-        after: "/placeholder.svg?height=300&width=400",
+        beforeSlot: "ourwork.lawn.1.before",
+        afterSlot: "ourwork.lawn.1.after",
         description: "Revitalized a neglected lawn with our comprehensive care package",
       },
       {
-        before: "/placeholder.svg?height=300&width=400",
-        after: "/placeholder.svg?height=300&width=400",
+        beforeSlot: "ourwork.lawn.2.before",
+        afterSlot: "ourwork.lawn.2.after",
         description: "Drought-resistant landscaping for a water-efficient yard",
       },
     ],
@@ -22,13 +23,13 @@ const projectCategories = [
     name: "Hardscaping Projects",
     projects: [
       {
-        before: "/placeholder.svg?height=300&width=400",
-        after: "/placeholder.svg?height=300&width=400",
+        beforeSlot: "ourwork.hardscape.1.before",
+        afterSlot: "ourwork.hardscape.1.after",
         description: "Custom patio installation with built-in fire pit",
       },
       {
-        before: "/placeholder.svg?height=300&width=400",
-        after: "/placeholder.svg?height=300&width=400",
+        beforeSlot: "ourwork.hardscape.2.before",
+        afterSlot: "ourwork.hardscape.2.after",
         description: "Elegant walkway and retaining wall project",
       },
     ],
@@ -37,13 +38,13 @@ const projectCategories = [
     name: "Commercial Landscaping",
     projects: [
       {
-        before: "/placeholder.svg?height=300&width=400",
-        after: "/placeholder.svg?height=300&width=400",
+        beforeSlot: "ourwork.commercial.1.before",
+        afterSlot: "ourwork.commercial.1.after",
         description: "Complete overhaul of office park grounds",
       },
       {
-        before: "/placeholder.svg?height=300&width=400",
-        after: "/placeholder.svg?height=300&width=400",
+        beforeSlot: "ourwork.commercial.2.before",
+        afterSlot: "ourwork.commercial.2.after",
         description: "Low-maintenance, high-impact landscaping for a shopping center",
       },
     ],
@@ -79,8 +80,8 @@ export default function OurWorkPage() {
                       <div className="grid grid-cols-2 gap-2">
                         <div className="relative h-48">
                           <Image
-                            src={project.before || "/placeholder.svg"}
-                            alt="Before"
+                            src={mediaSrc(project.beforeSlot)}
+                            alt={mediaAlt(project.beforeSlot, "Before")}
                             fill
                             className="object-cover"
                           />
@@ -89,7 +90,12 @@ export default function OurWorkPage() {
                           </div>
                         </div>
                         <div className="relative h-48">
-                          <Image src={project.after || "/placeholder.svg"} alt="After" fill className="object-cover" />
+                          <Image
+                            src={mediaSrc(project.afterSlot)}
+                            alt={mediaAlt(project.afterSlot, "After")}
+                            fill
+                            className="object-cover"
+                          />
                           <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 text-sm">
                             After
                           </div>

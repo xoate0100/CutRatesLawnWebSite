@@ -4,38 +4,39 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const commercialServices = [
   {
     title: "Commercial Landscaping",
     description:
       "Comprehensive landscape maintenance for businesses, including mowing, pruning, and seasonal plantings.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.commercial.1",
   },
   {
     title: "Snow and Ice Management",
     description: "Keep your property safe and accessible during winter with our reliable snow removal services.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.commercial.2",
   },
   {
     title: "Parking Lot Maintenance",
     description: "Sweeping, striping, and maintenance to keep your parking areas clean and well-marked.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.commercial.3",
   },
   {
     title: "Commercial Pest Control",
     description: "Protect your business from pests with our comprehensive commercial pest management solutions.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.commercial.4",
   },
   {
     title: "Irrigation System Management",
     description: "Installation, maintenance, and repair of commercial irrigation systems for efficient water usage.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.commercial.5",
   },
   {
     title: "Green Space Design",
     description: "Create inviting outdoor spaces for your employees and customers with our landscape design services.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.commercial.6",
   },
 ]
 
@@ -60,8 +61,8 @@ export default function CommercialServicesPage() {
               {commercialServices.map((service, index) => (
                 <Card key={index} className="flex flex-col">
                   <Image
-                    src={service.image || "/placeholder.svg"}
-                    alt={service.title}
+                    src={mediaSrc(service.slot)}
+                    alt={mediaAlt(service.slot, service.title)}
                     width={300}
                     height={200}
                     className="w-full h-48 object-cover rounded-t-lg"

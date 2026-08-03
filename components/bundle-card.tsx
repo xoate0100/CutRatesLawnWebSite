@@ -19,7 +19,7 @@ export function BundleCard({ bundle, className = "" }: BundleCardProps) {
   // Safe price formatting with null check
   const formattedPrice = price !== undefined && price !== null ? `$${price.toFixed(2)}` : "Contact for pricing"
 
-  const imageUrl = coverImage?.data?.attributes?.url || "/placeholder.svg?height=400&width=600&text=No+Image"
+  const imageUrl = coverImage?.data?.attributes?.url || "/placeholder.jpg?height=400&width=600&text=No+Image"
   const includedServices = services?.data || []
 
   return (
@@ -28,7 +28,7 @@ export function BundleCard({ bundle, className = "" }: BundleCardProps) {
     >
       <div className="relative aspect-video overflow-hidden">
         <Image
-          src={imageUrl || "/placeholder.svg"}
+          src={imageUrl || "/placeholder.jpg"}
           alt={title}
           fill
           className="object-cover transition-transform hover:scale-105"

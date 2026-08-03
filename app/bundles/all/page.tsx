@@ -4,25 +4,26 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight } from "lucide-react"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const bundleCategories = [
   {
     title: "Residential Bundles",
     description: "Comprehensive care packages for homeowners",
     link: "/bundles/residential",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.bundles-all.1",
   },
   {
     title: "Commercial Bundles",
     description: "Tailored solutions for businesses and properties",
     link: "/bundles/commercial",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.bundles-all.2",
   },
   {
     title: "Seasonal Bundles",
     description: "Specialized care for every season",
     link: "/bundles/seasonal",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.bundles-all.3",
   },
 ]
 
@@ -46,8 +47,8 @@ export default function AllBundlesPage() {
               {bundleCategories.map((category, index) => (
                 <Card key={index} className="flex flex-col">
                   <Image
-                    src={category.image || "/placeholder.svg"}
-                    alt={category.title}
+                    src={mediaSrc(category.slot)}
+                    alt={mediaAlt(category.slot, category.title)}
                     width={300}
                     height={200}
                     className="w-full h-48 object-cover rounded-t-lg"

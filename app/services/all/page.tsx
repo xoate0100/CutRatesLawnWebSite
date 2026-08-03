@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle, ArrowRight, Clock, DollarSign, Zap, Shield } from "lucide-react"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const allServices = [
   {
@@ -28,7 +29,7 @@ const allServices = [
         icon: Shield,
       },
     ],
-    image: "/placeholder.svg?height=300&width=400",
+    slot: "page.services-all.lawn",
     link: "/services/lawn-care",
   },
   {
@@ -53,7 +54,7 @@ const allServices = [
         icon: Clock,
       },
     ],
-    image: "/placeholder.svg?height=300&width=400",
+    slot: "page.services-all.landscaping",
     link: "/services/landscaping",
   },
   {
@@ -78,7 +79,7 @@ const allServices = [
         icon: Clock,
       },
     ],
-    image: "/placeholder.svg?height=300&width=400",
+    slot: "page.services-all.pest",
     link: "/services/pest-control",
   },
   {
@@ -103,7 +104,7 @@ const allServices = [
         icon: Clock,
       },
     ],
-    image: "/placeholder.svg?height=300&width=400",
+    slot: "page.services-all.powerwashing",
     link: "/services/power-washing",
   },
 ]
@@ -154,8 +155,8 @@ export default function AllServicesPage() {
                   <div className="lg:col-span-1">
                     <Card className="h-full flex flex-col">
                       <Image
-                        src={category.image || "/placeholder.svg"}
-                        alt={category.category}
+                        src={mediaSrc(category.slot)}
+                        alt={mediaAlt(category.slot, category.category)}
                         width={400}
                         height={300}
                         className="w-full h-48 object-cover rounded-t-lg"

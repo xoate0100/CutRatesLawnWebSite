@@ -17,7 +17,7 @@ export default function Hero({ data }) {
   const { title, description, ctaText, ctaLink, image } = data
   console.log("Hero data:", { title, description, ctaText, ctaLink, hasImage: !!image })
 
-  let imageUrl = "/placeholder.svg?height=600&width=800"
+  let imageUrl = "/placeholder.jpg?height=600&width=800"
   try {
     imageUrl = image?.data?.attributes?.url ? getSafeImageUrl(image.data.attributes.url) : imageUrl
     console.log("Hero image URL:", imageUrl)
@@ -46,7 +46,7 @@ export default function Hero({ data }) {
           </div>
           {imageUrl ? (
             <Image
-              src={imageUrl || "/placeholder.svg"}
+              src={imageUrl || "/placeholder.jpg"}
               alt="Beautiful lawn"
               fill
               style={{ objectFit: "cover" }}

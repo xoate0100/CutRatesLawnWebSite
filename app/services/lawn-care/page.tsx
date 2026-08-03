@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { CheckCircle } from "lucide-react"
 import CTASection from "@/components/cta-section"
 import StructuredData from "@/components/structured-data"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 export default function LawnCarePage() {
   return (
@@ -60,8 +61,8 @@ export default function LawnCarePage() {
         <section className="relative">
           <div className="absolute inset-0 z-0">
             <Image
-              src="/placeholder.svg?height=600&width=1920"
-              alt="Lush green lawn"
+              src={mediaSrc("services.hero")}
+              alt={mediaAlt("services.hero", "Lush green lawn")}
               fill
               className="object-cover brightness-50"
               priority
@@ -105,8 +106,8 @@ export default function LawnCarePage() {
               </div>
               <div className="relative h-[400px]">
                 <Image
-                  src="/placeholder.svg?height=400&width=600"
-                  alt="Lawn care professional at work"
+                  src={mediaSrc("services.mowing")}
+                  alt={mediaAlt("services.mowing", "Lawn care professional at work")}
                   fill
                   className="object-cover rounded-lg"
                 />

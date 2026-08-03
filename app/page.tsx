@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { HeroPlane } from "@/components/atmosphere/hero-plane"
 import { SectionShell } from "@/components/atmosphere/section-shell"
+import { AtmReveal } from "@/components/atmosphere/atm-reveal"
 import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const services = [
@@ -64,13 +65,13 @@ export default function Home() {
             <div className="flex flex-col gap-4 sm:flex-row atm-enter atm-enter-delay-2">
               <Link
                 href="/contact"
-                className="rounded-lg bg-primary px-6 py-3 text-center font-bold text-primary-foreground transition-colors hover:brightness-110"
+                className="rounded-lg bg-primary px-6 py-3 text-center font-bold text-primary-foreground transition-colors hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 Get a Free Quote
               </Link>
               <Link
                 href="/services"
-                className="rounded-lg bg-white px-6 py-3 text-center font-bold text-primary transition-colors hover:bg-white/90"
+                className="rounded-lg bg-white px-6 py-3 text-center font-bold text-primary transition-colors hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 Our Services
               </Link>
@@ -79,7 +80,7 @@ export default function Home() {
         </div>
       </HeroPlane>
 
-      <SectionShell tone="muted" seam className="py-6">
+      <SectionShell tone="muted" seam seamFade texture className="py-6">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center justify-center gap-8 md:flex-row">
             <p className="font-semibold text-muted-foreground">As Featured On:</p>
@@ -105,89 +106,118 @@ export default function Home() {
         </div>
       </SectionShell>
 
-      <SectionShell tone="canvas" motif className="py-16">
+      <SectionShell
+        tone="canvas-alt"
+        motif
+        motifCoverage="full"
+        motifIntensity="medium"
+        texture
+        seam
+        seamFade
+        className="py-16"
+      >
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold">Our Services</h2>
+          <AtmReveal>
+            <h2 className="mb-12 text-center text-3xl font-bold">Our Services</h2>
+          </AtmReveal>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, i) => (
-              <article
-                key={service.slot}
-                className={`overflow-hidden rounded-lg bg-card atm-elev-1 atm-hover-lift atm-enter ${
-                  i === 0 ? "atm-enter-delay-1" : i === 1 ? "atm-enter-delay-2" : "atm-enter-delay-3"
-                }`}
-              >
-                <div className="relative h-60">
-                  <Image
-                    src={mediaSrc(service.slot)}
-                    alt={mediaAlt(service.slot, service.title)}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="mb-2 text-xl font-bold">{service.title}</h3>
-                  <p className="mb-4 text-muted-foreground">{service.body}</p>
-                  <Link href={service.href} className="font-medium text-primary hover:underline">
-                    Learn More →
-                  </Link>
-                </div>
-              </article>
+              <AtmReveal key={service.slot} delay={(i + 1) as 1 | 2 | 3}>
+                <article className="overflow-hidden rounded-lg bg-card atm-elev-1 atm-hover-lift">
+                  <div className="relative h-60">
+                    <Image
+                      src={mediaSrc(service.slot)}
+                      alt={mediaAlt(service.slot, service.title)}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                    <div className="atm-photo-tint" aria-hidden />
+                    <div className="atm-photo-scrim" aria-hidden />
+                  </div>
+                  <div className="p-6">
+                    <h3 className="mb-2 text-xl font-bold">{service.title}</h3>
+                    <p className="mb-4 text-muted-foreground">{service.body}</p>
+                    <Link
+                      href={service.href}
+                      className="font-medium text-primary hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                    >
+                      Learn More →
+                    </Link>
+                  </div>
+                </article>
+              </AtmReveal>
             ))}
           </div>
-          <div className="mt-12 text-center">
+          <AtmReveal className="mt-12 text-center">
             <Link
               href="/services"
-              className="inline-block rounded-lg bg-primary px-6 py-3 font-bold text-primary-foreground transition-colors hover:brightness-110"
+              className="inline-block rounded-lg bg-primary px-6 py-3 font-bold text-primary-foreground transition-colors hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
             >
               View All Services
             </Link>
-          </div>
+          </AtmReveal>
         </div>
       </SectionShell>
 
-      <SectionShell tone="wash" seam className="py-16">
+      <SectionShell
+        tone="deep-band"
+        motif
+        motifCoverage="full"
+        motifVariant="ribs"
+        motifIntensity="soft"
+        texture
+        seam
+        seamFade
+        className="py-16"
+      >
         <div className="container mx-auto px-4">
-          <h2 className="mb-12 text-center text-3xl font-bold">What Our Customers Say</h2>
+          <AtmReveal>
+            <h2 className="mb-12 text-center text-3xl font-bold">What Our Customers Say</h2>
+          </AtmReveal>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {testimonials.map((t) => (
-              <blockquote key={t.slot} className="rounded-lg bg-card p-6 atm-elev-1">
-                <div className="mb-4 flex items-center">
-                  <div className="relative mr-4 h-12 w-12 overflow-hidden rounded-full">
-                    <Image
-                      src={mediaSrc(t.slot)}
-                      alt={mediaAlt(t.slot, t.name)}
-                      fill
-                      className="object-cover"
-                      sizes="48px"
-                    />
-                  </div>
-                  <div>
-                    <cite className="not-italic font-bold">{t.name}</cite>
-                    <div className="text-amber-500" aria-label="5 out of 5 stars">
-                      ★★★★★
+            {testimonials.map((t, i) => (
+              <AtmReveal key={t.slot} delay={(Math.min(i + 1, 3)) as 1 | 2 | 3}>
+                <blockquote className="rounded-lg bg-card p-6 atm-elev-1 atm-hover-lift">
+                  <div className="mb-4 flex items-center">
+                    <div className="relative mr-4 h-12 w-12 overflow-hidden rounded-full">
+                      <Image
+                        src={mediaSrc(t.slot)}
+                        alt={mediaAlt(t.slot, t.name)}
+                        fill
+                        className="object-cover"
+                        sizes="48px"
+                      />
+                    </div>
+                    <div>
+                      <cite className="not-italic font-bold">{t.name}</cite>
+                      <div className="text-amber-500" aria-label="5 out of 5 stars">
+                        ★★★★★
+                      </div>
                     </div>
                   </div>
-                </div>
-                <p className="text-muted-foreground">&ldquo;{t.quote}&rdquo;</p>
-              </blockquote>
+                  <p className="text-muted-foreground">&ldquo;{t.quote}&rdquo;</p>
+                </blockquote>
+              </AtmReveal>
             ))}
           </div>
         </div>
       </SectionShell>
 
-      <SectionShell tone="cta" className="py-16">
+      <SectionShell tone="cta" seamFade className="py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="mb-6 text-3xl font-bold">Ready for a Beautiful Lawn?</h2>
-          <p className="mx-auto mb-8 max-w-2xl text-xl text-primary-foreground/90">
-            Contact us today for a free quote and let us help you achieve the lawn you&apos;ve always wanted.
-          </p>
-          <Link
-            href="/contact"
-            className="inline-block rounded-lg bg-white px-8 py-3 font-bold text-primary transition-colors hover:bg-white/90"
-          >
-            Get Started
-          </Link>
+          <AtmReveal>
+            <h2 className="mb-6 text-3xl font-bold">Ready for a Beautiful Lawn?</h2>
+            <p className="mx-auto mb-8 max-w-2xl text-xl text-primary-foreground/90">
+              Contact us today for a free quote and let us help you achieve the lawn you&apos;ve always wanted.
+            </p>
+            <Link
+              href="/contact"
+              className="inline-block rounded-lg bg-white px-8 py-3 font-bold text-primary transition-colors hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+            >
+              Get Started
+            </Link>
+          </AtmReveal>
         </div>
       </SectionShell>
     </main>

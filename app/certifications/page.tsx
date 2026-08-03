@@ -1,25 +1,26 @@
 import Image from "next/image"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const certifications = [
   {
     name: "Certified Lawn Care Professional",
     organization: "National Association of Landscape Professionals",
     description: "Demonstrates expertise in lawn care techniques and best practices.",
-    image: "/placeholder.svg?height=100&width=100",
+    slot: "page.certifications.1",
   },
   {
     name: "Certified Arborist",
     organization: "International Society of Arboriculture",
     description: "Specialized knowledge in tree care and maintenance.",
-    image: "/placeholder.svg?height=100&width=100",
+    slot: "page.certifications.2",
   },
   {
     name: "Environmental Landscape Certification",
     organization: "Ecological Landscaping Association",
     description: "Focuses on sustainable and eco-friendly landscaping practices.",
-    image: "/placeholder.svg?height=100&width=100",
+    slot: "page.certifications.3",
   },
 ]
 
@@ -44,8 +45,8 @@ export default function CertificationsPage() {
                 <Card key={index} className="flex flex-col">
                   <CardHeader>
                     <Image
-                      src={cert.image || "/placeholder.svg"}
-                      alt={cert.name}
+                      src={mediaSrc(cert.slot)}
+                      alt={mediaAlt(cert.slot, cert.name)}
                       width={100}
                       height={100}
                       className="mb-4"

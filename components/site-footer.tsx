@@ -14,7 +14,7 @@ export function SiteFooter() {
             <div className="flex items-center space-x-2">
               <div className="relative w-10 h-10 bg-white rounded-full p-1">
                 <Image
-                  src="/placeholder.svg?height=40&width=40"
+                  src="/placeholder.jpg?height=40&width=40"
                   alt="Cut Rates Lawn Care"
                   fill
                   className="object-contain"

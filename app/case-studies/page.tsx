@@ -3,24 +3,25 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const caseStudies = [
   {
     title: "Residential Lawn Transformation",
     description: "How we turned a neglected yard into a lush, green oasis",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "casestudies.1",
     link: "/case-studies/residential-transformation",
   },
   {
     title: "Commercial Property Maintenance",
     description: "Year-round care for a large office complex",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "casestudies.2",
     link: "/case-studies/commercial-maintenance",
   },
   {
     title: "Sustainable Landscaping Project",
     description: "Implementing eco-friendly practices for a community park",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "casestudies.3",
     link: "/case-studies/sustainable-landscaping",
   },
 ]
@@ -44,8 +45,8 @@ export default function CaseStudiesPage() {
               {caseStudies.map((study, index) => (
                 <Card key={index} className="flex flex-col">
                   <Image
-                    src={study.image || "/placeholder.svg"}
-                    alt={study.title}
+                    src={mediaSrc(study.slot)}
+                    alt={mediaAlt(study.slot, study.title)}
                     width={300}
                     height={200}
                     className="w-full h-48 object-cover rounded-t-lg"

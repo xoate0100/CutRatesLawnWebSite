@@ -16,6 +16,22 @@ Agent completed everything that can run without your credentials, licenses, or G
 | H-ATM-06 | Confirm team names/photos on About are real or replace with placeholders | Accuracy / privacy | Real bios/photos or generic copy |
 | H-ATM-07 | Re-download incomplete files (quarantined `*.crdownload`) + extract empty-state ZIPs to PNG/SVG in inbox | Downloads unfinished / zip not ingestible | Files ready for second ingest |
 | H-ATM-08 | Commit `docs/media/*` + `lib/generated/media-map.json` and push (redeploy) after upload | Site reads baked `media-map.json` | Production shows new photos |
+| H-ATM-09 | **Upload + bind remaining null slots** — most page slots now reuse first-batch GCS library; still need real portfolio / specialty photos (see below) | Real photos for gaps stock lawn set cannot fill | Listed remaining nulls bound or explicitly deferred |
+
+### H-ATM-09 — Remaining nulls (after 2026-08-02 dedupe)
+
+**Do not re-download the first Envato lawn batch** — it is already on GCS. See [`INBOX_COVERAGE.md`](../media/INBOX_COVERAGE.md).
+
+Still need **new** photos for:
+- Real **before** portfolio shots: `ourwork.*.before` (and `ourwork.hardscape.2.after`)
+- Power washing: `services.power-washing`, `page.powerwashing.*`, `page.services-all.powerwashing`
+- Team: `team.owner` / `manager` / `crew`
+- Certifications: `page.certifications.*`
+- Avatars: `page.blog.post.avatar`, `page.bundles-slug.avatar`
+- Misc commercial: `page.commercial.4–6`, `page.pest.3`, `page.landscaping.4`
+- Optional: `empty.state`
+
+Duplicates from the second inbox drop are in `media/archive/already_in_registry/` (safe to delete).
 
 ---
 

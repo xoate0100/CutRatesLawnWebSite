@@ -14,7 +14,7 @@ export function BlogRelatedPosts({ posts }: BlogRelatedPostsProps) {
           <Link href={`/blog/${post.attributes.slug}`} className="block">
             <div className="relative h-40 overflow-hidden">
               <img
-                src={getSafeImageUrl(post.attributes.coverImage) || "/placeholder.svg?height=200&width=300"}
+                src={getSafeImageUrl(post.attributes.coverImage) || "/placeholder.jpg?height=200&width=300"}
                 alt={post.attributes.title}
                 className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                 width={300}

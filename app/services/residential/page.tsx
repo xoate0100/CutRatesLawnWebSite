@@ -4,37 +4,38 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { CheckCircle } from "lucide-react"
 import CTASection from "@/components/cta-section"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 const residentialServices = [
   {
     title: "Lawn Mowing",
     description: "Regular mowing to keep your lawn healthy and well-manicured.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "services.mowing",
   },
   {
     title: "Fertilization",
     description: "Customized fertilization programs to nourish your lawn throughout the year.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "services.fertilization",
   },
   {
     title: "Weed Control",
     description: "Targeted treatments to eliminate weeds and prevent their return.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "services.weed-control",
   },
   {
     title: "Pest Control",
     description: "Protect your property from harmful insects and pests.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "page.residential.pest",
   },
   {
     title: "Aeration and Overseeding",
     description: "Improve soil health and grass density for a lush lawn.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "services.aeration",
   },
   {
     title: "Seasonal Cleanup",
     description: "Spring and fall cleanups to prepare your property for the changing seasons.",
-    image: "/placeholder.svg?height=200&width=300",
+    slot: "services.cleanup",
   },
 ]
 
@@ -59,8 +60,8 @@ export default function ResidentialServicesPage() {
               {residentialServices.map((service, index) => (
                 <Card key={index} className="flex flex-col">
                   <Image
-                    src={service.image || "/placeholder.svg"}
-                    alt={service.title}
+                    src={mediaSrc(service.slot)}
+                    alt={mediaAlt(service.slot, service.title)}
                     width={300}
                     height={200}
                     className="w-full h-48 object-cover rounded-t-lg"

@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ArrowLeft } from "lucide-react"
 import type { BlogPost } from "@/lib/types"
+import { mediaSrc } from "@/lib/media"
 
 // This would normally come from an API or CMS
 const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
@@ -38,11 +39,11 @@ const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
         
         <p>By following these simple tips, you can maintain a healthy, vibrant lawn throughout the summer months, even during periods of heat and drought.</p>
       `,
-      featuredImage: "/placeholder.svg?height=600&width=1200",
+      featuredImage: mediaSrc("page.blog.post.hero"),
       publishedAt: "2023-06-15T10:00:00Z",
       author: {
         name: "John Smith",
-        avatar: "/placeholder.svg?height=100&width=100",
+        avatar: mediaSrc("page.blog.post.avatar"),
       },
       categories: ["Lawn Care", "Summer"],
     },
@@ -81,11 +82,11 @@ const getBlogPost = async (slug: string): Promise<BlogPost | null> => {
         
         <p>By staying vigilant and addressing pest problems early, you can maintain a healthy, beautiful lawn throughout the growing season.</p>
       `,
-      featuredImage: "/placeholder.svg?height=600&width=1200",
+      featuredImage: mediaSrc("page.blog.post.hero"),
       publishedAt: "2023-05-22T14:30:00Z",
       author: {
         name: "Sarah Johnson",
-        avatar: "/placeholder.svg?height=100&width=100",
+        avatar: mediaSrc("page.blog.post.avatar"),
       },
       categories: ["Pest Control", "Lawn Care"],
     },
@@ -147,7 +148,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         <div className="flex items-center gap-3 mb-8">
           <div className="relative h-10 w-10 rounded-full overflow-hidden">
             <Image
-              src={post.author.avatar || "/placeholder.svg?height=100&width=100"}
+              src={post.author.avatar || mediaSrc("page.blog.post.avatar")}
               alt={post.author.name}
               fill
               className="object-cover"
@@ -161,7 +162,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
 
         <div className="relative h-[400px] w-full mb-8">
           <Image
-            src={post.featuredImage || "/placeholder.svg?height=600&width=1200"}
+            src={post.featuredImage || mediaSrc("page.blog.post.hero")}
             alt={post.title}
             fill
             className="object-cover rounded-lg"

@@ -17,6 +17,11 @@ const nextConfig = {
         pathname: '/**',
       },
     ],
+    // Allow /placeholder.svg (and other local SVGs) through the image optimizer.
+    // CSP + attachment disposition are the standard pairing to block script execution.
+    dangerouslyAllowSVG: true,
+    contentDispositionType: 'attachment',
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   async redirects() {
     return [

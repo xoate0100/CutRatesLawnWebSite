@@ -15,10 +15,11 @@ assets:
         url: https://storage.googleapis.com/site_photo_storage/lawn-with-automatic-watering-system-2023-11-27-04-52-32-utc.jpg
     slots:
       - header.logo
+      - services.cleanup
     alt: Residential lawn with watering system
     usage: hero
     notes: Legacy root-bucket object; home.hero now uses env-A9DYSMH
-    updated_at: 2026-08-02T04:34:37.717Z
+    updated_at: 2026-08-02T22:06:16.727Z
     author: Cut Rates Lawn Care
     license_notes: Legacy root-bucket object; home.hero now uses env-A9DYSMH
     envato_url: null
@@ -37,10 +38,11 @@ assets:
         url: https://storage.googleapis.com/site_photo_storage/cutrateshireslogo.png
     slots:
       - header.logo
+      - services.cleanup
     alt: Cut Rates Lawn Care
     usage: logo
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T04:34:37.724Z
+    updated_at: 2026-08-02T22:06:16.732Z
     author: Cut Rates Lawn Care
     license_notes: Pre-existing GCS object (not Envato Elements)
     envato_url: null
@@ -102,6 +104,7 @@ assets:
         url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-3J7CC29/w768.webp
     slots:
       - header.logo
+      - services.cleanup
     alt: Farmer spraying fertilizer
     tags: []
     usage: stock
@@ -109,7 +112,7 @@ assets:
     staged_path: media/staging/env-3J7CC29.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T04:34:37.724Z
+    updated_at: 2026-08-02T22:06:16.732Z
   - asset_id: env-NVY3VZW
     slug: home-sweet-home-real-estate-exterior
     status: published
@@ -164,6 +167,7 @@ assets:
     slots:
       - about.hero
       - header.logo
+      - services.cleanup
     alt: Suburban home exterior — about Cut Rates Lawn Care
     tags: []
     usage: hero
@@ -171,7 +175,7 @@ assets:
     staged_path: media/staging/env-NVY3VZW.jpg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T04:34:37.725Z
+    updated_at: 2026-08-02T22:06:16.733Z
   - asset_id: env-A9DYSMH
     slug: house-with-a-green-lawn-under-blue-sky
     status: published
@@ -226,6 +230,7 @@ assets:
     slots:
       - home.hero
       - header.logo
+      - services.cleanup
     alt: House with a green lawn under blue sky
     tags: []
     usage: hero
@@ -233,7 +238,7 @@ assets:
     staged_path: media/staging/env-A9DYSMH.jpeg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T04:34:37.725Z
+    updated_at: 2026-08-02T22:06:16.733Z
   - asset_id: sha-1a0ddae6797d
     slug: lawn-care-professional-sprays-fertilizer
     status: published
@@ -287,6 +292,7 @@ assets:
         url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-1a0ddae6797d/w768.webp
     slots:
       - header.logo
+      - services.cleanup
     alt: Lawn care professional sprays fertilizer
     tags: []
     usage: stock
@@ -294,7 +300,7 @@ assets:
     staged_path: media/staging/sha-1a0ddae6797d.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T04:34:37.725Z
+    updated_at: 2026-08-02T22:06:16.733Z
   - asset_id: env-ETDTNU6
     slug: lawn-care-worker-mows-grass
     status: published
@@ -348,6 +354,7 @@ assets:
         url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-ETDTNU6/w768.webp
     slots:
       - header.logo
+      - services.cleanup
     alt: Lawn care worker mows grass
     tags: []
     usage: stock
@@ -355,7 +362,7 @@ assets:
     staged_path: media/staging/env-ETDTNU6.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T04:34:37.725Z
+    updated_at: 2026-08-02T22:06:16.733Z
   - asset_id: env-WL6S6J5
     slug: lawn-mover-on-green-grass
     status: published
@@ -402,6 +409,7 @@ assets:
     slots:
       - services.mowing
       - header.logo
+      - services.cleanup
     alt: Lawn mower on green grass
     tags: []
     usage: card
@@ -409,7 +417,7 @@ assets:
     staged_path: media/staging/env-WL6S6J5.jpg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T04:34:37.750Z
+    updated_at: 2026-08-02T22:06:16.733Z
   - asset_id: sha-5c1d1dd0095b
     slug: man-fertilizing-lawn-with-spreader-in-suburban-yard
     status: published
@@ -456,6 +464,7 @@ assets:
     slots:
       - services.fertilization
       - header.logo
+      - services.cleanup
     alt: Man fertilizing lawn with spreader
     tags: []
     usage: card
@@ -463,7 +472,7 @@ assets:
     staged_path: media/staging/sha-5c1d1dd0095b.jpg
     ingested_by: andre
     notes: Licensed inbox asset; Envato URL not captured at ingest
-    updated_at: 2026-08-02T04:34:37.750Z
+    updated_at: 2026-08-02T22:06:16.733Z
   - asset_id: sha-ba20accbcd23
     slug: man-mowing-the-lawn-in-his-backyard
     status: published
@@ -517,6 +526,7 @@ assets:
         url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-ba20accbcd23/w768.webp
     slots:
       - header.logo
+      - services.cleanup
     alt: Man mowing the lawn in his backyard
     tags: []
     usage: stock
@@ -524,7 +534,7 @@ assets:
     staged_path: media/staging/sha-ba20accbcd23.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T04:34:37.750Z
+    updated_at: 2026-08-02T22:06:16.734Z
   - asset_id: env-J4XCY2H
     slug: man-pushing-lawn-mower
     status: published
@@ -578,6 +588,7 @@ assets:
         url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-J4XCY2H/w768.webp
     slots:
       - header.logo
+      - services.cleanup
     alt: Man pushing lawn mower
     tags: []
     usage: stock
@@ -585,7 +596,7 @@ assets:
     staged_path: media/staging/env-J4XCY2H.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T04:34:37.751Z
+    updated_at: 2026-08-02T22:06:16.734Z
   - asset_id: env-HBA9N9D
     slug: mowed-green-frontyard
     status: published
@@ -639,6 +650,7 @@ assets:
         url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-HBA9N9D/w768.webp
     slots:
       - header.logo
+      - services.cleanup
     alt: Mowed green frontyard
     tags: []
     usage: stock
@@ -646,7 +658,7 @@ assets:
     staged_path: media/staging/env-HBA9N9D.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T04:34:37.751Z
+    updated_at: 2026-08-02T22:06:16.734Z
   - asset_id: sha-50ea64d6a870
     slug: residential-houses-in-suburban-neighborhood-in-summer
     status: published
@@ -701,6 +713,7 @@ assets:
     slots:
       - contact.hero
       - header.logo
+      - services.cleanup
     alt: Residential houses in a suburban neighborhood
     tags: []
     usage: hero
@@ -708,7 +721,7 @@ assets:
     staged_path: media/staging/sha-50ea64d6a870.jpg
     ingested_by: andre
     notes: Licensed inbox asset; Envato URL not captured at ingest
-    updated_at: 2026-08-02T04:34:37.751Z
+    updated_at: 2026-08-02T22:06:16.734Z
   - asset_id: env-BQ2DHJ4
     slug: row-of-traditional-suburban-homes-with-lush-green-front-lawns
     status: published
@@ -763,6 +776,7 @@ assets:
     slots:
       - services.hero
       - header.logo
+      - services.cleanup
     alt: Suburban homes with lush green front lawns
     tags: []
     usage: hero
@@ -770,7 +784,7 @@ assets:
     staged_path: media/staging/env-BQ2DHJ4.jpg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T04:34:37.751Z
+    updated_at: 2026-08-02T22:06:16.734Z
   - asset_id: sha-17ae8109f02b
     slug: suburban-home-exterior-with-manicured-lawn
     status: published
@@ -824,6 +838,7 @@ assets:
         url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w768.webp
     slots:
       - header.logo
+      - services.cleanup
     alt: Suburban home exterior with manicured lawn
     tags: []
     usage: stock
@@ -831,7 +846,7 @@ assets:
     staged_path: media/staging/sha-17ae8109f02b.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T04:34:37.751Z
+    updated_at: 2026-08-02T22:06:16.734Z
   - asset_id: sha-df83cbfdd6a5
     slug: water-droplets-on-green-grass-field
     status: published
@@ -878,6 +893,7 @@ assets:
     slots:
       - services.aeration
       - header.logo
+      - services.cleanup
     alt: Water droplets on green grass
     tags: []
     usage: card
@@ -885,7 +901,7 @@ assets:
     staged_path: media/staging/sha-df83cbfdd6a5.jpg
     ingested_by: andre
     notes: Interim stand-in for aeration
-    updated_at: 2026-08-02T04:34:37.751Z
+    updated_at: 2026-08-02T22:06:16.734Z
   - asset_id: env-L66HWHJ
     slug: worker-spraying-pesticide-onto-green-lawn-outdoors
     status: published
@@ -932,6 +948,7 @@ assets:
     slots:
       - services.weed-control
       - header.logo
+      - services.cleanup
     alt: Worker spraying pesticide onto green lawn
     tags: []
     usage: card
@@ -939,7 +956,7 @@ assets:
     staged_path: media/staging/env-L66HWHJ.jpg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T04:34:37.751Z
+    updated_at: 2026-08-02T22:06:16.735Z
   - asset_id: legacy-logo-white
     slug: logo-white
     status: published
@@ -959,11 +976,12 @@ assets:
     slots:
       - branding.logo-white
       - header.logo
+      - services.cleanup
     alt: Cut Rates Lawn Care
     usage: logo
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T04:34:37.751Z
+    updated_at: 2026-08-02T22:06:16.735Z
   - asset_id: legacy-service-cleanup
     slug: service-cleanup
     status: published
@@ -987,7 +1005,7 @@ assets:
     usage: card
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T04:34:37.752Z
+    updated_at: 2026-08-02T22:06:16.735Z
   - asset_id: legacy-testimonial-1
     slug: testimonial-1
     status: published
@@ -1007,11 +1025,12 @@ assets:
     slots:
       - testimonials.1
       - header.logo
+      - services.cleanup
     alt: Customer photo
     usage: avatar
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T04:34:37.752Z
+    updated_at: 2026-08-02T22:06:16.735Z
   - asset_id: legacy-testimonial-2
     slug: testimonial-2
     status: published
@@ -1031,11 +1050,12 @@ assets:
     slots:
       - testimonials.2
       - header.logo
+      - services.cleanup
     alt: Customer photo
     usage: avatar
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T04:34:37.752Z
+    updated_at: 2026-08-02T22:06:16.735Z
   - asset_id: legacy-testimonial-3
     slug: testimonial-3
     status: published
@@ -1055,11 +1075,12 @@ assets:
     slots:
       - testimonials.3
       - header.logo
+      - services.cleanup
     alt: Customer photo
     usage: avatar
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T04:34:37.752Z
+    updated_at: 2026-08-02T22:06:16.735Z
   - asset_id: legacy-partner-kwch
     slug: partner-kwch
     status: published
@@ -1079,11 +1100,12 @@ assets:
     slots:
       - partners.kwch
       - header.logo
+      - services.cleanup
     alt: KWCH 12 News
     usage: logo
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T04:34:37.752Z
+    updated_at: 2026-08-02T22:06:16.735Z
   - asset_id: legacy-partner-google
     slug: partner-google
     status: published
@@ -1103,11 +1125,12 @@ assets:
     slots:
       - partners.google
       - header.logo
+      - services.cleanup
     alt: Google Reviews
     usage: logo
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T04:34:37.752Z
+    updated_at: 2026-08-02T22:06:16.735Z
   - asset_id: legacy-partner-yelp
     slug: partner-yelp
     status: published
@@ -1127,11 +1150,12 @@ assets:
     slots:
       - partners.yelp
       - header.logo
+      - services.cleanup
     alt: Yelp
     usage: logo
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T04:34:37.752Z
+    updated_at: 2026-08-02T22:06:16.735Z
   - asset_id: sha-bab7b1635fc6
     slug: cut-rates-lawn-care-logo-new
     status: published
@@ -1177,6 +1201,7 @@ assets:
         url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/branding/header-logo/sha-bab7b1635fc6/w256.webp
     slots:
       - header.logo
+      - services.cleanup
     alt: Cut Rates Lawn Care
     tags: []
     usage: logo
@@ -1184,7 +1209,7 @@ assets:
     staged_path: media/staging/sha-bab7b1635fc6.svg
     ingested_by: andre
     notes: Inbox filename cutrateslogonew.svg; binds to header.logo
-    updated_at: 2026-08-02T04:34:37.752Z
+    updated_at: 2026-08-02T22:06:16.735Z
   - asset_id: sha-1804e39e6138
     slug: cut-rates-lawn-care-logo-transparent
     status: published
@@ -1230,6 +1255,7 @@ assets:
         url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/branding/header-logo/sha-1804e39e6138/w256.webp
     slots:
       - header.logo
+      - services.cleanup
     alt: Cut Rates Lawn Care
     tags: []
     usage: logo
@@ -1237,5 +1263,188 @@ assets:
     staged_path: media/staging/sha-1804e39e6138.svg
     ingested_by: andre
     notes: cutrateslogo_transparent.svg
-    updated_at: 2026-08-02T19:49:45.145Z
-updated_at: 2026-08-02T19:49:45.149Z
+    updated_at: 2026-08-02T22:06:16.735Z
+  - asset_id: sha-7b1c0a70183b
+    slug: man-mows-the-lawn-on-a-sunny-day-2026-01-05-22-50-01-utc
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: man-mows-the-lawn-on-a-sunny-day-2026-01-05-22-50-01-utc
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T22:01:17.700Z
+    source_filename: man-mows-the-lawn-on-a-sunny-day-2026-01-05-22-50-01-utc.jpg
+    sha256: 7b1c0a70183b3ee97ba8555e19260fcd04dd52d43422fbeab58a7443918abad7
+    bytes: 21653440
+    width: 6720
+    height: 4480
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/services-cleanup/sha-7b1c0a70183b
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-7b1c0a70183b/original.jpg
+        width: 6720
+        height: 4480
+        format: jpeg
+        bytes: 4760458
+        object: cutrateslawn/prod/services/services-cleanup/sha-7b1c0a70183b/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-7b1c0a70183b/original.jpg
+      - name: w1920
+        file: media/processed/sha-7b1c0a70183b/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 537858
+        object: cutrateslawn/prod/services/services-cleanup/sha-7b1c0a70183b/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-7b1c0a70183b/w1920.webp
+      - name: w1280
+        file: media/processed/sha-7b1c0a70183b/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 261260
+        object: cutrateslawn/prod/services/services-cleanup/sha-7b1c0a70183b/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-7b1c0a70183b/w1280.webp
+      - name: w768
+        file: media/processed/sha-7b1c0a70183b/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 110770
+        object: cutrateslawn/prod/services/services-cleanup/sha-7b1c0a70183b/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-7b1c0a70183b/w768.webp
+    slots:
+      - services.cleanup
+    alt: Professional landscaper trimming tall grass
+    tags: []
+    usage: service
+    category: services
+    staged_path: media/staging/sha-7b1c0a70183b.jpg
+    ingested_by: andre
+    notes: ""
+    updated_at: 2026-08-02T22:06:16.735Z
+  - asset_id: sha-f22b5ee0b651
+    slug: professional-landscaper-trimming-tall-grass-with-s-2026-07-09-19
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: professional-landscaper-trimming-tall-grass-with-s-2026-07-09-19-44-04-utc
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T22:01:18.422Z
+    source_filename: professional-landscaper-trimming-tall-grass-with-s-2026-07-09-19-44-04-utc.jpg
+    sha256: f22b5ee0b6519a733bca4a673e4b2be30ec217cd6dfdef311721a74838b38ef8
+    bytes: 18660690
+    width: 5760
+    height: 3840
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-f22b5ee0b651/original.jpg
+        width: 5760
+        height: 3840
+        format: jpeg
+        bytes: 3811333
+        object: cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/original.jpg
+      - name: w1920
+        file: media/processed/sha-f22b5ee0b651/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 565936
+        object: cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/w1920.webp
+      - name: w1280
+        file: media/processed/sha-f22b5ee0b651/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 309700
+        object: cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/w1280.webp
+      - name: w768
+        file: media/processed/sha-f22b5ee0b651/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 137464
+        object: cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/w768.webp
+    slots:
+      - services.cleanup
+    alt: Professional landscaper trimming tall grass
+    tags: []
+    usage: service
+    category: services
+    staged_path: media/staging/sha-f22b5ee0b651.jpg
+    ingested_by: andre
+    notes: ""
+    updated_at: 2026-08-02T22:06:16.735Z
+  - asset_id: sha-9a459a99270d
+    slug: worker-spraying-pesticide-onto-green-bush-outdoors-2026-01-07-15
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: worker-spraying-pesticide-onto-green-bush-outdoors-2026-01-07-15-33-30-utc
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-08-02T22:01:18.938Z
+    source_filename: worker-spraying-pesticide-onto-green-bush-outdoors-2026-01-07-15-33-30-utc.jpg
+    sha256: 9a459a99270d133e64970072760874135e49259ff0e4111678e5f52c120a3dbd
+    bytes: 12817586
+    width: 6720
+    height: 4480
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-9a459a99270d/original.jpg
+        width: 6720
+        height: 4480
+        format: jpeg
+        bytes: 2456087
+        object: cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d/original.jpg
+      - name: w1920
+        file: media/processed/sha-9a459a99270d/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 265672
+        object: cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d/w1920.webp
+      - name: w1280
+        file: media/processed/sha-9a459a99270d/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 152820
+        object: cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d/w1280.webp
+      - name: w768
+        file: media/processed/sha-9a459a99270d/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 78030
+        object: cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d/w768.webp
+    slots:
+      - services.cleanup
+    alt: Professional landscaper trimming tall grass
+    tags: []
+    usage: service
+    category: services
+    staged_path: media/staging/sha-9a459a99270d.jpg
+    ingested_by: andre
+    notes: ""
+    updated_at: 2026-08-02T22:06:16.735Z
+updated_at: 2026-08-02T22:06:16.736Z

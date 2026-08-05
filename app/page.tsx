@@ -64,7 +64,7 @@ export default function Home() {
             </p>
             <div className="flex flex-col gap-4 sm:flex-row atm-enter atm-enter-delay-2">
               <Link
-                href="/contact"
+                href="/quote"
                 className="rounded-lg bg-primary px-6 py-3 text-center font-bold text-primary-foreground transition-colors hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
               >
                 Get a Free Quote
@@ -212,7 +212,7 @@ export default function Home() {
               Contact us today for a free quote and let us help you achieve the lawn you&apos;ve always wanted.
             </p>
             <Link
-              href="/contact"
+              href="/quote"
               className="inline-block rounded-lg bg-white px-8 py-3 font-bold text-primary transition-colors hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
             >
               Get Started

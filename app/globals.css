@@ -229,6 +229,9 @@
     transition:
       opacity var(--atm-dur-slow) var(--atm-ease),
       transform var(--atm-dur-slow) var(--atm-ease);
+    /* Keep scroll reveals under sticky chrome (header z-100) */
+    position: relative;
+    z-index: 0;
   }
 
   .atm-reveal.atm-reveal-visible {

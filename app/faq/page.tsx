@@ -5,7 +5,8 @@ import ErrorState from "@/components/error-state"
 
 export default async function FAQPage() {
   try {
-    const categories = await getFAQCategories()
+    const raw = await getFAQCategories()
+    const categories = Array.isArray(raw) ? raw : Array.isArray((raw as { data?: unknown })?.data) ? (raw as { data: unknown[] }).data : []
 
     return (
       <div className="flex flex-col min-h-screen">
@@ -21,12 +22,18 @@ export default async function FAQPage() {
 
           <section className="py-16">
             <div className="container mx-auto px-4">
-              {categories.map((category, index) => (
-                <div key={index} className="mb-12">
-                  <h2 className="text-2xl font-bold mb-6">{category.name}</h2>
-                  <FAQSection category={category.slug} title="" />
-                </div>
-              ))}
+              {categories.length === 0 ? (
+                <p className="text-center text-muted-foreground">
+                  FAQ content is temporarily unavailable. Call us or use the contact form and we&apos;ll help directly.
+                </p>
+              ) : (
+                categories.map((category: { name: string; slug: string }, index: number) => (
+                  <div key={index} className="mb-12">
+                    <h2 className="text-2xl font-bold mb-6">{category.name}</h2>
+                    <FAQSection category={category.slug} title="" />
+                  </div>
+                ))
+              )}
             </div>
           </section>
 

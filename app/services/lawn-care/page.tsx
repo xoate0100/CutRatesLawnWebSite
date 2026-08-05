@@ -154,7 +154,7 @@ export default function LawnCarePage() {
               lawn's size and specific needs.
             </p>
             <div className="flex justify-center">
-              <Link href="/contact">
+              <Link href="/quote">
                 <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white">
                   Get a Custom Quote
                 </Button>

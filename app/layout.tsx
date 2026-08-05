@@ -68,7 +68,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Providers>
           <Header />
-          {children}
+          <div className="relative z-0">{children}</div>
           <Footer />
           <LiveChat />
           <Toaster />

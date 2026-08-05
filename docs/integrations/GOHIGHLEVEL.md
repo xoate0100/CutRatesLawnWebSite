@@ -2,7 +2,7 @@
 
 **Purpose:** Connect Cursor (MCP) and the website lead API to HighLevel so form submissions create contacts and drive workflows.
 
-**Last updated:** 2026-08-01
+**Last updated:** 2026-08-03
 
 ---
 
@@ -32,10 +32,12 @@ LeadConnector MCP  (https://services.leadconnectorhq.com/mcp/)
 |-----|---------|
 | `website-lead` | Any site lead (primary automation trigger) |
 | `source:contact` | From contact form (`source` field) |
-| `source:quote` | From quote flow |
-| `service:lawn-care` | Requested service (slugified) |
+| `source:quote` | From **/quote** funnel (`QuoteFunnel` → `/api/lead`) |
+| `service:lawn-mowing` (etc.) | Requested service (slugified from form label) |
 
-Build HighLevel workflows that start on **Contact Tag Added → `website-lead`**.
+**Quote funnel path:** `/quote` → Details → Estimate → Contact → `POST /api/lead` with `source: "quote"` plus estimate fields (amount, unit, lawn size, frequency, optional address). GHL contact message includes the planning estimate for staff.
+
+Build HighLevel workflows that start on **Contact Tag Added → `website-lead`**, then branch on `source:quote` vs `source:contact`.
 
 ---
 

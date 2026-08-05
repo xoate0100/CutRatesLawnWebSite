@@ -25,7 +25,7 @@ export default function Header() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/80 bg-background/85 backdrop-blur-md atm-elev-1">
+    <header className="sticky top-0 z-[100] isolate w-full border-b border-border/80 bg-background/85 backdrop-blur-md atm-elev-1">
       <div className="h-0.5 w-full bg-gradient-to-r from-primary/80 via-primary to-primary/40" aria-hidden />
       <div className="container mx-auto px-4">
         <div className="flex h-20 items-center justify-between">

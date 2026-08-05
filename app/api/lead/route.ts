@@ -17,6 +17,13 @@ const leadSchema = z.object({
   /** Honeypot — bots fill this; humans leave empty */
   companyWebsite: z.string().max(200).optional().default(""),
   turnstileToken: z.string().optional(),
+  /** Optional quote-funnel estimate context (folded into GHL message) */
+  estimateAmount: z.number().nonnegative().optional(),
+  estimateUnit: z.string().trim().max(40).optional(),
+  lawnSizeSqFt: z.number().int().positive().optional(),
+  propertyType: z.string().trim().max(40).optional(),
+  frequency: z.string().trim().max(40).optional(),
+  address: z.string().trim().max(200).optional(),
 })
 
 type LeadBody = z.infer<typeof leadSchema>
@@ -72,6 +79,19 @@ async function deliverLead(lead: LeadBody, requestId: string): Promise<{ ok: tru
     }
   }
 
+  const estimateLines: string[] = []
+  if (lead.estimateAmount != null && lead.estimateUnit) {
+    estimateLines.push(`Planning estimate: $${lead.estimateAmount} ${lead.estimateUnit}`)
+  }
+  if (lead.propertyType) estimateLines.push(`Property: ${lead.propertyType}`)
+  if (lead.lawnSizeSqFt) estimateLines.push(`Lawn size: ${lead.lawnSizeSqFt} sq ft`)
+  if (lead.frequency) estimateLines.push(`Frequency: ${lead.frequency}`)
+  if (lead.address) estimateLines.push(`Address: ${lead.address}`)
+  const enrichedMessage = [lead.message, estimateLines.length ? estimateLines.join("\n") : ""]
+    .filter(Boolean)
+    .join("\n\n")
+    .slice(0, 5000)
+
   const payload = {
     requestId,
     idempotencyKey: lead.idempotencyKey,
@@ -81,7 +101,13 @@ async function deliverLead(lead: LeadBody, requestId: string): Promise<{ ok: tru
     email: lead.email,
     phone: lead.phone,
     service: lead.service,
-    message: lead.message,
+    message: enrichedMessage,
+    estimateAmount: lead.estimateAmount ?? null,
+    estimateUnit: lead.estimateUnit ?? null,
+    lawnSizeSqFt: lead.lawnSizeSqFt ?? null,
+    propertyType: lead.propertyType ?? null,
+    frequency: lead.frequency ?? null,
+    address: lead.address ?? null,
     receivedAt: new Date().toISOString(),
   }
 
@@ -95,7 +121,7 @@ async function deliverLead(lead: LeadBody, requestId: string): Promise<{ ok: tru
       email: lead.email,
       phone: lead.phone,
       service: lead.service,
-      message: lead.message,
+      message: enrichedMessage,
       source: lead.source,
       requestId,
     })
@@ -138,7 +164,7 @@ async function deliverLead(lead: LeadBody, requestId: string): Promise<{ ok: tru
       body: JSON.stringify({
         from: process.env.RESEND_FROM_EMAIL || "leads@cutrateslawn.com",
         to: [notifyTo],
-        subject: `[Lead] ${lead.service} — ${lead.firstName} ${lead.lastName}`,
+        subject: `[${lead.source === "quote" ? "Quote" : "Lead"}] ${lead.service} — ${lead.firstName} ${lead.lastName}`,
         text: [
           `Request ID: ${requestId}`,
           `Name: ${lead.firstName} ${lead.lastName}`,
@@ -147,7 +173,7 @@ async function deliverLead(lead: LeadBody, requestId: string): Promise<{ ok: tru
           `Service: ${lead.service}`,
           `Source: ${lead.source}`,
           "",
-          lead.message,
+          enrichedMessage,
         ].join("\n"),
       }),
     })

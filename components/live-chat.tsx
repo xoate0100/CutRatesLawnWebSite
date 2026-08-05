@@ -44,14 +44,24 @@ export default function LiveChat() {
                 </a>
               </li>
               <li>
+                <Link className="text-green-700 underline" href="/quote" onClick={() => setIsOpen(false)}>
+                  Get a Quote
+                </Link>
+              </li>
+              <li>
                 <Link className="text-green-700 underline" href="/contact" onClick={() => setIsOpen(false)}>
                   Contact form
                 </Link>
               </li>
             </ul>
           </CardContent>
-          <CardFooter>
+          <CardFooter className="flex flex-col gap-2">
             <Button asChild className="w-full bg-green-600 hover:bg-green-700">
+              <Link href="/quote" onClick={() => setIsOpen(false)}>
+                Get a Quote
+              </Link>
+            </Button>
+            <Button asChild variant="outline" className="w-full">
               <Link href="/contact" onClick={() => setIsOpen(false)}>
                 Go to contact
               </Link>

@@ -1,8 +1,7 @@
-template_version: "1.0.0-spoke"
-template_source: "project_initializer + kiwi_project patterns (slim spoke)"
-migrated_at: "2026-07-15"
+template_version: "4.2.0"
+template_source: project_initializer + kiwi_project patterns (slim spoke)
+migrated_at: '2026-07-15'
 layout_preset: nextjs_root
-
 features:
   decision_registry: true
   drift_vectors: true
@@ -13,14 +12,31 @@ features:
   python_pre_commit: false
   intent_declaration: false
   hub_and_spoke_sync: false
-
 protected_files:
-  - 0_phase0_bootstrap/AI_SANDBOX_RULES.md
-  - 5_reference_architectures/DECISION_REGISTRY.yaml
-
+- 0_phase0_bootstrap/AI_SANDBOX_RULES.md
+- 5_reference_architectures/DECISION_REGISTRY.yaml
 project_directories:
-  - app/
-  - components/
-  - lib/
-  - hooks/
-  - public/
+- app/
+- components/
+- lib/
+- hooks/
+- public/
+last_updated_at: '2026-08-18T03:59:23.280790Z'
+update_history:
+  - from_version: "unknown"
+    to_version: "4.2.0"
+    updated_at: "2026-08-18T04:00:00Z"
+    migration_applied: false
+    notes: "Adopt hub v4.2.0: /audit-runtime-safety + exec_guard (Python) / commands (Node)."
+- from_version: 1.0.0-spoke
+  to_version: v4.2.0
+  updated_at: '2026-08-18T03:59:18.498363Z'
+  migration_applied: false
+  notes: 'Skipped (version parsing issue: invalid literal for int() with base 10:
+    ''v4'')'
+- from_version: v4.2.0
+  to_version: v4.2.0
+  updated_at: '2026-08-18T03:59:23.280790Z'
+  migration_applied: false
+  notes: 'Skipped (version parsing issue: invalid literal for int() with base 10:
+    ''v4'')'

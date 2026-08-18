@@ -1,4 +1,4 @@
-template_version: v4.2.0
+template_version: "4.2.0"
 template_source: project_initializer + kiwi_project patterns (slim spoke)
 migrated_at: '2026-07-15'
 layout_preset: nextjs_root

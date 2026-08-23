@@ -52,8 +52,10 @@ Screenshots: `artifacts/redesign/*.png` (gitignored).
 
 ## Figma mirror
 
-Target file: `sxG4jdV7FXFf8KtkCfKy96`  
-Page: **Redesign — Build Progress** (see `docs/redesign/FIGMA_MIRROR.md` if API self-heal required).
+Target file: https://www.figma.com/design/sxG4jdV7FXFf8KtkCfKy96  
+Page: **[Redesign — Build Progress](https://www.figma.com/design/sxG4jdV7FXFf8KtkCfKy96?node-id=48-2)**  
+
+Stakeholder-ready cover + labeled route frames are on that page; outdated homepage frames archived. Pixel `generate_figma_design` captures deferred (see `FIGMA_MIRROR.md` — browser MCP unavailable / capture timeouts). Variables: **Cut Rates / Redesign**.
 
 ## Code Connect (planned map)
 

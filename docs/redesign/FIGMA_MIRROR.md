@@ -1,28 +1,31 @@
 # Figma mirror log
 
 **File:** https://www.figma.com/design/sxG4jdV7FXFf8KtkCfKy96  
-**Target page:** Redesign — Build Progress  
+**Target page:** [Redesign — Build Progress](https://www.figma.com/design/sxG4jdV7FXFf8KtkCfKy96?node-id=48-2)  
 **Date:** 2026-08-23
 
-## Status
+## Completed in Figma
 
-Mirror runs post-merge against local (`http://127.0.0.1:3010`) or deployed preview URL.
+- Created page **Redesign — Build Progress** (`48:2`) with cover frame
+- Created page **Archive** (`48:3`) and moved outdated Homepage Desktop/Mobile + Page 1 content into Archive wraps (not deleted)
+- Labeled stakeholder frames (grid): Home desktop/mobile, Services, Service Detail (Landscaping), Service Area (Derby), Quote, Our Work, Bundles, About, Contact
+- Published variables collection **Cut Rates / Redesign** (forest, lime, cream, paper, ink, sage, radii)
 
-### Capture plan (generate_figma_design)
+## Pixel capture (self-heal)
 
-1. Cover: Cut Rates — Website Redesign · build progress · 2026-08-23  
-2. Home desktop + mobile  
-3. Services  
-4. Service Detail (Landscaping)  
-5. Service Area (Derby)  
-6. Quote  
-7. Our Work  
-8. Bundles  
-9. About  
-10. Contact  
+| Attempt | Method | Result |
+|---------|--------|--------|
+| 1 | Playwright `captureForDesign` captureId `608db35a-…` | Hung / timeout |
+| 2 | Playwright captureId `ba14991c-…` | Timed out at 45s |
 
-Archive outdated homepage frames (`12:x`) to page **Archive** (do not delete).
+Browser MCP (`cursor-ide-browser`) unavailable in this session; local hash-URL open could not be verified. **Merge not blocked.** Re-run captures post-deploy:
 
-### Self-heal
+```bash
+pnpm exec next start -p 3010
+# Then generate_figma_design per route against deployed/preview URL,
+# or open localhost with #figmacapture=… after injecting capture.js
+```
 
-Up to 2 retries on Figma API errors; failures logged here without blocking merge.
+## Code Connect
+
+Deferred until pixel frames are captured (map Button / ServiceCard / Pill / Tag / Bundle / FAQ / InteriorHero → nodes). Placeholder map in `BUILD_REPORT.md`.

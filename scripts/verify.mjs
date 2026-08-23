@@ -38,7 +38,7 @@ check('Decision registry validation', () => {
 });
 
 check('Pricing estimator math', () => {
-  execSync('npm run test:pricing', { cwd: root, stdio: 'pipe' });
+  execSync('pnpm run test:pricing', { cwd: root, stdio: 'pipe' });
 });
 
 check('Governance path drift', () => {
@@ -64,7 +64,7 @@ check('Governance path drift', () => {
 });
 
 check('Production build', () => {
-  execSync('npm run build', { cwd: root, stdio: 'pipe', env: { ...process.env, CI: 'true' } });
+  execSync('pnpm run build', { cwd: root, stdio: 'pipe', env: { ...process.env, CI: 'true' } });
 });
 
 if (failed) {

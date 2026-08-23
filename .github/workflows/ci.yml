@@ -12,26 +12,30 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Generate AI context
-        run: npm run agentic:context
+        run: pnpm run agentic:context
 
       - name: Verify (build + agentic gates)
-        run: npm run verify
+        run: pnpm run verify
 
       - name: Fail on critical npm advisories
-        run: npm audit --audit-level=critical
+        run: pnpm audit --audit-level=critical
 
       - name: Start production server
         run: |
-          npx next start -p 3000 &
+          pnpm exec next start -p 3000 &
           for i in $(seq 1 60); do
             if curl -sf http://127.0.0.1:3000/ >/dev/null; then exit 0; fi
             sleep 1

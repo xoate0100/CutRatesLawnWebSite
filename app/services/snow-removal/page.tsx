@@ -1,18 +1,12 @@
-import { ServiceLanding } from "@/components/service-landing"
+import { ServiceDetailView } from "@/components/blocks"
+import { getServiceDetail } from "@/lib/marketing-content"
 
-export const metadata = { title: "Snow Removal | Cut Rates Lawn Care" }
+export const metadata = {
+  title: "Snow Removal",
+  description: "Residential and commercial snow clearing from Cut Rates Lawn Care.",
+}
 
 export default function SnowRemovalPage() {
-  return (
-    <ServiceLanding
-      title="Snow Removal"
-      summary="Seasonal snow clearing for driveways, walks, and commercial lots — confirm coverage and trigger depths with our team."
-      bullets={[
-        "Residential driveway and walk clearing",
-        "Commercial lot options by agreement",
-        "Seasonal contracts available",
-        "Call for current season availability",
-      ]}
-    />
-  )
+  const detail = getServiceDetail("snow-removal")!
+  return <ServiceDetailView detail={detail} />
 }

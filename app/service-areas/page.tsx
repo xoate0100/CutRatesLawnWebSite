@@ -1,86 +1,49 @@
-import { getServiceAreas } from "@/lib/api"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import CTASection from "@/components/cta-section"
-import ErrorState from "@/components/error-state"
-import LoadingState from "@/components/loading-state"
-import { Suspense } from "react"
 import Link from "next/link"
+import { SectionHead } from "@/components/ui/section-head"
+import { AreaChips, CTASection, InteriorHero } from "@/components/blocks"
+import { SERVICE_AREAS } from "@/lib/marketing-content"
 
-export default async function ServiceAreasPage() {
-  try {
-    const serviceAreas = await getServiceAreas()
+export const metadata = {
+  title: "Service Areas",
+  description:
+    "Cut Rates Lawn Care serves Wichita, Valley Center, Andover, Derby, Maize, Kansas City, and Leavenworth.",
+}
 
-    return (
-      <div className="flex flex-col min-h-screen">
-        <main className="flex-grow">
-          <section className="bg-green-600 text-white py-20">
-            <div className="container mx-auto px-4">
-              <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Service Areas</h1>
-              <p className="text-xl mb-8 max-w-3xl">
-                Cut Rates Lawn Care proudly serves the following areas in Kansas. Check if your location is covered by
-                our expert services.
-              </p>
-            </div>
-          </section>
+export default function ServiceAreasPage() {
+  return (
+    <div className="bg-paper">
+      <InteriorHero
+        eyebrow="Where we work"
+        title="Seven towns. One easy booking."
+        description="From Wichita and the surrounding communities to the Kansas City side — local crews, no contracts."
+        mediaSlot="services.hero"
+      />
 
-          <section className="py-16">
-            <div className="container mx-auto px-4">
-              <Suspense fallback={<LoadingState />}>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {serviceAreas.map((area) => (
-                    <Card key={area.id}>
-                      <CardHeader>
-                        <CardTitle>{area.attributes.city}</CardTitle>
-                        <CardDescription>Zip Codes: {area.attributes.zipCodes.join(", ")}</CardDescription>
-                      </CardHeader>
-                      <CardContent>
-                        <h3 className="font-semibold mb-2">Services Offered:</h3>
-                        <ul className="list-disc list-inside">
-                          {area.attributes.services.map((service, serviceIndex) => (
-                            <li key={serviceIndex}>{service}</li>
-                          ))}
-                        </ul>
-                      </CardContent>
-                      <CardFooter>
-                        <Link href="/contact" className="w-full">
-                          <Button className="w-full">Check Availability</Button>
-                        </Link>
-                      </CardFooter>
-                    </Card>
-                  ))}
-                </div>
-              </Suspense>
-            </div>
-          </section>
+      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+        <SectionHead
+          eyebrow="Towns"
+          title="Find your neighborhood."
+          description="Tap a town for local details — or jump straight to a quote."
+        />
+        <AreaChips className="mt-8" />
 
-          <section className="bg-gray-100 py-16">
-            <div className="container mx-auto px-4">
-              <h2 className="text-3xl font-bold mb-8 text-center">Don't see your area listed?</h2>
-              <p className="text-xl text-center mb-8">
-                We're constantly expanding our service areas. Contact us to check if we can accommodate your location.
-              </p>
-              <div className="flex justify-center">
-                <Link href="/contact">
-                  <Button size="lg">Contact Us</Button>
-                </Link>
-              </div>
-            </div>
-          </section>
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {SERVICE_AREAS.map((area) => (
+            <li key={area.slug}>
+              <Link
+                href={area.href}
+                className="block rounded-brand border border-line bg-white p-5 transition-transform hover:-translate-y-1 hover:shadow-brand"
+              >
+                <h3 className="font-display text-xl font-bold text-ink">{area.name}</h3>
+                <p className="mt-1 text-sm text-sage">Lawn care & landscaping</p>
+                <span className="mt-3 inline-flex font-bold text-green">View area →</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </section>
 
-          <CTASection
-            title="Ready to Get Started?"
-            description="Schedule your service today or contact us for more information about our service areas."
-            primaryButtonText="Schedule Service"
-            primaryButtonLink="/schedule"
-            secondaryButtonText="Contact Us"
-            secondaryButtonLink="/contact"
-          />
-        </main>
-      </div>
-    )
-  } catch (error) {
-    console.error("Error fetching service areas:", error)
-    return <ErrorState message="Failed to load service areas. Please try again later." />
-  }
+      <CTASection title="Serving your town — get a quote." />
+    </div>
+  )
 }

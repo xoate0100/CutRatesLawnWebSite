@@ -1,123 +1,47 @@
-import Image from "next/image"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import CTASection from "@/components/cta-section"
-import { mediaAlt, mediaSrc } from "@/lib/media"
+import { SectionHead } from "@/components/ui/section-head"
+import {
+  BeforeAfterSlider,
+  CTASection,
+  Gallery,
+  InteriorHero,
+} from "@/components/blocks"
 
-const projectCategories = [
-  {
-    name: "Lawn Transformations",
-    projects: [
-      {
-        beforeSlot: "ourwork.lawn.1.before",
-        afterSlot: "ourwork.lawn.1.after",
-        description: "Revitalized a neglected lawn with our comprehensive care package",
-      },
-      {
-        beforeSlot: "ourwork.lawn.2.before",
-        afterSlot: "ourwork.lawn.2.after",
-        description: "Drought-resistant landscaping for a water-efficient yard",
-      },
-    ],
-  },
-  {
-    name: "Hardscaping Projects",
-    projects: [
-      {
-        beforeSlot: "ourwork.hardscape.1.before",
-        afterSlot: "ourwork.hardscape.1.after",
-        description: "Custom patio installation with built-in fire pit",
-      },
-      {
-        beforeSlot: "ourwork.hardscape.2.before",
-        afterSlot: "ourwork.hardscape.2.after",
-        description: "Elegant walkway and retaining wall project",
-      },
-    ],
-  },
-  {
-    name: "Commercial Landscaping",
-    projects: [
-      {
-        beforeSlot: "ourwork.commercial.1.before",
-        afterSlot: "ourwork.commercial.1.after",
-        description: "Complete overhaul of office park grounds",
-      },
-      {
-        beforeSlot: "ourwork.commercial.2.before",
-        afterSlot: "ourwork.commercial.2.after",
-        description: "Low-maintenance, high-impact landscaping for a shopping center",
-      },
-    ],
-  },
-]
+export const metadata = {
+  title: "Our Work",
+  description: "Before-and-after lawn and landscape projects from Cut Rates Lawn Care.",
+}
 
 export default function OurWorkPage() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-grow">
-        <section className="bg-green-600 text-white py-20">
-          <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Work</h1>
-            <p className="text-xl mb-8 max-w-3xl">
-              Explore our portfolio of successful projects and transformations. See the Cut Rates Lawn Care difference
-              for yourself.
-            </p>
-          </div>
-        </section>
+    <div className="bg-paper">
+      <InteriorHero
+        eyebrow="Portfolio"
+        title="Real yards. Local results."
+        description="Filter the gallery, then drag the slider — proof before you book."
+        mediaSlot="gallery.after"
+      />
 
-        {projectCategories.map((category, categoryIndex) => (
-          <section key={categoryIndex} className="py-16">
-            <div className="container mx-auto px-4">
-              <h2 className="text-3xl font-bold mb-12 text-center">{category.name}</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                {category.projects.map((project, projectIndex) => (
-                  <Card key={projectIndex} className="overflow-hidden">
-                    <CardHeader>
-                      <CardTitle>Before & After</CardTitle>
-                      <CardDescription>{project.description}</CardDescription>
-                    </CardHeader>
-                    <CardContent className="p-0">
-                      <div className="grid grid-cols-2 gap-2">
-                        <div className="relative h-48">
-                          <Image
-                            src={mediaSrc(project.beforeSlot)}
-                            alt={mediaAlt(project.beforeSlot, "Before")}
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 text-sm">
-                            Before
-                          </div>
-                        </div>
-                        <div className="relative h-48">
-                          <Image
-                            src={mediaSrc(project.afterSlot)}
-                            alt={mediaAlt(project.afterSlot, "After")}
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 text-sm">
-                            After
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
-            </div>
-          </section>
-        ))}
-
-        <CTASection
-          title="Ready to Transform Your Property?"
-          description="Let us bring our expertise to your outdoor space. Contact us today for a consultation."
-          primaryButtonText="Get a Quote"
-          primaryButtonLink="/quote"
-          secondaryButtonText="Our Services"
-          secondaryButtonLink="/services"
+      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+        <SectionHead
+          eyebrow="Gallery"
+          title="Browse by category."
+          description="Lawn, hardscape, and commercial work across our service area."
         />
-      </main>
+        <Gallery className="mt-8" />
+      </section>
+
+      <section className="bg-cream py-[clamp(2.5rem,5vw,4.5rem)]">
+        <div className="mx-auto w-[min(1000px,92vw)]">
+          <SectionHead
+            eyebrow="Compare"
+            title="Before and after."
+            align="center"
+          />
+          <BeforeAfterSlider className="mt-8" />
+        </div>
+      </section>
+
+      <CTASection title="Like what you see? Get a quote." />
     </div>
   )
 }

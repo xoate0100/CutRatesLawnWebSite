@@ -113,12 +113,9 @@ export function useFormValidation<T extends Record<string, any>>(
   const resetForm = useCallback(() => {
     setValues(initialValues)
     setErrors({})
-    setTouched({})\
-    setIsSubmitting(false)  => 
-    setValues(initialValues)
-    setErrors({})
     setTouched({})
-    setIsSubmitting(false), [initialValues])
+    setIsSubmitting(false)
+  }, [initialValues])
   
   return {
     values,

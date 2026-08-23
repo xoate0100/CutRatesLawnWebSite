@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cut Rates — Page Templates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--forest:#0B3A1E;--forest-2:#0F2E1B;--green:#1F6B3A;--green-soft:#2E7D42;--lime:#C8F135;--lime-2:#A9E22E;--cream:#F5F2E9;--paper:#FBFAF4;--ink:#12241A;--sage:#5D7064;--line:rgba(18,36,26,.12);--line-lt:rgba(255,255,255,.14);--shadow:0 18px 50px -20px rgba(11,58,30,.45);--r:20px;--r-lg:30px;--display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Hanken Grotesk',system-ui,sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.05;letter-spacing:-.02em;font-weight:700}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,92vw);margin-inline:auto}
+.pad{padding:clamp(2.6rem,5vw,4.4rem) 0}
+.eyebrow{font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
+.sec-head{max-width:60ch;margin-bottom:1.6rem}
+.sec-head h2{font-size:clamp(1.7rem,3.4vw,2.5rem);margin:.4rem 0}
+.sec-head p{color:var(--sage)}
+.on-cream{background:var(--cream)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.95rem;padding:.85rem 1.4rem;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.btn-lime{background:var(--lime);color:var(--forest-2);box-shadow:0 8px 0 -2px var(--lime-2)}.btn-lime:hover{transform:translateY(-2px)}
+.btn-ghost{border-color:currentColor}.btn-ghost:hover{transform:translateY(-2px)}
+.btn-dark{background:var(--forest);color:#fff}.btn-dark:hover{transform:translateY(-2px)}
+.pill{display:inline-flex;align-items:center;gap:.4rem;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .8rem;border-radius:999px;border:1px solid var(--line)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--lime)}
+.tag{display:inline-block;background:var(--green);color:#fff;font-weight:700;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .6rem;border-radius:999px}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E")}
+/* media slots */
+.media{position:relative;overflow:hidden;border-radius:var(--r);aspect-ratio:4/3;background:#123}
+.media .ph{position:absolute;inset:0;background:linear-gradient(180deg,#bfe0ef 0 34%,#8fd3a3 34% 46%,#2f9a4f 46% 70%,#177033 70% 100%)}
+.media .ph::after{content:"";position:absolute;inset:46% 0 0;background-image:repeating-linear-gradient(64deg,rgba(255,255,255,.10) 0 20px,rgba(0,0,0,.06) 20px 40px)}
+.media .cap{position:absolute;left:10px;bottom:10px;z-index:5;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(11,58,30,.72);color:#fff;padding:.28rem .5rem;border-radius:7px}
+.t-mask{border-radius:42% 42% 36% 36%/12% 12% 10% 10%}
+.t-duotone .ph{filter:saturate(.25) contrast(1.1)}.t-duotone::after{content:"";position:absolute;inset:0;background:linear-gradient(150deg,rgba(11,58,30,.85),rgba(31,107,58,.5));mix-blend-mode:multiply}
+.t-stripe::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(58deg,rgba(200,241,53,.14) 0 16px,transparent 16px 34px);pointer-events:none}
+/* interior hero */
+.ihero{position:relative;color:#fff;overflow:hidden;min-height:340px;display:flex;align-items:flex-end;padding:2.2rem;border-radius:0}
+.ihero .bg{position:absolute;inset:0}.ihero .bg .ph{position:absolute;inset:0}
+.ihero.t-duotone::after{border-radius:0}
+.ihero .scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,58,30,.92),rgba(11,58,30,.4) 72%,transparent)}
+.ihero .in{position:relative;max-width:46ch;z-index:2}
+.ihero .crumb{font-size:.8rem;font-weight:600;color:rgba(255,255,255,.75);margin-bottom:.5rem}
+.ihero h1{font-size:clamp(1.9rem,3.8vw,3rem)}.ihero p{color:rgba(255,255,255,.85);margin:.6rem 0 1.1rem}
+/* cards / grids */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;align-items:center}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.card .body{padding:1rem 1.1rem}.card h3{font-size:1.12rem}.card p{color:var(--sage);font-size:.9rem;margin-top:.25rem}
+.tcard{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.1rem}.tcard .stars{color:#f5a623;letter-spacing:2px}.tcard p{margin:.5rem 0;font-size:.95rem}.tcard .who{font-weight:700;font-size:.85rem;color:var(--sage)}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:.5rem 1rem;font-weight:700;font-size:.88rem;cursor:pointer;transition:.2s}
+.chip:hover,.chip.on{background:var(--forest);color:#fff;border-color:var(--forest)}
+.chip .dm{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);margin-right:.45rem}
+.cta{position:relative;overflow:hidden;background:var(--forest-2);color:#fff;text-align:center;border-radius:var(--r-lg);padding:2.4rem}
+.cta .glow{position:absolute;width:420px;height:420px;left:50%;top:10%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(200,241,53,.35),transparent 62%)}
+.cta h2{font-size:clamp(1.6rem,3vw,2.3rem);position:relative}.cta p{color:rgba(255,255,255,.75);margin:.6rem auto 1.2rem;max-width:44ch;position:relative}
+/* template band label */
+.tpl{border-top:2px dashed var(--line)}
+.tpl-lbl{background:var(--forest);color:#fff;font-weight:700;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;padding:.5rem 0}
+.tpl-lbl .wrap{display:flex;justify-content:space-between;align-items:center}
+.tpl-lbl b{color:var(--lime)}
+/* quote estimator */
+.qcard{background:var(--forest-2);color:#fff;border-radius:var(--r-lg);padding:1.5rem;box-shadow:var(--shadow)}
+.qcard label{font-size:.74rem;text-transform:uppercase;letter-spacing:.1em;opacity:.7;font-weight:700;display:block;margin:.9rem 0 .4rem}
+.seg{display:flex;gap:.4rem}.seg button{flex:1;background:rgba(255,255,255,.08);border:1px solid var(--line-lt);color:#fff;border-radius:10px;padding:.55rem;font-weight:700;cursor:pointer;font-family:var(--body)}
+.seg button.on{background:var(--lime);color:var(--forest-2);border-color:var(--lime)}
+.qcard select,.qcard input[type=range]{width:100%}.qcard select{padding:.6rem;border-radius:10px;border:1px solid var(--line-lt);background:rgba(255,255,255,.06);color:#fff;font-family:var(--body)}
+.qcard input[type=range]{accent-color:var(--lime);margin-top:.3rem}
+.qcard .val{font-family:var(--display);font-weight:800;color:var(--lime)}
+.qcard .est{margin-top:1rem;background:rgba(200,241,53,.1);border:1px dashed rgba(200,241,53,.5);border-radius:12px;padding:.8rem 1rem}.qcard .est small{opacity:.7;font-weight:600}.qcard .est b{font-family:var(--display);font-size:1.5rem;display:block}
+.stepper{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}
+.stepper .s{background:rgba(11,58,30,.08);border:1px solid var(--line);border-radius:10px;padding:.5rem .8rem;font-weight:700;font-size:.85rem;display:flex;gap:.5rem;align-items:center;color:var(--sage)}
+.stepper .s.on{background:var(--forest);color:#fff;border-color:var(--forest)}.stepper .s.on b{background:var(--lime);color:var(--forest-2)}
+.stepper .s b{background:#d9e4dc;color:var(--forest-2);width:20px;height:20px;border-radius:50%;display:grid;place-items:center;font-size:.72rem}
+.trust{display:flex;gap:1.4rem;flex-wrap:wrap;margin-top:1rem;font-weight:600;font-size:.9rem;color:var(--sage)}
+.trust span{display:inline-flex;gap:.5rem;align-items:center}.trust .c{width:20px;height:20px;border-radius:50%;background:rgba(31,107,58,.14);display:grid;place-items:center}.trust .c svg{width:12px;height:12px;color:var(--green)}
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:140px;gap:.7rem}
+.gallery .g{position:relative;overflow:hidden;border-radius:14px}.gallery .g .ph{position:absolute;inset:0}
+.gallery .tall{grid-row:span 2}.gallery .wide{grid-column:span 2}
+.ba{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:16/8;user-select:none;touch-action:none;box-shadow:var(--shadow)}
+.ba .l{position:absolute;inset:0}.ba .before{background:linear-gradient(160deg,#6d7a4e,#556138)}.ba .before::after{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 25% 40%,rgba(120,90,50,.5) 0 7%,transparent 8%),radial-gradient(circle at 70% 65%,rgba(120,90,50,.45) 0 6%,transparent 7%)}
+.ba .after{background:linear-gradient(160deg,#2f9a4f,#177033);clip-path:inset(0 0 0 var(--pos,50%))}.ba .after::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(58deg,rgba(255,255,255,.1) 0 20px,rgba(0,0,0,.06) 20px 40px)}
+.ba .lbl{position:absolute;top:12px;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(11,58,30,.7);color:#fff;padding:.3rem .6rem;border-radius:999px;z-index:3}.ba .lbl.b{left:12px}.ba .lbl.a{right:12px;background:var(--lime);color:var(--forest-2)}
+.ba .h{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:3px;background:var(--lime);z-index:4;cursor:ew-resize}.ba .h::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;border-radius:50%;background:var(--lime);box-shadow:var(--shadow)}.ba .h::after{content:"⟺";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--forest-2);font-weight:900}
+/* bundles */
+.bundles{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.bundle{border:1px solid var(--line);border-radius:var(--r-lg);padding:1.5rem;background:#fff;position:relative;transition:.25s}.bundle:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.bundle.best{background:var(--forest);color:#fff;border-color:var(--forest)}.bundle .bt{font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;color:var(--green)}.bundle.best .bt{color:var(--lime)}
+.bundle .price{font-family:var(--display);font-weight:800;font-size:2.2rem;margin:.3rem 0}.bundle .price small{font-size:.85rem;font-weight:600;color:var(--sage)}.bundle.best .price small{color:rgba(255,255,255,.7)}
+.bundle ul{list-style:none;margin:.9rem 0 1.2rem;display:grid;gap:.5rem}.bundle li{display:flex;gap:.5rem;font-size:.92rem}.bundle li svg{width:17px;height:17px;color:var(--green);flex:none;margin-top:3px}.bundle.best li svg{color:var(--lime)}
+.bundle .flag{position:absolute;top:-11px;right:16px;background:var(--lime);color:var(--forest-2);font-weight:700;font-size:.68rem;padding:.28rem .6rem;border-radius:999px;text-transform:uppercase;letter-spacing:.08em}
+.tbl{width:100%;border-collapse:collapse;font-size:.92rem;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin-top:1.4rem}
+.tbl th,.tbl td{padding:.7rem .9rem;border-bottom:1px solid var(--line);text-align:center}.tbl th:first-child,.tbl td:first-child{text-align:left}.tbl th{background:var(--forest);color:#fff;font-family:var(--body);font-size:.76rem;letter-spacing:.06em;text-transform:uppercase}.tbl tr:last-child td{border-bottom:none}.tbl .y{color:var(--green);font-weight:800}.tbl .n{color:var(--sage)}
+/* faq */
+.qa{border-bottom:1px solid var(--line)}.qa button{width:100%;background:none;border:none;text-align:left;padding:1rem 0;font-family:var(--display);font-weight:700;font-size:1.08rem;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center;color:var(--ink)}
+.qa .ic{flex:none;width:24px;height:24px;border-radius:50%;border:2px solid var(--green);display:grid;place-items:center;color:var(--green);transition:.25s}.qa.open .ic{background:var(--green);color:#fff;transform:rotate(45deg)}
+.qa .ans{max-height:0;overflow:hidden;transition:max-height .3s}.qa .ans p{padding:0 0 1rem;color:var(--sage)}
+/* stats + team */
+.stats{display:flex;gap:2.2rem;flex-wrap:wrap}.stat b{font-family:var(--display);font-weight:800;font-size:2rem;color:var(--green);display:block;line-height:1}.stat small{font-weight:600;font-size:.82rem;color:var(--sage)}
+.team{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.member .av{aspect-ratio:1;border-radius:20px;overflow:hidden;position:relative}.member .av .ph{position:absolute;inset:0}.member h4{margin-top:.6rem;font-size:1.05rem}.member small{color:var(--sage);font-weight:600}
+/* form */
+.form{background:#fff;border:1px solid var(--line);border-radius:var(--r-lg);padding:1.6rem}
+.form .row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.form label{font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--sage);display:block;margin:.7rem 0 .3rem}
+.form input,.form select,.form textarea{width:100%;padding:.7rem .8rem;border:1px solid var(--line);border-radius:12px;font-family:var(--body);font-size:.95rem;background:var(--paper)}
+.form textarea{min-height:110px;resize:vertical}
+.info .li{display:flex;gap:.7rem;align-items:flex-start;margin-bottom:.9rem}.info .li .ic{width:38px;height:38px;border-radius:12px;background:var(--forest);display:grid;place-items:center;flex:none}.info .li .ic svg{width:18px;height:18px;color:var(--lime)}.info .li b{display:block}.info .li span{color:var(--sage);font-size:.92rem}
+.mapband{height:220px;border-radius:var(--r-lg);position:relative;overflow:hidden;background:linear-gradient(135deg,#cfe6d5,#a7ccb2);margin-top:1.4rem}
+.mapband::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(11,58,30,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(11,58,30,.12) 1px,transparent 1px);background-size:34px 34px}
+.mapband .pin{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%);width:26px;height:26px;border-radius:50% 50% 50% 0;background:var(--lime);rotate:-45deg;box-shadow:var(--shadow)}
+.reveal{opacity:0;transform:translateY(16px)}.reveal.in{opacity:1;transform:none;transition:.6s cubic-bezier(.2,.7,.2,1)}
+@media(max-width:900px){.grid3,.grid4,.team,.bundles{grid-template-columns:1fr 1fr}.grid2,.form .row{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.grid3,.grid4,.team,.bundles{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<!-- ============ TEMPLATE: SERVICE AREA ============ -->
+<div class="tpl-lbl"><div class="wrap"><span>Template <b>01</b> · Service Area (local SEO)</span><span>cutrateslawn.com/service-areas/derby</span></div></div>
+<section class="ihero grain t-duotone">
+  <div class="bg"><div class="media" style="border-radius:0;aspect-ratio:auto;position:absolute;inset:0"><div class="ph"></div></div></div>
+  <div class="scrim"></div>
+  <div class="in wrap" style="padding:0">
+    <div class="crumb">Home / Service Areas / <b style="color:#fff">Derby, KS</b></div>
+    <span class="pill" style="border-color:var(--line-lt);color:#fff"><span class="dot"></span> Now serving Derby</span>
+    <h1 style="margin-top:.6rem">Lawn &amp; Landscape Care in Derby, KS</h1>
+    <p>Your local, family-owned crew — mowing, landscaping, fertilization and more, right here in Derby. Free quote in about two minutes.</p>
+    <a href="#" class="btn btn-lime">Get my Derby quote →</a>
+  </div>
+</section>
+<section class="pad"><div class="wrap grid2">
+  <div class="reveal">
+    <span class="eyebrow">Local &amp; nearby</span>
+    <h2 style="font-size:1.8rem;margin:.4rem 0">The crew Derby neighbors already trust.</h2>
+    <p style="color:var(--sage)">We're just up the road, so we show up on time and know Derby yards. From new-build lawns to established landscapes, we keep it simple: request a quote, we text you back, and we get it handled.</p>
+    <div class="stats" style="margin-top:1.2rem"><div class="stat"><b>4.8★</b><small>Local rating</small></div><div class="stat"><b>Same-day</b><small>Quote replies</small></div><div class="stat"><b>No</b><small>Contracts</small></div></div>
+  </div>
+  <div class="reveal"><div class="media grain t-stripe"><div class="ph"></div><span class="cap">Photo · Derby lawn</span></div></div>
+</div></section>
+<section class="pad on-cream"><div class="wrap">
+  <div class="sec-head reveal"><span class="eyebrow">Services in Derby</span><h2>Everything your Derby property needs.</h2></div>
+  <div class="grid4">
+    <div class="card reveal"><div class="media" style="border-radius:0;aspect-ratio:16/11"><div class="ph"></div><span class="cap">Landscaping</span></div><div class="body"><h3>Landscaping</h3></div></div>
+    <div class="card reveal"><div class="media" style="border-radius:0;aspect-ratio:16/11"><div class="ph"></div><span class="cap">Mowing</span></div><div class="body"><h3>Lawn Mowing</h3></div></div>
+    <div class="card reveal"><div class="media" style="border-radius:0;aspect-ratio:16/11"><div class="ph"></div><span class="cap">Fertilization</span></div><div class="body"><h3>Fertilization</h3></div></div>
+    <div class="card reveal"><div class="media" style="border-radius:0;aspect-ratio:16/11"><div class="ph"></div><span class="cap">Aeration</span></div><div class="body"><h3>Aeration</h3></div></div>
+  </div>
+  <h3 style="font-size:1.3rem;margin:2rem 0 1rem" class="reveal">What Derby customers say</h3>
+  <div class="grid3">
+    <div class="tcard reveal"><div class="stars">★★★★★</div><p>"On time every week and the lawn's never looked better."</p><div class="who">— Sara P., Derby</div></div>
+    <div class="tcard reveal"><div class="stars">★★★★★</div><p>"Booked in two minutes and got a text right back."</p><div class="who">— Mike R., Derby</div></div>
+    <div class="tcard reveal"><div class="stars">★★★★★</div><p>"They redid our whole front landscape. Best on the street."</p><div class="who">— Tom H., Derby</div></div>
+  </div>
+</div></section>
+<section class="pad"><div class="wrap"><div class="cta grain reveal"><div class="glow"></div><h2>Ready for the best yard in Derby?</h2><p>Free quote in about two minutes — local crew, no contracts.</p><a href="#" class="btn btn-lime">Get a fast quote →</a></div></div></section>
+
+<!-- ============ TEMPLATE: QUOTE FLOW ============ -->
+<div class="tpl tpl-lbl"><div class="wrap"><span>Template <b>02</b> · Quote flow</span><span>cutrateslawn.com/quote</span></div></div>
+<section class="ihero grain t-duotone" style="min-height:220px">
+  <div class="bg"><div class="media" style="border-radius:0;aspect-ratio:auto;position:absolute;inset:0"><div class="ph"></div></div></div><div class="scrim"></div>
+  <div class="in wrap" style="padding:0"><h1>Get a fast quote</h1><p>See a planning estimate in seconds — then we text you to confirm pricing and scheduling.</p></div>
+</section>
+<section class="pad"><div class="wrap grid2" style="align-items:start">
+  <div class="reveal">
+    <div class="stepper"><span class="s on"><b>1</b> Details</span><span class="s"><b>2</b> Estimate</span><span class="s"><b>3</b> Contact</span><span class="s"><b>4</b> Done</span></div>
+    <h2 style="font-size:1.7rem;margin:.4rem 0">Tell us about your property.</h2>
+    <p style="color:var(--sage)">Instant planning numbers first — then share your details so a real person can confirm a true quote, usually the same day.</p>
+    <div class="trust">
+      <span><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Texts you instantly</span>
+      <span><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> No contracts</span>
+      <span><span class="c"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> No obligation</span>
+    </div>
+  </div>
+  <div class="qcard reveal">
+    <label>Property type</label>
+    <div class="seg" data-seg><button class="on">Residential</button><button>Commercial</button></div>
+    <label>Service</label>
+    <select><option>Landscaping</option><option>Lawn mowing</option><option>Fertilization</option><option>Aeration &amp; overseeding</option><option>Pest control</option><option>Holiday lights</option></select>
+    <label>Lawn size — <span class="val" id="sz">2,000</span> sq ft</label>
+    <input type="range" min="500" max="15000" step="250" value="2000" id="rng">
+    <label>Frequency</label>
+    <div class="seg" data-seg><button class="on">Weekly</button><button>Bi-weekly</button></div>
+    <div class="est"><small>Planning estimate</small><b id="est">$44 – $58 / visit</b></div>
+    <button class="btn btn-lime" style="width:100%;justify-content:center;margin-top:.9rem">Continue → get my real quote</button>
+  </div>
+</div></section>
+
+<!-- ============ TEMPLATE: OUR WORK ============ -->
+<div class="tpl tpl-lbl"><div class="wrap"><span>Template <b>03</b> · Our Work / gallery</span><span>cutrateslawn.com/our-work</span></div></div>
+<section class="ihero grain t-duotone" style="min-height:240px">
+  <div class="bg"><div class="media" style="border-radius:0;aspect-ratio:auto;position:absolute;inset:0"><div class="ph"></div></div></div><div class="scrim"></div>
+  <div class="in wrap" style="padding:0"><span class="tag">Proof, not promises</span><h1 style="margin-top:.5rem">Our work</h1><p>Real transformations from local yards across the metro.</p></div>
+</section>
+<section class="pad"><div class="wrap">
+  <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.4rem" class="reveal" id="filters">
+    <span class="chip on">All</span><span class="chip">Landscaping</span><span class="chip">Lawn</span><span class="chip">Hardscape</span><span class="chip">Seasonal</span>
+  </div>
+  <div class="gallery reveal">
+    <div class="g tall grain t-duotone"><div class="ph"></div></div>
+    <div class="g wide grain t-stripe"><div class="ph"></div></div>
+    <div class="g grain"><div class="ph"></div></div>
+    <div class="g grain t-duotone"><div class="ph"></div></div>
+    <div class="g wide grain"><div class="ph"></div></div>
+    <div class="g tall grain t-stripe"><div class="ph"></div></div>
+    <div class="g grain t-duotone"><div class="ph"></div></div>
+    <div class="g grain"><div class="ph"></div></div>
+  </div>
+  <h3 style="font-size:1.3rem;margin:2.2rem 0 1rem" class="reveal">Featured transformation</h3>
+  <div class="ba reveal" id="ba"><div class="l before"></div><div class="l after"></div><span class="lbl b">Before</span><span class="lbl a">After</span><div class="h" id="handle"></div></div>
+</div></section>
+<section class="pad on-cream"><div class="wrap"><div class="cta grain reveal"><div class="glow"></div><h2>Want your yard on this page?</h2><p>Let's build the transformation. Free quote in two minutes.</p><a href="#" class="btn btn-lime">Get a fast quote →</a></div></div></section>
+
+<!-- ============ TEMPLATE: BUNDLES & PRICING ============ -->
+<div class="tpl tpl-lbl"><div class="wrap"><span>Template <b>04</b> · Bundles &amp; pricing</span><span>cutrateslawn.com/bundles</span></div></div>
+<section class="ihero grain t-duotone" style="min-height:230px">
+  <div class="bg"><div class="media" style="border-radius:0;aspect-ratio:auto;position:absolute;inset:0"><div class="ph"></div></div></div><div class="scrim"></div>
+  <div class="in wrap" style="padding:0"><h1>Bundles &amp; pricing</h1><p>Simple "starting at" pricing. Bundle the services your yard needs and save.</p></div>
+</section>
+<section class="pad"><div class="wrap">
+  <div class="bundles">
+    <div class="bundle reveal"><span class="bt">Essentials</span><div class="price">$129<small>/mo starting</small></div><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Weekly mowing &amp; edging</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Seasonal cleanup</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Text reminders</li></ul><a class="btn btn-dark" style="width:100%;justify-content:center" href="#">Choose Essentials</a></div>
+    <div class="bundle best reveal"><span class="flag">Most popular</span><span class="bt">Full Yard</span><div class="price">$199<small>/mo starting</small></div><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Everything in Essentials</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Fertilization program</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Aeration &amp; overseeding</li></ul><a class="btn btn-lime" style="width:100%;justify-content:center" href="#">Choose Full Yard</a></div>
+    <div class="bundle reveal"><span class="bt">Estate</span><div class="price">$349<small>/mo starting</small></div><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Everything in Full Yard</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Landscape maintenance</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Priority scheduling</li></ul><a class="btn btn-dark" style="width:100%;justify-content:center" href="#">Choose Estate</a></div>
+  </div>
+  <div class="reveal" style="overflow-x:auto">
+  <table class="tbl">
+    <tr><th>What's included</th><th>Essentials</th><th>Full Yard</th><th>Estate</th></tr>
+    <tr><td>Weekly mowing &amp; edging</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td></tr>
+    <tr><td>Fertilization program</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+    <tr><td>Aeration &amp; overseeding</td><td class="n">—</td><td class="y">✓</td><td class="y">✓</td></tr>
+    <tr><td>Landscape maintenance</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+    <tr><td>Priority scheduling</td><td class="n">—</td><td class="n">—</td><td class="y">✓</td></tr>
+  </table>
+  </div>
+  <h3 style="font-size:1.3rem;margin:2.2rem 0 .6rem" class="reveal">Bundle questions</h3>
+  <div class="reveal" style="max-width:760px">
+    <div class="qa"><button>Can I customize a bundle? <span class="ic">+</span></button><div class="ans"><p>Yes — bundles are a starting point. Tell us your yard and we'll tailor it on your quote.</p></div></div>
+    <div class="qa"><button>Is there a contract? <span class="ic">+</span></button><div class="ans"><p>No. Everything is month-to-month.</p></div></div>
+    <div class="qa"><button>How is "starting at" pricing set? <span class="ic">+</span></button><div class="ans"><p>Final price depends on lot size and scope — your quote confirms the exact number, no surprises.</p></div></div>
+  </div>
+</div></section>
+
+<!-- ============ TEMPLATE: ABOUT ============ -->
+<div class="tpl tpl-lbl"><div class="wrap"><span>Template <b>05</b> · About</span><span>cutrateslawn.com/about</span></div></div>
+<section class="ihero grain t-duotone" style="min-height:240px">
+  <div class="bg"><div class="media" style="border-radius:0;aspect-ratio:auto;position:absolute;inset:0"><div class="ph"></div></div></div><div class="scrim"></div>
+  <div class="in wrap" style="padding:0"><span class="tag">Family-owned</span><h1 style="margin-top:.5rem">Local roots, real accountability.</h1><p>We're a family-owned crew that treats your yard like our own.</p></div>
+</section>
+<section class="pad"><div class="wrap grid2">
+  <div class="reveal"><span class="eyebrow">Our story</span><h2 style="font-size:1.8rem;margin:.4rem 0">Built on showing up and doing it right.</h2><p style="color:var(--sage)">Cut Rates started with one mower and a simple promise: dependable work, fair pricing, and no runaround. Today we care for lawns and landscapes across the metro — but we still answer the phone like the local, family-owned business we are.</p>
+    <div class="stats" style="margin-top:1.3rem"><div class="stat"><b>1,200+</b><small>Lawns cared for</small></div><div class="stat"><b>7</b><small>Towns served</small></div><div class="stat"><b>4.8★</b><small>Local rating</small></div></div>
+  </div>
+  <div class="reveal"><div class="media grain t-stripe" style="aspect-ratio:4/3"><div class="ph"></div><span class="cap">Photo · the crew</span></div></div>
+</div></section>
+<section class="pad on-cream"><div class="wrap">
+  <div class="sec-head reveal"><span class="eyebrow">Meet the crew</span><h2>The people behind the yard.</h2></div>
+  <div class="team">
+    <div class="member reveal"><div class="av grain t-duotone"><div class="ph"></div></div><h4>Owner</h4><small>Founder</small></div>
+    <div class="member reveal"><div class="av grain t-duotone"><div class="ph"></div></div><h4>Crew Lead</h4><small>Operations</small></div>
+    <div class="member reveal"><div class="av grain t-duotone"><div class="ph"></div></div><h4>Landscape Designer</h4><small>Design</small></div>
+    <div class="member reveal"><div class="av grain t-duotone"><div class="ph"></div></div><h4>Service Manager</h4><small>Scheduling</small></div>
+  </div>
+</div></section>
+<section class="pad"><div class="wrap"><div class="cta grain reveal"><div class="glow"></div><h2>Let's take care of your yard.</h2><p>Free quote in two minutes — from a crew that shows up.</p><a href="#" class="btn btn-lime">Get a fast quote →</a></div></div></section>
+
+<!-- ============ TEMPLATE: CONTACT ============ -->
+<div class="tpl tpl-lbl"><div class="wrap"><span>Template <b>06</b> · Contact</span><span>cutrateslawn.com/contact</span></div></div>
+<section class="ihero grain t-duotone" style="min-height:220px">
+  <div class="bg"><div class="media" style="border-radius:0;aspect-ratio:auto;position:absolute;inset:0"><div class="ph"></div></div></div><div class="scrim"></div>
+  <div class="in wrap" style="padding:0"><h1>Get in touch</h1><p>Questions or ready to book? We'll get right back to you.</p></div>
+</section>
+<section class="pad"><div class="wrap grid2" style="align-items:start">
+  <div class="form reveal">
+    <div class="row"><div><label>Name</label><input placeholder="Your name"></div><div><label>Phone</label><input placeholder="(316) 000-0000"></div></div>
+    <label>Email</label><input placeholder="you@email.com">
+    <label>Service</label><select><option>Landscaping</option><option>Lawn mowing</option><option>Fertilization</option><option>Other</option></select>
+    <label>Message</label><textarea placeholder="Tell us about your yard…"></textarea>
+    <button class="btn btn-lime" style="width:100%;justify-content:center;margin-top:1rem">Send message →</button>
+  </div>
+  <div class="info reveal">
+    <div class="li"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5c0 8 7 15 15 15l2-3-4-2-2 2c-3-1-6-4-7-7l2-2-2-4z"/></svg></span><div><b>(316) 925-5050</b><span>Call or text — fastest reply</span></div></div>
+    <div class="li"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span><div><b>info@cutrateslawn.com</b><span>We reply the same day</span></div></div>
+    <div class="li"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><b>226 W. Main St, Valley Center, KS</b><span>Serving Wichita → Kansas City</span></div></div>
+    <div class="li"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b>Mon–Sat, 7am–6pm</b><span>Quotes anytime online</span></div></div>
+    <div class="mapband"><div class="pin"></div></div>
+  </div>
+</div></section>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('[data-seg]').forEach(seg=>seg.addEventListener('click',e=>{if(e.target.tagName!=='BUTTON')return;seg.querySelectorAll('button').forEach(b=>b.classList.remove('on'));e.target.classList.add('on')}));
+const rng=document.getElementById('rng'),sz=document.getElementById('sz'),est=document.getElementById('est');
+function upd(){const v=+rng.value;sz.textContent=v.toLocaleString();const lo=Math.round(28+v*0.008),hi=Math.round(lo*1.32);est.textContent='$'+lo+' – $'+hi+' / visit'}
+rng&&(rng.addEventListener('input',upd),upd());
+document.querySelectorAll('.qa button').forEach(b=>b.addEventListener('click',()=>{const qa=b.parentElement,ans=qa.querySelector('.ans');const o=qa.classList.toggle('open');ans.style.maxHeight=o?ans.scrollHeight+'px':0}));
+const filters=document.getElementById('filters');filters&&filters.addEventListener('click',e=>{if(!e.target.classList.contains('chip'))return;filters.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));e.target.classList.add('on')});
+const ba=document.getElementById('ba'),handle=document.getElementById('handle');
+if(ba){let drag=false;ba.style.setProperty('--pos','50%');const set=x=>{const r=ba.getBoundingClientRect();let p=Math.max(2,Math.min(98,(x-r.left)/r.width*100));ba.style.setProperty('--pos',p+'%')};handle.addEventListener('pointerdown',()=>drag=true);window.addEventListener('pointerup',()=>drag=false);window.addEventListener('pointermove',e=>{if(drag)set(e.clientX)});ba.addEventListener('click',e=>set(e.clientX));}
+</script>
+</body>
+</html>

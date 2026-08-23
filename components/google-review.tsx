@@ -1,5 +1,6 @@
 import { formatDistanceToNow } from "date-fns"
 import { ExternalLink, User } from "lucide-react"
+import { mediaAlt, mediaSrc } from "@/lib/media"
 
 interface GoogleReviewProps {
   authorName: string
@@ -85,8 +86,8 @@ export function GoogleReview({
       <div className="mt-2 pt-2 border-t border-gray-100 flex items-center">
         <div className="flex items-center">
           <img
-            src="https://storage.googleapis.com/site_photo_storage/images/partners/google-reviews.png"
-            alt="Google Review"
+            src={mediaSrc("partners.google")}
+            alt={mediaAlt("partners.google", "Google Review")}
             className="h-4"
           />
           <span className="text-xs text-gray-500 ml-1">Verified Review</span>

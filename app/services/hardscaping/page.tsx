@@ -1,18 +1,12 @@
-import { ServiceLanding } from "@/components/service-landing"
+import { ServiceDetailView } from "@/components/blocks"
+import { getServiceDetail } from "@/lib/marketing-content"
 
-export const metadata = { title: "Hardscaping | Cut Rates Lawn Care" }
+export const metadata = {
+  title: "Hardscaping",
+  description: "Patios, walks, and outdoor structure from Cut Rates Lawn Care.",
+}
 
 export default function HardscapingPage() {
-  return (
-    <ServiceLanding
-      title="Hardscaping"
-      summary="Patios, walkways, and outdoor hardscape features that complement your lawn and landscape."
-      bullets={[
-        "Consultation on layout and materials",
-        "Walkways, patio pads, and related hardscape installs",
-        "Coordination with lawn and landscape services",
-        "Custom quotes based on site conditions",
-      ]}
-    />
-  )
+  const detail = getServiceDetail("hardscaping")!
+  return <ServiceDetailView detail={detail} galleryCategory="Hardscape" />
 }

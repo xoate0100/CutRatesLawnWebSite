@@ -1,12 +1,10 @@
 import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { MediaFrame } from "@/components/media/media-frame"
+import { InteriorHero, CTASection } from "@/components/blocks"
 import { NewsletterSignup } from "@/components/newsletter-signup"
-import { mediaAlt, mediaSrc } from "@/lib/media"
 
-// This would typically come from a CMS or API
 const blogPosts = [
   {
     id: 1,
@@ -37,69 +35,54 @@ const blogPosts = [
   },
 ]
 
+export const metadata = {
+  title: "Blog",
+  description: "Lawn care tips and seasonal guides from Cut Rates Lawn Care.",
+}
+
 export default function BlogPage() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <main className="flex-grow">
-        {/* Hero Section */}
-        <section className="bg-green-600 text-white py-20">
-          <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Lawn Care Blog</h1>
-            <p className="text-xl mb-8 max-w-3xl">
-              Expert tips, industry insights, and helpful guides to keep your property looking its best.
-            </p>
-          </div>
-        </section>
+    <div className="bg-paper">
+      <InteriorHero
+        eyebrow="Blog"
+        title="Tips that keep yards looking sharp."
+        description="Practical guides from a local crew — no fluff."
+        mediaSlot="page.blog.1"
+        ctaHref="/quote"
+      />
 
-        {/* Blog Posts */}
-        <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {blogPosts.map((post) => (
-                <Card key={post.id} className="flex flex-col">
-                  <CardHeader>
-                    <Image
-                      src={mediaSrc(post.slot)}
-                      alt={mediaAlt(post.slot, post.title)}
-                      width={400}
-                      height={200}
-                      className="rounded-t-lg"
-                    />
-                  </CardHeader>
-                  <CardContent className="flex-grow">
-                    <CardTitle className="mb-2">{post.title}</CardTitle>
-                    <CardDescription>{post.excerpt}</CardDescription>
-                  </CardContent>
-                  <CardFooter className="flex justify-between items-center">
-                    <div className="text-sm text-gray-500">
-                      {new Date(post.date).toLocaleDateString()} by {post.author}
-                    </div>
-                    <Link href="/blog">
-                      <Button variant="outline" size="sm">
-                        Browse posts <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </Link>
-                  </CardFooter>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Newsletter Signup */}
-        <section className="bg-gray-100 py-16">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto text-center">
-              <h2 className="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
-              <p className="mb-6">Get the latest lawn care tips and exclusive offers delivered to your inbox.</p>
-              <div className="text-left max-w-md mx-auto">
-                <NewsletterSignup variant="blog" />
+      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+        <ul className="grid gap-6 md:grid-cols-3">
+          {blogPosts.map((post) => (
+            <li
+              key={post.id}
+              className="overflow-hidden rounded-brand border border-line bg-white"
+            >
+              <MediaFrame slot={post.slot} aspect="16/10" className="rounded-none" />
+              <div className="p-5">
+                <p className="text-xs font-bold uppercase tracking-wider text-sage">{post.date}</p>
+                <h2 className="font-display mt-2 text-xl font-bold text-ink">
+                  <Link href={`/blog/${post.slug}`} className="hover:text-green">
+                    {post.title}
+                  </Link>
+                </h2>
+                <p className="mt-2 text-sm text-sage">{post.excerpt}</p>
+                <Button asChild variant="ghost" className="mt-3 px-0">
+                  <Link href={`/blog/${post.slug}`}>
+                    Read more <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
+                </Button>
               </div>
-            </div>
-          </div>
-        </section>
-      </main>
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-12 rounded-brand border border-line bg-cream p-6">
+          <NewsletterSignup />
+        </div>
+      </section>
+
+      <CTASection />
     </div>
   )
 }
-

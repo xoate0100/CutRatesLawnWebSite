@@ -17,8 +17,8 @@ type UseRevealResult = {
 }
 
 /**
- * Scroll-triggered reveal for below-the-fold atmosphere motion.
- * Respects prefers-reduced-motion (starts visible / no transform).
+ * Scroll-triggered reveal. Respects prefers-reduced-motion.
+ * Emits both brand (`.reveal` / `.reveal.in`) and legacy atm classes.
  */
 export function useReveal(options: UseRevealOptions = {}): UseRevealResult {
   const { threshold = 0.14, rootMargin = "0px 0px -48px 0px", once = true } = options
@@ -55,6 +55,6 @@ export function useReveal(options: UseRevealOptions = {}): UseRevealResult {
   return {
     ref,
     visible,
-    className: `atm-reveal${visible ? " atm-reveal-visible" : ""}`,
+    className: `reveal${visible ? " in" : ""} atm-reveal${visible ? " atm-reveal-visible" : ""}`,
   }
 }

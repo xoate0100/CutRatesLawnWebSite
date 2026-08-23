@@ -1,5 +1,5 @@
 import type React from "react"
-import { type ComponentType, lazy, Suspense } from "react"
+import { createElement, type ComponentType, lazy, Suspense } from "react"
 
 /**
  * Lazy load a client component with suspense
@@ -10,11 +10,8 @@ export function lazyLoadComponent<T extends ComponentType<any>>(
 ) {
   const LazyComponent = lazy(factory)
 
-  return (props: React.ComponentProps<T>) => (
-    <Suspense fallback={fallback}>
-      <LazyComponent {...props} />
-    </Suspense>
-  )
+  return (props: React.ComponentProps<T>) =>
+    createElement(Suspense, { fallback }, createElement(LazyComponent, props))
 }
 
 /**

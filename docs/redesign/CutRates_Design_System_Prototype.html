@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cut Rates Lawn Care — Design System Prototype</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#0B3A1E; --forest-2:#0F2E1B; --green:#1F6B3A; --green-soft:#2E7D42;
+  --lime:#C8F135; --lime-2:#A9E22E;
+  --cream:#F5F2E9; --paper:#FBFAF4; --ink:#12241A; --sage:#5D7064;
+  --line:rgba(18,36,26,.12); --line-lt:rgba(255,255,255,.14);
+  --shadow:0 18px 50px -20px rgba(11,58,30,.45);
+  --r:22px; --r-lg:32px;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;
+  --body:'Hanken Grotesk',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.02;letter-spacing:-.02em;font-weight:700}
+a{color:inherit;text-decoration:none}
+img,svg{display:block}
+.wrap{width:min(1200px,92vw);margin-inline:auto}
+.eyebrow{font-family:var(--body);font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase}
+
+/* grain + texture helpers */
+.grain::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");}
+.stripes{background-image:repeating-linear-gradient(-33deg,rgba(255,255,255,.035) 0 28px,rgba(0,0,0,.05) 28px 56px)}
+.leafpat{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='54' viewBox='0 0 54 54'%3E%3Cpath d='M27 6C18 14 18 30 27 48 36 30 36 14 27 6Z' fill='none' stroke='%231F6B3A' stroke-opacity='0.10' stroke-width='1.4'/%3E%3C/svg%3E");}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--body);font-weight:700;font-size:.98rem;
+  padding:.92rem 1.5rem;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:transform .18s ease,box-shadow .18s ease,background .2s;position:relative}
+.btn .arw{transition:transform .2s ease}
+.btn:hover .arw{transform:translateX(4px)}
+.btn-lime{background:var(--lime);color:var(--forest-2);box-shadow:0 10px 0 -2px var(--lime-2),0 22px 34px -14px rgba(169,226,46,.6)}
+.btn-lime:hover{transform:translateY(-2px)}
+.btn-lime:active{transform:translateY(2px);box-shadow:0 4px 0 -2px var(--lime-2)}
+.btn-ghost{background:transparent;color:inherit;border-color:currentColor;opacity:.9}
+.btn-ghost:hover{opacity:1;transform:translateY(-2px)}
+.btn-dark{background:var(--forest);color:#fff}
+.btn-dark:hover{transform:translateY(-2px)}
+
+.pill{display:inline-flex;align-items:center;gap:.4rem;font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;
+  padding:.42rem .8rem;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.06)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 4px rgba(200,241,53,.25)}
+
+/* brush highlight */
+.brush{position:relative;white-space:nowrap;color:#fff}
+.brush svg{position:absolute;left:-3%;bottom:-14%;width:106%;height:44%;z-index:-1;color:var(--lime)}
+
+/* ===== announcement marquee ===== */
+.ann{background:var(--forest-2);color:var(--lime);overflow:hidden;border-bottom:1px solid var(--line-lt)}
+.ann .track{display:flex;gap:2.5rem;white-space:nowrap;padding:.5rem 0;animation:march 26s linear infinite;font-weight:700;font-size:.78rem;letter-spacing:.14em;text-transform:uppercase}
+.ann .track span{display:inline-flex;align-items:center;gap:2.5rem}
+@keyframes march{to{transform:translateX(-50%)}}
+
+/* ===== header ===== */
+header{position:sticky;top:0;z-index:60;background:rgba(11,58,30,.86);backdrop-filter:blur(12px);color:#fff;border-bottom:1px solid var(--line-lt);transition:background .3s}
+.nav{display:flex;align-items:center;gap:1.4rem;height:70px}
+.logo{display:flex;align-items:center;gap:.6rem;margin-right:auto}
+.logo .mk{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,var(--lime),var(--green-soft));display:grid;place-items:center;font-family:var(--display);font-weight:800;color:var(--forest-2);font-size:1.15rem;box-shadow:0 6px 18px -6px rgba(200,241,53,.6)}
+.logo b{font-family:var(--display);font-weight:800;font-size:1.15rem;letter-spacing:-.01em;line-height:1}
+.logo small{display:block;font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;opacity:.7;font-weight:600}
+.nav-links{display:flex;gap:1.3rem;font-weight:600;font-size:.92rem}
+.nav-links a{position:relative;padding:.3rem 0;opacity:.85}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:100%;height:2px;background:var(--lime);transform:scaleX(0);transform-origin:left;transition:transform .25s ease}
+.nav-links a:hover{opacity:1}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav .tel{font-weight:700;font-size:.9rem;opacity:.9}
+.burger{display:none;background:none;border:1px solid var(--line-lt);color:#fff;border-radius:10px;padding:.5rem .7rem;font-weight:700;cursor:pointer}
+
+/* ===== hero ===== */
+.hero{position:relative;background:radial-gradient(120% 90% at 82% -10%,#17512c 0%,var(--forest) 45%,var(--forest-2) 100%);color:#fff;overflow:hidden;padding:clamp(3rem,7vw,6rem) 0 clamp(4rem,8vw,7rem)}
+.hero .glow{position:absolute;width:640px;height:640px;right:-140px;top:-200px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,241,53,.5),rgba(200,241,53,0) 62%);filter:blur(8px);pointer-events:none;will-change:transform}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;position:relative;z-index:2}
+.hero h1{font-size:clamp(2.6rem,6.2vw,5rem);font-weight:800;line-height:1.08}
+.hero p.sub{font-size:clamp(1.05rem,1.5vw,1.28rem);max-width:36ch;margin:1.4rem 0 1.9rem;color:rgba(255,255,255,.82)}
+.hero .cta-row{display:flex;gap:.9rem;flex-wrap:wrap}
+.trust-chips{display:flex;gap:1.4rem;margin-top:1.9rem;flex-wrap:wrap;font-weight:600;font-size:.9rem;color:rgba(255,255,255,.8)}
+.trust-chips span{display:inline-flex;align-items:center;gap:.5rem}
+.check{width:20px;height:20px;border-radius:50%;background:rgba(200,241,53,.16);display:grid;place-items:center}
+.check svg{width:12px;height:12px;color:var(--lime)}
+
+/* hero art panel */
+.hero-art{position:relative}
+.turf{position:relative;aspect-ratio:5/6;border-radius:36% 36% 30% 30%/8% 8% 6% 6%;overflow:hidden;
+  background:linear-gradient(160deg,#2c8547,#176030 60%,#0f4324);box-shadow:var(--shadow)}
+.turf.card-stripes::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(64deg,rgba(255,255,255,.10) 0 22px,rgba(0,0,0,.07) 22px 44px)}
+.turf .house{position:absolute;left:50%;bottom:34%;transform:translateX(-50%);width:56%;opacity:.92}
+.badge-float{position:absolute;background:var(--paper);color:var(--ink);border-radius:18px;padding:.85rem 1rem;box-shadow:var(--shadow);display:flex;gap:.6rem;align-items:center;font-weight:700;font-size:.86rem}
+.badge-float.tl{top:6%;left:-6%;animation:bob 5s ease-in-out infinite}
+.badge-float.br{bottom:8%;right:-5%;animation:bob 6s ease-in-out infinite .6s}
+.badge-float .stars{color:#f5a623;font-size:.8rem;letter-spacing:1px}
+@keyframes bob{50%{transform:translateY(-9px)}}
+.diag{position:absolute;right:-4%;bottom:16%;width:46%;height:70px;background:var(--lime);border-radius:14px;transform:rotate(-14deg);box-shadow:0 14px 30px -10px rgba(200,241,53,.6);z-index:-1}
+
+/* stat row */
+.stats{display:flex;gap:2.4rem;margin-top:2.6rem;flex-wrap:wrap;position:relative;z-index:2}
+.stat b{font-family:var(--display);font-weight:800;font-size:2rem;color:var(--lime);display:block;line-height:1}
+.stat small{font-weight:600;font-size:.82rem;color:rgba(255,255,255,.72)}
+
+/* ribbon marquee */
+.ribbon{background:var(--lime);color:var(--forest-2);overflow:hidden;border-block:3px solid var(--forest-2)}
+.ribbon .track{display:flex;white-space:nowrap;animation:march 22s linear infinite;font-family:var(--display);font-weight:800;font-size:1.5rem;padding:.55rem 0;text-transform:uppercase;letter-spacing:.01em}
+.ribbon .track span{display:inline-flex;gap:1.6rem;padding-right:1.6rem;align-items:center}
+.ribbon .star{color:var(--forest-2)}
+
+/* section shells */
+section{position:relative}
+.pad{padding:clamp(3.4rem,7vw,6rem) 0}
+.sec-head{max-width:60ch}
+.sec-head .eyebrow{color:var(--green)}
+.sec-head h2{font-size:clamp(2rem,4.2vw,3.2rem);margin:.6rem 0 .5rem}
+.sec-head p{color:var(--sage);font-size:1.05rem;max-width:52ch}
+.on-cream{background:var(--cream)}
+
+/* services */
+.svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.4rem}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .25s ease,box-shadow .25s ease;position:relative}
+.card:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.card .thumb{aspect-ratio:16/10;position:relative;overflow:hidden}
+.card .thumb .fill{position:absolute;inset:0;transition:transform .5s ease}
+.card:hover .thumb .fill{transform:scale(1.06)}
+.card .ic{position:absolute;top:12px;left:12px;width:40px;height:40px;border-radius:12px;background:rgba(11,58,30,.72);display:grid;place-items:center;backdrop-filter:blur(4px)}
+.card .ic svg{width:20px;height:20px;color:var(--lime)}
+.card .price{position:absolute;bottom:12px;right:12px;background:var(--lime);color:var(--forest-2);font-weight:700;font-size:.78rem;padding:.3rem .6rem;border-radius:999px}
+.card .body{padding:1.15rem 1.2rem 1.3rem}
+.card h3{font-size:1.28rem}
+.card p{color:var(--sage);font-size:.94rem;margin:.4rem 0 .8rem}
+.card .lnk{font-weight:700;color:var(--green);display:inline-flex;align-items:center;gap:.4rem;font-size:.9rem}
+.card .lnk .arw{transition:transform .2s}
+.card:hover .lnk .arw{transform:translateX(4px)}
+.card.feature{grid-column:span 2;display:grid;grid-template-columns:1.1fr 1fr}
+.card.feature .thumb{aspect-ratio:auto;height:100%}
+.card.feature .body{display:flex;flex-direction:column;justify-content:center;padding:1.8rem}
+.card.feature h3{font-size:1.7rem}
+.card.feature .tag{align-self:flex-start;margin-bottom:.7rem}
+.tag{display:inline-block;background:var(--green);color:#fff;font-weight:700;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .6rem;border-radius:999px}
+
+/* quote band */
+.qband{position:relative;overflow:hidden;background:linear-gradient(120deg,var(--lime),var(--lime-2));color:var(--forest-2)}
+.qband .inner{display:grid;grid-template-columns:1.2fr .8fr;gap:2rem;align-items:center;padding:clamp(2.2rem,4vw,3.2rem) 0}
+.qband h2{font-size:clamp(1.9rem,3.6vw,2.8rem)}
+.qband .steps{display:flex;gap:.5rem;margin-top:1rem;flex-wrap:wrap}
+.qband .step{background:rgba(11,58,30,.12);border:1px solid rgba(11,58,30,.2);border-radius:12px;padding:.6rem .8rem;font-weight:700;font-size:.85rem;display:flex;gap:.5rem;align-items:center}
+.qband .step b{background:var(--forest-2);color:var(--lime);width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:.75rem}
+.qcard{background:var(--forest-2);color:#fff;border-radius:var(--r-lg);padding:1.4rem;box-shadow:var(--shadow)}
+.qcard label{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;opacity:.7;font-weight:700;display:block;margin:.9rem 0 .4rem}
+.qcard .seg{display:flex;gap:.4rem}
+.qcard .seg button{flex:1;background:rgba(255,255,255,.08);border:1px solid var(--line-lt);color:#fff;border-radius:10px;padding:.55rem;font-weight:700;cursor:pointer;font-family:var(--body)}
+.qcard .seg button.on{background:var(--lime);color:var(--forest-2);border-color:var(--lime)}
+.qcard input[type=range]{width:100%;accent-color:var(--lime);margin-top:.3rem}
+.qcard .val{font-family:var(--display);font-weight:800;font-size:1.6rem;color:var(--lime)}
+.qcard .est{margin-top:1rem;background:rgba(200,241,53,.1);border:1px dashed rgba(200,241,53,.5);border-radius:12px;padding:.8rem 1rem}
+.qcard .est small{opacity:.7;font-weight:600}
+.qcard .est b{font-family:var(--display);font-size:1.5rem;color:#fff;display:block}
+
+/* before after slider */
+.ba{position:relative;border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--shadow);aspect-ratio:16/9;user-select:none;touch-action:none}
+.ba .layer{position:absolute;inset:0}
+.ba .before{background:linear-gradient(160deg,#6d7a4e,#556138);}
+.ba .before.patchy::after{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 20% 30%,rgba(120,90,50,.6) 0 8%,transparent 9%),radial-gradient(circle at 70% 60%,rgba(120,90,50,.5) 0 6%,transparent 7%),radial-gradient(circle at 45% 80%,rgba(120,90,50,.55) 0 7%,transparent 8%),radial-gradient(circle at 85% 25%,rgba(120,90,50,.5) 0 5%,transparent 6%)}
+.ba .after{background:linear-gradient(160deg,#2f9a4f,#177033);clip-path:inset(0 0 0 var(--pos,50%))}
+.ba .after::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(58deg,rgba(255,255,255,.10) 0 20px,rgba(0,0,0,.06) 20px 40px)}
+.ba .lbl{position:absolute;top:14px;font-weight:700;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(11,58,30,.7);color:#fff;padding:.35rem .7rem;border-radius:999px;z-index:3}
+.ba .lbl.b{left:14px}.ba .lbl.a{right:14px;background:var(--lime);color:var(--forest-2)}
+.ba .handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:3px;background:var(--lime);z-index:4;cursor:ew-resize}
+.ba .handle::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:var(--lime);box-shadow:var(--shadow)}
+.ba .handle::after{content:"⟺";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--forest-2);font-weight:900;font-size:1rem}
+
+/* proof / testimonials marquee */
+.tmarq{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.tmarq .track{display:flex;gap:1rem;animation:march 34s linear infinite;width:max-content}
+.tmarq:hover .track{animation-play-state:paused}
+.tcard{width:340px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.2rem 1.3rem}
+.tcard .stars{color:#f5a623;letter-spacing:2px;font-size:.9rem}
+.tcard p{margin:.6rem 0;font-size:.98rem}
+.tcard .who{font-weight:700;font-size:.88rem;color:var(--sage)}
+
+/* area chips */
+.areas{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.6rem}
+.chip{border:1px solid var(--line);background:#fff;border-radius:999px;padding:.55rem 1rem;font-weight:700;font-size:.9rem;transition:.2s;cursor:default}
+.chip:hover{background:var(--forest);color:#fff;transform:translateY(-2px);border-color:var(--forest)}
+.chip .dotm{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--lime);margin-right:.5rem}
+
+/* bundles */
+.bundles{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.4rem}
+.bundle{border:1px solid var(--line);border-radius:var(--r-lg);padding:1.6rem;background:#fff;position:relative;transition:.25s}
+.bundle:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+.bundle.best{background:var(--forest);color:#fff;border-color:var(--forest)}
+.bundle.best .li svg{color:var(--lime)}
+.bundle .bt{font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;color:var(--green)}
+.bundle.best .bt{color:var(--lime)}
+.bundle .price{font-family:var(--display);font-weight:800;font-size:2.4rem;margin:.4rem 0}
+.bundle .price small{font-size:.9rem;font-weight:600;color:var(--sage)}
+.bundle.best .price small{color:rgba(255,255,255,.7)}
+.bundle ul{list-style:none;margin:1rem 0 1.4rem;display:grid;gap:.6rem}
+.bundle .li{display:flex;gap:.6rem;align-items:flex-start;font-size:.94rem}
+.bundle .li svg{width:18px;height:18px;color:var(--green);flex:none;margin-top:3px}
+.bundle .flag{position:absolute;top:-12px;right:18px;background:var(--lime);color:var(--forest-2);font-weight:700;font-size:.7rem;padding:.3rem .7rem;border-radius:999px;text-transform:uppercase;letter-spacing:.08em}
+
+/* faq */
+.faq{max-width:820px;margin-top:2rem}
+.qa{border-bottom:1px solid var(--line)}
+.qa button{width:100%;background:none;border:none;text-align:left;padding:1.1rem 0;font-family:var(--display);font-weight:700;font-size:1.15rem;cursor:pointer;display:flex;justify-content:space-between;gap:1rem;align-items:center;color:var(--ink)}
+.qa .ic{flex:none;width:26px;height:26px;border-radius:50%;border:2px solid var(--green);display:grid;place-items:center;transition:.25s;color:var(--green)}
+.qa.open .ic{background:var(--green);color:#fff;transform:rotate(45deg)}
+.qa .ans{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.qa .ans p{padding:0 0 1.1rem;color:var(--sage)}
+
+/* footer CTA */
+.foot-cta{position:relative;background:var(--forest-2);color:#fff;overflow:hidden;text-align:center;padding:clamp(3.4rem,7vw,6rem) 0}
+.foot-cta .glow{position:absolute;width:600px;height:600px;left:50%;top:20%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(200,241,53,.35),transparent 62%);pointer-events:none}
+.foot-cta h2{font-size:clamp(2.2rem,5vw,3.6rem);position:relative}
+.foot-cta p{color:rgba(255,255,255,.75);margin:1rem auto 1.8rem;max-width:44ch;position:relative}
+footer.site{background:var(--forest);color:rgba(255,255,255,.8);padding:3rem 0 2rem}
+.fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2rem}
+footer.site h4{color:#fff;font-size:1rem;margin-bottom:.8rem}
+footer.site a{display:block;padding:.25rem 0;opacity:.8;font-size:.92rem}
+footer.site a:hover{opacity:1;color:var(--lime)}
+.fbar{border-top:1px solid var(--line-lt);margin-top:2rem;padding-top:1.2rem;font-size:.82rem;opacity:.7;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+
+/* sticky mobile quote */
+.sticky-q{position:fixed;left:0;right:0;bottom:0;z-index:70;background:var(--forest-2);color:#fff;padding:.7rem 1rem;display:none;align-items:center;justify-content:space-between;gap:1rem;transform:translateY(120%);transition:transform .35s ease;box-shadow:0 -10px 30px -12px rgba(0,0,0,.5)}
+.sticky-q.show{transform:none}
+.sticky-q b{font-family:var(--display);font-size:1rem}
+
+/* design system section */
+.ds{background:var(--forest-2);color:#fff}
+.ds .swatches{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:1.4rem}
+.sw{border-radius:14px;overflow:hidden;border:1px solid var(--line-lt);width:120px}
+.sw .chipc{height:64px}.sw .meta{padding:.5rem .6rem;font-size:.72rem}
+.sw .meta b{display:block;font-family:var(--body)}
+.ds .row{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-top:1.2rem}
+.ds .box{background:rgba(255,255,255,.05);border:1px solid var(--line-lt);border-radius:16px;padding:1.2rem;flex:1;min-width:240px}
+.ds .box h4{color:var(--lime);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.8rem;font-family:var(--body)}
+.type-scale div{font-family:var(--display);font-weight:800;line-height:1}
+.cover{columns:2;column-gap:2rem;margin-top:1rem;font-size:.9rem}
+.cover li{margin:.35rem 0;list-style:none;display:flex;gap:.5rem;break-inside:avoid}
+.cover li svg{width:16px;height:16px;color:var(--lime);flex:none;margin-top:3px}
+
+.reveal{opacity:0;transform:translateY(22px)}
+.reveal.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+
+@media (max-width:900px){
+  .hero-grid{grid-template-columns:1fr}.hero-art{order:-1;max-width:420px}
+  .svc-grid,.bundles{grid-template-columns:1fr 1fr}
+  .card.feature{grid-column:span 2;grid-template-columns:1fr}
+  .qband .inner{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr 1fr}
+  .nav-links,.nav .tel{display:none}.burger{display:inline-block}
+  .sticky-q{display:flex}.cover{columns:1}
+}
+@media (max-width:560px){
+  .svc-grid,.bundles{grid-template-columns:1fr}.card.feature{grid-template-columns:1fr}
+  .fgrid{grid-template-columns:1fr}.stats{gap:1.4rem}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<!-- announcement -->
+<div class="ann"><div class="track">
+  <span>Local &amp; family-owned&nbsp; ✦&nbsp; Free 2-minute quotes&nbsp; ✦&nbsp; No contracts&nbsp; ✦&nbsp; Serving Wichita to Kansas City&nbsp; ✦&nbsp; 4.8★ from local customers&nbsp; ✦&nbsp;</span>
+  <span aria-hidden="true">Local &amp; family-owned&nbsp; ✦&nbsp; Free 2-minute quotes&nbsp; ✦&nbsp; No contracts&nbsp; ✦&nbsp; Serving Wichita to Kansas City&nbsp; ✦&nbsp; 4.8★ from local customers&nbsp; ✦&nbsp;</span>
+</div></div>
+
+<!-- header -->
+<header id="top">
+  <div class="wrap nav">
+    <a class="logo" href="#top">
+      <span class="mk">CR</span>
+      <span><b>Cut Rates</b><small>Lawn Care</small></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#work">Our Work</a>
+      <a href="#areas">Service Areas</a>
+      <a href="#bundles">Bundles</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <span class="tel">(316) 925-5050</span>
+    <a href="#quote" class="btn btn-lime" style="padding:.6rem 1.1rem">Get a fast quote <span class="arw">→</span></a>
+    <button class="burger" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<!-- hero -->
+<section class="hero grain stripes">
+  <div class="glow" id="glow"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <span class="pill"><span class="dot"></span> Local. Reliable. Easy to book.</span>
+      <h1 style="margin-top:1rem">A better-looking lawn,<br><span class="brush">without the runaround.<svg viewBox="0 0 300 60" preserveAspectRatio="none"><path d="M6 40 C60 20 120 48 180 34 C230 22 270 40 296 30 L292 54 C250 46 210 58 160 50 C110 42 60 58 10 52 Z" fill="currentColor"/></svg></span></h1>
+      <p class="sub">Straightforward, dependable lawn &amp; landscape care from a family-owned local crew — from Wichita to the Kansas City side. We show up, do it right, and make booking painless.</p>
+      <div class="cta-row">
+        <a href="#quote" class="btn btn-lime">Get my free quote <span class="arw">→</span></a>
+        <a href="#work" class="btn btn-ghost">See our work</a>
+      </div>
+      <div class="trust-chips">
+        <span><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> No contracts</span>
+        <span><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Fast response</span>
+        <span><span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg></span> Locally owned</span>
+      </div>
+      <div class="stats">
+        <div class="stat"><b data-count="1200" data-suffix="+">0</b><small>Lawns cared for</small></div>
+        <div class="stat"><b data-count="4.8" data-dec="1" data-suffix="★">0</b><small>Google rating</small></div>
+        <div class="stat"><b data-count="7">0</b><small>Towns served</small></div>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="diag"></div>
+      <div class="turf card-stripes grain">
+        <svg class="house" viewBox="0 0 200 120" fill="none">
+          <path d="M20 70 L100 24 L180 70 V116 H20 Z" fill="#f3efe2"/>
+          <path d="M12 74 L100 18 L188 74" stroke="#0B3A1E" stroke-width="6" fill="none"/>
+          <rect x="60" y="82" width="26" height="34" fill="#1F6B3A"/>
+          <rect x="112" y="82" width="30" height="24" fill="#8fd3a3"/>
+        </svg>
+      </div>
+      <div class="badge-float tl"><span class="mk" style="width:30px;height:30px;border-radius:8px;font-size:.85rem">CR</span> Booked in 2 min</div>
+      <div class="badge-float br"><div><span class="stars">★★★★★</span><br>“Yard looked better immediately.”</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ribbon -->
+<div class="ribbon"><div class="track">
+  <span>Mowing <span class="star">✦</span> Landscaping <span class="star">✦</span> Fertilization <span class="star">✦</span> Aeration &amp; Overseeding <span class="star">✦</span> Pest Control <span class="star">✦</span> Holiday Lights <span class="star">✦</span></span>
+  <span aria-hidden="true">Mowing <span class="star">✦</span> Landscaping <span class="star">✦</span> Fertilization <span class="star">✦</span> Aeration &amp; Overseeding <span class="star">✦</span> Pest Control <span class="star">✦</span> Holiday Lights <span class="star">✦</span></span>
+</div></div>
+
+<!-- services -->
+<section class="pad" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Popular services</span>
+      <h2>The work your property actually needs.</h2>
+      <p>Start with what you need most — we make the next step obvious. Landscaping is our specialty, but we handle the whole yard.</p>
+    </div>
+    <div class="svc-grid">
+      <article class="card feature reveal">
+        <div class="thumb"><div class="fill turf card-stripes" style="border-radius:0"></div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c-3 4-3 9 0 14 3-5 3-10 0-14zM12 22v-6"/></svg></span></div>
+        <div class="body">
+          <span class="tag">Our specialty</span>
+          <h3>Landscaping &amp; Design</h3>
+          <p>Design, hardscaping, planting, and irrigation — the transformations that turn a plain yard into the best one on the block.</p>
+          <a class="lnk" href="#">Explore landscaping <span class="arw">→</span></a>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="thumb"><div class="fill" style="background:linear-gradient(160deg,#39a457,#1c6c37)"></div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h18M6 17v-4a6 6 0 0112 0v4"/></svg></span><span class="price">from $39</span></div>
+        <div class="body"><h3>Lawn Mowing</h3><p>Clean cuts, crisp edges, dependable schedule.</p><a class="lnk" href="#">Learn more <span class="arw">→</span></a></div>
+      </article>
+      <article class="card reveal">
+        <div class="thumb"><div class="fill" style="background:linear-gradient(160deg,#4fb15f,#2b7a3f)"></div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v18M12 8c3-2 6-1 6-1s0 4-3 5M12 12c-3-2-6-1-6-1s0 4 3 5"/></svg></span><span class="price">from $59</span></div>
+        <div class="body"><h3>Fertilization</h3><p>A healthier, greener lawn on a practical plan.</p><a class="lnk" href="#">Learn more <span class="arw">→</span></a></div>
+      </article>
+      <article class="card reveal">
+        <div class="thumb"><div class="fill" style="background:linear-gradient(160deg,#2f9a4f,#155f30)"></div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></span><span class="price">seasonal</span></div>
+        <div class="body"><h3>Aeration &amp; Overseeding</h3><p>Thicker turf and better roots before the season.</p><a class="lnk" href="#">Learn more <span class="arw">→</span></a></div>
+      </article>
+      <article class="card reveal">
+        <div class="thumb"><div class="fill" style="background:linear-gradient(160deg,#3a8f52,#1e6835)"></div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 8v8M8 12h8"/><circle cx="12" cy="12" r="9"/></svg></span><span class="price">from $49</span></div>
+        <div class="body"><h3>Pest Control</h3><p>Targeted exterior protection, no complications.</p><a class="lnk" href="#">Learn more <span class="arw">→</span></a></div>
+      </article>
+      <article class="card reveal">
+        <div class="thumb"><div class="fill" style="background:linear-gradient(160deg,#0f4324,#0b3a1e)"></div><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2 5 5 .5-4 3.5 1.5 5-4.5-3-4.5 3 1.5-5-4-3.5 5-.5z"/></svg></span><span class="price">Nov–Jan</span></div>
+        <div class="body"><h3>Holiday Lights</h3><p>Design, install, take-down — we handle it all.</p><a class="lnk" href="#">Learn more <span class="arw">→</span></a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- quote band -->
+<section class="qband grain" id="quote">
+  <div class="wrap inner">
+    <div class="reveal">
+      <span class="pill" style="border-color:rgba(11,58,30,.25);background:rgba(11,58,30,.08)"><span class="dot" style="background:var(--forest-2)"></span> Most quotes take under 2 minutes</span>
+      <h2 style="margin:.8rem 0">Tell us what you need.<br>We'll make the next step clear.</h2>
+      <div class="steps">
+        <span class="step"><b>1</b> Your property</span>
+        <span class="step"><b>2</b> Instant estimate</span>
+        <span class="step"><b>3</b> We text you</span>
+        <span class="step"><b>4</b> Done</span>
+      </div>
+    </div>
+    <div class="qcard reveal">
+      <label>Property type</label>
+      <div class="seg" data-seg>
+        <button class="on">Residential</button><button>Commercial</button>
+      </div>
+      <label>Lawn size — <span class="val" id="sz">2,000</span> sq ft</label>
+      <input type="range" min="500" max="15000" step="250" value="2000" id="rng">
+      <label>Frequency</label>
+      <div class="seg" data-seg><button class="on">Weekly</button><button>Bi-weekly</button></div>
+      <div class="est"><small>Planning estimate</small><b id="est">$44 – $58 / visit</b></div>
+      <a href="#" class="btn btn-lime" style="width:100%;justify-content:center;margin-top:.9rem">Get my real quote <span class="arw">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- before/after -->
+<section class="pad on-cream leafpat" id="work">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Proof, not promises</span>
+      <h2>Drag to see the difference.</h2>
+      <p>Real transformations from local yards. Slide the handle to watch a tired lawn become the best one on the street.</p>
+    </div>
+    <div class="ba reveal" id="ba" style="margin-top:2rem">
+      <div class="layer before patchy"></div>
+      <div class="layer after"></div>
+      <span class="lbl b">Before</span><span class="lbl a">After</span>
+      <div class="handle" id="handle"></div>
+    </div>
+  </div>
+</section>
+
+<!-- testimonials -->
+<section class="pad">
+  <div class="wrap sec-head reveal">
+    <span class="eyebrow">What neighbors say</span>
+    <h2>4.8★ from local customers.</h2>
+  </div>
+  <div class="tmarq" style="margin-top:2rem"><div class="track" id="ttrack"></div></div>
+</section>
+
+<!-- areas -->
+<section class="pad on-cream" id="areas">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Where we work</span>
+      <h2>Serving Wichita to Kansas City.</h2>
+      <p>Dedicated local pages for every town we serve — so your neighbors find us first.</p>
+    </div>
+    <div class="areas reveal">
+      <span class="chip"><span class="dotm"></span>Wichita</span>
+      <span class="chip"><span class="dotm"></span>Valley Center</span>
+      <span class="chip"><span class="dotm"></span>Andover</span>
+      <span class="chip"><span class="dotm"></span>Derby</span>
+      <span class="chip"><span class="dotm"></span>Maize</span>
+      <span class="chip"><span class="dotm"></span>Kansas City</span>
+      <span class="chip"><span class="dotm"></span>Leavenworth</span>
+    </div>
+  </div>
+</section>
+
+<!-- bundles -->
+<section class="pad" id="bundles">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">Residential bundles</span>
+      <h2>Bundle it and save.</h2>
+      <p>Simple, "starting at" pricing. Mix the services your yard needs into one easy plan.</p>
+    </div>
+    <div class="bundles">
+      <div class="bundle reveal">
+        <span class="bt">Essentials</span>
+        <div class="price">$129<small>/mo starting</small></div>
+        <ul>
+          <li class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Weekly mowing &amp; edging</li>
+          <li class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Seasonal cleanup</li>
+          <li class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Text reminders</li>
+        </ul>
+        <a href="#quote" class="btn btn-dark" style="width:100%;justify-content:center">Choose Essentials</a>
+      </div>
+      <div class="bundle best reveal">
+        <span class="flag">Most popular</span>
+        <span class="bt">Full Yard</span>
+        <div class="price">$199<small>/mo starting</small></div>
+        <ul>
+          <li class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Everything in Essentials</li>
+          <li class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Fertilization program</li>
+          <li class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Aeration &amp; overseeding</li>
+        </ul>
+        <a href="#quote" class="btn btn-lime" style="width:100%;justify-content:center">Choose Full Yard</a>
+      </div>
+      <div class="bundle reveal">
+        <span class="bt">Estate</span>
+        <div class="price">$349<small>/mo starting</small></div>
+        <ul>
+          <li class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Everything in Full Yard</li>
+          <li class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Landscape maintenance</li>
+          <li class="li"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Priority scheduling</li>
+        </ul>
+        <a href="#quote" class="btn btn-dark" style="width:100%;justify-content:center">Choose Estate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- faq -->
+<section class="pad on-cream" id="faq">
+  <div class="wrap">
+    <div class="sec-head reveal"><span class="eyebrow">Good to know</span><h2>Questions, answered.</h2></div>
+    <div class="faq">
+      <div class="qa reveal"><button>Do I have to sign a contract? <span class="ic">+</span></button><div class="ans"><p>Never. Every plan is month-to-month — stay because the lawn looks great, not because you're locked in.</p></div></div>
+      <div class="qa reveal"><button>How fast will I hear back? <span class="ic">+</span></button><div class="ans"><p>The moment you finish a quote, it texts our crew and you get an instant confirmation. Most folks hear from a real person the same day.</p></div></div>
+      <div class="qa reveal"><button>Which areas do you serve? <span class="ic">+</span></button><div class="ans"><p>From Wichita and the surrounding towns all the way to the Kansas City side — Wichita, Valley Center, Andover, Derby, Maize, Kansas City, and Leavenworth.</p></div></div>
+      <div class="qa reveal"><button>Can I bundle services? <span class="ic">+</span></button><div class="ans"><p>Absolutely — bundling mowing, fertilization, and aeration into one plan is the easiest way to save and keep the whole yard on schedule.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- footer cta -->
+<section class="foot-cta grain">
+  <div class="glow"></div>
+  <div class="wrap">
+    <h2>Make your lawn the easiest<br>thing on your list.</h2>
+    <p>Free quote in about two minutes. Local crew, no contracts, done right.</p>
+    <a href="#quote" class="btn btn-lime">Get a fast quote <span class="arw">→</span></a>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <a class="logo" href="#top" style="color:#fff"><span class="mk">CR</span><span><b>Cut Rates</b><small>Lawn Care</small></span></a>
+        <p style="margin-top:.9rem;max-width:34ch;font-size:.9rem">Family-owned lawn &amp; landscape care for homes and businesses across south-central Kansas and the KC metro.</p>
+      </div>
+      <div><h4>Services</h4><a href="#">Landscaping</a><a href="#">Lawn Mowing</a><a href="#">Fertilization</a><a href="#">Aeration</a><a href="#">Holiday Lights</a></div>
+      <div><h4>Company</h4><a href="#">Our Work</a><a href="#">Service Areas</a><a href="#">Bundles</a><a href="#">Reviews</a><a href="#">Contact</a></div>
+      <div><h4>Get in touch</h4><a href="tel:3169255050">(316) 925-5050</a><a href="mailto:info@cutrateslawn.com">info@cutrateslawn.com</a><a href="#">226 W. Main St, Valley Center, KS</a><a href="#quote" class="btn btn-lime" style="margin-top:.8rem;padding:.6rem 1.1rem">Free quote →</a></div>
+    </div>
+    <div class="fbar"><span>© 2026 Cut Rates Lawn Care LLC</span><span>Prototype — canonical design system</span></div>
+  </div>
+</footer>
+
+<!-- design system reference -->
+<section class="ds pad grain">
+  <div class="wrap">
+    <div class="sec-head reveal" style="max-width:100%"><span class="eyebrow" style="color:var(--lime)">Design system</span><h2 style="color:#fff">Everything the rebuild needs.</h2><p style="color:rgba(255,255,255,.7)">Tokens, type, components, and motion — the canonical kit this direction is built from.</p></div>
+    <div class="swatches">
+      <div class="sw"><div class="chipc" style="background:var(--forest)"></div><div class="meta"><b>Forest</b>#0B3A1E</div></div>
+      <div class="sw"><div class="chipc" style="background:var(--green)"></div><div class="meta"><b>Green</b>#1F6B3A</div></div>
+      <div class="sw"><div class="chipc" style="background:var(--lime)"></div><div class="meta"><b>Lime</b>#C8F135</div></div>
+      <div class="sw"><div class="chipc" style="background:var(--cream)"></div><div class="meta"><b>Cream</b>#F5F2E9</div></div>
+      <div class="sw"><div class="chipc" style="background:var(--ink)"></div><div class="meta"><b>Ink</b>#12241A</div></div>
+      <div class="sw"><div class="chipc" style="background:var(--sage)"></div><div class="meta"><b>Sage</b>#5D7064</div></div>
+    </div>
+    <div class="row">
+      <div class="box">
+        <h4>Type — Bricolage / Hanken</h4>
+        <div class="type-scale" style="color:#fff">
+          <div style="font-size:2.4rem">Display 800</div>
+          <div style="font-size:1.4rem;font-weight:600;margin-top:.4rem">Heading 600</div>
+          <div style="font-family:var(--body);font-weight:400;font-size:1rem;margin-top:.5rem;color:rgba(255,255,255,.8)">Body — Hanken Grotesk, set for calm, readable lines.</div>
+        </div>
+      </div>
+      <div class="box">
+        <h4>Controls</h4>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;align-items:center">
+          <button class="btn btn-lime">Primary →</button>
+          <button class="btn btn-ghost" style="color:#fff">Ghost</button>
+          <span class="pill"><span class="dot"></span> Pill</span>
+          <span class="tag">Tag</span>
+        </div>
+      </div>
+    </div>
+    <div class="box" style="margin-top:1rem">
+      <h4>Components &amp; motion covered</h4>
+      <ul class="cover">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Scrolling announcement + service ribbon marquees</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Sticky blur header with animated nav underlines</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Hero: brush-stroke highlight, lime glow, parallax</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Floating review + "booked" badges (bob animation)</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Count-up stat counters on scroll</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Grain overlay, mow-stripe + leaf-pattern textures</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Service cards: organic masks, image zoom, hover lift</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Featured "specialty" card (Landscaping flagship)</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Live quote estimator (segmented toggles + slider)</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Draggable before/after slider</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Auto-scrolling testimonial marquee (pause on hover)</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Interactive service-area chips</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Pricing bundles with "starting at" + highlighted tier</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>FAQ accordion</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Footer CTA with lime glow + sticky mobile quote bar</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M5 13l4 4L19 7"/></svg>Scroll-reveal on every section; reduced-motion respected</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- sticky mobile quote -->
+<div class="sticky-q" id="stq">
+  <div><b>Free quote in 2 min</b><br><small style="opacity:.7">No contracts · local crew</small></div>
+  <a href="#quote" class="btn btn-lime" style="padding:.6rem 1rem">Start →</a>
+</div>
+
+<script>
+// scroll reveal
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// count up
+const cUp=new IntersectionObserver((es)=>{es.forEach(e=>{if(!e.isIntersecting)return;const el=e.target;const to=parseFloat(el.dataset.count),dec=+(el.dataset.dec||0),suf=el.dataset.suffix||'';let t0=null;const dur=1400;
+  function step(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/dur,1);const v=(to*(1-Math.pow(1-p,3)));el.textContent=(dec?v.toFixed(dec):Math.round(v).toLocaleString())+suf;if(p<1)requestAnimationFrame(step)}
+  requestAnimationFrame(step);cUp.unobserve(el)})},{threshold:.6});
+document.querySelectorAll('[data-count]').forEach(el=>cUp.observe(el));
+
+// segmented toggles
+document.querySelectorAll('[data-seg]').forEach(seg=>seg.addEventListener('click',e=>{if(e.target.tagName!=='BUTTON')return;seg.querySelectorAll('button').forEach(b=>b.classList.remove('on'));e.target.classList.add('on')}));
+
+// quote slider estimate
+const rng=document.getElementById('rng'),sz=document.getElementById('sz'),est=document.getElementById('est');
+function upd(){const v=+rng.value;sz.textContent=v.toLocaleString();const lo=Math.round(28+v*0.008),hi=Math.round(lo*1.32);est.textContent='$'+lo+' – $'+hi+' / visit'}
+rng&&rng.addEventListener('input',upd);upd();
+
+// before/after
+const ba=document.getElementById('ba'),handle=document.getElementById('handle');
+let drag=false;
+function setPos(x){const r=ba.getBoundingClientRect();let p=(x-r.left)/r.width*100;p=Math.max(2,Math.min(98,p));ba.style.setProperty('--pos',p+'%')}
+ba&&ba.style.setProperty('--pos','50%');
+const start=()=>drag=true,end=()=>drag=false;
+handle.addEventListener('pointerdown',start);window.addEventListener('pointerup',end);
+window.addEventListener('pointermove',e=>{if(drag)setPos(e.clientX)});
+ba.addEventListener('click',e=>setPos(e.clientX));
+
+// testimonials build + duplicate for loop
+const T=[['★★★★★','They were quick, professional, and the yard looked better immediately.','— Jennifer L., Wichita'],
+['★★★★★','Best lawn crew we\'ve used. Fair prices and they actually show up.','— Michael R., Derby'],
+['★★★★★','Turned our neglected yard into the envy of the neighborhood.','— David W., Andover'],
+['★★★★★','Booking took two minutes and someone texted me right back.','— Sara P., Maize'],
+['★★★★★','The landscaping redesign completely changed our curb appeal.','— Tom H., Valley Center']];
+const tt=document.getElementById('ttrack');
+function tcard(t){const d=document.createElement('div');d.className='tcard';d.innerHTML='<div class="stars">'+t[0]+'</div><p>'+t[1]+'</p><div class="who">'+t[2]+'</div>';return d}
+[...T,...T].forEach(t=>tt.appendChild(tcard(t)));
+
+// faq
+document.querySelectorAll('.qa button').forEach(b=>b.addEventListener('click',()=>{const qa=b.parentElement,ans=qa.querySelector('.ans');const open=qa.classList.toggle('open');ans.style.maxHeight=open?ans.scrollHeight+'px':0}));
+
+// parallax glow (respect reduced motion)
+const rm=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+const glow=document.getElementById('glow');
+if(!rm){window.addEventListener('scroll',()=>{const y=window.scrollY;glow&&(glow.style.transform='translateY('+y*0.18+'px)')},{passive:true});}
+
+// sticky mobile quote bar after hero
+const stq=document.getElementById('stq'),hero=document.querySelector('.hero');
+const hIO=new IntersectionObserver((es)=>{es.forEach(e=>stq.classList.toggle('show',!e.isIntersecting))},{threshold:0});
+hero&&hIO.observe(hero);
+
+// header opacity on scroll
+const hd=document.querySelector('header');
+window.addEventListener('scroll',()=>{hd.style.background=window.scrollY>40?'rgba(11,58,30,.95)':'rgba(11,58,30,.86)'},{passive:true});
+</script>
+</body>
+</html>

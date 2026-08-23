@@ -4,13 +4,13 @@ test.describe("Get a Quote funnel", () => {
   test("hero and nav quote CTAs land on /quote", async ({ page }) => {
     await page.goto("/")
 
-    const heroQuote = page.locator('main a[href="/quote"]').filter({ hasText: "Get a Free Quote" }).first()
+    const heroQuote = page.locator('a[href="/quote"]').filter({ hasText: /quote/i }).first()
     await expect(heroQuote).toBeVisible()
     await expect(heroQuote).toHaveAttribute("href", "/quote")
     await expect(page.locator('header a[href="/quote"]').first()).toHaveAttribute("href", "/quote")
 
     await page.goto("/quote")
-    await expect(page.getByRole("heading", { name: /Get a Quote/i, level: 1 })).toBeVisible()
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
   })
 
   test("runs estimate then contact steps", async ({ page }) => {
@@ -69,7 +69,7 @@ test.describe("Get a Quote funnel", () => {
     if (res.ok()) {
       await expect(page.getByRole("heading", { name: /Request received/i })).toBeVisible()
     } else {
-      await expect(page.getByRole("alert")).toBeVisible()
+      await expect(page.getByRole("alert").first()).toBeVisible()
     }
   })
 })

@@ -1,6 +1,7 @@
 import { formatDistanceToNow } from "date-fns"
 import { ExternalLink, User } from "lucide-react"
 import type { Review } from "@/lib/services/reviews/reviews-service.interface"
+import { mediaSrc } from "@/lib/media"
 
 interface ReviewCardProps {
   review: Review
@@ -15,13 +16,13 @@ export function ReviewCard({ review, businessName = "Cut Rates Lawn Care", class
   // Truncate long review text
   const truncatedText = review.text.length > 200 ? `${review.text.substring(0, 200)}...` : review.text
 
-  // Get source logo
+  // Get source logo via media slots
   const getSourceLogo = () => {
     switch (review.source) {
       case "google":
-        return "https://storage.googleapis.com/site_photo_storage/images/partners/google-reviews.png"
+        return mediaSrc("partners.google")
       case "yelp":
-        return "https://storage.googleapis.com/site_photo_storage/images/partners/yelp-logo.png"
+        return mediaSrc("partners.yelp")
       case "facebook":
         return "/placeholder.jpg?height=20&width=60"
       default:

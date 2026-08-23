@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cut Rates — Design System v2 · Media Layer &amp; Page Templates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest:#0B3A1E;--forest-2:#0F2E1B;--green:#1F6B3A;--green-soft:#2E7D42;
+  --lime:#C8F135;--lime-2:#A9E22E;--cream:#F5F2E9;--paper:#FBFAF4;--ink:#12241A;--sage:#5D7064;
+  --line:rgba(18,36,26,.12);--line-lt:rgba(255,255,255,.14);--shadow:0 18px 50px -20px rgba(11,58,30,.45);
+  --r:20px;--r-lg:30px;--display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Hanken Grotesk',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--body);background:var(--paper);color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4{font-family:var(--display);line-height:1.04;letter-spacing:-.02em;font-weight:700}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1160px,92vw);margin-inline:auto}
+.pad{padding:clamp(3rem,6vw,5rem) 0}
+.eyebrow{font-weight:700;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green)}
+.sec-head{max-width:64ch;margin-bottom:1.8rem}
+.sec-head h2{font-size:clamp(1.8rem,3.6vw,2.7rem);margin:.5rem 0}
+.sec-head p{color:var(--sage);font-size:1.03rem}
+.on-cream{background:var(--cream)}.on-dark{background:var(--forest-2);color:#fff}
+.on-dark .sec-head p{color:rgba(255,255,255,.72)}.on-dark .eyebrow{color:var(--lime)}
+.btn{display:inline-flex;align-items:center;gap:.5rem;font-weight:700;font-size:.95rem;padding:.85rem 1.4rem;border-radius:999px;border:2px solid transparent;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.btn-lime{background:var(--lime);color:var(--forest-2);box-shadow:0 8px 0 -2px var(--lime-2)}
+.btn-lime:hover{transform:translateY(-2px)}
+.btn-ghost{border-color:currentColor;opacity:.9}.btn-ghost:hover{transform:translateY(-2px)}
+.pill{display:inline-flex;align-items:center;gap:.4rem;font-weight:700;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;padding:.4rem .8rem;border-radius:999px;border:1px solid var(--line)}
+.on-dark .pill{border-color:var(--line-lt)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--lime)}
+.tag{display:inline-block;background:var(--green);color:#fff;font-weight:700;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;padding:.3rem .6rem;border-radius:999px}
+
+/* ===== texture/pattern helpers ===== */
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E")}
+.stripe-ov::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(58deg,rgba(255,255,255,.08) 0 20px,rgba(0,0,0,.06) 20px 40px);pointer-events:none}
+
+/* ===== the media system ===== */
+.media{position:relative;overflow:hidden;border-radius:var(--r);aspect-ratio:4/3;background:#123}
+.media .ph{position:absolute;inset:0;background:linear-gradient(180deg,#bfe0ef 0 34%,#8fd3a3 34% 46%,#2f9a4f 46% 70%,#177033 70% 100%)}
+.media .ph::after{content:"";position:absolute;inset:46% 0 0;background-image:repeating-linear-gradient(64deg,rgba(255,255,255,.10) 0 20px,rgba(0,0,0,.06) 20px 40px)}
+.media .house{position:absolute;left:50%;bottom:30%;transform:translateX(-50%);width:44%}
+.media .cap{position:absolute;left:10px;bottom:10px;z-index:5;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:rgba(11,58,30,.72);color:#fff;padding:.3rem .55rem;border-radius:8px}
+/* treatments (stackable) */
+.t-mask{border-radius:42% 42% 36% 36%/12% 12% 10% 10%}
+.t-duotone .ph{filter:saturate(.2) contrast(1.1)}
+.t-duotone::after{content:"";position:absolute;inset:0;background:linear-gradient(150deg,rgba(11,58,30,.85),rgba(31,107,58,.55));mix-blend-mode:multiply}
+.t-duotone .lime-lift{position:absolute;inset:0;background:radial-gradient(120% 90% at 80% 10%,rgba(200,241,53,.35),transparent 55%);mix-blend-mode:screen}
+.t-grain{}
+.t-stripe::before{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(58deg,rgba(200,241,53,.14) 0 16px,transparent 16px 34px);pointer-events:none}
+.t-ring{outline:3px solid var(--lime);outline-offset:-10px;border-radius:var(--r)}
+.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.pipeline figure{margin:0}.pipeline figcaption{font-size:.82rem;color:var(--sage);margin-top:.5rem;font-weight:600}
+.pipeline .n{color:var(--green);font-weight:800}
+
+.tex-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:.8rem}
+.swatch{aspect-ratio:1;border-radius:14px;position:relative;overflow:hidden;border:1px solid var(--line)}
+.swatch span{position:absolute;left:6px;bottom:6px;font-size:.6rem;font-weight:700;background:rgba(11,58,30,.7);color:#fff;padding:.2rem .4rem;border-radius:6px}
+.tx-grass{background:linear-gradient(160deg,#2f9a4f,#155f30)}.tx-grass::after{content:"";position:absolute;inset:0;background-image:repeating-linear-gradient(80deg,rgba(255,255,255,.12) 0 3px,transparent 3px 7px)}
+.tx-paper{background:var(--cream)}.tx-paper::after{content:"";position:absolute;inset:0;opacity:.6;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23p)' opacity='0.25'/%3E%3C/svg%3E")}
+.tx-soil{background:linear-gradient(160deg,#6b4b2a,#3f2c17)}
+.pt-leaf{background:var(--forest);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48'%3E%3Cpath d='M24 6C16 14 16 30 24 42 32 30 32 14 24 6Z' fill='none' stroke='%23C8F135' stroke-opacity='0.4' stroke-width='1.4'/%3E%3C/svg%3E")}
+.pt-stripe{background:var(--green);background-image:repeating-linear-gradient(-33deg,rgba(255,255,255,.14) 0 10px,transparent 10px 20px)}
+.pt-dots{background:var(--forest-2);background-image:radial-gradient(rgba(200,241,53,.5) 1.4px,transparent 1.6px);background-size:14px 14px}
+
+.icons{display:grid;grid-template-columns:repeat(8,1fr);gap:.7rem}
+.icons .ico{aspect-ratio:1;border:1px solid var(--line-lt);border-radius:14px;display:grid;place-items:center;background:rgba(255,255,255,.04)}
+.icons svg{width:26px;height:26px;color:var(--lime)}
+
+.vslot{position:relative;border-radius:var(--r-lg);overflow:hidden;aspect-ratio:16/8;background:linear-gradient(150deg,#0f4324,#0b3a1e)}
+.vslot .ph{position:absolute;inset:0}.vslot .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:74px;height:74px;border-radius:50%;background:var(--lime);display:grid;place-items:center;box-shadow:var(--shadow)}
+.vslot .play::after{content:"";border-left:20px solid var(--forest-2);border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px}
+.vslot .lbl{position:absolute;left:14px;top:14px;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(11,58,30,.7);color:#fff;padding:.35rem .6rem;border-radius:8px;z-index:3}
+
+/* cards / service */
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:translateY(-5px);box-shadow:var(--shadow)}
+.card .body{padding:1.1rem}.card h3{font-size:1.2rem}.card p{color:var(--sage);font-size:.92rem;margin-top:.3rem}
+.card .lnk{font-weight:700;color:var(--green);font-size:.88rem;display:inline-flex;gap:.35rem;margin-top:.7rem}
+
+/* interior hero */
+.ihero{position:relative;color:#fff;border-radius:var(--r-lg);overflow:hidden;min-height:420px;display:flex;align-items:flex-end;padding:2.2rem}
+.ihero .bg{position:absolute;inset:0}.ihero .bg .ph{position:absolute;inset:0}
+.ihero .scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,58,30,.9),rgba(11,58,30,.35) 70%,transparent)}
+.ihero .in{position:relative;max-width:44ch}
+.ihero h1{font-size:clamp(2rem,4vw,3.2rem)}
+.ihero p{color:rgba(255,255,255,.85);margin:.7rem 0 1.2rem}
+.crumb{position:absolute;top:1.4rem;left:2.2rem;z-index:3;font-size:.8rem;font-weight:600;color:rgba(255,255,255,.8)}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:.8rem}
+.gallery .g{position:relative;overflow:hidden;border-radius:16px}
+.gallery .g .ph{position:absolute;inset:0}
+.gallery .tall{grid-row:span 2}.gallery .wide{grid-column:span 2}
+
+/* process */
+.proc{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;counter-reset:s}
+.step{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:1.2rem}
+.step .num{font-family:var(--display);font-weight:800;color:var(--lime);-webkit-text-stroke:1.5px var(--green);font-size:2rem}
+.step h4{margin:.3rem 0}.step p{color:var(--sage);font-size:.9rem}
+
+/* tables */
+.tbl{width:100%;border-collapse:collapse;font-size:.9rem;background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.tbl th,.tbl td{text-align:left;padding:.7rem .9rem;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl th{background:var(--forest);color:#fff;font-family:var(--body);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}
+.tbl tr:last-child td{border-bottom:none}.tbl code{background:var(--cream);padding:.1rem .35rem;border-radius:5px;font-size:.85em}
+.tbl .type{font-weight:700;color:var(--green)}
+
+/* block map */
+.blocks{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem}
+.bcard{border:1px solid var(--line);border-radius:var(--r);padding:1.2rem;background:#fff}
+.bcard h4{font-size:1.05rem;margin-bottom:.5rem}
+.bcard .chips{display:flex;gap:.4rem;flex-wrap:wrap}
+.bchip{font-size:.74rem;font-weight:700;background:var(--cream);border:1px solid var(--line);border-radius:999px;padding:.28rem .6rem}
+.bchip.core{background:var(--forest);color:#fff;border-color:var(--forest)}
+
+.reveal{opacity:0;transform:translateY(18px)}.reveal.in{opacity:1;transform:none;transition:.6s cubic-bezier(.2,.7,.2,1)}
+.note{background:rgba(200,241,53,.14);border:1px dashed var(--lime-2);border-radius:14px;padding:.9rem 1.1rem;font-size:.9rem;color:var(--forest-2)}
+.on-dark .note{color:#eaffc0}
+hr.div{border:none;border-top:1px solid var(--line);margin:2.4rem 0}
+
+@media(max-width:900px){.pipeline,.grid3,.grid4,.proc,.blocks{grid-template-columns:1fr 1fr}.tex-grid,.icons{grid-template-columns:repeat(4,1fr)}.gallery{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.pipeline,.grid3,.grid4,.proc,.blocks{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+</style>
+</head>
+<body>
+
+<!-- masthead -->
+<section class="on-dark grain" style="position:relative;padding:2.4rem 0 2rem">
+  <div class="wrap" style="position:relative;z-index:2">
+    <span class="pill"><span class="dot"></span> Design System v2</span>
+    <h1 style="font-size:clamp(2rem,4.4vw,3.2rem);margin:.7rem 0 .4rem;color:#fff">A media layer that makes the whole site feel rich — and stays consistent on every page.</h1>
+    <p style="color:rgba(255,255,255,.75);max-width:60ch">Extends the canonical Cut Rates system with an Envato-ready media pipeline (photos, textures, patterns, icons, motion, video), reusable page templates, and a slot map so real assets drop straight in — no more flat placeholder graphics.</p>
+  </div>
+</section>
+
+<!-- 1. MEDIA SYSTEM -->
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">01 · Media system</span>
+      <h2>Real photos, made unmistakably Cut Rates.</h2>
+      <p>Any stock photo enters through the same treatment pipeline, so third-party imagery always lands on-brand — green, textured, and warm — instead of looking like a stock library.</p>
+    </div>
+
+    <!-- photo treatment pipeline -->
+    <div class="pipeline reveal">
+      <figure><div class="media grain"><div class="ph"></div><svg class="house" viewBox="0 0 200 120"><path d="M20 70 L100 24 L180 70 V116 H20 Z" fill="#f3efe2"/><path d="M12 74 L100 18 L188 74" stroke="#0B3A1E" stroke-width="6" fill="none"/><rect x="60" y="82" width="26" height="34" fill="#1F6B3A"/><rect x="112" y="82" width="30" height="24" fill="#8fd3a3"/></svg><span class="cap">Raw Envato photo</span></div><figcaption><span class="n">1.</span> Source — an Envato Elements stock photo.</figcaption></figure>
+      <figure><div class="media grain t-duotone"><div class="ph"></div><div class="lime-lift"></div><span class="cap">+ Green duotone</span></div><figcaption><span class="n">2.</span> Brand duotone + lime light-lift.</figcaption></figure>
+      <figure><div class="media grain t-duotone t-stripe"><div class="ph"></div><div class="lime-lift"></div><span class="cap">+ Mow-stripe</span></div><figcaption><span class="n">3.</span> Signature mow-stripe overlay.</figcaption></figure>
+      <figure><div class="media grain t-duotone t-stripe t-mask"><div class="ph"></div><div class="lime-lift"></div><span class="cap">+ Organic mask</span></div><figcaption><span class="n">4.</span> Organic mask — the final on-brand asset.</figcaption></figure>
+    </div>
+
+    <hr class="div">
+
+    <!-- textures + patterns -->
+    <div class="grid3" style="align-items:start">
+      <div class="reveal">
+        <h3 style="font-size:1.2rem;margin-bottom:.8rem">Textures</h3>
+        <div class="tex-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="swatch tx-grass"><span>Grass</span></div>
+          <div class="swatch tx-paper"><span>Paper</span></div>
+          <div class="swatch tx-soil"><span>Soil</span></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <h3 style="font-size:1.2rem;margin-bottom:.8rem">Patterns</h3>
+        <div class="tex-grid" style="grid-template-columns:repeat(3,1fr)">
+          <div class="swatch pt-leaf"><span>Leaf</span></div>
+          <div class="swatch pt-stripe"><span>Stripe</span></div>
+          <div class="swatch pt-dots"><span>Seed dots</span></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <h3 style="font-size:1.2rem;margin-bottom:.8rem">Icon set</h3>
+        <div class="icons" style="grid-template-columns:repeat(4,1fr)">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c-3 4-3 9 0 14 3-5 3-10 0-14z"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 17h18M6 17v-4a6 6 0 0112 0v4"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></svg></div>
+          <div class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2 5 5 .5-4 3.5 1.5 5-4.5-3-4.5 3 1.5-5-4-3.5 5-.5z"/></svg></div>
+        </div>
+        <p style="color:var(--sage);font-size:.82rem;margin-top:.6rem">Single-weight line set, lime on dark chips — one consistent icon language.</p>
+      </div>
+    </div>
+
+    <hr class="div">
+
+    <!-- video slot -->
+    <div class="reveal">
+      <h3 style="font-size:1.2rem;margin-bottom:.8rem">Motion &amp; video slot</h3>
+      <div class="vslot grain stripe-ov"><div class="ph"></div><span class="lbl">Envato stock video · aerial lawn loop</span><div class="play"></div></div>
+      <p class="note" style="margin-top:1rem">Hero and section backgrounds accept a looping Envato clip (muted, autoplay, poster fallback) or a Lottie animation from Envato add-ons — same slot, reduced-motion aware, always with a static poster so it never blocks the quote CTA.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2. INTERIOR TEMPLATE -->
+<section class="pad on-cream">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">02 · Page template — service detail</span>
+      <h2>Every interior page, built from the same blocks.</h2>
+      <p>Here's the Landscaping page assembled entirely from the shared components and media slots — proof the look holds across the site, not just the homepage.</p>
+    </div>
+
+    <div class="ihero grain reveal">
+      <div class="bg"><div class="media t-duotone" style="border-radius:0;aspect-ratio:auto;position:absolute;inset:0"><div class="ph"></div><div class="lime-lift"></div></div></div>
+      <div class="scrim"></div>
+      <span class="crumb">Home / Services / <b style="color:#fff">Landscaping</b></span>
+      <div class="in">
+        <span class="tag">Our specialty</span>
+        <h1 style="margin-top:.6rem">Landscaping &amp; Design</h1>
+        <p>Design, hardscaping, planting, and irrigation — the transformations that make yours the best yard on the block.</p>
+        <a href="#" class="btn btn-lime">Get a landscaping quote →</a>
+      </div>
+    </div>
+
+    <div class="grid4 reveal" style="margin-top:1.4rem">
+      <div class="card"><div class="media" style="aspect-ratio:16/11;border-radius:0"><div class="ph"></div><span class="cap">Photo slot</span></div><div class="body"><h3 style="font-size:1.1rem">Landscape Design</h3><p>Custom plans tuned to your property.</p></div></div>
+      <div class="card"><div class="media" style="aspect-ratio:16/11;border-radius:0"><div class="ph"></div><span class="cap">Photo slot</span></div><div class="body"><h3 style="font-size:1.1rem">Hardscaping</h3><p>Patios, walkways, retaining walls.</p></div></div>
+      <div class="card"><div class="media" style="aspect-ratio:16/11;border-radius:0"><div class="ph"></div><span class="cap">Photo slot</span></div><div class="body"><h3 style="font-size:1.1rem">Planting</h3><p>Plants suited to your local climate.</p></div></div>
+      <div class="card"><div class="media" style="aspect-ratio:16/11;border-radius:0"><div class="ph"></div><span class="cap">Photo slot</span></div><div class="body"><h3 style="font-size:1.1rem">Irrigation</h3><p>Efficient, water-wise systems.</p></div></div>
+    </div>
+
+    <h3 style="font-size:1.3rem;margin:2.4rem 0 1rem" class="reveal">Recent work</h3>
+    <div class="gallery reveal">
+      <div class="g tall grain t-duotone"><div class="ph"></div></div>
+      <div class="g wide grain t-stripe"><div class="ph"></div></div>
+      <div class="g grain"><div class="ph"></div></div>
+      <div class="g grain t-duotone"><div class="ph"></div></div>
+      <div class="g wide grain"><div class="ph"></div></div>
+      <div class="g tall grain t-stripe"><div class="ph"></div></div>
+    </div>
+
+    <h3 style="font-size:1.3rem;margin:2.4rem 0 1rem" class="reveal">How it works</h3>
+    <div class="proc reveal">
+      <div class="step"><div class="num">1</div><h4>Consultation</h4><p>We walk the property and learn your goals.</p></div>
+      <div class="step"><div class="num">2</div><h4>Design</h4><p>A custom plan built for your yard and budget.</p></div>
+      <div class="step"><div class="num">3</div><h4>Install</h4><p>Our crew brings it to life, on schedule.</p></div>
+      <div class="step"><div class="num">4</div><h4>Maintain</h4><p>Ongoing care keeps it looking its best.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. ENVATO SLOT MAP -->
+<section class="pad">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">03 · Envato slot map</span>
+      <h2>Where each asset comes from.</h2>
+      <p>Every media slot is wired to a specific Envato Elements search + brand treatment, so sourcing is repeatable and licensing stays clean.</p>
+    </div>
+    <div style="overflow-x:auto" class="reveal">
+    <table class="tbl">
+      <tr><th>Slot</th><th>Envato type</th><th>Search terms</th><th>Filters</th><th>Treatment</th></tr>
+      <tr><td>Hero / page banners</td><td class="type">photos</td><td><code>manicured lawn landscaped backyard</code></td><td>landscape · green · no people</td><td>Duotone + grain + scrim</td></tr>
+      <tr><td>Service &amp; card images</td><td class="type">photos</td><td><code>lawn crew mowing</code>, <code>hardscape patio</code></td><td>landscape · green</td><td>Organic mask + grain</td></tr>
+      <tr><td>Before/after proof</td><td class="type">photos</td><td><code>lawn before after</code></td><td>landscape · square</td><td>Mow-stripe on "after"</td></tr>
+      <tr><td>Section textures</td><td class="type">graphics</td><td><code>grass texture</code>, <code>paper texture</code></td><td>Textures · tileable</td><td>Low-opacity overlay</td></tr>
+      <tr><td>Background patterns</td><td class="type">graphics</td><td><code>botanical leaf pattern</code></td><td>Patterns · vector · tileable</td><td>4–8% opacity, brand tint</td></tr>
+      <tr><td>Iconography</td><td class="type">graphics</td><td><code>garden lawn line icons</code></td><td>Icons · vector · part of pack</td><td>Recolor to lime/green</td></tr>
+      <tr><td>Hero / ambient motion</td><td class="type">stock-video</td><td><code>aerial lawn drone</code></td><td>Nature · looped · 4K · horizontal</td><td>Muted loop + poster</td></tr>
+      <tr><td>Micro-animations</td><td class="type">add-ons / graphics</td><td><code>lottie animation garden</code></td><td>JSON · animated · looped</td><td>Accent moments only</td></tr>
+      <tr><td>Display font (optional)</td><td class="type">fonts</td><td><code>bold grotesque display</code></td><td>webfont · display</td><td>Pairs with Hanken body</td></tr>
+      <tr><td>Ambient audio (optional)</td><td class="type">sound-effects</td><td><code>outdoor birds ambience</code></td><td>Nature · &lt;30s</td><td>Off by default</td></tr>
+    </table>
+    </div>
+    <p class="note reveal" style="margin-top:1rem">Live pulls run through your connected Envato Elements — approve the connector prompt and I'll swap every <code>Photo slot</code> here for real, licensed assets and log the item IDs for the media manifest.</p>
+  </div>
+</section>
+
+<!-- 4. PAGE BLOCK LIBRARY -->
+<section class="pad on-dark grain">
+  <div class="wrap" style="position:relative;z-index:2">
+    <div class="sec-head reveal">
+      <span class="eyebrow">04 · Page block library</span>
+      <h2 style="color:#fff">One kit of blocks builds every page.</h2>
+      <p>Consistency by construction: each page type is just a recipe of shared blocks. New pages inherit the look automatically.</p>
+    </div>
+    <div class="blocks reveal">
+      <div class="bcard"><h4>Homepage</h4><div class="chips"><span class="bchip core">Hero</span><span class="bchip">Ribbon</span><span class="bchip">Services</span><span class="bchip">Quote band</span><span class="bchip">Before/After</span><span class="bchip">Reviews</span><span class="bchip">Areas</span><span class="bchip">Bundles</span><span class="bchip">FAQ</span><span class="bchip">Footer CTA</span></div></div>
+      <div class="bcard"><h4>Service detail</h4><div class="chips"><span class="bchip core">Interior hero</span><span class="bchip">Sub-services</span><span class="bchip">Gallery</span><span class="bchip">Process</span><span class="bchip">Reviews</span><span class="bchip">FAQ</span><span class="bchip">Quote CTA</span></div></div>
+      <div class="bcard"><h4>Service area (local SEO)</h4><div class="chips"><span class="bchip core">Interior hero</span><span class="bchip">Local intro</span><span class="bchip">Services</span><span class="bchip">Map/area</span><span class="bchip">Reviews</span><span class="bchip">Quote CTA</span></div></div>
+      <div class="bcard"><h4>Quote flow</h4><div class="chips"><span class="bchip core">Stepper</span><span class="bchip">Estimator</span><span class="bchip">Contact</span><span class="bchip">Trust strip</span><span class="bchip">Confirmation</span></div></div>
+      <div class="bcard"><h4>Our work / gallery</h4><div class="chips"><span class="bchip core">Interior hero</span><span class="bchip">Filter chips</span><span class="bchip">Gallery</span><span class="bchip">Before/After</span><span class="bchip">Quote CTA</span></div></div>
+      <div class="bcard"><h4>Bundles &amp; pricing</h4><div class="chips"><span class="bchip core">Interior hero</span><span class="bchip">Bundle cards</span><span class="bchip">Compare table</span><span class="bchip">FAQ</span><span class="bchip">Quote CTA</span></div></div>
+      <div class="bcard"><h4>About</h4><div class="chips"><span class="bchip core">Interior hero</span><span class="bchip">Story</span><span class="bchip">Team</span><span class="bchip">Stats</span><span class="bchip">Areas</span><span class="bchip">Quote CTA</span></div></div>
+      <div class="bcard"><h4>Contact</h4><div class="chips"><span class="bchip core">Interior hero</span><span class="bchip">Form</span><span class="bchip">Map</span><span class="bchip">Hours/phone</span><span class="bchip">Quote CTA</span></div></div>
+    </div>
+    <p class="note reveal" style="margin-top:1.4rem">Bold block = the page's anchor. Every block already exists in the kit, so a new town page or service page is assembled, never designed from scratch.</p>
+  </div>
+</section>
+
+<script>
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

@@ -1,21 +1,39 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
+import dynamic from "next/dynamic"
+import { Bricolage_Grotesque, Hanken_Grotesk } from "next/font/google"
 import "./globals.css"
-import Header from "@/components/header"
-import Footer from "@/components/footer"
-import LiveChat from "@/components/live-chat"
+import {
+  AnnouncementMarquee,
+  SiteFooter,
+  SiteHeader,
+  StickyQuoteBar,
+} from "@/components/blocks"
 import { Toaster } from "@/components/ui/sonner"
 import { siteConfig } from "@/lib/site-config"
 import { mediaSrc } from "@/lib/media"
 import { Providers } from "./providers"
 
-const inter = Inter({ subsets: ["latin"] })
+const LiveChat = dynamic(() => import("@/components/live-chat"), { ssr: false })
+
+const display = Bricolage_Grotesque({
+  subsets: ["latin"],
+  variable: "--font-display",
+  weight: ["600", "700", "800"],
+  display: "swap",
+})
+
+const body = Hanken_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-body",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+})
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
+    { media: "(prefers-color-scheme: light)", color: "#FBFAF4" },
+    { media: "(prefers-color-scheme: dark)", color: "#0B3A1E" },
   ],
 }
 
@@ -26,8 +44,17 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "Professional lawn care, power washing, pest control, and more for residential and commercial properties.",
-  keywords: ["lawn care", "landscaping", "pest control", "power washing", "property maintenance"],
+    "Family-owned landscaping and lawn care from Wichita to Kansas City. Design, mowing, fertilization, aeration, holiday lights, and more — get a free quote in about two minutes.",
+  keywords: [
+    "landscaping",
+    "lawn care",
+    "Wichita",
+    "Kansas City",
+    "aeration",
+    "holiday lights",
+    "pest control",
+    "hardscaping",
+  ],
   authors: [{ name: "Cut Rates Lawn Care LLC" }],
   creator: "Cut Rates Lawn Care LLC",
   openGraph: {
@@ -40,7 +67,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
-    description: "Professional lawn care and property maintenance services",
+    description:
+      "Landscaping flagship care from Wichita to KC — free online quotes, no contracts.",
     creator: siteConfig.twitterHandle,
     images: [mediaSrc("og.default")],
   },
@@ -65,11 +93,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${display.variable} ${body.variable} font-body`}>
         <Providers>
-          <Header />
-          <div className="relative z-0">{children}</div>
-          <Footer />
+          <AnnouncementMarquee />
+          <SiteHeader />
+          <main className="relative z-0">{children}</main>
+          <SiteFooter />
+          <StickyQuoteBar />
           <LiveChat />
           <Toaster />
         </Providers>

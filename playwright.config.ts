@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test"
 
-const PORT = process.env.PORT ?? "3000"
-const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? `http://localhost:${PORT}`
+const PORT = process.env.PORT ?? "3010"
+const baseURL = process.env.PLAYWRIGHT_BASE_URL ?? `http://127.0.0.1:${PORT}`
 
 export default defineConfig({
   testDir: "./tests/e2e",
@@ -20,14 +20,21 @@ export default defineConfig({
   },
   projects: [
     {
-      name: "Microsoft Edge",
-      use: { ...devices["Desktop Edge"], channel: "msedge" },
+      name: "chromium",
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "mobile",
+      use: {
+        ...devices["Pixel 5"],
+        defaultBrowserType: "chromium",
+      },
     },
   ],
   webServer: {
-    command: "npm run build && npm run start",
+    command: `pnpm run build && pnpm exec next start -p ${PORT}`,
     url: baseURL,
     reuseExistingServer: !process.env.CI,
-    timeout: 180_000,
+    timeout: 300_000,
   },
 })

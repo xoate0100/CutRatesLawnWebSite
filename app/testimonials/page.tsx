@@ -1,5 +1,8 @@
 import { ReviewsList } from "@/components/reviews/reviews-list"
 import { TestimonialsList } from "@/components/testimonials-list"
+import { MediaFrame } from "@/components/media/media-frame"
+import { mediaAlt, mediaSrc } from "@/lib/media"
+import Image from "next/image"
 import { Suspense } from "react"
 import { Shield, Clock, Users, Award, ThumbsUp } from "lucide-react"
 
@@ -43,10 +46,12 @@ export default function TestimonialsPage() {
       <section className="mb-16">
         <div className="bg-white rounded-lg shadow-sm p-6">
           <div className="flex items-center gap-3 mb-6">
-            <img
-              src="https://storage.googleapis.com/site_photo_storage/images/partners/google-reviews.png"
-              alt="Google Reviews"
-              className="h-8"
+            <Image
+              src={mediaSrc("partners.google")}
+              alt={mediaAlt("partners.google", "Google Reviews")}
+              width={120}
+              height={32}
+              className="h-8 w-auto"
             />
             <h2 className="text-2xl font-bold">Google Reviews</h2>
             <div className="ml-auto flex items-center gap-2">
@@ -86,12 +91,8 @@ export default function TestimonialsPage() {
           <h2 className="text-2xl font-bold mb-6">See The Difference</h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <div className="aspect-video relative overflow-hidden rounded-lg mb-4">
-                <img
-                  src="https://storage.googleapis.com/site_photo_storage/images/results/before-after-1.jpg"
-                  alt="Before and after lawn transformation"
-                  className="w-full h-full object-cover"
-                />
+              <div className="mb-4 overflow-hidden rounded-lg">
+                <MediaFrame slot="gallery.before" aspect="16/9" />
               </div>
               <h3 className="font-semibold text-lg mb-2">Neglected Lawn Transformation</h3>
               <p className="text-gray-700">
@@ -101,12 +102,8 @@ export default function TestimonialsPage() {
               <p className="text-sm text-gray-500 mt-2">— Michael R., East Wichita</p>
             </div>
             <div>
-              <div className="aspect-video relative overflow-hidden rounded-lg mb-4">
-                <img
-                  src="https://storage.googleapis.com/site_photo_storage/images/results/before-after-2.jpg"
-                  alt="Before and after garden bed transformation"
-                  className="w-full h-full object-cover"
-                />
+              <div className="mb-4 overflow-hidden rounded-lg">
+                <MediaFrame slot="gallery.after" aspect="16/9" />
               </div>
               <h3 className="font-semibold text-lg mb-2">Complete Yard Makeover</h3>
               <p className="text-gray-700">
@@ -136,10 +133,12 @@ export default function TestimonialsPage() {
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-2 px-6 py-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
           >
-            <img
-              src="https://storage.googleapis.com/site_photo_storage/images/partners/google-reviews.png"
-              alt="Google Reviews"
-              className="h-6"
+            <Image
+              src={mediaSrc("partners.google")}
+              alt={mediaAlt("partners.google", "Google Reviews")}
+              width={96}
+              height={24}
+              className="h-6 w-auto"
             />
             <span className="font-medium">Review on Google</span>
           </a>
@@ -148,10 +147,12 @@ export default function TestimonialsPage() {
             href="#"
             className="flex items-center justify-center gap-2 px-6 py-3 bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
           >
-            <img
-              src="https://storage.googleapis.com/site_photo_storage/images/partners/yelp-logo.png"
-              alt="Yelp"
-              className="h-6"
+            <Image
+              src={mediaSrc("partners.yelp")}
+              alt={mediaAlt("partners.yelp", "Yelp")}
+              width={96}
+              height={24}
+              className="h-6 w-auto"
             />
             <span className="font-medium">Review on Yelp</span>
           </a>

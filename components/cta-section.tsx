@@ -7,7 +7,7 @@ interface CTAButtonProps {
 }
 
 interface CTASectionProps {
-  data: {
+  data?: {
     title?: string
     subtitle?: string
     primaryButton?: CTAButtonProps
@@ -22,12 +22,26 @@ interface CTASectionProps {
   secondaryButtonLink?: string
 }
 
-export function CTASection({ data }: CTASectionProps) {
+export function CTASection({
+  data,
+  title: titleProp,
+  description,
+  primaryButtonText,
+  primaryButtonLink,
+  secondaryButtonText,
+  secondaryButtonLink,
+}: CTASectionProps) {
   const {
-    title = "Ready to get started?",
-    subtitle = "Contact us today for a free quote on your lawn care needs.",
-    primaryButton = { text: "Get a Quote", url: "/quote" },
-    secondaryButton = { text: "Learn More", url: "/services" },
+    title = titleProp ?? "Ready to get started?",
+    subtitle = description ?? "Contact us today for a free quote on your lawn care needs.",
+    primaryButton = {
+      text: primaryButtonText ?? "Get a Quote",
+      url: primaryButtonLink ?? "/quote",
+    },
+    secondaryButton = {
+      text: secondaryButtonText ?? "Learn More",
+      url: secondaryButtonLink ?? "/services",
+    },
     backgroundColor = "bg-green-600",
   } = data || {}
 

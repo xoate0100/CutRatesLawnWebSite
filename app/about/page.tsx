@@ -1,120 +1,54 @@
-import Image from "next/image"
-import { HeroPlane } from "@/components/atmosphere/hero-plane"
-import { SectionShell } from "@/components/atmosphere/section-shell"
-import { AtmReveal } from "@/components/atmosphere/atm-reveal"
-import { mediaAlt, mediaSrc } from "@/lib/media"
+import { SectionHead } from "@/components/ui/section-head"
+import { CTASection, InteriorHero, TeamGrid } from "@/components/blocks"
+import { ABOUT_STATS } from "@/lib/marketing-content"
 
-const team = [
-  {
-    slot: "team.owner",
-    name: "John Smith",
-    role: "Owner & Founder",
-    bio: "With over 15 years of experience in lawn care, John founded Cut Rates Lawn Care with a vision to provide exceptional service at competitive rates.",
-  },
-  {
-    slot: "team.manager",
-    name: "Sarah Johnson",
-    role: "Operations Manager",
-    bio: "Sarah oversees all day-to-day operations, ensuring that every job is completed to our high standards of quality and customer satisfaction.",
-  },
-  {
-    slot: "team.crew",
-    name: "Mike Thompson",
-    role: "Lead Technician",
-    bio: "Mike brings technical expertise and attention to detail to every project, specializing in lawn treatments and specialized care techniques.",
-  },
-] as const
+export const metadata = {
+  title: "About",
+  description:
+    "Family-owned landscaping and lawn care from Valley Center — serving Wichita to Kansas City.",
+}
 
 export default function AboutPage() {
   return (
-    <main className="flex min-h-screen flex-col">
-      <HeroPlane
-        slot="about.hero"
-        altFallback="Cut Rates Lawn Care team"
-        heightClass="h-[400px] md:h-[500px] lg:h-[560px]"
-      >
-        <div className="container mx-auto px-4 text-center text-white">
-          <h1 className="mb-4 text-4xl font-bold md:text-5xl atm-enter">Our Team</h1>
-          <p className="mx-auto max-w-2xl text-xl text-white/90 atm-enter atm-enter-delay-1">
-            Dedicated professionals committed to making your lawn the best it can be
-          </p>
-        </div>
-      </HeroPlane>
+    <div className="bg-paper">
+      <InteriorHero
+        eyebrow="About us"
+        title="Local crew. Straight talk. Done right."
+        description="Family-owned Cut Rates Lawn Care — landscaping flagship work and dependable lawn care from Wichita to the Kansas City side."
+        mediaSlot="about.hero"
+      />
 
-      <SectionShell
-        tone="canvas-alt"
-        motif
-        motifCoverage="full"
-        motifIntensity="medium"
-        texture
-        seam
-        seamFade
-        className="py-16"
-      >
-        <div className="container mx-auto px-4">
-          <AtmReveal>
-            <div className="mx-auto max-w-4xl">
-              <h2 className="mb-6 text-center text-3xl font-bold">About Cut Rates Lawn Care</h2>
-              <p className="mb-6 text-lg text-muted-foreground">
-                Founded in 2015, Cut Rates Lawn Care has been providing exceptional lawn care services to homeowners and
-                businesses in Wichita and surrounding areas. Our team of experienced professionals is dedicated to
-                delivering high-quality results that exceed our customers&apos; expectations.
-              </p>
-              <p className="mb-6 text-lg text-muted-foreground">
-                We take pride in our work and are committed to using the best equipment and techniques to ensure your lawn
-                looks its best year-round. From regular maintenance to specialized treatments, we have the expertise to
-                handle all your lawn care needs.
-              </p>
-              <p className="text-lg text-muted-foreground">
-                Our mission is simple: to provide reliable, professional lawn care services at competitive rates, while
-                building lasting relationships with our customers based on trust and satisfaction.
-              </p>
+      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+        <SectionHead
+          eyebrow="Our story"
+          title="Show up. Do the work. Make booking easy."
+          description="We built Cut Rates for homeowners who want a better-looking lawn without chasing contractors. No contracts, fast quotes, and a crew that treats your property like a neighbor’s — because we are."
+        />
+        <dl className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {ABOUT_STATS.map((s) => (
+            <div
+              key={s.label}
+              className="rounded-brand border border-line bg-cream px-5 py-4 text-center"
+            >
+              <dt className="text-xs font-bold uppercase tracking-wider text-sage">{s.label}</dt>
+              <dd className="font-display mt-1 text-2xl font-extrabold text-forest">{s.value}</dd>
             </div>
-          </AtmReveal>
-        </div>
-      </SectionShell>
+          ))}
+        </dl>
+      </section>
 
-      <SectionShell
-        tone="deep-band"
-        motif
-        motifCoverage="full"
-        motifVariant="ribs"
-        motifIntensity="soft"
-        texture
-        seam
-        seamFade
-        className="py-16"
-      >
-        <div className="container mx-auto px-4">
-          <AtmReveal>
-            <h2 className="mb-12 text-center text-3xl font-bold">Meet Our Team</h2>
-          </AtmReveal>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {team.map((member, i) => (
-              <AtmReveal key={member.slot} delay={(Math.min(i + 1, 3)) as 1 | 2 | 3}>
-                <article className="overflow-hidden rounded-lg bg-card atm-elev-1 atm-hover-lift">
-                  <div className="relative h-80">
-                    <Image
-                      src={mediaSrc(member.slot)}
-                      alt={mediaAlt(member.slot, member.name)}
-                      fill
-                      className="object-cover object-center"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                    <div className="atm-photo-tint" aria-hidden />
-                    <div className="atm-photo-scrim" aria-hidden />
-                  </div>
-                  <div className="p-6">
-                    <h3 className="mb-2 text-xl font-bold">{member.name}</h3>
-                    <p className="mb-4 font-medium text-primary">{member.role}</p>
-                    <p className="text-muted-foreground">{member.bio}</p>
-                  </div>
-                </article>
-              </AtmReveal>
-            ))}
-          </div>
+      <section className="bg-cream py-[clamp(2.5rem,5vw,4.5rem)]">
+        <div className="mx-auto w-[min(1200px,92vw)]">
+          <SectionHead
+            eyebrow="Team"
+            title="People behind the routes."
+            description="Operations, scheduling, and field crews focused on consistent results."
+          />
+          <TeamGrid />
         </div>
-      </SectionShell>
-    </main>
+      </section>
+
+      <CTASection title="Meet the crew on your next quote." />
+    </div>
   )
 }

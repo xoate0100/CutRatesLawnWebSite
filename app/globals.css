@@ -4,28 +4,46 @@
 
 @layer base {
   :root {
-    --background: 40 20% 98%;
-    --foreground: 150 15% 12%;
+    /* Brand tokens */
+    --forest: #0b3a1e;
+    --forest-2: #0f2e1b;
+    --green: #1f6b3a;
+    --green-soft: #2e7d42;
+    --lime: #c8f135;
+    --lime-2: #a9e22e;
+    --cream: #f5f2e9;
+    --paper: #fbfaf4;
+    --ink: #12241a;
+    --sage: #5d7064;
+    --line: rgba(18, 36, 26, 0.12);
+    --line-lt: rgba(255, 255, 255, 0.14);
+    --shadow: 0 18px 50px -20px rgba(11, 58, 30, 0.45);
+    --r: 20px;
+    --r-lg: 30px;
+
+    /* shadcn HSL tokens mapped toward brand */
+    --background: 60 33% 97%; /* paper */
+    --foreground: 145 33% 10%; /* ink */
     --card: 0 0% 100%;
-    --card-foreground: 150 15% 12%;
+    --card-foreground: 145 33% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 150 15% 12%;
-    --primary: 142 76% 36%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 40 18% 94%;
-    --secondary-foreground: 150 15% 18%;
-    --muted: 40 14% 94%;
-    --muted-foreground: 150 8% 40%;
-    --accent: 142 30% 94%;
-    --accent-foreground: 142 60% 22%;
+    --popover-foreground: 145 33% 10%;
+    --primary: 145 55% 27%; /* green */
+    --primary-foreground: 60 33% 97%;
+    --secondary: 45 33% 94%; /* cream */
+    --secondary-foreground: 145 33% 12%;
+    --muted: 45 20% 94%;
+    --muted-foreground: 150 10% 40%;
+    --accent: 45 33% 94%;
+    --accent-foreground: 145 55% 22%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 140 12% 88%;
     --input: 140 12% 88%;
-    --ring: 142 76% 36%;
+    --ring: 74 87% 57%; /* lime-ish */
     --radius: 0.5rem;
 
-    /* Atmosphere tokens — calibrated for perceptible banding */
+    /* Atmosphere tokens — kept for existing pages */
     --atm-earth: 32 34% 86%;
     --atm-mist: 150 28% 91%;
     --atm-deep: 150 32% 10%;
@@ -44,7 +62,7 @@
     --card-foreground: 40 15% 96%;
     --popover: 150 16% 11%;
     --popover-foreground: 40 15% 96%;
-    --primary: 142 70% 45%;
+    --primary: 145 50% 40%;
     --primary-foreground: 150 30% 8%;
     --secondary: 150 12% 16%;
     --secondary-foreground: 40 15% 96%;
@@ -56,7 +74,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 150 12% 20%;
     --input: 150 12% 20%;
-    --ring: 142 70% 45%;
+    --ring: 74 87% 57%;
     --atm-earth: 32 16% 16%;
     --atm-mist: 150 18% 12%;
     --atm-deep: 150 22% 5%;
@@ -68,16 +86,76 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-paper text-ink font-body antialiased;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--lime);
+    outline-offset: 3px;
   }
 }
 
 @layer components {
+  /* ——— Brand utilities ——— */
+  .grain {
+    position: relative;
+  }
+  .grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  }
+
+  .mow-stripe,
+  .stripes {
+    background-image: repeating-linear-gradient(
+      -33deg,
+      rgba(255, 255, 255, 0.035) 0 28px,
+      rgba(0, 0, 0, 0.05) 28px 56px
+    );
+  }
+
+  .leafpat {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='54' height='54' viewBox='0 0 54 54'%3E%3Cpath d='M27 6C18 14 18 30 27 48 36 30 36 14 27 6Z' fill='none' stroke='%231F6B3A' stroke-opacity='0.10' stroke-width='1.4'/%3E%3C/svg%3E");
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    z-index: 0;
+  }
+
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: march 26s linear infinite;
+  }
+
+  .marquee-track-fast {
+    display: flex;
+    width: max-content;
+    animation: march 22s linear infinite;
+  }
+
+  /* ——— Atmosphere (legacy; brand tokens win for new UI) ——— */
   .atm-canvas {
     background-color: hsl(var(--background));
   }
 
-  /* Warmer earth band — alternates with canvas/mist for visible section banding */
   .atm-canvas-alt {
     background-color: hsl(var(--atm-earth));
   }
@@ -91,7 +169,6 @@
     );
   }
 
-  /* Soft mesh behind proof / mid bands */
   .atm-deep-band {
     background:
       radial-gradient(ellipse 70% 50% at 15% 20%, hsl(var(--primary) / 0.08), transparent 55%),
@@ -117,17 +194,12 @@
     );
   }
 
-  /* Bottom-up scrim for card / proof photos */
   .atm-photo-scrim {
     pointer-events: none;
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(
-      180deg,
-      transparent 40%,
-      hsl(var(--atm-deep) / 0.28) 100%
-    );
+    background: linear-gradient(180deg, transparent 40%, hsl(var(--atm-deep) / 0.28) 100%);
   }
 
   .atm-grain {
@@ -150,11 +222,7 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: radial-gradient(
-      ellipse at center,
-      transparent 40%,
-      hsl(var(--atm-deep) / 0.48) 100%
-    );
+    background: radial-gradient(ellipse at center, transparent 40%, hsl(var(--atm-deep) / 0.48) 100%);
   }
 
   .atm-photo-tint {
@@ -191,7 +259,8 @@
   }
 
   .atm-hover-lift {
-    transition: transform var(--atm-dur) var(--atm-ease),
+    transition:
+      transform var(--atm-dur) var(--atm-ease),
       box-shadow var(--atm-dur) var(--atm-ease);
   }
 
@@ -205,7 +274,6 @@
     outline-offset: 3px;
   }
 
-  /* Load-once (hero / above-the-fold) */
   .atm-enter {
     animation: atm-fade-up var(--atm-dur-slow) var(--atm-ease) both;
   }
@@ -222,14 +290,12 @@
     animation-delay: 240ms;
   }
 
-  /* Scroll-triggered reveal (below-the-fold) */
   .atm-reveal {
     opacity: 0;
     transform: translateY(18px);
     transition:
       opacity var(--atm-dur-slow) var(--atm-ease),
       transform var(--atm-dur-slow) var(--atm-ease);
-    /* Keep scroll reveals under sticky chrome (header z-100) */
     position: relative;
     z-index: 0;
   }
@@ -255,7 +321,6 @@
     background: hsl(var(--muted));
   }
 
-  /* Optional hero parallax layer (PRM-gated below) */
   .atm-parallax-media {
     transform: scale(1.06);
     will-change: transform;
@@ -273,7 +338,25 @@
   }
 }
 
+@keyframes march {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .marquee-track,
+  .marquee-track-fast {
+    animation: none !important;
+  }
+
   .atm-enter,
   .atm-enter-delay-1,
   .atm-enter-delay-2,
@@ -311,6 +394,7 @@
 }
 
 @media print {
+  .grain::before,
   .atm-grain,
   .atm-grain-strong,
   .atm-vignette,

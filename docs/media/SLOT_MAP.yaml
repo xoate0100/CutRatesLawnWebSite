@@ -498,3 +498,74 @@ slots:
     fallback: /placeholder.jpg?height=40&width=40
     alt: Customer avatar
     notes: Upload; bind asset_id
+  home.hero.video:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.svg?height=800&width=1920
+    alt: Aerial lawn ambient video loop — poster fallback
+    notes: Redesign — bind Envato video; poster-only under reduced-motion
+  services.holiday-lights:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=480&width=720
+    alt: Home exterior illuminated with holiday lights
+    notes: Redesign — Envato proposals in ENVATO_PROPOSALS_REDESIGN.md
+  services.snow-removal:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=480&width=720
+    alt: Snow cleared from a residential driveway
+    notes: Redesign — Envato proposals in ENVATO_PROPOSALS_REDESIGN.md
+  services.commercial:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.jpg?height=480&width=720
+    alt: Commercial property with maintained grounds
+    notes: Redesign — Envato proposals in ENVATO_PROPOSALS_REDESIGN.md
+  pattern.leaf:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.svg?height=200&width=200
+    alt: Botanical leaf pattern for section backgrounds
+    notes: Tileable vector; use at low opacity, brand-tinted
+  icons.gardening:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.svg?height=64&width=64
+    alt: Gardening icon set
+    notes: Recolor to lime on dark / green on light
+  areas.wichita.hero:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.svg?height=600&width=1600
+    alt: Lawn care in Wichita, KS
+  areas.valley-center.hero:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.svg?height=600&width=1600
+    alt: Lawn care in Valley Center, KS
+  areas.andover.hero:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.svg?height=600&width=1600
+    alt: Lawn care in Andover, KS
+  areas.derby.hero:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.svg?height=600&width=1600
+    alt: Lawn care in Derby, KS
+  areas.maize.hero:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.svg?height=600&width=1600
+    alt: Lawn care in Maize, KS
+  areas.kansas-city.hero:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.svg?height=600&width=1600
+    alt: Lawn care in Kansas City
+  areas.leavenworth.hero:
+    asset_id: null
+    variant: null
+    fallback: /placeholder.svg?height=600&width=1600
+    alt: Lawn care in Leavenworth, KS

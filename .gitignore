@@ -36,6 +36,13 @@ next-env.d.ts
 playwright-report/
 test-results/
 
+# Redesign audit / scratch artifacts
+artifacts/redesign/
+artifacts/lh-tmp/
+*.log
+artifacts-playwright*.log
+build-final.log
+
 # Media pipeline binaries (registries under docs/media/ stay committed)
 media/inbox/*
 !media/inbox/.gitkeep

@@ -1,6 +1,7 @@
 import { SectionHead } from "@/components/ui/section-head"
 import { CTASection, InteriorHero, TeamGrid } from "@/components/blocks"
 import { ABOUT_STATS } from "@/lib/marketing-content"
+import { pageWrap } from "@/lib/layout"
 
 export const metadata = {
   title: "About",
@@ -18,7 +19,7 @@ export default function AboutPage() {
         mediaSlot="about.hero"
       />
 
-      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         <SectionHead
           eyebrow="Our story"
           title="Show up. Do the work. Make booking easy."
@@ -38,7 +39,7 @@ export default function AboutPage() {
       </section>
 
       <section className="bg-cream py-[clamp(2.5rem,5vw,4.5rem)]">
-        <div className="mx-auto w-[min(1200px,92vw)]">
+        <div className={`${pageWrap}`}>
           <SectionHead
             eyebrow="Team"
             title="People behind the routes."

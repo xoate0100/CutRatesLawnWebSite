@@ -32,8 +32,8 @@ export function ServiceCard({
           </span>
         ) : null}
       </div>
-      <div className="p-5">
-        <h3 className="font-display text-[1.28rem] font-bold">{service.title}</h3>
+      <div className="min-w-0 p-4 sm:p-5">
+        <h3 className="font-display text-[clamp(1.15rem,4vw,1.28rem)] font-bold">{service.title}</h3>
         <p className="mt-1.5 text-[0.94rem] text-sage">{service.description}</p>
         <Link
           href={service.href}
@@ -69,9 +69,9 @@ export function FeatureCard({
           sizes="(max-width: 768px) 100vw, 50vw"
         />
       </div>
-      <div className="flex flex-col justify-center p-7">
+      <div className="flex flex-col justify-center p-5 sm:p-7 min-w-0">
         {service.tag ? <Tag className="mb-3 self-start">{service.tag}</Tag> : null}
-        <h3 className="font-display text-[1.7rem] font-bold">{service.title}</h3>
+        <h3 className="font-display text-[clamp(1.35rem,4vw,1.7rem)] font-bold">{service.title}</h3>
         <p className="mt-2 text-sage">{service.description}</p>
         <Link
           href={service.href}

@@ -1,4 +1,5 @@
 import { SectionHead } from "@/components/ui/section-head"
+import { pageWrap, pageWrapNarrow } from "@/lib/layout"
 import {
   CTASection,
   FAQAccordion,
@@ -34,7 +35,7 @@ export function ServiceDetailView({
         ctaLabel="Get a quote"
       />
 
-      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4rem)]">
+      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4rem)]`}>
         <SectionHead
           eyebrow="What’s included"
           title="Clear scope. Local crew. Done right."
@@ -56,7 +57,7 @@ export function ServiceDetailView({
       </section>
 
       <section className="bg-cream py-[clamp(2.5rem,5vw,4rem)]">
-        <div className="mx-auto w-[min(1200px,92vw)]">
+        <div className={`${pageWrap}`}>
           <SectionHead
             eyebrow="How it works"
             title="From quote to curb appeal."
@@ -66,14 +67,14 @@ export function ServiceDetailView({
       </section>
 
       {gallery.length > 0 ? (
-        <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4rem)]">
+        <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4rem)]`}>
           <SectionHead eyebrow="Our work" title="Results on real properties." />
           <Gallery items={gallery} className="mt-8" />
         </section>
       ) : null}
 
       <section className="bg-cream py-[clamp(2.5rem,5vw,4rem)]">
-        <div className="mx-auto w-[min(900px,92vw)]">
+        <div className={`${pageWrapNarrow}`}>
           <SectionHead eyebrow="FAQ" title="Quick answers." align="center" />
           <FAQAccordion items={detail.faqs} className="mt-8" />
         </div>

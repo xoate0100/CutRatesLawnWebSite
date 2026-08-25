@@ -2,6 +2,7 @@ import { FAQAccordion, CTASection, InteriorHero } from "@/components/blocks"
 import { FAQS } from "@/lib/marketing-content"
 import { getFAQCategories } from "@/lib/api"
 import FAQSection from "@/components/faq-section"
+import { pageWrapNarrow } from "@/lib/layout"
 
 export const metadata = {
   title: "FAQ",
@@ -30,7 +31,7 @@ export default async function FAQPage() {
         mediaSlot="services.hero"
       />
 
-      <section className="mx-auto w-[min(900px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+      <section className={`${pageWrapNarrow} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         {categories.length === 0 ? (
           <FAQAccordion items={FAQS} />
         ) : (

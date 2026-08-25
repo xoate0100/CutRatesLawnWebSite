@@ -1,4 +1,5 @@
 import { SectionHead } from "@/components/ui/section-head"
+import { pageWrap, pageWrapNarrow } from "@/lib/layout"
 import {
   BundleCards,
   CompareTable,
@@ -24,7 +25,7 @@ export default function BundlesPage() {
         mediaSlot="page.bundles-all.1"
       />
 
-      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         <SectionHead
           eyebrow="Choose a plan"
           title="Starting at prices. Month to month."
@@ -34,7 +35,7 @@ export default function BundlesPage() {
       </section>
 
       <section className="bg-cream py-[clamp(2.5rem,5vw,4rem)]">
-        <div className="mx-auto w-[min(1200px,92vw)]">
+        <div className={`${pageWrap}`}>
           <SectionHead
             eyebrow="Compare"
             title="What’s included at each starting price."
@@ -43,7 +44,7 @@ export default function BundlesPage() {
         </div>
       </section>
 
-      <section className="mx-auto w-[min(900px,92vw)] py-[clamp(2.5rem,5vw,4rem)]">
+      <section className={`${pageWrapNarrow} py-[clamp(2.5rem,5vw,4rem)]`}>
         <SectionHead eyebrow="FAQ" title="Bundle questions." align="center" />
         <FAQAccordion items={BUNDLE_FAQS} />
       </section>

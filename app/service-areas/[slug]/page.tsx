@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
 import { SectionHead } from "@/components/ui/section-head"
+import { pageWrap } from "@/lib/layout"
 import {
   CTASection,
   InteriorHero,
@@ -44,7 +45,7 @@ export default function ServiceAreaSlugPage({ params }: Props) {
         ctaHref={`/quote?area=${area.slug}`}
       />
 
-      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4rem)]">
+      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4rem)]`}>
         <SectionHead
           eyebrow="Local crew"
           title={`Why neighbors in ${area.name} book us.`}
@@ -64,7 +65,7 @@ export default function ServiceAreaSlugPage({ params }: Props) {
       </section>
 
       <section className="bg-cream py-[clamp(2.5rem,5vw,4rem)]">
-        <div className="mx-auto w-[min(1200px,92vw)]">
+        <div className={`${pageWrap}`}>
           <SectionHead
             eyebrow="Services in town"
             title={`What we offer in ${area.name}.`}
@@ -74,7 +75,7 @@ export default function ServiceAreaSlugPage({ params }: Props) {
       </section>
 
       <section className="py-[clamp(2rem,4vw,3rem)]">
-        <div className="mx-auto mb-4 w-[min(1200px,92vw)]">
+        <div className={`${pageWrap} mb-4`}>
           <SectionHead
             eyebrow="Neighbors"
             title="What customers say nearby."

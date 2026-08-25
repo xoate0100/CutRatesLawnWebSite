@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center gap-2 text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 whitespace-nowrap max-sm:whitespace-normal max-sm:text-center",
   {
     variants: {
       variant: {
@@ -17,7 +17,7 @@ const buttonVariants = cva(
         ghost:
           "rounded-full border-2 border-current bg-transparent font-bold opacity-90 hover:opacity-100",
         link: "rounded-md text-primary underline-offset-4 hover:underline",
-        lime: "rounded-full bg-lime text-forest-2 font-bold shadow-[0_10px_0_-2px_var(--lime-2),0_22px_34px_-14px_rgba(169,226,46,0.6)] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-[0_4px_0_-2px_var(--lime-2)]",
+        lime: "rounded-full bg-lime text-forest-2 font-bold shadow-md max-sm:shadow-md sm:shadow-[0_10px_0_-2px_var(--lime-2),0_22px_34px_-14px_rgba(169,226,46,0.6)] hover:-translate-y-0.5 active:translate-y-0.5 active:shadow-md sm:active:shadow-[0_4px_0_-2px_var(--lime-2)]",
         dark: "rounded-full bg-forest text-white font-bold hover:-translate-y-0.5",
       },
       size: {

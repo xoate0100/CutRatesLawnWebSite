@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { siteConfig } from "@/lib/site-config"
+import { pageWrapProse } from "@/lib/layout"
 
 export const metadata = {
   title: `Privacy Policy | ${siteConfig.name}`,
@@ -9,7 +10,7 @@ export const metadata = {
 export default function PrivacyPage() {
   return (
     <div className="bg-paper">
-      <div className="mx-auto w-[min(720px,92vw)] py-16">
+      <div className={`${pageWrapProse} py-16`}>
         <p className="text-xs font-bold uppercase tracking-[0.14em] text-sage">Legal</p>
         <h1 className="font-display mt-2 text-4xl font-extrabold text-ink">Privacy Policy</h1>
         <p className="mt-3 text-sm text-sage">

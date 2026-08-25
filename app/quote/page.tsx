@@ -2,6 +2,7 @@ import { Suspense } from "react"
 import { InteriorHero } from "@/components/blocks"
 import { QuoteFunnel } from "@/components/quote/quote-funnel"
 import { siteConfig } from "@/lib/site-config"
+import { pageWrapQuote } from "@/lib/layout"
 
 export const metadata = {
   title: "Get a Quote",
@@ -31,7 +32,7 @@ export default function QuotePage() {
 
       <section
         id="quote-funnel"
-        className="mx-auto w-[min(960px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]"
+        className={`${pageWrapQuote} py-[clamp(2.5rem,5vw,4.5rem)]`}
       >
         <div className="rounded-brand border border-line bg-white p-4 shadow-sm sm:p-8">
           <Suspense fallback={<p className="text-center text-sage">Loading quote form…</p>}>

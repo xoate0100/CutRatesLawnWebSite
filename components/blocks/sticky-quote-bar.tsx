@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { useReducedMotion } from "@/hooks/use-reduced-motion"
@@ -8,39 +9,63 @@ import { cn } from "@/lib/utils"
 
 export type StickyQuoteBarProps = {
   className?: string
+  /** px scrolled before the chip may appear */
   threshold?: number
 }
 
-export function StickyQuoteBar({ className, threshold = 420 }: StickyQuoteBarProps) {
+/**
+ * Compact floating CTA — not a full-bleed bottom sheet.
+ * Full-width sticky bars cover mid-viewport copy (failed responsive audit).
+ */
+export function StickyQuoteBar({ className, threshold = 520 }: StickyQuoteBarProps) {
+  const pathname = usePathname()
   const [visible, setVisible] = useState(false)
   const reduced = useReducedMotion()
+  const hideOnQuote = pathname === "/quote" || pathname?.startsWith("/quote/")
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > threshold)
-    onScroll()
-    window.addEventListener("scroll", onScroll, { passive: true })
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [threshold])
+    if (hideOnQuote) {
+      setVisible(false)
+      return
+    }
+
+    const update = () => {
+      const y = window.scrollY
+      const doc = document.documentElement
+      const nearFooter = y + window.innerHeight > doc.scrollHeight - 120
+      // Show only after hero scroll, and tuck away when footer is in play
+      setVisible(y > threshold && !nearFooter)
+    }
+
+    update()
+    window.addEventListener("scroll", update, { passive: true })
+    window.addEventListener("resize", update, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", update)
+      window.removeEventListener("resize", update)
+    }
+  }, [threshold, hideOnQuote])
+
+  if (hideOnQuote) return null
 
   return (
     <div
+      data-sticky-quote
       className={cn(
-        "fixed inset-x-0 bottom-0 z-50 border-t border-line bg-paper/95 px-4 py-3 shadow-[0_-8px_30px_-12px_rgba(11,58,30,0.35)] backdrop-blur md:hidden",
-        reduced ? "" : "transition-transform duration-300",
-        visible ? "translate-y-0" : "pointer-events-none translate-y-full",
+        // Corner chip — leaves center/left reading column clear of a full-width overlay
+        "pointer-events-none fixed bottom-4 left-4 z-40 md:hidden",
+        visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0",
+        // Avoid transition-all — it can animate top/bottom and yank fixed chips off-screen
+        reduced ? "" : "transition-[opacity,transform] duration-300",
         className,
       )}
-      // Prefer inert over aria-hidden so focusable descendants are excluded from a11y tree
-      {...(visible ? {} : { inert: "" as unknown as undefined })}
+      aria-hidden={!visible}
     >
       {visible ? (
-        <div className="mx-auto flex max-w-lg items-center justify-between gap-3">
-          <div>
-            <b className="block text-sm font-bold text-ink">Free quote in 2 min</b>
-            <small className="text-xs text-sage">No contracts · local crew</small>
-          </div>
-          <Button asChild variant="lime" size="sm">
-            <Link href="/quote">Get a quote →</Link>
+        <div className="pointer-events-auto flex max-w-[min(18rem,calc(100vw-5.5rem))] items-center gap-2 rounded-full border border-line bg-paper/95 py-1.5 pl-3 pr-1.5 shadow-[0_12px_28px_-12px_rgba(11,58,30,0.45)] backdrop-blur">
+          <span className="min-w-0 truncate text-xs font-bold text-ink">Free quote · 2 min</span>
+          <Button asChild variant="lime" size="sm" className="shrink-0 shadow-none max-sm:shadow-none">
+            <Link href="/quote">Quote →</Link>
           </Button>
         </div>
       ) : null}

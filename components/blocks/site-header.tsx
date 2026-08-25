@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { pageWrap } from "@/lib/layout"
 import { NAV_LINKS } from "@/lib/marketing-content"
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
@@ -17,7 +18,7 @@ export function SiteHeader() {
         "sticky top-0 z-[80] isolate border-b border-line-lt bg-[rgba(11,58,30,0.86)] text-white backdrop-blur-md",
       )}
     >
-      <div className="mx-auto flex h-[70px] w-[min(1200px,92vw)] items-center gap-4">
+      <div className={cn(pageWrap, "flex h-[70px] items-center gap-3 sm:gap-4")}>
         <Link href="/" className="mr-auto flex items-center gap-2.5" onClick={() => setOpen(false)}>
           <span className="grid h-[42px] w-[42px] place-items-center rounded-xl bg-gradient-to-br from-lime to-green-soft font-display text-[1.15rem] font-extrabold text-forest-2 shadow-[0_6px_18px_-6px_rgba(200,241,53,0.6)]">
             CR
@@ -71,7 +72,7 @@ export function SiteHeader() {
       {open ? (
         <div
           id="mobile-nav"
-          className="border-t border-line-lt bg-forest-2 px-[4vw] py-4 md:hidden"
+          className="border-t border-line-lt bg-forest-2 px-5 py-4 sm:px-6 md:hidden"
         >
           <nav className="flex flex-col gap-3 font-semibold" aria-label="Mobile">
             {NAV_LINKS.map((link) => (

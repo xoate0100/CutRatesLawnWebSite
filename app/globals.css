@@ -85,8 +85,32 @@
   * {
     @apply border-border;
   }
+  html {
+    overflow-x: clip;
+    max-width: 100%;
+    scroll-padding-top: 5.5rem;
+    scroll-padding-bottom: 5.5rem;
+  }
+
   body {
     @apply bg-paper text-ink font-body antialiased;
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  /* Keep long display headlines from forcing horizontal scroll on small screens */
+  h1,
+  h2,
+  h3 {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  img,
+  video,
+  svg,
+  canvas {
+    max-width: 100%;
   }
 
   :focus-visible {
@@ -139,15 +163,42 @@
     transform: translateY(0);
   }
 
-  .marquee-track {
+  /* Isolate marquees so max-content tracks cannot widen the document */
+  .marquee {
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    contain: inline-size;
+    /* Soft edge fade so scrolling copy doesn't look hard-clipped */
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 1.25rem,
+      #000 calc(100% - 1.25rem),
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0,
+      #000 1.25rem,
+      #000 calc(100% - 1.25rem),
+      transparent 100%
+    );
+  }
+
+  .marquee-track,
+  .marquee-track-fast {
     display: flex;
     width: max-content;
+    max-width: none;
+    will-change: transform;
+  }
+
+  .marquee-track {
     animation: march 26s linear infinite;
   }
 
   .marquee-track-fast {
-    display: flex;
-    width: max-content;
     animation: march 22s linear infinite;
   }
 

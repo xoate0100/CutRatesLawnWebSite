@@ -2,6 +2,7 @@ import Link from "next/link"
 import { SectionHead } from "@/components/ui/section-head"
 import { AreaChips, CTASection, InteriorHero } from "@/components/blocks"
 import { SERVICE_AREAS } from "@/lib/marketing-content"
+import { pageWrap } from "@/lib/layout"
 
 export const metadata = {
   title: "Service Areas",
@@ -19,7 +20,7 @@ export default function ServiceAreasPage() {
         mediaSlot="services.hero"
       />
 
-      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         <SectionHead
           eyebrow="Towns"
           title="Find your neighborhood."

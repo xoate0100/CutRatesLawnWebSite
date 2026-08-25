@@ -1,4 +1,5 @@
 import { SectionHead } from "@/components/ui/section-head"
+import { pageWrap, pageWrapNarrow, pageWrapMid } from "@/lib/layout"
 import {
   AreaChips,
   BeforeAfterSlider,
@@ -18,7 +19,7 @@ export default function HomePage() {
       <Hero />
       <RibbonMarquee />
 
-      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         <SectionHead
           eyebrow="Popular services"
           title="The work your property actually needs."
@@ -29,7 +30,7 @@ export default function HomePage() {
 
       <QuoteBand />
 
-      <section className="mx-auto w-[min(1000px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+      <section className={`${pageWrapMid} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         <SectionHead
           eyebrow="Proof"
           title="Before and after, side by side."
@@ -42,7 +43,7 @@ export default function HomePage() {
       <TestimonialMarquee />
 
       <section className="bg-cream py-[clamp(2.5rem,5vw,4rem)]">
-        <div className="mx-auto w-[min(1200px,92vw)]">
+        <div className={`${pageWrap}`}>
           <SectionHead
             eyebrow="Service areas"
             title="Wichita to the Kansas City side."
@@ -52,7 +53,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         <SectionHead
           eyebrow="Bundles"
           title="Starting-at plans that stay flexible."
@@ -62,7 +63,7 @@ export default function HomePage() {
       </section>
 
       <section className="bg-cream py-[clamp(2.5rem,5vw,4rem)]">
-        <div className="mx-auto w-[min(900px,92vw)]">
+        <div className={`${pageWrapNarrow}`}>
           <SectionHead eyebrow="FAQ" title="Straight answers." align="center" />
           <FAQAccordion />
         </div>

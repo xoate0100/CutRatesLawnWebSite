@@ -172,7 +172,10 @@ export function QuoteFunnel() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <nav aria-label="Quote progress" className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+      <nav
+        aria-label="Quote progress"
+        className="flex flex-wrap items-center justify-center gap-1.5 text-xs text-muted-foreground sm:gap-2 sm:text-sm"
+      >
         {["Details", "Estimate", "Contact", "Done"].map((label, i) => {
           const n = i + 1
           const active = stepIndex === n
@@ -180,7 +183,7 @@ export function QuoteFunnel() {
           return (
             <span
               key={label}
-              className={`rounded-full px-3 py-1 ${
+              className={`rounded-full px-2.5 py-1 whitespace-nowrap sm:px-3 ${
                 active ? "bg-primary text-primary-foreground" : complete ? "bg-primary/15 text-primary" : "bg-muted"
               }`}
             >

@@ -22,7 +22,7 @@ export function SectionHead({
   return (
     <div
       className={cn(
-        "max-w-[60ch]",
+        "min-w-0 max-w-[60ch]",
         align === "center" && "mx-auto text-center",
         className,
       )}
@@ -32,7 +32,7 @@ export function SectionHead({
       ) : null}
       <h2
         className={cn(
-          "font-display mt-2 text-[clamp(2rem,4.2vw,3.2rem)] font-bold leading-[1.02] tracking-[-0.02em]",
+          "font-display mt-2 text-[clamp(1.75rem,6vw,3.2rem)] font-bold leading-[1.08] tracking-[-0.02em]",
           tone === "on-dark" ? "text-white" : "text-ink",
         )}
       >

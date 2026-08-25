@@ -6,6 +6,7 @@ import { Tag } from "@/components/ui/tag"
 import { Eyebrow } from "@/components/ui/eyebrow"
 import { MediaFrame } from "@/components/media/media-frame"
 import { VideoFrame } from "@/components/media/video-frame"
+import { pageWrap } from "@/lib/layout"
 import {
   AnnouncementMarquee,
   AreaChips,
@@ -47,7 +48,7 @@ function Block({
 }) {
   return (
     <section className="border-b border-line py-12">
-      <div className="mx-auto w-[min(1200px,92vw)]">
+      <div className={`${pageWrap}`}>
         <p className="mb-6 font-mono text-xs font-bold uppercase tracking-widest text-sage">
           {title}
         </p>
@@ -65,7 +66,7 @@ export default function DevComponentsPage() {
   return (
     <div className="bg-paper pb-24">
       <div className="border-b border-line bg-cream py-10">
-        <div className="mx-auto w-[min(1200px,92vw)]">
+        <div className={`${pageWrap}`}>
           <Eyebrow>Dev only</Eyebrow>
           <h1 className="font-display mt-2 text-4xl font-extrabold">Component library QA</h1>
           <p className="mt-2 max-w-xl text-sage">

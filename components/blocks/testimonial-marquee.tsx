@@ -26,7 +26,7 @@ export function TestimonialMarquee({
 }: TestimonialMarqueeProps) {
   const doubled = [...items, ...items]
   return (
-    <div className={cn("overflow-hidden", className)} role="region" aria-label="Customer reviews">
+    <div className={cn("marquee overflow-hidden", className)} role="region" aria-label="Customer reviews">
       <div className="marquee-track gap-4 py-2 hover:[animation-play-state:paused]">
         {doubled.map((t, i) => (
           <Card key={`${t.name}-${i}`} t={t} />

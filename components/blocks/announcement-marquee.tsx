@@ -14,7 +14,7 @@ export function AnnouncementMarquee({
   return (
     <div
       className={cn(
-        "overflow-hidden border-b border-line-lt bg-forest-2 text-lime",
+        "marquee overflow-hidden border-b border-line-lt bg-forest-2 text-lime",
         className,
       )}
       role="region"
@@ -22,7 +22,7 @@ export function AnnouncementMarquee({
     >
       <div className="marquee-track gap-10 py-2 text-[0.78rem] font-bold uppercase tracking-[0.14em]">
         {doubled.map((item, i) => (
-          <span key={`${item}-${i}`} className="inline-flex items-center gap-10 px-2">
+          <span key={`${item}-${i}`} className="inline-flex shrink-0 items-center gap-10 px-2">
             {item}
             <span aria-hidden className="opacity-50">
               ✦

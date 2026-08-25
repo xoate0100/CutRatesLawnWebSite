@@ -11,14 +11,14 @@ export function RibbonMarquee({ items = RIBBON_ITEMS, className }: RibbonMarquee
   return (
     <div
       className={cn(
-        "overflow-hidden border-y-[3px] border-forest-2 bg-lime text-forest-2",
+        "marquee overflow-hidden border-y-[3px] border-forest-2 bg-lime text-forest-2",
         className,
       )}
       aria-hidden
     >
-      <div className="marquee-track-fast font-display py-2 text-2xl font-extrabold uppercase tracking-[0.01em]">
+      <div className="marquee-track-fast font-display py-2 text-[clamp(1.15rem,4vw,1.5rem)] font-extrabold uppercase tracking-[0.01em]">
         {doubled.map((item, i) => (
-          <span key={`${item}-${i}`} className="inline-flex items-center gap-6 px-3">
+          <span key={`${item}-${i}`} className="inline-flex shrink-0 items-center gap-6 px-3">
             {item}
             <span className="text-forest-2">✦</span>
           </span>

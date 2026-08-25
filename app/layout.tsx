@@ -97,7 +97,7 @@ export default function RootLayout({
         <Providers>
           <AnnouncementMarquee />
           <SiteHeader />
-          <main className="relative z-0">{children}</main>
+          <main className="relative z-0 pb-24 md:pb-0">{children}</main>
           <SiteFooter />
           <StickyQuoteBar />
           <LiveChat />

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { MediaFrame } from "@/components/media/media-frame"
 import { InteriorHero, CTASection } from "@/components/blocks"
 import { NewsletterSignup } from "@/components/newsletter-signup"
+import { pageWrap } from "@/lib/layout"
 
 const blogPosts = [
   {
@@ -51,7 +52,7 @@ export default function BlogPage() {
         ctaHref="/quote"
       />
 
-      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         <ul className="grid gap-6 md:grid-cols-3">
           {blogPosts.map((post) => (
             <li

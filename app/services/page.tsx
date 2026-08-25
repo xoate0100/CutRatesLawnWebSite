@@ -1,6 +1,7 @@
 import { SectionHead } from "@/components/ui/section-head"
 import { CTASection, InteriorHero, ServiceGrid } from "@/components/blocks"
 import { SERVICES } from "@/lib/marketing-content"
+import { pageWrap } from "@/lib/layout"
 
 export const metadata = {
   title: "Services",
@@ -18,7 +19,7 @@ export default function ServicesPage() {
         mediaSlot="services.hero"
       />
 
-      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         <SectionHead
           eyebrow="What we do"
           title="Pick a service. Get a fast quote."

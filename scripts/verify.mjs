@@ -41,6 +41,10 @@ check('Pricing estimator math', () => {
   execSync('pnpm run test:pricing', { cwd: root, stdio: 'pipe' });
 });
 
+check('Single globals.css import', () => {
+  execSync('node scripts/check-globals-css-import.mjs', { cwd: root, stdio: 'pipe' });
+});
+
 check('Governance path drift', () => {
   const flags = readFileSync(join(root, '0_phase0_bootstrap/feature_flags.yml'), 'utf8');
   const sandbox = readFileSync(join(root, '0_phase0_bootstrap/AI_SANDBOX_RULES.md'), 'utf8');

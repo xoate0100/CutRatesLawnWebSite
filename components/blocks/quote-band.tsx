@@ -10,6 +10,7 @@ import {
   type PropertyType,
   type ServiceType,
 } from "@/lib/pricing/estimate"
+import { pageWrap } from "@/lib/layout"
 import { cn } from "@/lib/utils"
 
 function Seg({
@@ -135,13 +136,13 @@ export function QuoteBand({ className }: QuoteBandProps) {
         className,
       )}
     >
-      <div className="mx-auto grid w-[min(1200px,92vw)] items-center gap-8 py-[clamp(2.2rem,4vw,3.2rem)] md:grid-cols-[1.2fr_0.8fr]">
-        <div>
+      <div className={cn(pageWrap, "grid items-center gap-8 py-[clamp(2.2rem,4vw,3.2rem)] md:grid-cols-[1.2fr_0.8fr]")}>
+        <div className="min-w-0">
           <Pill tone="on-lime">
-            <span className="h-1.5 w-1.5 rounded-full bg-forest-2" />
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-forest-2" />
             Most quotes take under 2 minutes
           </Pill>
-          <h2 className="font-display mt-3 text-[clamp(1.9rem,3.6vw,2.8rem)] font-bold leading-[1.05]">
+          <h2 className="font-display mt-3 text-[clamp(1.7rem,6vw,2.8rem)] font-bold leading-[1.08]">
             Tell us what you need.
             <br />
             We&apos;ll make the next step clear.

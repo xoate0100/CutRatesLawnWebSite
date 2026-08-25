@@ -33,14 +33,14 @@ export function CTASection({
     >
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[420px] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(200,241,53,0.35),transparent_65%)] blur-md"
+        className="pointer-events-none absolute left-1/2 top-0 h-[420px] w-[min(420px,100%)] -translate-x-1/2 rounded-full bg-[radial-gradient(circle,rgba(200,241,53,0.35),transparent_65%)] blur-md"
       />
-      <div className="relative z-[1] mx-auto w-[min(800px,92vw)]">
-        <h2 className="font-display text-[clamp(2rem,4vw,3rem)] font-extrabold leading-[1.05]">
+      <div className="relative z-[1] mx-auto w-full max-w-[800px] px-4 sm:px-6">
+        <h2 className="font-display text-[clamp(1.75rem,6vw,3rem)] font-extrabold leading-[1.08]">
           {title}
         </h2>
         <p className="mx-auto mt-3 max-w-[42ch] text-white/75">{description}</p>
-        <Button asChild variant="lime" size="lg" className="mt-6">
+        <Button asChild variant="lime" size="lg" className="mt-6 max-w-full">
           <Link href={ctaHref}>
             {ctaLabel} <span aria-hidden>→</span>
           </Link>

@@ -1,4 +1,5 @@
 import { SectionHead } from "@/components/ui/section-head"
+import { pageWrap, pageWrapMid } from "@/lib/layout"
 import {
   BeforeAfterSlider,
   CTASection,
@@ -21,7 +22,7 @@ export default function OurWorkPage() {
         mediaSlot="gallery.after"
       />
 
-      <section className="mx-auto w-[min(1200px,92vw)] py-[clamp(2.5rem,5vw,4.5rem)]">
+      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         <SectionHead
           eyebrow="Gallery"
           title="Browse by category."
@@ -31,7 +32,7 @@ export default function OurWorkPage() {
       </section>
 
       <section className="bg-cream py-[clamp(2.5rem,5vw,4.5rem)]">
-        <div className="mx-auto w-[min(1000px,92vw)]">
+        <div className={`${pageWrapMid}`}>
           <SectionHead
             eyebrow="Compare"
             title="Before and after."

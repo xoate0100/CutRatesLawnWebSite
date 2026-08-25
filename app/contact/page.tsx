@@ -1,4 +1,5 @@
 import { SectionHead } from "@/components/ui/section-head"
+import { pageWrap } from "@/lib/layout"
 import {
   ContactFormBlock,
   CTASection,
@@ -25,7 +26,7 @@ export default function ContactPage() {
         ctaLabel="Get a quote"
       />
 
-      <section className="mx-auto grid w-[min(1200px,92vw)] gap-10 py-[clamp(2.5rem,5vw,4.5rem)] lg:grid-cols-[1.1fr_0.9fr]">
+      <section className={`${pageWrap} grid gap-10 py-[clamp(2.5rem,5vw,4.5rem)] lg:grid-cols-[1.1fr_0.9fr]`}>
         <div>
           <SectionHead
             eyebrow="Message"
@@ -62,7 +63,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="mx-auto w-[min(1200px,92vw)] pb-[clamp(2.5rem,5vw,4rem)]">
+      <section className={`${pageWrap} pb-[clamp(2.5rem,5vw,4rem)]`}>
         <MapBand />
       </section>
 

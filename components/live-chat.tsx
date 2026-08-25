@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { MessageCircle, X } from "lucide-react"
@@ -9,7 +10,11 @@ import { siteConfig } from "@/lib/site-config"
 
 /** Honest offline help — not a live agent simulation. */
 export default function LiveChat() {
+  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
+  const hideOnQuote = pathname === "/quote" || pathname?.startsWith("/quote/")
+
+  if (hideOnQuote) return null
 
   return (
     <>
@@ -23,7 +28,7 @@ export default function LiveChat() {
         </Button>
       )}
       {isOpen && (
-        <Card className="fixed bottom-4 right-4 z-50 w-80 shadow-xl">
+        <Card className="fixed bottom-4 right-4 z-50 w-[min(20rem,calc(100vw-2rem))] max-w-[calc(100vw-2rem)] shadow-xl">
           <CardHeader className="flex flex-row items-center justify-between space-y-0">
             <CardTitle className="text-base">Talk with us</CardTitle>
             <Button variant="ghost" size="sm" onClick={() => setIsOpen(false)} aria-label="Close">

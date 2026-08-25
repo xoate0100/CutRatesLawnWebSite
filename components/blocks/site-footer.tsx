@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { pageWrap } from "@/lib/layout"
 import { NAV_LINKS, SERVICES } from "@/lib/marketing-content"
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
@@ -15,14 +16,14 @@ export function SiteFooter({ className }: SiteFooterProps) {
 
   return (
     <footer className={cn("bg-forest-2 text-white", className)}>
-      <div className="mx-auto w-[min(1200px,92vw)] py-12">
+      <div className={cn(pageWrap, "py-12")}>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
+          <div className="min-w-0">
             <Link href="/" className="flex items-center gap-2.5">
-              <span className="grid h-[42px] w-[42px] place-items-center rounded-xl bg-gradient-to-br from-lime to-green-soft font-display text-[1.15rem] font-extrabold text-forest-2">
+              <span className="grid h-[42px] w-[42px] shrink-0 place-items-center rounded-xl bg-gradient-to-br from-lime to-green-soft font-display text-[1.15rem] font-extrabold text-forest-2">
                 CR
               </span>
-              <span className="leading-none">
+              <span className="min-w-0 leading-none">
                 <b className="font-display text-[1.15rem] font-extrabold">Cut Rates</b>
                 <small className="block text-[0.62rem] font-semibold uppercase tracking-[0.22em] opacity-70">
                   Lawn Care

@@ -49,6 +49,7 @@ sources:
     priority: 3
     tags: [onboarding, framework]
     enabled: true
+    optional: true
 
   - id: readme
     path: README.md

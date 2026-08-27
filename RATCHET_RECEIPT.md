@@ -117,3 +117,18 @@
 - Template sync via hub `template_directories`, respecting `protected_files`.
 - Product runtime paths were not force-overwritten.
 - NA-14 / NA-16 were **not** executed in this wave.
+
+
+## Remediation (2026-08-27T15:06:04Z)
+
+Fleet remediation applied.
+
+- synced hub file: 3_bootstrap_scripts/architecture_check.py
+- synced hub file: 3_bootstrap_scripts/knowledge_sources_validate.py
+- synced hub file: 3_bootstrap_scripts/agentic_coordinate_validate.py
+- synced hub file: 3_bootstrap_scripts/test_task1_gate.py
+- synced hub file: 3_bootstrap_scripts/task_workflow_helper.py
+- synced hub file: 5_reference_architectures/KNOWLEDGE_SOURCES.yaml
+- AI_SANDBOX_RULES references feature_flags.yml
+
+Classification per docs/factory/FLEET_TRIAGE.md.

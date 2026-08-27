@@ -54,6 +54,11 @@ def main() -> int:
             continue
         rel = source.get("path", "")
         if rel and not (REPO_ROOT / rel).exists():
+            # Priority ≥3 / optional sources are advisory — hub docs like
+            # docs/meta_overview.md are not required on every spoke.
+            if source.get("optional") is True or int(source.get("priority") or 1) >= 3:
+                print(f"[knowledge-sources] WARN: {sid}: missing path {rel} (optional)")
+                continue
             errors.append(f"{sid}: missing path {rel}")
 
     if errors:

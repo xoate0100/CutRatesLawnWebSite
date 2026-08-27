@@ -16,6 +16,24 @@ EXCLUDE_DIR_NAMES = {
     "dist", "build", ".tox", "htmlcov", ".coverage",
 }
 
+# Template / governance trees are never product frontend|backend for cross-import.
+# Spokes sometimes set components.frontend.directories: ['./'] which would otherwise
+# false-positive on hub-synced 3_bootstrap_scripts mentioning the word "backend".
+TEMPLATE_PATH_PREFIXES = (
+    "0_phase0_bootstrap/",
+    "1_global_standards/",
+    "2_framework_templates/",
+    "3_bootstrap_scripts/",
+    "5_reference_architectures/",
+    "7_schemas/",
+    "8_ci/",
+    "adapters/",
+    "agentic/",
+    "agent_platform/",
+    "templates/",
+    ".cursor/",
+)
+
 FULL_SCAN_ENV = "ARCHITECTURE_CHECK_ALL_FILES"
 
 
@@ -25,6 +43,11 @@ def _normalize_path(path: str) -> str:
 
 def _is_excluded(path: pathlib.Path) -> bool:
     return any(part in EXCLUDE_DIR_NAMES for part in path.parts)
+
+
+def _is_template_path(path: pathlib.Path) -> bool:
+    rel = _normalize_path(str(path))
+    return any(rel == p.rstrip("/") or rel.startswith(p) for p in TEMPLATE_PATH_PREFIXES)
 
 
 def get_staged_files() -> list[str] | None:
@@ -121,6 +144,8 @@ def check_cross_component_imports():
         extensions = [".ts", ".tsx", ".js", ".py", ".java", ".cs"]
         for root in roots:
             for p in iter_files_in_roots([root], extensions, STAGED_FILES):
+                if _is_template_path(p):
+                    continue
                 try:
                     text = p.read_text(encoding="utf-8", errors="ignore")
                 except:

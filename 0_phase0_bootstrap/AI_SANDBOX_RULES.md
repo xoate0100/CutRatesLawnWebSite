@@ -68,3 +68,7 @@ You are the single authorized agent (Cursor Code). You may execute multi-step pl
 ## Failure Protocol
 - If a hook fails: attempt local corrective changes within current task.
 - If failure persists after two attempts: append an entry to `6_ai_runtime_context/ai_feedback_log.json` and stop.
+
+## Feature flags
+
+Writable paths must stay consistent with `0_phase0_bootstrap/feature_flags.yml`.

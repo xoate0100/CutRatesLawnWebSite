@@ -55,7 +55,16 @@ def run_script(name: str, extra: list[str] | None = None) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--skip-scan", action="store_true", help="Skip diff scans (validators only)")
+    # Deprecated: older spoke CI workflows still pass this after hub CLI rename.
+    # Kept as a no-op so ratchet PRs do not fail on unrecognized arguments.
+    parser.add_argument(
+        "--core-only",
+        action="store_true",
+        help=argparse.SUPPRESS,
+    )
     args = parser.parse_args()
+    if args.core_only:
+        print("[agentic-validate] WARN: --core-only is deprecated and ignored")
 
     exit_code = 0
     for validator in CORE_VALIDATORS:

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -12,9 +12,24 @@ import { siteConfig } from "@/lib/site-config"
 export default function LiveChat() {
   const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
+  const [revealed, setRevealed] = useState(false)
   const hideOnQuote = pathname === "/quote" || pathname?.startsWith("/quote/")
 
+  useEffect(() => {
+    if (hideOnQuote) return
+    // Keep FAB off first-paint hero CTAs on short phones (overlap at ≤667px height).
+    const update = () => setRevealed(window.scrollY > 420)
+    update()
+    window.addEventListener("scroll", update, { passive: true })
+    window.addEventListener("resize", update, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", update)
+      window.removeEventListener("resize", update)
+    }
+  }, [hideOnQuote])
+
   if (hideOnQuote) return null
+  if (!revealed && !isOpen) return null
 
   return (
     <>

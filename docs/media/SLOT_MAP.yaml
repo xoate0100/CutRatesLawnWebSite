@@ -569,3 +569,27 @@ slots:
     variant: null
     fallback: /placeholder.svg?height=600&width=1600
     alt: Lawn care in Leavenworth, KS
+  careers.hero:
+    asset_id: env-ETDTNU6
+    variant: w1920
+    fallback: /placeholder.svg?height=720&width=1200
+    alt: Lawn care worker mowing a residential lawn
+    notes: Temporary reuse of licensed library asset; upgrade to ANENAST crew photo when licensed
+  careers.crew:
+    asset_id: sha-f22b5ee0b651
+    variant: w1920
+    fallback: /placeholder.svg?height=600&width=900
+    alt: Field crew member trimming tall grass
+    notes: Reuse licensed cleanup ingest; prefer RL37PZY or owned crew photography
+  careers.equipment:
+    asset_id: env-WL6S6J5
+    variant: w800
+    fallback: /placeholder.svg?height=600&width=900
+    alt: Commercial lawn mower on green grass
+    notes: Reuse licensed services.mowing; optional upgrade 2KTRVRB riding mower
+  careers.yard:
+    asset_id: env-J4XCY2H
+    variant: w1920
+    fallback: /placeholder.svg?height=600&width=900
+    alt: Lawn care work in a suburban yard
+    notes: Temporary stand-in; prefer owned Valley Center yard or D4R4EF5 when licensed

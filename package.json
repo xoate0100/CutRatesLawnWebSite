@@ -9,6 +9,7 @@
     "lint": "next lint",
     "verify": "node scripts/verify.mjs",
     "test:pricing": "pnpm dlx tsx lib/pricing/estimate.test.ts",
+    "test:careers-math": "pnpm dlx tsx lib/careers/paycheck-math.test.ts",
     "agentic:context": "node scripts/generate-ai-context.mjs",
     "test:e2e": "playwright test",
     "test:e2e:edge": "playwright test --project=\"Microsoft Edge\"",

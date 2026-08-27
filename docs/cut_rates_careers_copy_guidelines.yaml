@@ -1,0 +1,1094 @@
+# Cut Rates Lawn Care Careers Site
+# LLM-Ingestible Copy + Candidate Experience Governance Specification
+# Version: 1.1
+# Purpose: Strictly govern candidate-facing careers-site copy AND interactive elements.
+# Scope: careers landing pages, job cards, job detail pages, application UI, SMS CTAs,
+#        career-path content, culture/safety copy, onboarding previews, FAQs,
+#        recruiting microcopy, interactive widgets, calculators, simulations,
+#        manager/team cards, progress previews, and candidate engagement elements.
+
+metadata:
+  organization: "Cut Rates Lawn Care"
+  artifact: "Careers Site Copy and Candidate Experience Guidelines"
+  version: "1.1"
+  status: "strict"
+  intended_consumers:
+    - "LLM copy generators"
+    - "LLM copy reviewers"
+    - "design-to-code agents"
+    - "UX/UI agents"
+    - "human copywriters"
+    - "HR and operations reviewers"
+  governing_principle: >
+    The careers site is not a corporate employer-brand brochure. It is a mobile-first
+    frontline hiring funnel built around radical clarity, dignity, low friction,
+    visible skill progression, realistic expectations, and a strong sense of
+    achievable forward movement.
+  north_star_message: >
+    Here's the work. Here's the pay. Here's when and where you start.
+    Here's what we provide. Here's how we'll teach you. Here's how you move up.
+    Here's what success can look like. Apply without wasting your time.
+
+copy_governance:
+  enforcement_level: "hard"
+  instruction_priority:
+    - "truthfulness"
+    - "required practical job facts"
+    - "candidate comprehension"
+    - "clarity and brevity"
+    - "dignity and respect"
+    - "candidate confidence"
+    - "brand tone"
+    - "persuasion"
+  hard_rule: >
+    Never improve persuasion by making an unverified, exaggerated, ambiguous,
+    or operationally unsupported claim.
+  unsupported_claim_behavior:
+    if_fact_unknown: "use an explicit placeholder or omit the claim"
+    placeholder_format: "[VERIFY: field name]"
+    never_infer_from:
+      - "industry norms"
+      - "competitors"
+      - "old job postings"
+      - "generic HR practices"
+      - "what would sound attractive"
+  launch_gate:
+    rule: >
+      Copy containing any [VERIFY: ...] placeholder is draft-only and MUST NOT be
+      treated as approved production copy.
+    required_fact_owner:
+      - "Operations"
+      - "HR"
+      - "Payroll, when pay-related"
+      - "Safety/compliance owner, when safety-related"
+
+audience:
+  primary:
+    description: >
+      Frontline field candidates for lawn maintenance, landscape renovation,
+      turf/fertilization, pest-control, snow/ice, holiday-lighting, equipment,
+      crew-lead, and related field roles.
+  design_assumption: >
+    The candidate may be using a smartphone as their primary practical internet device.
+  education_assumption: >
+    Do not assume college education, résumé fluency, corporate vocabulary,
+    or familiarity with hiring jargon.
+  age_assumption: >
+    Do not write as though the audience is only teenagers or workers in their early 20s.
+  language_assumption: >
+    English proficiency and language preference vary. Never infer Spanish preference
+    from ethnicity, name, appearance, ZIP code, or other proxy.
+
+candidate_psychology:
+  desired_emotional_state:
+    - "I understand exactly what this job is."
+    - "I can picture myself doing this."
+    - "I know what I would earn."
+    - "I know where I would go and who I would work with."
+    - "I can see how I would get better at this."
+    - "I can imagine belonging on this team."
+    - "This looks like a real opportunity, not a dead-end job."
+    - "I am not being tricked or talked down to."
+  psychological_mechanisms_to_use:
+    certainty_reduction:
+      intent: "Reduce anxiety caused by unknown pay, schedule, location, process, and expectations."
+      allowed_methods:
+        - "specific job facts"
+        - "visual schedules"
+        - "application progress indicators"
+        - "first-day previews"
+        - "manager introductions"
+    mental_simulation:
+      intent: "Help candidates rehearse what successful employment would feel like."
+      allowed_methods:
+        - "first-week walkthroughs"
+        - "sample workday timelines"
+        - "career-path previews"
+        - "skill checkoff simulations"
+        - "earnings estimators"
+    progress_motivation:
+      intent: "Make advancement visible and attainable."
+      allowed_methods:
+        - "skill ladders"
+        - "milestone badges"
+        - "next-level requirement cards"
+        - "earnings progression examples using verified ranges"
+    social_belonging:
+      intent: "Make the workplace feel human and knowable before the candidate arrives."
+      allowed_methods:
+        - "meet your manager"
+        - "crew-lead profiles"
+        - "employee stories"
+        - "team photos"
+        - "who trains you cards"
+    agency:
+      intent: "Let candidates explore the job instead of being forced through a sales pitch."
+      allowed_methods:
+        - "role comparison"
+        - "choose-your-path tools"
+        - "salary/schedule calculators"
+        - "language choice"
+        - "apply or text-me-this-job options"
+  prohibited_psychological_tactics:
+    - "false scarcity"
+    - "fake countdown timers"
+    - "fabricated applicant counts"
+    - "fake social proof"
+    - "dark patterns"
+    - "pressure language implying immediate acceptance is required"
+    - "manipulative guilt"
+    - "gamification that hides material job facts"
+    - "artificially inflated earnings projections"
+  governing_rule: >
+    Engagement should increase confidence and anticipation by making the job more
+    legible and imaginable, not by exploiting fear, urgency, insecurity, or confusion.
+
+positioning:
+  primary_value_proposition:
+    concept: "radical clarity plus visible progress"
+    approved_pattern: >
+      Good outdoor work. Clear pay. Paid training. A path up.
+      Apply from your phone in about three minutes.
+    requirement: >
+      Any concrete claim in this pattern must be verified before publication.
+  message_order:
+    required_order:
+      - "pay"
+      - "schedule"
+      - "reporting location"
+      - "qualifications / experience"
+      - "training and equipment"
+      - "advancement"
+      - "benefits"
+      - "culture"
+    rule: >
+      Do not lead with mission, family language, values, culture, or generic company
+      history before answering practical job questions.
+
+tone:
+  overall:
+    attributes:
+      - "plainspoken"
+      - "direct"
+      - "respectful"
+      - "specific"
+      - "practical"
+      - "competent"
+      - "high-trust"
+      - "non-corporate"
+    avoid:
+      - "cute"
+      - "performatively blue-collar"
+      - "condescending"
+      - "hype-heavy"
+      - "HR-jargon-heavy"
+      - "luxury-employer branding"
+      - "pseudo-inspirational"
+      - "bro-culture"
+  dignity_rule: >
+    Write to capable adults whose skills may be undeveloped, informal, or transferable.
+    Never equate lack of formal credentials with lack of intelligence or value.
+
+readability:
+  target_reading_level: "approximately grade 6-8 for core recruiting copy"
+  sentence_rules:
+    preferred_words_per_sentence: "8-20"
+    max_words_per_sentence_soft_limit: 28
+    prefer_active_voice: true
+    avoid_nested_clauses: true
+  paragraph_rules:
+    preferred_sentences_per_paragraph: "1-3"
+    use_bullets_for:
+      - "duties"
+      - "requirements"
+      - "provided equipment"
+      - "schedule facts"
+      - "benefits"
+      - "career milestones"
+
+role_naming:
+  approved_role_terms:
+    - "Crew Member"
+    - "Landscape Crew Member"
+    - "Service Professional"
+    - "Equipment Operator"
+    - "Crew Lead"
+    - "Field Supervisor"
+    - "Lawn Technician"
+    - "Turf Technician"
+    - "Pest Technician"
+    - "Irrigation Technician"
+    - "Specialist"
+    - "Entry-Level"
+  prohibited_role_terms:
+    - "low-level"
+    - "cheap labor"
+    - "unskilled labor"
+    - "grunt"
+    - "rockstar"
+    - "ninja"
+    - "guru"
+
+compensation_copy:
+  required_on_every_job_card_if_known:
+    - "actual starting pay range"
+    - "pay frequency"
+  required_on_job_detail_if_known:
+    - "starting pay range"
+    - "what determines position within the range"
+    - "pay frequency"
+    - "typical hours"
+    - "overtime reality or policy, when material"
+    - "seasonality or year-round status"
+  range_integrity:
+    rules:
+      - "Range must reflect the actual role, not a theoretical maximum."
+      - "Do not lead with 'up to $X' when ordinary starting pay is materially lower."
+      - "The upper end must be explainable by real skills, experience, licensing, driving requirements, or other lawful job-related criteria."
+      - "Do not say 'competitive pay' in place of a range when a range can be published."
+
+schedule_and_location:
+  job_card_required_if_known:
+    - "city / branch / reporting yard"
+    - "typical start time"
+    - "typical workdays"
+    - "full-time / part-time / seasonal / year-round"
+  transportation_rule: >
+    Ask whether the candidate can reliably get to the stated reporting location
+    by the stated time. Do not automatically require personal car ownership unless
+    driving a personal vehicle is an actual lawful job requirement.
+
+training_copy:
+  rule: >
+    Never use "training provided" as the full message when concrete training details
+    are available.
+  explain_when_true:
+    - "who trains new hires"
+    - "what happens on the first shift"
+    - "what equipment requires checkoff before use"
+    - "what safety orientation includes"
+    - "what early skills are expected"
+    - "how progress is documented"
+
+career_progression:
+  core_ladder:
+    - level: "Crew Member I"
+      next:
+        - "Crew Member II / Certified Equipment Operator"
+    - level: "Crew Member II / Certified Equipment Operator"
+      next:
+        - "Crew Lead"
+        - "Specialist Track"
+    - level: "Crew Lead"
+      next:
+        - "Field Supervisor"
+    - level: "Specialist Track"
+      examples:
+        - "Irrigation"
+        - "Turf"
+        - "Pesticide"
+        - "Small Equipment"
+    - level: "Field Supervisor"
+      next:
+        - "Operations / Route Manager"
+  progression_rule: >
+    Describe advancement through demonstrated competence, reliability, quality,
+    leadership readiness, required licensing, and available openings.
+
+culture:
+  principle: >
+    Culture copy must describe observable standards and reciprocal obligations,
+    not vague personality claims.
+  core_expectations:
+    high_trust:
+      candidate_facing_meaning:
+        - "Do what you said you would do."
+        - "Tell the truth when something goes wrong."
+        - "Ask before guessing when safety, property, or quality is at risk."
+    integrity:
+      candidate_facing_meaning:
+        - "Do not falsify time, photos, service records, or completed work."
+        - "Do not hide damage, skipped work, or mistakes."
+        - "Report problems early enough to fix them."
+    quality:
+      candidate_facing_meaning:
+        - "Leave the property to company standard."
+        - "Do not trade speed for avoidable rework or damage."
+        - "Use required notes, photos, and checklists."
+    respect:
+      candidate_facing_meaning:
+        - "Speak directly to the person who can solve the issue."
+        - "Do not use gossip, intimidation, harassment, or sabotage to manage conflict."
+        - "Treat coworkers, customers, and property with basic respect."
+    accountability:
+      candidate_facing_meaning:
+        - "Pay and advancement come with increased skill, reliability, quality, and responsibility."
+        - "Attendance, timekeeping, safety, documentation, and workmanship matter."
+  reciprocal_company_commitments:
+    rule: >
+      Culture standards must not read as one-way obedience. Pair employee expectations
+      with company commitments wherever practical.
+    preferred:
+      - "We tell you the pay before you accept."
+      - "We tell you where and when to report."
+      - "We provide the training we promise."
+      - "We explain the standard before holding you to it."
+      - "We address problems directly instead of through rumors."
+      - "We make skill expectations for advancement visible."
+
+candidate_experience_elements:
+  purpose: >
+    Use interactive and visual elements to help the candidate feel that they have
+    already begun a successful career path with Cut Rates. The experience should
+    make the future concrete: what they earn, where they go, who they work with,
+    what they learn, what success looks like, and what comes next.
+  design_principle: >
+    Every engagement element must either reduce uncertainty, increase useful
+    self-selection, strengthen realistic belonging, or make progress tangible.
+    Decorative novelty without candidate value should be removed.
+
+  priority_1_core_elements:
+
+    paycheck_estimator:
+      name: "What Could My Paycheck Look Like?"
+      psychological_hook:
+        - "immediacy"
+        - "mental ownership"
+        - "future visualization"
+      purpose: >
+        Let candidates convert an hourly wage into a realistic weekly or biweekly
+        gross-pay estimate so the advertised wage becomes personally meaningful.
+      inputs:
+        - "role or hourly rate"
+        - "estimated regular hours"
+        - "estimated overtime hours, only when overtime is genuinely plausible"
+        - "pay frequency"
+      outputs:
+        - "estimated gross paycheck"
+        - "estimated gross monthly earnings"
+        - "clear statement that taxes/deductions are not included"
+      optional_outputs:
+        - "earnings at next verified skill level"
+        - "difference after a verified certification or promotion"
+      copy_examples:
+        title: "See what your paycheck could look like."
+        helper: "Choose a role and typical hours. We’ll show the gross estimate before taxes and deductions."
+        result: "Estimated gross pay: $[CALCULATED]"
+      hard_rules:
+        - "Never present gross pay as take-home pay."
+        - "Do not assume overtime."
+        - "Do not inflate hours to maximize the estimate."
+        - "Use only verified pay ranges."
+        - "Label all outputs as estimates."
+      implementation_suggestions:
+        - "simple JavaScript calculator"
+        - "server-rendered calculator for low-bandwidth fallback"
+        - "analytics event: paycheck_estimator_completed"
+
+    schedule_previewer:
+      name: "See a Typical Workweek"
+      psychological_hook:
+        - "uncertainty reduction"
+        - "life-fit simulation"
+      purpose: >
+        Help candidates see how the job fits around family, transportation,
+        school, second jobs, or other obligations.
+      display_options:
+        - "weekly timeline"
+        - "day-by-day cards"
+        - "mobile calendar strip"
+      show:
+        - "typical report time"
+        - "typical finish range"
+        - "normal workdays"
+        - "weather variability"
+        - "seasonal changes when relevant"
+        - "overtime possibility when relevant"
+      copy_examples:
+        title: "What could a normal week look like?"
+        disclaimer: "Weather, workload, and season can change actual hours."
+      hard_rules:
+        - "Do not display an unrealistically neat schedule."
+        - "Show variability when variability is normal."
+        - "Use verified branch/role scheduling data."
+      implementation_suggestions:
+        - "interactive calendar"
+        - "expandable day cards"
+        - "role-specific schedule selector"
+
+    meet_your_manager:
+      name: "Meet Who You’ll Work With"
+      psychological_hook:
+        - "social familiarity"
+        - "trust"
+        - "belonging"
+      purpose: >
+        Replace an anonymous employer with real people the candidate may actually
+        interact with.
+      card_fields:
+        - "photo"
+        - "first name"
+        - "role"
+        - "how long with Cut Rates"
+        - "what they train or manage"
+        - "one direct quote about what they expect from new hires"
+        - "one direct quote about what candidates can expect from them"
+      preferred_profiles:
+        - "Operations Manager"
+        - "Field Supervisor"
+        - "Crew Lead"
+        - "Trainer"
+        - "Pest/Turf Lead"
+      example:
+        name: "Jason"
+        title: "Operations Manager"
+        candidate_can_expect: "I’ll make sure you know where to be, what the standard is, and who to ask when you’re stuck."
+        manager_expects: "Show up, tell the truth, protect the property, and ask before guessing."
+      hard_rules:
+        - "Use real staff only."
+        - "Do not fabricate quotes."
+        - "Do not over-polish bios into executive marketing copy."
+      implementation_suggestions:
+        - "horizontal swipe cards on mobile"
+        - "short optional 15-30 second video intro"
+        - "tap to see 'What I look for in a new hire'"
+
+    first_day_previewer:
+      name: "Your First Day"
+      psychological_hook:
+        - "anxiety reduction"
+        - "mental rehearsal"
+        - "commitment"
+      purpose: >
+        Let candidates picture arriving successfully rather than imagining an
+        uncertain first shift.
+      steps:
+        - "where you park/report"
+        - "who you meet first"
+        - "what to wear"
+        - "what to bring"
+        - "what Cut Rates gives you"
+        - "orientation"
+        - "PPE"
+        - "equipment introduction"
+        - "first supervised task"
+      format:
+        - "vertical timeline"
+        - "illustrated step cards"
+        - "optional real-yard photos"
+      preferred_title: "Know what happens before you ever clock in."
+      implementation_suggestions:
+        - "photo walkthrough"
+        - "interactive timeline"
+        - "map pin for reporting location"
+
+    career_path_simulator:
+      name: "Build Your Path"
+      psychological_hook:
+        - "progress"
+        - "competence"
+        - "future identity"
+      purpose: >
+        Let candidates choose a likely path and see the verified skills, training,
+        and role levels associated with it.
+      paths:
+        - "Equipment"
+        - "Crew Leadership"
+        - "Turf / Fertilization"
+        - "Pest Control"
+        - "Irrigation"
+        - "Operations"
+      interaction:
+        - "candidate chooses starting role"
+        - "candidate chooses an area they want to learn"
+        - "tool shows possible next milestones"
+      show:
+        - "required skills"
+        - "licenses/certifications"
+        - "verified pay bands when available"
+        - "typical responsibility changes"
+      hard_rules:
+        - "Do not imply guaranteed promotion."
+        - "Do not present a fictional timeline."
+        - "Use 'can qualify for' rather than 'will become'."
+      preferred_result_copy: >
+        If you start as a Crew Member I and qualify on [skills], you can become
+        eligible for [next role] when an opening is available.
+
+    job_fit_quiz:
+      name: "Which Cut Rates Job Fits Me?"
+      psychological_hook:
+        - "self-discovery"
+        - "agency"
+        - "personalization"
+      purpose: >
+        Help applicants with weak résumé vocabulary recognize transferable skills.
+      questions:
+        - "Do you like working outdoors?"
+        - "Have you used powered equipment?"
+        - "Are you comfortable talking with customers?"
+        - "Do you prefer repeating a route or changing project sites?"
+        - "Are you interested in chemicals, turf, irrigation, leadership, or equipment?"
+        - "Do you have a valid driver's license if the role requires one?"
+      outputs:
+        - "recommended roles"
+        - "why the role may fit"
+        - "what experience is not required"
+        - "direct job-card links"
+      hard_rules:
+        - "Never use protected-class characteristics."
+        - "Do not make employment eligibility decisions."
+        - "Make clear this is a navigation aid, not a screening test."
+
+  priority_2_high_value_elements:
+
+    crew_day_timeline:
+      name: "A Day on the Crew"
+      structure:
+        - "6:30 — meet at yard"
+        - "equipment check"
+        - "route / project work"
+        - "break"
+        - "quality check"
+        - "return / unload / notes"
+      rule: "Use actual representative workflow and label it as typical, not guaranteed."
+
+    equipment_gallery:
+      name: "What You’ll Learn to Use"
+      purpose: "Turn unfamiliar commercial equipment into a visible skill opportunity."
+      card_fields:
+        - "equipment photo"
+        - "equipment name"
+        - "what it does"
+        - "when new hires may learn it"
+        - "required checkoff/training"
+      psychological_hook:
+        - "mastery"
+        - "curiosity"
+        - "competence"
+
+    skill_badge_preview:
+      name: "Skills You Can Earn"
+      purpose: >
+        Preview the internal competency system before hire so candidates see
+        advancement as a sequence of learnable skills.
+      example_badges:
+        - "Safety Ready"
+        - "Trimmer Qualified"
+        - "Blower Qualified"
+        - "Mower Qualified"
+        - "Property Protection"
+        - "Crew Communication"
+        - "Route Documentation"
+      rule: >
+        Badges must correspond to real internal training/checkoffs if presented as
+        official Cut Rates achievements.
+
+    manager_expectations_card:
+      name: "What Success Looks Like Here"
+      structure:
+        left: "What we expect from you"
+        right: "What you can expect from us"
+      purpose: "Make the employment relationship feel reciprocal and explicit."
+
+    real_employee_story_cards:
+      name: "How People Got Started"
+      purpose: >
+        Show different starting points: no experience, construction background,
+        prior landscaping, re-entry, specialist path, leadership path.
+      structure:
+        - "where they started"
+        - "what they learned"
+        - "what changed"
+        - "their current role"
+      rule: "Use real stories only."
+
+    application_progress_meter:
+      name: "3-Minute Application Progress"
+      purpose: "Reduce abandonment by showing that the process is short and finite."
+      preferred_steps:
+        - "About You"
+        - "Job & Location"
+        - "Availability"
+        - "Finish"
+      hard_rule: "Do not claim a time estimate that has not been tested."
+
+    response_time_indicator:
+      name: "What Happens Next"
+      purpose: "Reduce post-application uncertainty."
+      display:
+        - "application received"
+        - "review"
+        - "text/call"
+        - "interview"
+        - "decision"
+      hard_rule: "Only publish response-time promises that operations can meet."
+
+    branch_location_explorer:
+      name: "Where Would I Report?"
+      purpose: "Make commute and reporting expectations concrete."
+      elements:
+        - "map"
+        - "yard photo"
+        - "parking/reporting instructions"
+        - "typical start time"
+        - "distance from candidate ZIP if implemented"
+      privacy_rule: "Do not retain precise candidate location without a valid product need and consent."
+
+    text_me_this_job:
+      name: "Send This Job to My Phone"
+      purpose: >
+        Let candidates move from browsing to later completion without losing the job.
+      use_cases:
+        - "candidate is currently at work"
+        - "candidate wants to share with spouse/family"
+        - "candidate wants to apply later"
+      hard_rules:
+        - "obtain valid SMS consent"
+        - "do not subscribe candidate to unrelated marketing"
+
+  priority_3_delight_elements:
+
+    earnings_progression_visual:
+      name: "What New Skills Can Unlock"
+      purpose: >
+        Show verified role/pay bands as capability increases.
+      example:
+        - "Crew Member I — [verified range]"
+        - "Equipment Operator — [verified range]"
+        - "Crew Lead — [verified range]"
+      rule: "Never imply automatic raises based solely on tenure."
+
+    choose_your_first_skill:
+      name: "What Would You Want to Learn First?"
+      options:
+        - "Mowers"
+        - "Turf"
+        - "Irrigation"
+        - "Pest control"
+        - "Leadership"
+      output: "Show relevant career path and open roles."
+      psychological_hook:
+        - "agency"
+        - "identity formation"
+
+    first_90_days_preview:
+      name: "Your First 90 Days"
+      layout:
+        - "Day 1"
+        - "Week 1"
+        - "Day 30"
+        - "Day 60"
+        - "Day 90"
+      purpose: >
+        Show that employment has structure beyond simply showing up for labor.
+
+    weather_reality_widget:
+      name: "Working Outdoors Means Real Weather"
+      purpose: "Set honest expectations while showing operational preparedness."
+      content:
+        - "heat"
+        - "cold"
+        - "rain delays"
+        - "seasonal conditions"
+        - "company procedures"
+      rule: "Do not trivialize hazardous weather."
+
+    ask_a_crew_lead:
+      name: "Questions People Ask Before They Start"
+      format: "FAQ written in the voice of real crew leads"
+      question_examples:
+        - "Do I need my own mower?"
+        - "What if I’ve never used a zero-turn?"
+        - "What shoes do I need?"
+        - "What happens if it rains?"
+        - "How fast do I have to work?"
+        - "How do I move up?"
+      rule: "Answers must remain policy-accurate."
+
+    candidate_saved_path:
+      name: "Save My Career Path"
+      purpose: >
+        Let the candidate save a preferred role/path and receive a link by SMS/email.
+      rule: "Do not require account creation."
+
+  personalization:
+    allowed_inputs:
+      - "ZIP code"
+      - "preferred location"
+      - "preferred role"
+      - "availability"
+      - "skill interests"
+      - "experience level"
+      - "language preference"
+    allowed_outputs:
+      - "nearby roles"
+      - "relevant manager/team"
+      - "schedule preview"
+      - "pay estimate"
+      - "career-path suggestions"
+    prohibited_inputs:
+      - "race"
+      - "ethnicity"
+      - "religion"
+      - "sex"
+      - "sexual orientation"
+      - "disability"
+      - "age except lawful minimum-age screening when required"
+      - "other protected traits"
+    rule: >
+      Personalization should improve navigation and understanding, never covertly
+      alter opportunity or selection standards.
+
+  content_resource_suggestions:
+    authentic_assets:
+      - "real crew photos"
+      - "yard/reporting-location photos"
+      - "equipment photos"
+      - "short manager introduction videos"
+      - "short crew-member testimonial videos"
+      - "first-day walkthrough video"
+      - "before/after work examples"
+    downloadable_or_saveable_resources:
+      - "What to Expect on Your First Day"
+      - "Job Snapshot"
+      - "Career Path Map"
+      - "What We Provide / What You Bring"
+    support_resources:
+      - "tap-to-call recruiting"
+      - "SMS recruiting support"
+      - "Spanish-language assistance"
+      - "accommodation request contact"
+
+  tools_and_implementation_suggestions:
+    low_complexity:
+      - "JavaScript paycheck calculator"
+      - "accordion FAQ"
+      - "swipeable manager cards"
+      - "career-path stepper"
+      - "application progress bar"
+      - "SMS deep links"
+      - "interactive job filters"
+    medium_complexity:
+      - "ZIP-to-branch distance lookup"
+      - "role-fit quiz"
+      - "dynamic schedule preview by role"
+      - "personalized career path"
+      - "saved job via SMS"
+    advanced:
+      - "conversational job finder"
+      - "interview self-scheduling"
+      - "candidate status portal"
+      - "dynamic onboarding preview after conditional offer"
+      - "source-to-90-day-retention analytics"
+    build_order:
+      - "paycheck estimator"
+      - "schedule preview"
+      - "meet your manager"
+      - "first-day preview"
+      - "career-path simulator"
+      - "application progress"
+      - "job-fit quiz"
+      - "advanced conversational or scheduling tools"
+
+  engagement_analytics:
+    track:
+      - "paycheck_estimator_started"
+      - "paycheck_estimator_completed"
+      - "schedule_previewer_opened"
+      - "manager_card_viewed"
+      - "manager_video_played"
+      - "career_path_started"
+      - "career_path_completed"
+      - "first_day_preview_viewed"
+      - "job_fit_quiz_completed"
+      - "text_me_job_used"
+      - "apply_started"
+      - "apply_completed"
+    quality_guardrails:
+      - "qualified application rate"
+      - "interview show rate"
+      - "offer acceptance"
+      - "first-day show rate"
+      - "day-30 retention"
+      - "day-90 retention"
+    interpretation_rule: >
+      Do not optimize engagement events in isolation. An element is successful only
+      if it improves candidate understanding, conversion quality, show rate,
+      acceptance, or retention without increasing misleading expectations.
+
+mobile_first:
+  rules:
+    - "Put the most decision-relevant facts above long-form employer story."
+    - "Use large, concrete CTA labels."
+    - "Avoid dense paragraphs."
+    - "Avoid making video mandatory."
+    - "Avoid mandatory PDF résumé uploads."
+    - "Avoid account creation before initial interest/application."
+    - "Preserve progress where technically possible."
+    - "Use tappable phone/SMS actions where implemented."
+
+page_architecture:
+  careers_home:
+    required_sections_in_order:
+      - "utility/header with EN/ES control"
+      - "hero with practical value proposition"
+      - "paycheck estimator or job/pay preview"
+      - "open jobs / job cards"
+      - "schedule preview"
+      - "meet your manager / team"
+      - "what Cut Rates provides"
+      - "career path / skill progression"
+      - "first-day or realistic job preview"
+      - "trust / what you will know before saying yes"
+      - "culture and work standards"
+      - "application CTA"
+      - "privacy / EEO / accommodation / SMS information"
+  rule: >
+    Sections may be condensed or combined for mobile, but the practical information
+    hierarchy must remain intact.
+
+job_card_schema:
+  mandatory_fields:
+    - "job_title"
+    - "city_or_reporting_area"
+    - "pay_range"
+    - "pay_frequency"
+    - "typical_schedule"
+    - "employment_status"
+    - "experience_requirement"
+    - "apply_cta"
+  hallucination_rule: >
+    Job cards MUST NOT fill missing fields with plausible values.
+
+application_copy:
+  primary_goal: "Get enough information to decide the next recruiting step."
+  target_field_count: "approximately 5-8 fields for initial frontline application"
+  recommended_fields:
+    - "name"
+    - "mobile number"
+    - "ZIP code"
+    - "preferred job/location"
+    - "availability"
+    - "ability to reach stated reporting location/start time"
+    - "relevant experience (optional)"
+    - "preferred language/communication method"
+
+trust_copy:
+  required_concept: "What you'll know before you say yes"
+  approved_list:
+    - "Your starting pay."
+    - "Where you report."
+    - "Your normal schedule."
+    - "What gear we provide."
+    - "Who trains you."
+    - "What outdoor and physical work to expect."
+    - "What happens after you apply."
+
+claims_and_evidence:
+  claim_types:
+    operational_fact:
+      examples:
+        - "pay"
+        - "schedule"
+        - "benefits"
+        - "PPE provided"
+        - "year-round work"
+        - "paid training"
+        - "weekly pay"
+      evidence_required: "internal verified fact"
+    experiential_claim:
+      examples:
+        - "respectful supervisor"
+        - "great culture"
+        - "people love working here"
+      evidence_required: "avoid unless grounded in specific employee evidence or observable practices"
+    superiority_claim:
+      examples:
+        - "best"
+        - "safest"
+        - "highest-paying"
+        - "top workplace"
+      evidence_required: "credible current substantiation"
+      default_action: "reject"
+
+fact_registry:
+  purpose: >
+    Before generating production copy or interactive candidate projections,
+    the LLM should be provided with a structured role-specific fact record.
+  required_fields:
+    company_entity: null
+    role_title: null
+    market: null
+    reporting_location: null
+    starting_pay_low: null
+    starting_pay_high: null
+    pay_frequency: null
+    typical_days: null
+    typical_start_time: null
+    typical_end_time_or_hours: null
+    overtime: null
+    employment_status: null
+    seasonality: null
+    experience_required: null
+    drivers_license_required: null
+    driving_record_requirement: null
+    licenses_or_certifications: null
+    physical_requirements: null
+    core_duties: null
+    training_paid: null
+    training_details: null
+    tools_provided: null
+    ppe_provided: null
+    employee_supplied_items: null
+    benefits: null
+    benefit_eligibility: null
+    bonus_programs: null
+    career_next_steps: null
+    verified_next_level_pay_bands: null
+    spanish_journey_available: null
+    application_time_estimate: null
+    resume_required: null
+    hiring_process: null
+    manager_profiles: null
+    crew_lead_profiles: null
+    first_day_process: null
+    accommodation_contact: null
+    privacy_notice: null
+    sms_consent_language: null
+  generation_rule: >
+    Any null field that would otherwise be asserted as fact must be omitted or rendered
+    as [VERIFY: field_name]. Never resolve nulls through inference.
+
+llm_generation_protocol:
+  before_writing:
+    steps:
+      - "Identify content type or interactive element."
+      - "Load role-specific fact_registry values."
+      - "Separate verified facts from missing facts."
+      - "Apply message hierarchy."
+      - "Apply candidate psychology rules."
+      - "Check prohibited manipulation tactics."
+      - "Check readability."
+      - "Check dignity."
+      - "Check operational claims."
+  during_writing:
+    rules:
+      - "Prefer concrete nouns and verbs."
+      - "Use numbers where verified."
+      - "Use candidate language, not HR language."
+      - "Keep claims role-specific."
+      - "Do not hide hard realities of the work."
+      - "Help candidates mentally simulate success without promising outcomes."
+  after_writing:
+    mandatory_self_review:
+      - "Can a candidate see pay, schedule, and location quickly?"
+      - "Did I state anything not in the fact registry?"
+      - "Does the experience help the candidate picture working here?"
+      - "Did I create confidence through facts rather than hype?"
+      - "Did I imply guaranteed advancement?"
+      - "Are interactive estimates labeled honestly?"
+      - "Are manager/employee identities real?"
+      - "Does personalization avoid protected characteristics?"
+      - "Does every delight element have a candidate-value reason?"
+
+llm_reviewer_protocol:
+  output:
+    decision_values:
+      - "PASS"
+      - "REVISE"
+      - "BLOCK"
+  block_if:
+    - "unverified pay claim"
+    - "inflated paycheck estimate"
+    - "fake manager or employee profile"
+    - "fabricated testimonial"
+    - "false scarcity or countdown"
+    - "guaranteed advancement without verified policy"
+    - "protected-class preference or personalization"
+    - "dark pattern"
+    - "machine-generated legal language presented as approved"
+  revise_if:
+    - "interactive element is decorative but provides no candidate value"
+    - "generic corporate language"
+    - "career simulation lacks realistic conditions"
+    - "engagement element adds friction"
+    - "manager bio reads like executive PR"
+    - "schedule preview hides variability"
+    - "pay calculator fails to distinguish gross from take-home"
+  pass_only_if:
+    - "all claims are supported"
+    - "practical facts are prioritized"
+    - "candidate can mentally model the work"
+    - "interactive elements reduce uncertainty or increase useful engagement"
+    - "work is described honestly"
+    - "advancement is competency-based"
+    - "candidate is treated with dignity"
+    - "engagement avoids manipulation"
+
+scoring:
+  enabled: true
+  total_points: 100
+  minimum_pass_score: 90
+  categories:
+    truthfulness_and_support:
+      points: 25
+    practical_clarity:
+      points: 15
+    candidate_future_visualization:
+      points: 15
+    mobile_readability:
+      points: 10
+    dignity_and_inclusiveness:
+      points: 10
+    realistic_job_preview:
+      points: 10
+    training_and_progression_specificity:
+      points: 5
+    culture_specificity_and_reciprocity:
+      points: 5
+    engagement_value_without_manipulation:
+      points: 5
+  hard_gate: >
+    A numeric score cannot override a BLOCK condition.
+
+copy_lint_rules:
+  case_insensitive_reject_phrases:
+    - "competitive pay"
+    - "competitive compensation"
+    - "join our family"
+    - "we're a family"
+    - "work hard play hard"
+    - "rockstar"
+    - "ninja"
+    - "guru"
+    - "unskilled labor"
+    - "low-level labor"
+    - "cheap labor"
+    - "no drama"
+    - "no complainers"
+    - "no lazy people"
+    - "unlimited growth"
+    - "unlimited advancement"
+    - "world-class culture"
+    - "best place to work"
+    - "fast-paced environment"
+  warning_phrases:
+    - "up to"
+    - "great benefits"
+    - "flexible schedule"
+    - "year-round"
+    - "weekly pay"
+    - "paid training"
+    - "promotion"
+    - "bonus"
+    - "start immediately"
+
+final_instruction_to_llm: >
+  Generate careers-site copy and candidate-experience elements only within this
+  specification. The careers experience should make the candidate feel that a
+  successful future with Cut Rates is concrete, understandable, and attainable.
+  Use transparency, simulation, real people, verified earnings, visible milestones,
+  and reciprocal expectations to create belonging and forward momentum.
+  Never substitute manipulation, hype, false urgency, fabricated social proof,
+  or unsupported promises for genuine candidate confidence.

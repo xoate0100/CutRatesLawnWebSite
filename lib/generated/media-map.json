@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-23T16:44:13.966Z",
+  "generated_at": "2026-08-27T06:56:25.726Z",
   "public_base_url": "https://storage.googleapis.com/site_photo_storage",
   "slots": {
     "home.hero": {
@@ -1489,6 +1489,74 @@
       "height": null,
       "attribution": null,
       "status": null
+    },
+    "careers.hero": {
+      "slot": "careers.hero",
+      "asset_id": "env-ETDTNU6",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-ETDTNU6/w1920.webp",
+      "fallback": "/placeholder.svg?height=720&width=1200",
+      "alt": "Lawn care worker mowing a residential lawn",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "Lawn care worker mows grass",
+        "author": "duallogic",
+        "envato_url": "https://elements.envato.com/lawn-care-worker-mows-grass-in-a-sunny-garden-duri-ETDTNU6",
+        "envato_item_id": "ETDTNU6"
+      },
+      "status": "published"
+    },
+    "careers.crew": {
+      "slot": "careers.crew",
+      "asset_id": "sha-f22b5ee0b651",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/w1920.webp",
+      "fallback": "/placeholder.svg?height=600&width=900",
+      "alt": "Field crew member trimming tall grass",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "professional-landscaper-trimming-tall-grass-with-s-2026-07-09-19-44-04-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "careers.equipment": {
+      "slot": "careers.equipment",
+      "asset_id": "env-WL6S6J5",
+      "variant": "w800",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-mowing/env-WL6S6J5/w800.webp",
+      "fallback": "/placeholder.svg?height=600&width=900",
+      "alt": "Commercial lawn mower on green grass",
+      "width": 800,
+      "height": 534,
+      "attribution": {
+        "title": "Lawn mover on green grass",
+        "author": "erika8213",
+        "envato_url": "https://elements.envato.com/lawn-mover-on-green-grass-machine-for-cutting-lawn-WL6S6J5",
+        "envato_item_id": "WL6S6J5"
+      },
+      "status": "published"
+    },
+    "careers.yard": {
+      "slot": "careers.yard",
+      "asset_id": "env-J4XCY2H",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-J4XCY2H/w1920.webp",
+      "fallback": "/placeholder.svg?height=600&width=900",
+      "alt": "Lawn care work in a suburban yard",
+      "width": 1920,
+      "height": 1281,
+      "attribution": {
+        "title": "Man pushing lawn mower",
+        "author": "Olena_Mykhaylova",
+        "envato_url": "https://elements.envato.com/man-pushing-lawn-mower-lawn-care-background-place--J4XCY2H",
+        "envato_item_id": "J4XCY2H"
+      },
+      "status": "published"
     }
   }
 }

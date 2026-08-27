@@ -2,7 +2,7 @@
 # Status: pending | in_progress | blocked | completed | cancelled
 # Do not put secrets here.
 
-updated: "2026-08-01"
+updated: "2026-08-27"
 source_docs:
   - docs/integrations/GOHIGHLEVEL.md
   - proposals/DEC-GHL-LEADCONNECTOR.yaml
@@ -11,8 +11,27 @@ source_docs:
   - docs/atmosphere/SYSTEM.md
   - docs/atmosphere/HUMAN_TASKS.md
   - docs/media/ENVATO_PROPOSALS.md
+  - docs/media/ENVATO_PROPOSALS_CAREERS.md
+  - docs/cut_rates_careers_copy_guidelines.yaml
 
 items:
+  - id: CAREERS-MEDIA-001
+    title: Envato search/ingest session for careers slots
+    area: media
+    priority: high
+    status: in_progress
+    depends_on: []
+    acceptance:
+      - Connect Envato MCP and shortlist per docs/media/ENVATO_PROPOSALS_CAREERS.md
+      - Bind interim licensed assets to careers.* slots (done 2026-08-27)
+      - Human license preferred upgrades ANENAST / RL37PZY / 2KTRVRB / D4R4EF5 into media/inbox
+      - media:publish for upgraded careers slots
+      - Prefer replace careers.hero/yard with real Cut Rates photography ASAP
+    notes: >
+      2026-08-27 search complete. Interim bindings: hero=ETDTNU6, crew=sha-f22b5ee0b651,
+      equipment=WL6S6J5, yard=J4XCY2H. Preferred new licenses opened in browser — awaiting
+      human License + download into media/inbox.
+
   - id: ATM-GO-001
     title: Atmosphere Phase 1 go-ahead (scope S1/S2/S3 + media cutover A/B)
     area: atmosphere

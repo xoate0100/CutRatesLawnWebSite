@@ -196,6 +196,8 @@ def check_srp_single_responsibility():
             continue
 
         for file_path in iter_files_in_roots([root_dir], code_extensions, STAGED_FILES):
+            if _is_template_path(file_path):
+                continue
             try:
                 content = file_path.read_text(encoding="utf-8", errors="ignore")
                 lines = content.splitlines()
@@ -293,6 +295,8 @@ def check_isp_interface_segregation():
             continue
 
         for file_path in iter_files_in_roots([root_dir], ts_extensions, STAGED_FILES):
+            if _is_template_path(file_path):
+                continue
             try:
                 content = file_path.read_text(encoding="utf-8", errors="ignore")
                 lines = content.splitlines()
@@ -380,6 +384,8 @@ def check_dip_dependency_inversion():
             continue
 
         for file_path in iter_files_in_roots([root_dir], code_extensions, STAGED_FILES):
+            if _is_template_path(file_path):
+                continue
             try:
                 content = file_path.read_text(encoding="utf-8", errors="ignore")
                 lines = content.splitlines()

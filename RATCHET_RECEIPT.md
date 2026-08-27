@@ -132,3 +132,12 @@ Fleet remediation applied.
 - AI_SANDBOX_RULES references feature_flags.yml
 
 Classification per docs/factory/FLEET_TRIAGE.md.
+
+
+## Remediation (2026-08-27T15:25:10Z)
+
+Fleet remediation applied.
+
+- synced hub file: 3_bootstrap_scripts/architecture_check.py
+
+Classification per docs/factory/FLEET_TRIAGE.md.

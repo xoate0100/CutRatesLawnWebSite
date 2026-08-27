@@ -1,91 +1,100 @@
-# Machine-checkable decision registry — source of truth for settled choices.
-# Direct edits forbidden; add proposals under proposals/ and merge via human review.
+# Machine-checkable ADR registry — source of truth for settled and open decisions.
+# Customize rows for your project. Edits require decision_registry_validate.py --propose.
 version: 1
-updated: "2026-07-15"
-
+updated: '2026-08-21'
 decisions:
-  - decision_id: DEC-0001-LAYOUT-PRESET
-    status: accepted
-    decided_at: "2026-07-15"
-    decision_basis: >
-      Keep flat nextjs_root layout (app/, components/, lib/, hooks/) at repo root.
-      Do not normalize to frontend/ monorepo structure — existing v0-generated
-      site works and migration must not break paths or imports.
-    supersedes: null
-    forbidden_resurrection_in: ["any PR", "any agent session"]
-    resurrection_trigger_keywords:
-      - "move app to frontend/"
-      - "normalize to monorepo frontend backend"
-      - "restructure into packages/"
-    reopen_requires: >
-      Explicit human decision with migration plan and full regression test pass.
+- decision_id: DEC-0001-REPO-MODEL
+  status: accepted
+  decision_basis: 'Monorepo layout (frontend/backend/shared) for MVP and early scale.
+    Document your repo-model rationale in docs/architecture/ and reference it here.
 
-  - decision_id: DEC-0002-VERIFY-GATE
-    status: accepted
-    decided_at: "2026-07-15"
-    decision_basis: >
-      Use npm-based verify gate (scripts/verify.mjs) instead of full Python
-      pre-commit stack for this spoke. Rationale: no Python runtime dependency,
-      matches Node/Next.js stack, sufficient for static marketing site.
-    supersedes: null
-    forbidden_resurrection_in: ["any agent session without human approval"]
-    resurrection_trigger_keywords:
-      - "add full pre-commit python stack"
-      - "copy project_initializer hooks verbatim"
-    reopen_requires: >
-      Human approval citing need for TDD/SOLID blocking gates or hub sync.
+    '
+  supersedes: null
+  forbidden_resurrection_in:
+  - any PR
+  - any agent session
+  resurrection_trigger_keywords:
+  - split into separate repos
+  - polyrepo
+  - separate frontend repo
+  - separate backend repo
+  reopen_requires: 'Documented split criteria in your repo-model decision being demonstrably
+    true — not anticipated future scale.
 
-  - decision_id: DEC-0003-BUILD-LENIENCY
-    status: deprecated
-    decided_at: "2026-07-15"
-    decision_basis: >
-      Superseded by DEC-0006-QUALITY-HARDENING. Build now enforces TypeScript
-      and ESLint; themeColor uses viewport export.
-    supersedes: null
-    forbidden_resurrection_in: []
-    resurrection_trigger_keywords: []
-    reopen_requires: N/A — superseded
+    '
+- decision_id: DEC-0002-STACK-SELECTION
+  status: superseded
+  decision_basis: 'Fulfilled by the v4 stack-adapter model: the hub is multi-adapter;
+    each child selects one adapter (python|node|…). See DEC-0003-ADAPTER-MODEL.
 
-  - decision_id: DEC-0004-AGENTIC-SPOKE-DEPTH
-    status: accepted
-    decided_at: "2026-07-15"
-    decision_basis: >
-      Adopt slim L2.5 spoke: governance dirs, decision registry, cursor rules,
-      npm verify, basic CI. Defer intent declarations, hub-and-spoke sync,
-      Python guardrail scripts, and phase_gate automation.
-    supersedes: null
-    forbidden_resurrection_in: ["any agent session"]
-    resurrection_trigger_keywords:
-      - "full project_initializer bootstrap"
-      - "numbered dirs 0 through 8 complete copy"
-    reopen_requires: >
-      Human decision to upgrade spoke depth with migration plan.
+    '
+  supersedes: null
+  forbidden_resurrection_in:
+  - any scaffolding that forces a single language runtime for all children
+  resurrection_trigger_keywords:
+  - python required for all children
+  - one stack only forever
+  reopen_requires: 'A deliberate update via decision_proposer with human approval
+    — never inferred from an unrelated planning conversation.
 
-  - decision_id: DEC-0005-SHADCN-UI-PATTERN
-    status: accepted
-    decided_at: "2026-07-15"
-    decision_basis: >
-      Continue using shadcn/ui components in components/ui/. New UI primitives
-      follow existing Radix + CVA + tailwind-merge patterns per components.json.
-    supersedes: null
-    forbidden_resurrection_in: []
-    resurrection_trigger_keywords:
-      - "replace shadcn with material-ui"
-      - "replace radix with headless ui wholesale"
-    reopen_requires: >
-      Human product/design decision with component migration plan.
+    '
+- decision_id: DEC-0003-ADAPTER-MODEL
+  status: accepted
+  decision_basis: 'Language-neutral protocol with per-stack adapters. Python is the
+    reference adapter and the default for migrated v3 children. New children select
+    adapter from TECH_STACK at init (JS/TS → node, else python). v4.0 ships python
+    + node only; generic CI-only adapter deferred to v4.1+. Major version 4.0.0.
 
-  - decision_id: DEC-0006-QUALITY-HARDENING
-    status: accepted
-    decided_at: "2026-07-15"
-    decision_basis: >
-      Phase 2 quality hardening completed: strict TypeScript and ESLint during
-      build, themeColor moved to viewport export, deployment scaffolding added.
-      Marketing copy uses react/no-unescaped-entities off (prose-heavy site).
-    supersedes: DEC-0003-BUILD-LENIENCY
-    forbidden_resurrection_in: ["any agent session"]
-    resurrection_trigger_keywords:
-      - "ignoreBuildErrors: true"
-      - "ignoreDuringBuilds: true"
-    reopen_requires: >
-      Human decision documenting why build leniency must return.
+    '
+  supersedes: DEC-0002-STACK-SELECTION
+  forbidden_resurrection_in:
+  - any PR that makes Python mandatory for non-python adapters
+  - template updates that push adapters/python onto node children
+  resurrection_trigger_keywords:
+  - require python for node children
+  - ship all bootstrap scripts to every stack
+  - delete python adapter
+  reopen_requires: 'Documented ADR amendment plus major-version migration — never
+    silent edits.
+
+    '
+- decision_id: DEC-0004-HOOK-RUNNER
+  status: accepted
+  decision_basis: 'Neutral preferred hook runner is lefthook (cross-platform binary,
+    no Python). Python adapter continues to use pre-commit. Node adapter uses lefthook.
+    husky is allowed only as a node-adapter option, not the neutral default.
+
+    '
+  supersedes: null
+  forbidden_resurrection_in:
+  - any change that makes Python pre-commit the only allowed runner in the protocol
+  resurrection_trigger_keywords:
+  - pre-commit only forever
+  - require husky for all stacks
+  reopen_requires: 'ADR update with adapter impact analysis and conformance matrix
+    update.
+
+    '
+- decision_id: DEC-0005-GOVERNANCE-RUNTIME-SPLIT
+  status: accepted
+  decision_basis: 'Product stack is informational; governance_runtime drives lifecycle
+    verbs. Adapter/runtime selection must not infer product language from the governance
+    toolchain (e.g. CutRatesLMS is PHP product / python governance). No PHP adapter
+    is required for PHP product spokes that already use adapter: python.
+
+    '
+  supersedes: null
+  forbidden_resurrection_in:
+  - any fleet ratchet that sets product_stack from adapter or governance_runtime
+  - any PR that adds a PHP adapter solely because product_stack is php
+  - any agent session that equates TECH_STACK languages with governance_runtime
+  resurrection_trigger_keywords:
+  - infer stack from adapter
+  - php adapter required
+  - governance runtime equals product stack
+  - require php adapter for CutRatesLMS
+  reopen_requires: 'Documented ADR amendment with a spoke that cannot run governance
+    verbs under an existing adapter and evidence that product_stack must drive lifecycle
+    — never inferred from a planning conversation.
+
+    '

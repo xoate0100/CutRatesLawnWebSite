@@ -39,7 +39,7 @@ for (const block of decisionBlocks) {
     errors.push(`Duplicate decision_id: ${id}`);
   }
   ids.add(id);
-  if (!status || !['accepted', 'proposed', 'deprecated'].includes(status)) {
+  if (!status || !['accepted', 'proposed', 'deprecated', 'superseded'].includes(status)) {
     errors.push(`${id}: invalid or missing status`);
   }
   if (!block.includes('decision_basis:')) {

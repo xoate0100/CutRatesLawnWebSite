@@ -55,3 +55,5 @@ media/quarantine/*
 media/archive/*
 !media/archive/.gitkeep
 media/archive/already_in_registry/**
+.vercel
+.env*

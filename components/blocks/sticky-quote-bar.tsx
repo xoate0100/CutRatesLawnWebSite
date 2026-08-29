@@ -1,10 +1,10 @@
 "use client"
 
-import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { useReducedMotion } from "@/hooks/use-reduced-motion"
+import { PREVIEW_SECTION, QUOTE_SOON_MESSAGE, scrollToSection } from "@/lib/preview-nav"
 import { cn } from "@/lib/utils"
 
 export type StickyQuoteBarProps = {
@@ -18,17 +18,10 @@ export type StickyQuoteBarProps = {
  * Full-width sticky bars cover mid-viewport copy (failed responsive audit).
  */
 export function StickyQuoteBar({ className, threshold = 520 }: StickyQuoteBarProps) {
-  const pathname = usePathname()
   const [visible, setVisible] = useState(false)
   const reduced = useReducedMotion()
-  const hideOnQuote = pathname === "/quote" || pathname?.startsWith("/quote/")
 
   useEffect(() => {
-    if (hideOnQuote) {
-      setVisible(false)
-      return
-    }
-
     const update = () => {
       const y = window.scrollY
       const doc = document.documentElement
@@ -44,9 +37,7 @@ export function StickyQuoteBar({ className, threshold = 520 }: StickyQuoteBarPro
       window.removeEventListener("scroll", update)
       window.removeEventListener("resize", update)
     }
-  }, [threshold, hideOnQuote])
-
-  if (hideOnQuote) return null
+  }, [threshold])
 
   return (
     <div
@@ -64,8 +55,17 @@ export function StickyQuoteBar({ className, threshold = 520 }: StickyQuoteBarPro
       {visible ? (
         <div className="pointer-events-auto flex max-w-[min(18rem,calc(100vw-5.5rem))] items-center gap-2 rounded-full border border-line bg-paper/95 py-1.5 pl-3 pr-1.5 shadow-[0_12px_28px_-12px_rgba(11,58,30,0.45)] backdrop-blur">
           <span className="min-w-0 truncate text-xs font-bold text-ink">Free quote · 2 min</span>
-          <Button asChild variant="lime" size="sm" className="shrink-0 shadow-none max-sm:shadow-none">
-            <Link href="/quote">Quote →</Link>
+          <Button
+            type="button"
+            variant="lime"
+            size="sm"
+            className="shrink-0 shadow-none max-sm:shadow-none"
+            onClick={() => {
+              toast.message(QUOTE_SOON_MESSAGE)
+              scrollToSection(PREVIEW_SECTION.quote)
+            }}
+          >
+            Quote →
           </Button>
         </div>
       ) : null}

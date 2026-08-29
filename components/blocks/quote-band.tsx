@@ -1,7 +1,7 @@
 "use client"
 
-import Link from "next/link"
 import { useMemo, useState } from "react"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Pill } from "@/components/ui/pill"
 import {
@@ -11,6 +11,7 @@ import {
   type ServiceType,
 } from "@/lib/pricing/estimate"
 import { pageWrap } from "@/lib/layout"
+import { QUOTE_SOON_MESSAGE } from "@/lib/preview-nav"
 import { cn } from "@/lib/utils"
 
 function Seg({
@@ -114,10 +115,13 @@ export function QuoteEstimator({ className }: { className?: string }) {
         ) : null}
       </div>
 
-      <Button asChild variant="lime" className="mt-4 w-full">
-        <Link href={`/quote?size=${lawnSize}&property=${propertyType}&frequency=${frequency}`}>
-          Get my real quote <span aria-hidden>→</span>
-        </Link>
+      <Button
+        type="button"
+        variant="lime"
+        className="mt-4 w-full"
+        onClick={() => toast.message(QUOTE_SOON_MESSAGE)}
+      >
+        Get my real quote <span aria-hidden>→</span>
       </Button>
     </div>
   )

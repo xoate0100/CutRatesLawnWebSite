@@ -1,7 +1,16 @@
+"use client"
+
 import Link from "next/link"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { pageWrap } from "@/lib/layout"
 import { NAV_LINKS, SERVICES } from "@/lib/marketing-content"
+import {
+  NAV_SCROLL_TARGET,
+  QUOTE_SOON_MESSAGE,
+  PREVIEW_SECTION,
+  scrollToSection,
+} from "@/lib/preview-nav"
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
 
@@ -15,7 +24,7 @@ export function SiteFooter({ className }: SiteFooterProps) {
   const year = new Date().getFullYear()
 
   return (
-    <footer className={cn("bg-forest-2 text-white", className)}>
+    <footer id={PREVIEW_SECTION.contact} className={cn("bg-forest-2 text-white", className)}>
       <div className={cn(pageWrap, "py-12")}>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div className="min-w-0">
@@ -43,9 +52,16 @@ export function SiteFooter({ className }: SiteFooterProps) {
             <ul className="mt-3 space-y-2 text-sm text-white/80">
               {FOOTER_SERVICES.map((s) => (
                 <li key={s.id}>
-                  <Link href={s.href} className="hover:text-lime">
+                  <a
+                    href={`#${PREVIEW_SECTION.services}`}
+                    className="hover:text-lime"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      scrollToSection(PREVIEW_SECTION.services)
+                    }}
+                  >
                     {s.title}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -56,13 +72,23 @@ export function SiteFooter({ className }: SiteFooterProps) {
               Company
             </p>
             <ul className="mt-3 space-y-2 text-sm text-white/80">
-              {NAV_LINKS.map((l) => (
-                <li key={l.href}>
-                  <Link href={l.href} className="hover:text-lime">
-                    {l.label}
-                  </Link>
-                </li>
-              ))}
+              {NAV_LINKS.map((l) => {
+                const target = NAV_SCROLL_TARGET[l.label]
+                return (
+                  <li key={l.href}>
+                    <a
+                      href={target ? `#${target}` : undefined}
+                      className="hover:text-lime"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        if (target) scrollToSection(target)
+                      }}
+                    >
+                      {l.label}
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </div>
 
@@ -83,8 +109,14 @@ export function SiteFooter({ className }: SiteFooterProps) {
               </li>
               <li>{siteConfig.address.full}</li>
             </ul>
-            <Button asChild variant="lime" size="sm" className="mt-4">
-              <Link href="/quote">Free quote →</Link>
+            <Button
+              type="button"
+              variant="lime"
+              size="sm"
+              className="mt-4"
+              onClick={() => toast.message(QUOTE_SOON_MESSAGE)}
+            >
+              Free quote →
             </Button>
           </div>
         </div>

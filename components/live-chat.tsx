@@ -1,22 +1,19 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { MessageCircle, X } from "lucide-react"
+import { PREVIEW_SECTION, QUOTE_SOON_MESSAGE, scrollToSection } from "@/lib/preview-nav"
 import { siteConfig } from "@/lib/site-config"
 
 /** Honest offline help — not a live agent simulation. */
 export default function LiveChat() {
-  const pathname = usePathname()
   const [isOpen, setIsOpen] = useState(false)
   const [revealed, setRevealed] = useState(false)
-  const hideOnQuote = pathname === "/quote" || pathname?.startsWith("/quote/")
 
   useEffect(() => {
-    if (hideOnQuote) return
     // Keep FAB off first-paint hero CTAs on short phones (overlap at ≤667px height).
     const update = () => setRevealed(window.scrollY > 420)
     update()
@@ -26,9 +23,8 @@ export default function LiveChat() {
       window.removeEventListener("scroll", update)
       window.removeEventListener("resize", update)
     }
-  }, [hideOnQuote])
+  }, [])
 
-  if (hideOnQuote) return null
   if (!revealed && !isOpen) return null
 
   return (
@@ -64,27 +60,54 @@ export default function LiveChat() {
                 </a>
               </li>
               <li>
-                <Link className="text-green-700 underline" href="/quote" onClick={() => setIsOpen(false)}>
+                <button
+                  type="button"
+                  className="text-green-700 underline"
+                  onClick={() => {
+                    setIsOpen(false)
+                    toast.message(QUOTE_SOON_MESSAGE)
+                    scrollToSection(PREVIEW_SECTION.quote)
+                  }}
+                >
                   Get a Quote
-                </Link>
+                </button>
               </li>
               <li>
-                <Link className="text-green-700 underline" href="/contact" onClick={() => setIsOpen(false)}>
+                <button
+                  type="button"
+                  className="text-green-700 underline"
+                  onClick={() => {
+                    setIsOpen(false)
+                    scrollToSection(PREVIEW_SECTION.contact)
+                  }}
+                >
                   Contact form
-                </Link>
+                </button>
               </li>
             </ul>
           </CardContent>
           <CardFooter className="flex flex-col gap-2">
-            <Button asChild className="w-full bg-green-600 hover:bg-green-700">
-              <Link href="/quote" onClick={() => setIsOpen(false)}>
-                Get a Quote
-              </Link>
+            <Button
+              type="button"
+              className="w-full bg-green-600 hover:bg-green-700"
+              onClick={() => {
+                setIsOpen(false)
+                toast.message(QUOTE_SOON_MESSAGE)
+                scrollToSection(PREVIEW_SECTION.quote)
+              }}
+            >
+              Get a Quote
             </Button>
-            <Button asChild variant="outline" className="w-full">
-              <Link href="/contact" onClick={() => setIsOpen(false)}>
-                Go to contact
-              </Link>
+            <Button
+              type="button"
+              variant="outline"
+              className="w-full"
+              onClick={() => {
+                setIsOpen(false)
+                scrollToSection(PREVIEW_SECTION.contact)
+              }}
+            >
+              Go to contact
             </Button>
           </CardFooter>
         </Card>

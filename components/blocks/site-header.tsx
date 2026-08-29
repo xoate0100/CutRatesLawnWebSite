@@ -3,11 +3,77 @@
 import Link from "next/link"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { pageWrap } from "@/lib/layout"
 import { NAV_LINKS } from "@/lib/marketing-content"
+import {
+  NAV_SCROLL_TARGET,
+  QUOTE_SOON_MESSAGE,
+  scrollToSection,
+} from "@/lib/preview-nav"
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
+
+function NavAnchor({
+  label,
+  className,
+  onNavigate,
+}: {
+  label: string
+  className?: string
+  onNavigate?: () => void
+}) {
+  const target = NAV_SCROLL_TARGET[label]
+  return (
+    <a
+      href={target ? `#${target}` : undefined}
+      role="link"
+      tabIndex={0}
+      className={className}
+      onClick={(e) => {
+        e.preventDefault()
+        onNavigate?.()
+        if (target) scrollToSection(target)
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault()
+          onNavigate?.()
+          if (target) scrollToSection(target)
+        }
+      }}
+    >
+      {label}
+      <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-lime transition-transform duration-200 group-hover:scale-x-100" />
+    </a>
+  )
+}
+
+function QuoteSoonButton({
+  className,
+  children,
+  onDone,
+}: {
+  className?: string
+  children: React.ReactNode
+  onDone?: () => void
+}) {
+  return (
+    <Button
+      type="button"
+      variant="lime"
+      size="sm"
+      className={className}
+      onClick={() => {
+        toast.message(QUOTE_SOON_MESSAGE)
+        onDone?.()
+      }}
+    >
+      {children}
+    </Button>
+  )
+}
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
@@ -33,14 +99,11 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-5 font-semibold md:flex" aria-label="Primary">
           {NAV_LINKS.map((link) => (
-            <Link
+            <NavAnchor
               key={link.href}
-              href={link.href}
+              label={link.label}
               className="group relative py-1 text-[0.92rem] opacity-85 hover:opacity-100"
-            >
-              {link.label}
-              <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-lime transition-transform duration-200 group-hover:scale-x-100" />
-            </Link>
+            />
           ))}
         </nav>
 
@@ -51,11 +114,9 @@ export function SiteHeader() {
           {siteConfig.phone.display}
         </a>
 
-        <Button asChild variant="lime" size="sm" className="hidden md:inline-flex">
-          <Link href="/quote">
-            Get a quote <span aria-hidden>→</span>
-          </Link>
-        </Button>
+        <QuoteSoonButton className="hidden md:inline-flex">
+          Get a quote <span aria-hidden>→</span>
+        </QuoteSoonButton>
 
         <button
           type="button"
@@ -76,23 +137,19 @@ export function SiteHeader() {
         >
           <nav className="flex flex-col gap-3 font-semibold" aria-label="Mobile">
             {NAV_LINKS.map((link) => (
-              <Link
+              <NavAnchor
                 key={link.href}
-                href={link.href}
-                className="py-2 opacity-90"
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </Link>
+                label={link.label}
+                className="relative py-2 opacity-90"
+                onNavigate={() => setOpen(false)}
+              />
             ))}
             <a href={`tel:${siteConfig.phone.e164}`} className="py-2 font-bold">
               {siteConfig.phone.display}
             </a>
-            <Button asChild variant="lime" className="mt-2 w-full">
-              <Link href="/quote" onClick={() => setOpen(false)}>
-                Get a quote →
-              </Link>
-            </Button>
+            <QuoteSoonButton className="mt-2 w-full" onDone={() => setOpen(false)}>
+              Get a quote →
+            </QuoteSoonButton>
           </nav>
         </div>
       ) : null}

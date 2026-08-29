@@ -1,6 +1,9 @@
+"use client"
+
 import type { ReactNode } from "react"
-import Link from "next/link"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
+import { PREVIEW_SECTION, QUOTE_SOON_MESSAGE, scrollToSection } from "@/lib/preview-nav"
 import { cn } from "@/lib/utils"
 
 export type CTASectionProps = {
@@ -20,7 +23,6 @@ export function CTASection({
     </>
   ),
   description = "Free quote in about two minutes. Local crew, no contracts, done right.",
-  ctaHref = "/quote",
   ctaLabel = "Get a fast quote",
   className,
 }: CTASectionProps) {
@@ -40,10 +42,17 @@ export function CTASection({
           {title}
         </h2>
         <p className="mx-auto mt-3 max-w-[42ch] text-white/75">{description}</p>
-        <Button asChild variant="lime" size="lg" className="mt-6 max-w-full">
-          <Link href={ctaHref}>
-            {ctaLabel} <span aria-hidden>→</span>
-          </Link>
+        <Button
+          type="button"
+          variant="lime"
+          size="lg"
+          className="mt-6 max-w-full"
+          onClick={() => {
+            toast.message(QUOTE_SOON_MESSAGE)
+            scrollToSection(PREVIEW_SECTION.quote)
+          }}
+        >
+          {ctaLabel} <span aria-hidden>→</span>
         </Button>
       </div>
     </section>

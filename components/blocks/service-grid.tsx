@@ -1,6 +1,8 @@
-import Link from "next/link"
+"use client"
+
 import { MediaFrame } from "@/components/media/media-frame"
 import { Tag } from "@/components/ui/tag"
+import { PREVIEW_SECTION, scrollToSection } from "@/lib/preview-nav"
 import { SERVICES, type ServiceItem } from "@/lib/marketing-content"
 import { cn } from "@/lib/utils"
 
@@ -35,12 +37,16 @@ export function ServiceCard({
       <div className="min-w-0 p-4 sm:p-5">
         <h3 className="font-display text-[clamp(1.15rem,4vw,1.28rem)] font-bold">{service.title}</h3>
         <p className="mt-1.5 text-[0.94rem] text-sage">{service.description}</p>
-        <Link
-          href={service.href}
+        <a
+          href={`#${PREVIEW_SECTION.services}`}
           className="mt-3 inline-flex items-center gap-1.5 text-[0.9rem] font-bold text-green"
+          onClick={(e) => {
+            e.preventDefault()
+            scrollToSection(PREVIEW_SECTION.services)
+          }}
         >
           Learn more <span className="transition-transform group-hover:translate-x-1">→</span>
-        </Link>
+        </a>
       </div>
     </article>
   )
@@ -73,12 +79,16 @@ export function FeatureCard({
         {service.tag ? <Tag className="mb-3 self-start">{service.tag}</Tag> : null}
         <h3 className="font-display text-[clamp(1.35rem,4vw,1.7rem)] font-bold">{service.title}</h3>
         <p className="mt-2 text-sage">{service.description}</p>
-        <Link
-          href={service.href}
+        <a
+          href={`#${PREVIEW_SECTION.services}`}
           className="mt-4 inline-flex items-center gap-1.5 font-bold text-green"
+          onClick={(e) => {
+            e.preventDefault()
+            scrollToSection(PREVIEW_SECTION.services)
+          }}
         >
           Explore landscaping <span className="transition-transform group-hover:translate-x-1">→</span>
-        </Link>
+        </a>
       </div>
     </article>
   )

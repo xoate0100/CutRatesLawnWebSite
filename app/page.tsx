@@ -1,5 +1,6 @@
 import { SectionHead } from "@/components/ui/section-head"
 import { pageWrap, pageWrapNarrow, pageWrapMid } from "@/lib/layout"
+import { PREVIEW_SECTION } from "@/lib/preview-nav"
 import {
   AreaChips,
   BeforeAfterSlider,
@@ -19,7 +20,10 @@ export default function HomePage() {
       <Hero />
       <RibbonMarquee />
 
-      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
+      <section
+        id={PREVIEW_SECTION.services}
+        className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)] scroll-mt-24`}
+      >
         <SectionHead
           eyebrow="Popular services"
           title="The work your property actually needs."
@@ -30,7 +34,10 @@ export default function HomePage() {
 
       <QuoteBand />
 
-      <section className={`${pageWrapMid} py-[clamp(2.5rem,5vw,4.5rem)]`}>
+      <section
+        id={PREVIEW_SECTION.proof}
+        className={`${pageWrapMid} py-[clamp(2.5rem,5vw,4.5rem)] scroll-mt-24`}
+      >
         <SectionHead
           eyebrow="Proof"
           title="Before and after, side by side."
@@ -42,7 +49,10 @@ export default function HomePage() {
 
       <TestimonialMarquee />
 
-      <section className="bg-cream py-[clamp(2.5rem,5vw,4rem)]">
+      <section
+        id={PREVIEW_SECTION.areas}
+        className="bg-cream py-[clamp(2.5rem,5vw,4rem)] scroll-mt-24"
+      >
         <div className={`${pageWrap}`}>
           <SectionHead
             eyebrow="Service areas"
@@ -53,7 +63,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
+      <section
+        id={PREVIEW_SECTION.bundles}
+        className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)] scroll-mt-24`}
+      >
         <SectionHead
           eyebrow="Bundles"
           title="Starting-at plans that stay flexible."
@@ -62,7 +75,10 @@ export default function HomePage() {
         <BundleCards />
       </section>
 
-      <section className="bg-cream py-[clamp(2.5rem,5vw,4rem)]">
+      <section
+        id={PREVIEW_SECTION.faq}
+        className="bg-cream py-[clamp(2.5rem,5vw,4rem)] scroll-mt-24"
+      >
         <div className={`${pageWrapNarrow}`}>
           <SectionHead eyebrow="FAQ" title="Straight answers." align="center" />
           <FAQAccordion />

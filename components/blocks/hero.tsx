@@ -1,12 +1,13 @@
 "use client"
 
-import Link from "next/link"
 import { Check } from "lucide-react"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
 import { Pill } from "@/components/ui/pill"
 import { MediaFrame } from "@/components/media/media-frame"
 import { useCountUp } from "@/hooks/use-count-up"
 import { useParallax } from "@/hooks/use-parallax"
+import { PREVIEW_SECTION, QUOTE_SOON_MESSAGE, scrollToSection } from "@/lib/preview-nav"
 import { cn } from "@/lib/utils"
 import type { RefObject } from "react"
 
@@ -84,13 +85,26 @@ export function Hero({ className }: HeroProps) {
             painless.
           </p>
           <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:gap-3">
-            <Button asChild variant="lime" size="lg" className="max-w-full">
-              <Link href="/quote">
-                Get my free quote <span aria-hidden>→</span>
-              </Link>
+            <Button
+              type="button"
+              variant="lime"
+              size="lg"
+              className="max-w-full"
+              onClick={() => {
+                toast.message(QUOTE_SOON_MESSAGE)
+                scrollToSection(PREVIEW_SECTION.quote)
+              }}
+            >
+              Get my free quote <span aria-hidden>→</span>
             </Button>
-            <Button asChild variant="ghost" size="lg" className="max-w-full text-white">
-              <Link href="/our-work">See our work</Link>
+            <Button
+              type="button"
+              variant="ghost"
+              size="lg"
+              className="max-w-full text-white"
+              onClick={() => scrollToSection(PREVIEW_SECTION.proof)}
+            >
+              See our work
             </Button>
           </div>
           <div className="mt-7 flex flex-wrap gap-5 text-[0.9rem] font-semibold text-white/80">

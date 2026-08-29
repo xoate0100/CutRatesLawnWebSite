@@ -1,6 +1,9 @@
-import Link from "next/link"
+"use client"
+
 import { Check } from "lucide-react"
+import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
+import { PREVIEW_SECTION, QUOTE_SOON_MESSAGE, scrollToSection } from "@/lib/preview-nav"
 import { BUNDLES, type BundleItem } from "@/lib/marketing-content"
 import { cn } from "@/lib/utils"
 
@@ -36,8 +39,16 @@ export function BundleCard({ bundle, className }: BundleCardProps) {
           </li>
         ))}
       </ul>
-      <Button asChild variant={bundle.popular ? "lime" : "dark"} className="mt-6 w-full">
-        <Link href={bundle.href}>Choose {bundle.name}</Link>
+      <Button
+        type="button"
+        variant={bundle.popular ? "lime" : "dark"}
+        className="mt-6 w-full"
+        onClick={() => {
+          toast.message(QUOTE_SOON_MESSAGE)
+          scrollToSection(PREVIEW_SECTION.bundles)
+        }}
+      >
+        Choose {bundle.name}
       </Button>
     </article>
   )

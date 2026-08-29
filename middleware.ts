@@ -1,32 +1,34 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
 
-// This function can be marked `async` if using `await` inside
+/**
+ * Homepage-only preview: every non-home document route redirects to /.
+ * Static assets, Next internals, and API routes stay reachable.
+ */
 export function middleware(request: NextRequest) {
-  // Get the auth token from the cookies
-  const authToken = request.cookies.get("auth_token")?.value
+  const { pathname } = request.nextUrl
 
-  // Check if the request is for a protected route
-  const isProtectedRoute =
-    request.nextUrl.pathname.startsWith("/account") || request.nextUrl.pathname.startsWith("/dashboard")
-
-  // If it's a protected route and there's no auth token, redirect to login
-  if (isProtectedRoute && !authToken) {
-    const loginUrl = new URL("/login", request.url)
-    loginUrl.searchParams.set("from", request.nextUrl.pathname)
-    return NextResponse.redirect(loginUrl)
+  if (
+    pathname.startsWith("/_next") ||
+    pathname.startsWith("/api") ||
+    pathname === "/favicon.ico" ||
+    pathname === "/robots.txt" ||
+    pathname === "/sitemap.xml" ||
+    /\.[a-zA-Z0-9]+$/.test(pathname)
+  ) {
+    return NextResponse.next()
   }
 
-  // If it's the login page and there is an auth token, redirect to account
-  if ((request.nextUrl.pathname === "/login" || request.nextUrl.pathname === "/register") && authToken) {
-    const accountUrl = new URL("/account", request.url)
-    return NextResponse.redirect(accountUrl)
+  if (pathname !== "/") {
+    const url = request.nextUrl.clone()
+    url.pathname = "/"
+    url.search = ""
+    return NextResponse.redirect(url)
   }
 
   return NextResponse.next()
 }
 
-// See "Matching Paths" below to learn more
 export const config = {
-  matcher: ["/account/:path*", "/dashboard/:path*", "/login", "/register"],
+  matcher: ["/((?!_next/static|_next/image).*)"],
 }

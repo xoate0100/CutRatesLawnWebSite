@@ -55,13 +55,13 @@ export function Hero({ className }: HeroProps) {
         aria-hidden
         className="pointer-events-none absolute -right-[140px] -top-[200px] h-[640px] w-[640px] rounded-full bg-[radial-gradient(circle,rgba(200,241,53,0.5),rgba(200,241,53,0)_62%)] blur-[8px]"
       />
-      <div className="relative z-[2] mx-auto grid w-full max-w-[1200px] items-center gap-[clamp(1.5rem,4vw,3.5rem)] px-5 sm:px-6 lg:px-8 md:grid-cols-[1.05fr_0.95fr]">
+      <div className="relative z-[2] mx-auto grid w-full max-w-[1200px] items-center gap-[clamp(1.5rem,4vw,3.5rem)] px-5 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
         <div className="relative z-10 min-w-0">
           <Pill tone="on-dark">
             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime shadow-[0_0_0_4px_rgba(200,241,53,0.25)]" />
             Local. Reliable. Easy to book.
           </Pill>
-          <h1 className="font-display mt-4 text-[clamp(2.1rem,8vw,5rem)] font-extrabold leading-[1.08]">
+          <h1 className="font-display mt-4 text-balance text-[clamp(2.1rem,8vw,4rem)] font-extrabold leading-[1.08] lg:text-[clamp(2.2rem,2.35vw,2.65rem)] xl:text-[clamp(2.35rem,2.7vw,2.85rem)]">
             A better-looking lawn,
             <br />
             <span className="relative inline text-white">
@@ -134,7 +134,7 @@ export function Hero({ className }: HeroProps) {
             aspect="5/6"
             priority
             className="mx-auto max-w-full shadow-brand"
-            sizes="(max-width: 768px) 92vw, 45vw"
+            sizes="(max-width: 1024px) 92vw, 42vw"
           />
         </div>
       </div>

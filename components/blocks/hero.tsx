@@ -55,7 +55,7 @@ export function Hero({ className }: HeroProps) {
         className="pointer-events-none absolute -right-[140px] -top-[200px] h-[640px] w-[640px] rounded-full bg-[radial-gradient(circle,rgba(200,241,53,0.5),rgba(200,241,53,0)_62%)] blur-[8px]"
       />
       <div className="relative z-[2] mx-auto grid w-full max-w-[1200px] items-center gap-[clamp(1.5rem,4vw,3.5rem)] px-5 sm:px-6 lg:px-8 md:grid-cols-[1.05fr_0.95fr]">
-        <div className="min-w-0">
+        <div className="relative z-10 min-w-0">
           <Pill tone="on-dark">
             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime shadow-[0_0_0_4px_rgba(200,241,53,0.25)]" />
             Local. Reliable. Easy to book.
@@ -63,7 +63,7 @@ export function Hero({ className }: HeroProps) {
           <h1 className="font-display mt-4 text-[clamp(2.1rem,8vw,5rem)] font-extrabold leading-[1.08]">
             A better-looking lawn,
             <br />
-            <span className="relative text-white md:whitespace-nowrap">
+            <span className="relative inline text-white">
               without the runaround.
               <svg
                 className="absolute -bottom-[14%] -left-[3%] -z-10 h-[44%] w-[106%] text-lime"
@@ -109,7 +109,7 @@ export function Hero({ className }: HeroProps) {
             <Stat end={7} label="Towns served" />
           </div>
         </div>
-        <div className="relative min-w-0">
+        <div className="relative z-0 min-w-0">
           <div
             aria-hidden
             className="absolute -right-[4%] bottom-[16%] -z-10 hidden h-[70px] w-[46%] -rotate-[14deg] rounded-[14px] bg-lime shadow-[0_14px_30px_-10px_rgba(200,241,53,0.6)] sm:block"

@@ -1,0 +1,288 @@
+{
+  "id": "analytics.tracking",
+  "version": "1.0.0",
+  "name": "Analytics Tracking (Marketing)",
+  "description": "Page-level GTM dataLayer analytics with UTM/GCLID attribution, env-gated GA4/Ads/Meta destinations, and credential-gated weekly GA4 reporting.",
+  "category": "product",
+  "maturity": "production",
+  "risk_level": "medium",
+  "approval_policy": "advisory",
+  "contract": {
+    "spec": "contract/SPEC.md",
+    "schemas": [],
+    "inputs": {
+      "event": {
+        "type": "object",
+        "description": "dataLayer event payload (event name + required fields per taxonomy)"
+      },
+      "stored_attribution": {
+        "type": "object",
+        "description": "Session-persisted utm_* + gclid from first touch"
+      },
+      "url_attribution": {
+        "type": "object",
+        "description": "Fresh URL attribution params"
+      },
+      "destinations": {
+        "type": "object",
+        "description": "Env-gated platform IDs: ga4, google_ads, meta_pixel — null/empty no-ops"
+      }
+    },
+    "outputs": {
+      "datalayer_push": {
+        "type": "object",
+        "description": "Enriched event pushed to dataLayer"
+      },
+      "attribution_captured": {
+        "type": "boolean",
+        "description": "Whether utm_source or gclid is present on the event"
+      },
+      "destinations_notified": {
+        "type": "array",
+        "description": "Destination keys actually notified (empty when IDs unset)"
+      }
+    }
+  },
+  "conformance_suite": {
+    "suite_id": "analytics.tracking.conformance",
+    "version": "1.0.0",
+    "description": "Mined from CRL_Lights_Landing analytics + Analytics_Standards.md",
+    "cases": [
+      {
+        "id": "emit-page-view-with-attribution",
+        "input": {
+          "event": { "event": "page_view", "page_path": "/", "page_title": "Home" },
+          "stored_attribution": {
+            "utm_source": "google",
+            "utm_medium": "cpc",
+            "utm_campaign": "spring-lawn",
+            "gclid": "CjwKCAiAtest123"
+          },
+          "destinations": { "ga4": "G-PLACEHOLDER", "google_ads": null, "meta_pixel": null }
+        },
+        "expect": {
+          "outcome": "pass",
+          "asserts": [
+            { "path": "$.datalayer_push.utm_source", "op": "eq", "value": "google" },
+            { "path": "$.datalayer_push.gclid", "op": "eq", "value": "CjwKCAiAtest123" },
+            { "path": "$.attribution_captured", "op": "eq", "value": true }
+          ]
+        }
+      },
+      {
+        "id": "emit-service-view",
+        "input": {
+          "event": {
+            "event": "service_view",
+            "page_path": "/services/lawn-care",
+            "service_id": "lawn-care",
+            "service_name": "Lawn Care"
+          },
+          "stored_attribution": { "utm_source": "google", "gclid": "gclid-svc-1" }
+        },
+        "expect": {
+          "outcome": "pass",
+          "asserts": [
+            { "path": "$.datalayer_push.service_id", "op": "eq", "value": "lawn-care" },
+            { "path": "$.datalayer_push.gclid", "op": "exists" }
+          ]
+        }
+      },
+      {
+        "id": "emit-area-view",
+        "input": {
+          "event": {
+            "event": "area_view",
+            "page_path": "/service-areas/wichita",
+            "area_slug": "wichita",
+            "area_name": "Wichita"
+          },
+          "stored_attribution": { "utm_medium": "organic" }
+        },
+        "expect": {
+          "outcome": "pass",
+          "asserts": [{ "path": "$.datalayer_push.area_slug", "op": "eq", "value": "wichita" }]
+        }
+      },
+      {
+        "id": "emit-funnel-step",
+        "input": {
+          "event": {
+            "event": "funnel_step_view",
+            "page_path": "/quote",
+            "funnel_id": "quote",
+            "step_name": "contact",
+            "step_number": 3
+          },
+          "stored_attribution": { "utm_source": "facebook" }
+        },
+        "expect": {
+          "outcome": "pass",
+          "asserts": [{ "path": "$.datalayer_push.step_name", "op": "eq", "value": "contact" }]
+        }
+      },
+      {
+        "id": "emit-phone-click",
+        "input": {
+          "event": {
+            "event": "phone_click",
+            "page_path": "/contact",
+            "click_location": "header"
+          },
+          "stored_attribution": { "gclid": "gclid-phone" }
+        },
+        "expect": {
+          "outcome": "pass",
+          "asserts": [{ "path": "$.datalayer_push.click_location", "op": "eq", "value": "header" }]
+        }
+      },
+      {
+        "id": "emit-conversion-lead-with-attribution",
+        "input": {
+          "event": {
+            "event": "conversion_lead",
+            "page_path": "/quote",
+            "transaction_id": "CRL-QUOTE-001",
+            "conversion_value": 149,
+            "currency": "USD"
+          },
+          "stored_attribution": {
+            "utm_source": "google",
+            "utm_medium": "cpc",
+            "gclid": "gclid-conv-99"
+          },
+          "destinations": {
+            "ga4": "G-PLACEHOLDER",
+            "google_ads": "AW-PLACEHOLDER",
+            "meta_pixel": "PIXEL-PLACEHOLDER"
+          }
+        },
+        "expect": {
+          "outcome": "pass",
+          "asserts": [
+            { "path": "$.datalayer_push.transaction_id", "op": "eq", "value": "CRL-QUOTE-001" },
+            { "path": "$.datalayer_push.gclid", "op": "exists" },
+            { "path": "$.attribution_captured", "op": "eq", "value": true },
+            { "path": "$.destinations_notified", "op": "contains", "value": "ga4" }
+          ]
+        }
+      },
+      {
+        "id": "reject-missing-page-path",
+        "input": { "event": { "event": "page_view", "page_title": "Home" } },
+        "expect": { "outcome": "reject", "error_code": "EVENT_SCHEMA_INVALID" }
+      },
+      {
+        "id": "reject-conversion-missing-id",
+        "input": {
+          "event": {
+            "event": "conversion_lead",
+            "page_path": "/quote",
+            "conversion_value": 100,
+            "currency": "USD"
+          },
+          "stored_attribution": { "utm_source": "google" }
+        },
+        "expect": { "outcome": "reject", "error_code": "CONVERSION_ID_REQUIRED" }
+      },
+      {
+        "id": "reject-conversion-missing-value",
+        "input": {
+          "event": {
+            "event": "conversion_lead",
+            "page_path": "/quote",
+            "transaction_id": "CRL-001",
+            "currency": "USD"
+          },
+          "stored_attribution": { "utm_source": "google" }
+        },
+        "expect": { "outcome": "reject", "error_code": "CONVERSION_VALUE_REQUIRED" }
+      },
+      {
+        "id": "reject-conversion-missing-attribution",
+        "input": {
+          "event": {
+            "event": "conversion_lead",
+            "page_path": "/quote",
+            "transaction_id": "CRL-002",
+            "conversion_value": 200,
+            "currency": "USD"
+          },
+          "stored_attribution": {}
+        },
+        "expect": { "outcome": "reject", "error_code": "ATTRIBUTION_REQUIRED" }
+      }
+    ]
+  },
+  "reference_implementation": {
+    "language": "typescript",
+    "path": "lib/analytics/",
+    "repository": "xoate0100/CutRatesLawnWebSite",
+    "notes": "CutRates marketing site provider; env-gated platform IDs; conformance via lib/analytics/conformance-provider.mjs"
+  },
+  "providers": [
+    {
+      "id": "hub-analytics-fixture",
+      "repo": "xoate0100/project_initializer",
+      "path": "backend/capability_adapter/impls_analytics.py",
+      "language": "python",
+      "tag": "main",
+      "conformance_status": "pass",
+      "conformance_evidence": "tests/test_analytics_tracking_conformance.py::test_conformant_passes",
+      "exceeds_floor": [],
+      "notes": "Fixture-based provider for registry gate + hub tests"
+    },
+    {
+      "id": "cutrateslawn-analytics",
+      "repo": "xoate0100/CutRatesLawnWebSite",
+      "path": "lib/analytics/",
+      "language": "typescript",
+      "tag": "main",
+      "conformance_status": "pending",
+      "conformance_evidence": "scripts/analytics/conformance-check.mjs",
+      "exceeds_floor": ["weekly_ga4_report", "quote_funnel_steps", "service_area_bindings"],
+      "notes": "Production GTM + env-gated GA4/Ads/Meta; weekly report credential-gated"
+    }
+  ],
+  "agent_manifest": {
+    "summary": "GTM dataLayer marketing analytics with UTM/GCLID attribution capture, env-gated GA4/Ads/Meta forwarding, and weekly GA4 reporting.",
+    "may_override": [
+      { "path": "contract.inputs.event.event_prefix", "reason": "Brand-specific event naming (e.g. CutRates_service_view)" },
+      { "path": "contract.inputs.destinations", "reason": "Which platforms are wired; all IDs via env vars" },
+      { "path": "contract.inputs.funnel_steps", "reason": "Quote funnel step names per site" },
+      { "path": "providers", "reason": "Per-provider inherit-and-override (DEC-CP-0012)" },
+      { "path": "contract.outputs.weekly_report.recipient", "reason": "Report recipient email via env" }
+    ],
+    "must_pass": [
+      {
+        "requirement": "B.5 attribution floor — conversion events require utm_source or gclid",
+        "conformance_case_ids": [
+          "emit-page-view-with-attribution",
+          "emit-conversion-lead-with-attribution",
+          "reject-missing-page-path",
+          "reject-conversion-missing-id",
+          "reject-conversion-missing-value",
+          "reject-conversion-missing-attribution"
+        ]
+      }
+    ],
+    "must_not_change": ["id", "category", "conformance_suite.suite_id"]
+  },
+  "dependencies": [],
+  "evaluators": ["EV.schema.capability_registry"],
+  "provenance": {
+    "reference_repos": [
+      "xoate0100/CRL_Lights_Landing",
+      "xoate0100/CutRatesLawnWebSite",
+      "xoate0100/gads_documentation"
+    ],
+    "mined_sources": [
+      "CRL_Lights_Landing/lib/gtm.ts",
+      "CRL_Lights_Landing/lib/analytics/core.ts",
+      "CRL_Lights_Landing/hooks/useAnalytics.ts",
+      "CRL_Lights_Landing/docs/Analytics_Standards.md",
+      "gads_documentation"
+    ],
+    "first_registration_gate": "initial_registration — agent.reviewer.capability_bump + conformance green"
+  }
+}

@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo, useState, type FormEvent } from "react"
+import { useMemo, useState, useEffect, type FormEvent } from "react"
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
@@ -19,6 +19,7 @@ import {
   type PropertyType,
   type ServiceType,
 } from "@/lib/pricing/estimate"
+import { useAnalytics } from "@/hooks/useAnalytics"
 
 type Step = "details" | "estimate" | "contact" | "done"
 
@@ -54,6 +55,7 @@ function newIdempotencyKey() {
 
 export function QuoteFunnel() {
   const searchParams = useSearchParams()
+  const { onFunnelStep, onConversionLead } = useAnalytics()
   const [step, setStep] = useState<Step>("details")
   const [propertyType, setPropertyType] = useState<PropertyType>("residential")
   const [serviceType, setServiceType] = useState<ServiceType | "">(() =>
@@ -85,6 +87,16 @@ export function QuoteFunnel() {
     if (step === "contact") return 3
     return 4
   }, [step])
+
+  useEffect(() => {
+    const stepNames: Record<Step, string> = {
+      details: "details",
+      estimate: "estimate",
+      contact: "contact",
+      done: "done",
+    }
+    onFunnelStep("quote", stepNames[step], stepIndex)
+  }, [step, stepIndex, onFunnelStep])
 
   const calculateQuote = () => {
     const outcome = calculateEstimate({
@@ -162,6 +174,11 @@ export function QuoteFunnel() {
         return
       }
       setStep("done")
+      onConversionLead(
+        data.requestId ?? idempotencyKey,
+        quote.amount,
+        "USD",
+      )
       setIdempotencyKey(newIdempotencyKey())
     } catch {
       setSubmitError(`Network error. Please call ${siteConfig.phone.display}.`)

@@ -1,0 +1,189 @@
+{
+  "suite_id": "analytics.tracking.conformance",
+  "version": "1.0.0",
+  "description": "Mined floor: GTM dataLayer events with UTM/GCLID attribution; conversion requires attribution; broken provider without attribution MUST fail",
+  "cases": [
+    {
+      "id": "emit-page-view-with-attribution",
+      "input": {
+        "event": {
+          "event": "page_view",
+          "page_path": "/",
+          "page_title": "Home"
+        },
+        "stored_attribution": {
+          "utm_source": "google",
+          "utm_medium": "cpc",
+          "utm_campaign": "spring-lawn",
+          "gclid": "CjwKCAiAtest123"
+        },
+        "destinations": { "ga4": "G-PLACEHOLDER", "google_ads": null, "meta_pixel": null }
+      },
+      "expect": {
+        "outcome": "pass",
+        "asserts": [
+          { "path": "$.datalayer_push.utm_source", "op": "eq", "value": "google" },
+          { "path": "$.datalayer_push.gclid", "op": "eq", "value": "CjwKCAiAtest123" },
+          { "path": "$.attribution_captured", "op": "eq", "value": true }
+        ]
+      },
+      "tags": ["floor", "mined:CRL_Lights_Landing/lib/gtm.ts"]
+    },
+    {
+      "id": "emit-service-view",
+      "input": {
+        "event": {
+          "event": "service_view",
+          "page_path": "/services/lawn-care",
+          "service_id": "lawn-care",
+          "service_name": "Lawn Care"
+        },
+        "stored_attribution": { "utm_source": "google", "gclid": "gclid-svc-1" }
+      },
+      "expect": {
+        "outcome": "pass",
+        "asserts": [
+          { "path": "$.datalayer_push.service_id", "op": "eq", "value": "lawn-care" },
+          { "path": "$.datalayer_push.gclid", "op": "exists" }
+        ]
+      },
+      "tags": ["floor"]
+    },
+    {
+      "id": "emit-area-view",
+      "input": {
+        "event": {
+          "event": "area_view",
+          "page_path": "/service-areas/wichita",
+          "area_slug": "wichita",
+          "area_name": "Wichita"
+        },
+        "stored_attribution": { "utm_medium": "organic" }
+      },
+      "expect": {
+        "outcome": "pass",
+        "asserts": [
+          { "path": "$.datalayer_push.area_slug", "op": "eq", "value": "wichita" }
+        ]
+      },
+      "tags": ["floor"]
+    },
+    {
+      "id": "emit-funnel-step",
+      "input": {
+        "event": {
+          "event": "funnel_step_view",
+          "page_path": "/quote",
+          "funnel_id": "quote",
+          "step_name": "contact",
+          "step_number": 3
+        },
+        "stored_attribution": { "utm_source": "facebook" }
+      },
+      "expect": {
+        "outcome": "pass",
+        "asserts": [
+          { "path": "$.datalayer_push.step_name", "op": "eq", "value": "contact" }
+        ]
+      },
+      "tags": ["floor", "mined:CRL quote funnel"]
+    },
+    {
+      "id": "emit-phone-click",
+      "input": {
+        "event": {
+          "event": "phone_click",
+          "page_path": "/contact",
+          "click_location": "header"
+        },
+        "stored_attribution": { "gclid": "gclid-phone" }
+      },
+      "expect": {
+        "outcome": "pass",
+        "asserts": [
+          { "path": "$.datalayer_push.click_location", "op": "eq", "value": "header" }
+        ]
+      },
+      "tags": ["floor"]
+    },
+    {
+      "id": "emit-conversion-lead-with-attribution",
+      "input": {
+        "event": {
+          "event": "conversion_lead",
+          "page_path": "/quote",
+          "transaction_id": "CRL-QUOTE-001",
+          "conversion_value": 149,
+          "currency": "USD"
+        },
+        "stored_attribution": {
+          "utm_source": "google",
+          "utm_medium": "cpc",
+          "gclid": "gclid-conv-99"
+        },
+        "destinations": { "ga4": "G-PLACEHOLDER", "google_ads": "AW-PLACEHOLDER", "meta_pixel": "PIXEL-PLACEHOLDER" }
+      },
+      "expect": {
+        "outcome": "pass",
+        "asserts": [
+          { "path": "$.datalayer_push.transaction_id", "op": "eq", "value": "CRL-QUOTE-001" },
+          { "path": "$.datalayer_push.gclid", "op": "exists" },
+          { "path": "$.attribution_captured", "op": "eq", "value": true },
+          { "path": "$.destinations_notified", "op": "contains", "value": "ga4" }
+        ]
+      },
+      "tags": ["floor", "conversion"]
+    },
+    {
+      "id": "reject-missing-page-path",
+      "input": {
+        "event": { "event": "page_view", "page_title": "Home" }
+      },
+      "expect": { "outcome": "reject", "error_code": "EVENT_SCHEMA_INVALID" },
+      "tags": ["floor", "negative"]
+    },
+    {
+      "id": "reject-conversion-missing-id",
+      "input": {
+        "event": {
+          "event": "conversion_lead",
+          "page_path": "/quote",
+          "conversion_value": 100,
+          "currency": "USD"
+        },
+        "stored_attribution": { "utm_source": "google" }
+      },
+      "expect": { "outcome": "reject", "error_code": "CONVERSION_ID_REQUIRED" },
+      "tags": ["floor", "negative"]
+    },
+    {
+      "id": "reject-conversion-missing-value",
+      "input": {
+        "event": {
+          "event": "conversion_lead",
+          "page_path": "/quote",
+          "transaction_id": "CRL-001",
+          "currency": "USD"
+        },
+        "stored_attribution": { "utm_source": "google" }
+      },
+      "expect": { "outcome": "reject", "error_code": "CONVERSION_VALUE_REQUIRED" },
+      "tags": ["floor", "negative"]
+    },
+    {
+      "id": "reject-conversion-missing-attribution",
+      "input": {
+        "event": {
+          "event": "conversion_lead",
+          "page_path": "/quote",
+          "transaction_id": "CRL-002",
+          "conversion_value": 200,
+          "currency": "USD"
+        },
+        "stored_attribution": {}
+      },
+      "expect": { "outcome": "reject", "error_code": "ATTRIBUTION_REQUIRED" },
+      "tags": ["floor", "negative", "biting:attribution"]
+    }
+  ]
+}

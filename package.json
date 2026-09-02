@@ -24,7 +24,9 @@
     "media:register": "node scripts/media/register.mjs",
     "media:sync-site": "node scripts/media/sync-site.mjs",
     "media:publish": "node scripts/media/publish.mjs",
-    "media:validate": "node scripts/media/validate.mjs"
+    "media:validate": "node scripts/media/validate.mjs",
+    "analytics:conformance": "node scripts/analytics/conformance-check.mjs",
+    "analytics:weekly-report": "node scripts/analytics/weekly-report.mjs"
   },
   "dependencies": {
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",

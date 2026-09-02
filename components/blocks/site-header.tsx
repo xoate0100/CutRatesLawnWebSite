@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { pageWrap } from "@/lib/layout"
 import { NAV_LINKS } from "@/lib/marketing-content"
 import { siteConfig } from "@/lib/site-config"
+import { trackPhoneClick } from "@/lib/analytics/core"
 import { cn } from "@/lib/utils"
 
 export function SiteHeader() {
@@ -47,6 +48,7 @@ export function SiteHeader() {
         <a
           href={`tel:${siteConfig.phone.e164}`}
           className="hidden font-bold text-[0.9rem] opacity-90 lg:inline"
+          onClick={() => trackPhoneClick("header_desktop")}
         >
           {siteConfig.phone.display}
         </a>
@@ -85,7 +87,11 @@ export function SiteHeader() {
                 {link.label}
               </Link>
             ))}
-            <a href={`tel:${siteConfig.phone.e164}`} className="py-2 font-bold">
+            <a
+              href={`tel:${siteConfig.phone.e164}`}
+              className="py-2 font-bold"
+              onClick={() => trackPhoneClick("header_mobile")}
+            >
               {siteConfig.phone.display}
             </a>
             <Button asChild variant="lime" className="mt-2 w-full">

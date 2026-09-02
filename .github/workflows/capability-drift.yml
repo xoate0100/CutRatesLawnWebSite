@@ -1,0 +1,27 @@
+name: capability-drift
+
+on:
+  pull_request:
+    paths:
+      - 'CAPABILITIES.lock'
+      - 'vendor/capabilities/**'
+      - 'lib/analytics/**'
+      - 'scripts/analytics/**'
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+      - run: pnpm install --frozen-lockfile
+      - name: Offline analytics.tracking conformance
+        run: node scripts/analytics/conformance-check.mjs
+      - name: Lock integrity present
+        run: test -f vendor/capabilities/analytics.tracking/conformance/suite.json

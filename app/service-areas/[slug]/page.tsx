@@ -13,6 +13,7 @@ import {
   SERVICES,
   testimonialsForArea,
 } from "@/lib/marketing-content"
+import { AreaViewTracker } from "@/components/analytics/area-view-tracker"
 
 type Props = { params: { slug: string } }
 
@@ -37,6 +38,7 @@ export default function ServiceAreaSlugPage({ params }: Props) {
 
   return (
     <div className="bg-paper">
+      <AreaViewTracker areaSlug={area.slug} areaName={area.name} />
       <InteriorHero
         eyebrow={`${area.name} · KS`}
         title={`Lawn care & landscaping in ${area.name}.`}

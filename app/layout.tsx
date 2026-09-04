@@ -13,6 +13,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { siteConfig } from "@/lib/site-config"
 import { mediaSrc } from "@/lib/media"
 import { Providers } from "./providers"
+import { GtmNoScript, GtmScript } from "@/components/analytics/gtm-script"
 
 const LiveChat = dynamic(() => import("@/components/live-chat"), { ssr: false })
 
@@ -94,6 +95,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${display.variable} ${body.variable} font-body`}>
+        <GtmScript />
+        <GtmNoScript />
         <Providers>
           <AnnouncementMarquee />
           <SiteHeader />

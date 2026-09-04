@@ -1,0 +1,24 @@
+{
+  "summary": "GTM dataLayer marketing analytics with UTM/GCLID attribution capture, env-gated GA4/Ads/Meta forwarding, and weekly GA4 reporting.",
+  "may_override": [
+    { "path": "contract.inputs.event.event_prefix", "reason": "Brand-specific event naming (e.g. CutRates_service_view)" },
+    { "path": "contract.inputs.destinations", "reason": "Which platforms are wired; all IDs via env vars" },
+    { "path": "contract.inputs.funnel_steps", "reason": "Quote funnel step names per site" },
+    { "path": "providers", "reason": "Per-provider inherit-and-override (DEC-CP-0012)" },
+    { "path": "contract.outputs.weekly_report.recipient", "reason": "Report recipient email via env" }
+  ],
+  "must_pass": [
+    {
+      "requirement": "B.5 attribution floor — conversion events require utm_source or gclid",
+      "conformance_case_ids": [
+        "emit-page-view-with-attribution",
+        "emit-conversion-lead-with-attribution",
+        "reject-missing-page-path",
+        "reject-conversion-missing-id",
+        "reject-conversion-missing-value",
+        "reject-conversion-missing-attribution"
+      ]
+    }
+  ],
+  "must_not_change": ["id", "category", "conformance_suite.suite_id"]
+}

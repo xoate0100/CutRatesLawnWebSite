@@ -1,0 +1,33 @@
+name: analytics-weekly-report
+
+on:
+  schedule:
+    - cron: '0 14 * * 1'
+  workflow_dispatch:
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Pull GA4 weekly metrics (credential-gated)
+        env:
+          GA4_PROPERTY_ID: ${{ secrets.GA4_PROPERTY_ID }}
+          GA4_DATA_API_CREDENTIALS_JSON: ${{ secrets.GA4_DATA_API_CREDENTIALS_JSON }}
+          WEEKLY_REPORT_EMAIL_TO: ${{ secrets.WEEKLY_REPORT_EMAIL_TO }}
+          WEEKLY_REPORT_EMAIL_FROM: ${{ secrets.WEEKLY_REPORT_EMAIL_FROM }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+        run: node scripts/analytics/weekly-report.mjs
+      - name: Upload report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-analytics-report
+          path: artifacts/weekly-analytics-report.json
+          if-no-files-found: ignore

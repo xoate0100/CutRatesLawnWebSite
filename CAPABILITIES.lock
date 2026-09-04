@@ -1,0 +1,8 @@
+schema_version: 1
+registry: xoate0100/capability-registry
+updated: '2026-09-02'
+capabilities:
+- capability_id: analytics.tracking
+  git_tag: capability/analytics.tracking/v1.0.0
+  integrity: sha256-1c8309c6196d4a0330a05c11697c4f02e0b24837fccac77234e6be4eb81ad455
+  vendored_path: vendor/capabilities/analytics.tracking

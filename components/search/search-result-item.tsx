@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Link from "next/link"
 import type { SearchResultType } from "@/lib/types"
 

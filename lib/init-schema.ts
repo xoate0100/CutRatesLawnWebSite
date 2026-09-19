@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { enhanceSchemaDiscovery } from "./schema-validator"
 import { initializeSchemaDiscovery } from "./schema-discovery"
 

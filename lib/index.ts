@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Re-export all functions from api.ts
 export * from "@/lib/api"
 

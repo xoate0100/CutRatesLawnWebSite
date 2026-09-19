@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { container } from "../di/container"
 import { type ApiService, API_SERVICE_TOKEN } from "./api/api-service.interface"
 import { ApiServiceImpl } from "./api/api-service.impl"

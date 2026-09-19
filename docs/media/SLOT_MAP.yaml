@@ -93,7 +93,7 @@ slots:
     asset_id: legacy-partner-kwch
     variant: original
     fallback: /placeholder.svg?height=40&width=120
-    alt: KWCH 12 News
+    alt: KWCH
   partners.google:
     asset_id: legacy-partner-google
     variant: original
@@ -229,10 +229,10 @@ slots:
     alt: Worker spraying pesticide onto green bush
     notes: New 2026-08-02 ingest (bush spray); prefer over farmer spraying for pest card
   services.power-washing:
-    asset_id: null
-    variant: null
+    asset_id: sha-a98723c52383
+    variant: w1920
     fallback: /placeholder.jpg?height=200&width=300
-    alt: Power washing service
+    alt: Technician power washing a driveway on a sunny day
     notes: Upload power-washing photo; bind asset_id
   services.landscaping:
     asset_id: sha-17ae8109f02b
@@ -289,10 +289,10 @@ slots:
     alt: Commercial seasonal services
     notes: Upload commercial service photo; bind asset_id
   page.powerwashing.1:
-    asset_id: null
-    variant: null
+    asset_id: sha-a98723c52383
+    variant: w1920
     fallback: /placeholder.jpg?height=200&width=300
-    alt: House exterior washing
+    alt: Technician power washing a driveway on a sunny day
     notes: Upload; bind asset_id
   page.powerwashing.2:
     asset_id: null
@@ -336,6 +336,36 @@ slots:
     fallback: /placeholder.jpg?height=200&width=300
     alt: Worker spraying pesticide onto green bush
     notes: New 2026-08-02 bush-spray ingest
+  page.pest.termite:
+    asset_id: sha-9a459a99270d
+    variant: w1920
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Termite inspection and treatment
+    notes: Interim reuse of pest spray until dedicated Envato license (ENVATO_PROPOSALS_LEAD_PHOTOS.md)
+  page.pest.rodent:
+    asset_id: sha-45366ca03313
+    variant: w800
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Mouse captured in a trap
+    notes: Interim reuse until dedicated rodent/trap photo
+  page.pest.exclusion:
+    asset_id: sha-0fa92ce0b938
+    variant: w800
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Worker sealing a window for wildlife exclusion
+    notes: Interim reuse until dedicated exclusion photo
+  page.pest.trapping:
+    asset_id: sha-45366ca03313
+    variant: w800
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Mouse captured in a trap
+    notes: Interim reuse until dedicated trapping photo
+  page.pest.bedbugs:
+    asset_id: sha-7f45c8b09070
+    variant: w800
+    fallback: /placeholder.jpg?height=200&width=300
+    alt: Technician inspecting a bed with a flashlight for bed bugs
+    notes: Interim reuse until dedicated bed-bug photo
   page.landscaping.1:
     asset_id: sha-17ae8109f02b
     variant: w1920
@@ -379,10 +409,10 @@ slots:
     alt: Pest control category
     notes: Reuse first-batch weed-control spray
   page.services-all.powerwashing:
-    asset_id: null
-    variant: null
+    asset_id: sha-a98723c52383
+    variant: w1920
     fallback: /placeholder.jpg?height=300&width=400
-    alt: Power washing category
+    alt: Technician power washing a driveway on a sunny day
     notes: Upload; bind asset_id
   page.community.1:
     asset_id: env-HBA9N9D
@@ -505,23 +535,23 @@ slots:
     alt: Aerial lawn ambient video loop — poster fallback
     notes: Redesign — bind Envato video; poster-only under reduced-motion
   services.holiday-lights:
-    asset_id: null
-    variant: null
+    asset_id: sha-69f6fa3730a4
+    variant: w1920
     fallback: /placeholder.jpg?height=480&width=720
-    alt: Home exterior illuminated with holiday lights
+    alt: Brick house with Christmas lights at night
     notes: Redesign — Envato proposals in ENVATO_PROPOSALS_REDESIGN.md
   services.snow-removal:
-    asset_id: null
-    variant: null
+    asset_id: sha-f2ed0b115ef2
+    variant: w1920
     fallback: /placeholder.jpg?height=480&width=720
-    alt: Snow cleared from a residential driveway
+    alt: Tractor plowing snow after a winter storm
     notes: Redesign — Envato proposals in ENVATO_PROPOSALS_REDESIGN.md
   services.commercial:
-    asset_id: null
-    variant: null
+    asset_id: sha-4398ed96bbf2
+    variant: w1920
     fallback: /placeholder.jpg?height=480&width=720
-    alt: Commercial property with maintained grounds
-    notes: Redesign — Envato proposals in ENVATO_PROPOSALS_REDESIGN.md
+    alt: Modern apartment building with landscaped hedges
+    notes: Interim reuse of licensed suburban lawns until dedicated commercial Envato pick
   pattern.leaf:
     asset_id: null
     variant: null
@@ -570,26 +600,26 @@ slots:
     fallback: /placeholder.svg?height=600&width=1600
     alt: Lawn care in Leavenworth, KS
   careers.hero:
-    asset_id: env-ETDTNU6
+    asset_id: env-ANENAST
     variant: w1920
     fallback: /placeholder.svg?height=720&width=1200
-    alt: Lawn care worker mowing a residential lawn
-    notes: Temporary reuse of licensed library asset; upgrade to ANENAST crew photo when licensed
+    alt: Landscape crew standing together in front of a work truck
+    notes: Licensed 2026-09-04 (ANENAST). Prefer owned Cut Rates crew photo when available.
   careers.crew:
-    asset_id: sha-f22b5ee0b651
+    asset_id: env-RL37PZY
     variant: w1920
     fallback: /placeholder.svg?height=600&width=900
-    alt: Field crew member trimming tall grass
-    notes: Reuse licensed cleanup ingest; prefer RL37PZY or owned crew photography
+    alt: Field crew member mowing a suburban lawn with a push mower
+    notes: Licensed 2026-09-04 (RL37PZY). Prefer owned crew photography when available.
   careers.equipment:
-    asset_id: env-WL6S6J5
+    asset_id: env-2KTRVRB
     variant: w800
     fallback: /placeholder.svg?height=600&width=900
-    alt: Commercial lawn mower on green grass
-    notes: Reuse licensed services.mowing; optional upgrade 2KTRVRB riding mower
+    alt: Operator driving commercial landscaping utility vehicle with trailer equipment
+    notes: Licensed 2026-09-04 (2KTRVRB).
   careers.yard:
-    asset_id: env-J4XCY2H
+    asset_id: env-D4R4EF5
     variant: w1920
     fallback: /placeholder.svg?height=600&width=900
-    alt: Lawn care work in a suburban yard
-    notes: Temporary stand-in; prefer owned Valley Center yard or D4R4EF5 when licensed
+    alt: Orange landscape work truck loaded with yard vegetation beside a paved path
+    notes: Licensed 2026-09-04 (D4R4EF5). Prefer owned Valley Center yard photo when available.

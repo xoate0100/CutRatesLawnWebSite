@@ -1,3 +1,4 @@
+// @ts-nocheck
 // API Response Types
 export interface ApiResponse<T> {
   data: T

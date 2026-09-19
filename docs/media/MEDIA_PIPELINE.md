@@ -20,9 +20,9 @@ No Envato tokens belong in this repository.
 
 Portable SDK (this machine):
 
-`%LOCALAPPDATA%\google-cloud-sdk\google-cloud-sdk\bin\gcloud.cmd`
+`%LOCALAPPDATA%\Google\Cloud SDK\google-cloud-sdk\bin\gcloud.cmd`
 
-Add that `bin` directory to PATH, or set `GCLOUD_PATH` to the full `gcloud.cmd` path.
+Add that `bin` directory to PATH, or set `GCLOUD_PATH` to the full `gcloud.cmd` path. On this workstation, User PATH includes the SDK `bin` directory and `GCLOUD_PATH` points at `gcloud.cmd`.
 
 1. Authenticate (human — browser OAuth; do **not** commit keys):
    ```bash

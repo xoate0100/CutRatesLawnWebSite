@@ -153,11 +153,11 @@ export function objectPrefix({ category, slot, assetId }) {
 export function findGcloud() {
   const candidates = [
     process.env.GCLOUD_PATH,
-    'gcloud',
-    join(process.env.LOCALAPPDATA || '', 'google-cloud-sdk', 'google-cloud-sdk', 'bin', 'gcloud.cmd'),
     join(process.env.LOCALAPPDATA || '', 'Google', 'Cloud SDK', 'google-cloud-sdk', 'bin', 'gcloud.cmd'),
+    join(process.env.LOCALAPPDATA || '', 'google-cloud-sdk', 'google-cloud-sdk', 'bin', 'gcloud.cmd'),
     'C:\\Program Files (x86)\\Google\\Cloud SDK\\google-cloud-sdk\\bin\\gcloud.cmd',
     'C:\\Program Files\\Google\\Cloud SDK\\google-cloud-sdk\\bin\\gcloud.cmd',
+    'gcloud',
   ].filter(Boolean)
 
   for (const c of candidates) {

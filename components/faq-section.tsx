@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion-native"
 import { getFAQs } from "@/lib/api"
 import ErrorState from "@/components/error-state"

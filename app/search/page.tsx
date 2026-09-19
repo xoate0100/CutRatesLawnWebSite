@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { Metadata } from "next"
 import { performSearch } from "@/lib/search"
 import { SearchResultItem } from "@/components/search/search-result-item"

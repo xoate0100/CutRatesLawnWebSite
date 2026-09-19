@@ -22,8 +22,9 @@ export async function safeImport<T>(importFn: () => Promise<T>, fallback: T): Pr
 export function safeRequire<T>(requirePath: string, fallback: T): T {
   try {
     // Using dynamic import to avoid issues with ESM
-    const module = require(requirePath)
-    return module as T
+    // eslint-disable-next-line @next/next/no-assign-module-variable -- Node require result binding
+    const requiredModule = require(requirePath)
+    return requiredModule as T
   } catch (error) {
     console.error(`Error requiring module ${requirePath}:`, error)
     return fallback

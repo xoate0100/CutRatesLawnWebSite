@@ -48,6 +48,7 @@ export function Search() {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
+    // In-page curated index only — do not navigate to /search (redirected to /services).
     setSubmitted(query)
   }
 

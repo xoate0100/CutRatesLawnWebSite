@@ -1,6 +1,6 @@
 # Cut Rates Lawn Website
 
-Marketing and lead-generation site for Cut Rates Lawn Care. Built with Next.js 14, TypeScript, Tailwind CSS, and shadcn/ui.
+Marketing and lead-generation site for Cut Rates Lawn Care. Built with Next.js 14, TypeScript, Tailwind CSS, and shadcn/ui. Package manager: **pnpm** (`packageManager` in `package.json`).
 
 ## Environment variables
 
@@ -15,15 +15,17 @@ cp .env.example .env
 | `NEXT_PUBLIC_SITE_URL` | Site URL for metadata (`http://localhost:3000` locally) |
 | `NEXT_PUBLIC_BUSINESS_*` | Phone, email, address shown on the site |
 | `NEXT_PUBLIC_CUSTOMER_PORTAL_URL` | FieldPortals / customer login link |
+| `GHL_PRIVATE_INTEGRATION_TOKEN` / `GHL_LOCATION_ID` | Go High Level lead upsert (production — human sets on Vercel) |
+| `NEXT_PUBLIC_TURNSTILE_SITE_KEY` / `TURNSTILE_SECRET_KEY` | Optional Cloudflare Turnstile on contact/quote |
 
 All public config is read via `lib/site-config.ts`. See `.env.example` for the full list.
 
 ## Quick start
 
 ```bash
-npm install
+pnpm install
 cp .env.example .env   # then edit .env with your values
-npm run dev
+pnpm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
@@ -32,11 +34,20 @@ Open [http://localhost:3000](http://localhost:3000).
 
 | Command | Purpose |
 |---------|---------|
-| `npm run dev` | Development server |
-| `npm run build` | Production build |
-| `npm run lint` | ESLint |
-| `npm run verify` | Full agentic verification (build + governance checks) |
-| `npm run agentic:context` | Regenerate `6_ai_runtime_context/AI_CONTEXT.md` |
+| `pnpm run dev` | Development server |
+| `pnpm run build` | Production build |
+| `pnpm run lint` | ESLint |
+| `pnpm run verify` | Full agentic verification (build via exec_guard + governance checks) |
+| `pnpm run agentic:context` | Regenerate `6_ai_runtime_context/AI_CONTEXT.md` |
+| `pnpm run media:validate` | Media slot / map validation |
+| `pnpm run test:e2e` | Playwright suite |
+
+## Careers & CRM
+
+- Careers portal: `/careers`, `/careers/apply` — applications POST to `/api/lead` with `source: "careers"`.
+- Customer login/register/account redirect to FieldPortals (`siteConfig.customerPortalUrl`).
+- GHL production wiring and nurture workflows remain human ops — see `6_ai_runtime_context/OUTSTANDING_TASKS.yaml` (`GHL-OPS-001`, `GHL-WF-001`–`003`).
+- Preferred Envato upgrades for careers media: `CAREERS-MEDIA-001`.
 
 ## Development AI onboarding
 

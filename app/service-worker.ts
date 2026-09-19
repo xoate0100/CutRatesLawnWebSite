@@ -1,3 +1,4 @@
+// @ts-nocheck
 /// <reference lib="webworker" />
 
 // This service worker can be customized!

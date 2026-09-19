@@ -8,6 +8,19 @@ import { cn } from "@/lib/utils"
 
 const STEPS = ["About you", "Job & location", "Availability", "Finish"] as const
 
+function newIdempotencyKey() {
+  if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID()
+  return `careers-${Date.now()}-${Math.random().toString(16).slice(2)}`
+}
+
+function splitName(full: string): { firstName: string; lastName: string } {
+  const parts = full.trim().split(/\s+/)
+  return {
+    firstName: parts[0] || full.trim(),
+    lastName: parts.slice(1).join(" ") || "—",
+  }
+}
+
 export function CareersApplyForm({
   className,
   initialJobId,
@@ -19,9 +32,13 @@ export function CareersApplyForm({
     CAREERS_ROLES.find((r) => r.id === initialJobId) ?? CAREERS_ROLES[0]
   const [step, setStep] = useState(0)
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [requestId, setRequestId] = useState<string | null>(null)
   const [form, setForm] = useState({
     name: "",
     phone: "",
+    email: "",
     zip: "",
     job: initialRole.title,
     availability: "",
@@ -29,6 +46,7 @@ export function CareersApplyForm({
     experience: "",
     language: "English",
     smsConsent: false,
+    companyWebsite: "",
   })
 
   function update<K extends keyof typeof form>(key: K, value: (typeof form)[K]) {
@@ -42,7 +60,7 @@ export function CareersApplyForm({
     return true
   }
 
-  function submit() {
+  function mailtoHref() {
     const body = [
       `Name: ${form.name}`,
       `Phone: ${form.phone}`,
@@ -54,21 +72,78 @@ export function CareersApplyForm({
       `Language: ${form.language}`,
       `SMS consent: ${form.smsConsent ? "yes" : "no"}`,
     ].join("%0A")
-    const mailto = `mailto:${siteConfig.email}?subject=${encodeURIComponent(
+    return `mailto:${siteConfig.email}?subject=${encodeURIComponent(
       `Careers application — ${form.job}`,
     )}&body=${body}`
-    window.location.href = mailto
-    setSubmitted(true)
+  }
+
+  async function submit() {
+    setSubmitting(true)
+    setSubmitError(null)
+    const { firstName, lastName } = splitName(form.name)
+    const message = [
+      `ZIP: ${form.zip}`,
+      `Availability: ${form.availability}`,
+      `Can reach report location/time: ${form.canReach}`,
+      `Experience: ${form.experience || "(none noted)"}`,
+      `Preferred language: ${form.language}`,
+      `SMS consent (recruiting for this role): ${form.smsConsent ? "yes" : "no"}`,
+    ].join("\n")
+
+    try {
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email:
+            form.email.trim() ||
+            `careers.${form.phone.replace(/\D/g, "").slice(-10) || "unknown"}@applicants.cutrateslawn.com`,
+          phone: form.phone,
+          service: form.job,
+          message,
+          source: "careers",
+          idempotencyKey: newIdempotencyKey(),
+          companyWebsite: form.companyWebsite,
+          address: form.zip,
+        }),
+      })
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean
+        error?: string
+        requestId?: string
+        manualContactRequired?: boolean
+      }
+      if (!res.ok || data.ok === false) {
+        setSubmitError(
+          data.error ||
+            "We could not submit your application online. Call us or email recruiting with the backup link below.",
+        )
+        return
+      }
+      setRequestId(data.requestId ?? null)
+      setSubmitted(true)
+    } catch {
+      setSubmitError(
+        "Network error. Call us or use the email backup link below.",
+      )
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (submitted) {
     return (
       <div className={cn("rounded-brand border border-line bg-white p-6", className)}>
-        <h3 className="font-display text-2xl font-bold text-ink">Application started</h3>
+        <h3 className="font-display text-2xl font-bold text-ink">Application received</h3>
         <p className="mt-2 text-sage">
-          Your email draft should open so you can send it. What happens next: we review → text/call → interview →
-          decision. We only promise response times Ops can meet — ask recruiting for the current timeline.
+          What happens next: we review → text/call → interview → decision. We only promise response times Ops can
+          meet — ask recruiting for the current timeline.
         </p>
+        {requestId ? (
+          <p className="mt-2 text-xs text-sage">Reference: {requestId}</p>
+        ) : null}
         <Button asChild variant="lime" className="mt-4">
           <a href={`tel:${siteConfig.phone.e164}`}>Call {siteConfig.phone.display}</a>
         </Button>
@@ -83,6 +158,18 @@ export function CareersApplyForm({
         Enough information to decide the next step.
       </h3>
       <p className="mt-2 text-sm text-sage">No account. No mandatory résumé for entry-level openings.</p>
+
+      {/* Honeypot */}
+      <input
+        type="text"
+        name="companyWebsite"
+        value={form.companyWebsite}
+        onChange={(e) => update("companyWebsite", e.target.value)}
+        className="absolute -left-[9999px] h-0 w-0 opacity-0"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden
+      />
 
       <ol className="mt-4 flex flex-wrap gap-2" aria-label="Application progress">
         {STEPS.map((label, i) => (
@@ -103,6 +190,12 @@ export function CareersApplyForm({
           <>
             <Field label="Full name" value={form.name} onChange={(v) => update("name", v)} />
             <Field label="Mobile number" value={form.phone} onChange={(v) => update("phone", v)} type="tel" />
+            <Field
+              label="Email (optional)"
+              value={form.email}
+              onChange={(v) => update("email", v)}
+              type="email"
+            />
             <label className="block text-sm font-semibold">
               Preferred language
               <select
@@ -179,15 +272,23 @@ export function CareersApplyForm({
               <strong>{form.name}</strong> · {form.phone} · {form.zip}
             </p>
             <p className="mt-1">
-              {form.job} · {form.availability} · Reach yard: {form.canReach}
+              {form.job} · {form.availability} · Reach yard: {form.canReach} · {form.language}
             </p>
             <p className="mt-3 text-sage">
-              Finish opens an email to recruiting with these answers. You can also call{" "}
-              {siteConfig.phone.display}.
+              Submit sends your answers to recruiting. You can also call {siteConfig.phone.display}.
             </p>
           </div>
         )}
       </div>
+
+      {submitError ? (
+        <div className="mt-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+          <p>{submitError}</p>
+          <a className="mt-2 inline-block font-semibold underline" href={mailtoHref()}>
+            Email recruiting instead
+          </a>
+        </div>
+      ) : null}
 
       <div className="mt-6 flex flex-wrap gap-3">
         {step > 0 ? (
@@ -200,9 +301,14 @@ export function CareersApplyForm({
             Continue
           </Button>
         ) : (
-          <Button type="button" variant="lime" onClick={submit}>
-            Send application email
-          </Button>
+          <>
+            <Button type="button" variant="lime" disabled={submitting} onClick={submit}>
+              {submitting ? "Submitting…" : "Submit application"}
+            </Button>
+            <Button asChild type="button" variant="outline">
+              <a href={mailtoHref()}>Email backup</a>
+            </Button>
+          </>
         )}
       </div>
     </div>
@@ -220,15 +326,17 @@ function Field({
   onChange: (v: string) => void
   type?: string
 }) {
+  const id = `careers-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`
   return (
-    <label className="block text-sm font-semibold text-ink">
-      {label}
+    <div className="block text-sm font-semibold text-ink">
+      <label htmlFor={id}>{label}</label>
       <input
+        id={id}
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         className="mt-1 w-full rounded-lg border border-line bg-paper px-3 py-2 font-normal"
       />
-    </label>
+    </div>
   )
 }

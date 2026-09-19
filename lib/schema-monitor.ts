@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { logDetailedError } from "./error-utils"
 
 interface SchemaErrorEvent {

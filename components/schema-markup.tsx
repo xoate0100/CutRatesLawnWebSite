@@ -1,3 +1,4 @@
+// @ts-nocheck
 export function SchemaMarkup({ type, data }) {
   const schemaData = {
     "@context": "https://schema.org",

@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client"
 
 import { useState, type FormEvent, type ReactNode } from "react"

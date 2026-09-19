@@ -19,8 +19,19 @@ const mustWork = [
   "/services/aeration",
   "/services/holiday-lights",
   "/service-areas/derby",
+  "/careers",
   "/careers/apply",
   "/bundles/residential",
+  "/api/health",
+]
+
+const must404 = [
+  "/api/google-reviews-debug",
+  "/api-debug",
+  "/api/test",
+  "/api/simple",
+  "/api/html",
+  "/api/mock-homepage",
 ]
 
 const mustRedirectOrWork = ["/dashboard", "/account", "/services/hardscapes", "/bundles/total-home"]
@@ -39,10 +50,16 @@ async function check(path, { expect404 = false } = {}) {
 
 for (const path of mustWork) await check(path)
 for (const path of mustRedirectOrWork) await check(path)
+for (const path of must404) await check(path, { expect404: true })
 await check("/this-route-does-not-exist-ci", { expect404: true })
 
 if (failures.length) {
   console.error(JSON.stringify({ ok: false, failures }, null, 2))
   process.exit(1)
 }
-console.log(JSON.stringify({ ok: true, checked: mustWork.length + mustRedirectOrWork.length + 1 }))
+console.log(
+  JSON.stringify({
+    ok: true,
+    checked: mustWork.length + mustRedirectOrWork.length + must404.length + 1,
+  }),
+)

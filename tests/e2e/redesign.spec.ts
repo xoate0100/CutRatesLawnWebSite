@@ -10,6 +10,7 @@ const ROUTES = [
   "/services/landscaping",
   "/services/aeration",
   "/services/holiday-lights",
+  "/services/pest-control",
   "/service-areas",
   "/service-areas/derby",
   "/quote",
@@ -111,20 +112,12 @@ test.describe("Redesign — interactions", () => {
     expect(body.service).toMatch(/mowing/i)
   })
 
-  test("home quote CTA and before/after keyboard", async ({ page }) => {
+  test("home quote CTA and Google rating", async ({ page }) => {
     await page.goto("/")
     const quoteCta = page.locator('a[href="/quote"]').filter({ hasText: /quote/i }).first()
     await expect(quoteCta).toBeVisible()
-
-    const slider = page.locator('[role="slider"]').first()
-    if (await slider.count()) {
-      await slider.focus()
-      const before = await slider.getAttribute("aria-valuenow")
-      await page.keyboard.press("ArrowRight")
-      await page.keyboard.press("ArrowRight")
-      const after = await slider.getAttribute("aria-valuenow")
-      expect(Number(after)).toBeGreaterThanOrEqual(Number(before ?? 0))
-    }
+    await expect(page.getByText(/4\.8/i).first()).toBeVisible()
+    await expect(page.getByText(/as seen on KWCH/i).first()).toBeVisible()
   })
 
   test("mobile menu opens", async ({ page }) => {
@@ -190,7 +183,7 @@ test.describe("Redesign — interactions", () => {
     })
     await page.goto("/")
     // Testimonials/reviews section should be present on home
-    await expect(page.getByText(/local customers|★★★★|star|review|testimonial/i).first()).toBeVisible()
+    await expect(page.getByText(/4\.8|Google review|★★★★★/i).first()).toBeVisible()
   })
 
   test("responsive 390 and 1440 + reduced motion + image alts", async ({ page }) => {

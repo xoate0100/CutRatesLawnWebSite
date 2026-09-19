@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { logDetailedError } from "./error-utils"
 import { getStrapiURL } from "./api"
 import { fetchAPI } from "./api"

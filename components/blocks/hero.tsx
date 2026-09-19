@@ -58,7 +58,7 @@ export function Hero({ className }: HeroProps) {
         <div className="relative z-10 min-w-0">
           <Pill tone="on-dark">
             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-lime shadow-[0_0_0_4px_rgba(200,241,53,0.25)]" />
-            Local. Reliable. Easy to book.
+            4.8★ Google · As seen on KWCH
           </Pill>
           <h1 className="font-display mt-4 text-balance text-[clamp(2.1rem,8vw,4rem)] font-extrabold leading-[1.08] lg:text-[clamp(2.2rem,2.35vw,2.65rem)] xl:text-[clamp(2.35rem,2.7vw,2.85rem)]">
             A better-looking lawn,
@@ -79,9 +79,9 @@ export function Hero({ className }: HeroProps) {
             </span>
           </h1>
           <p className="mt-5 max-w-[36ch] text-[clamp(1.05rem,1.5vw,1.28rem)] text-white/82">
-            Straightforward, dependable lawn &amp; landscape care from a family-owned local crew —
-            from Wichita to the Kansas City side. We show up, do it right, and make booking
-            painless.
+            Family-owned lawn, landscape, and pest protection from Wichita to the Kansas City side —
+            including termites, rodents, exclusions, and bed bugs. We show up, do it right, and make
+            booking painless.
           </p>
           <div className="mt-6 flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:gap-3">
             <Button asChild variant="lime" size="lg" className="max-w-full">
@@ -90,7 +90,7 @@ export function Hero({ className }: HeroProps) {
               </Link>
             </Button>
             <Button asChild variant="ghost" size="lg" className="max-w-full text-white">
-              <Link href="/our-work">See our work</Link>
+              <Link href="/services/pest-control">Pest control</Link>
             </Button>
           </div>
           <div className="mt-7 flex flex-wrap gap-5 text-[0.9rem] font-semibold text-white/80">

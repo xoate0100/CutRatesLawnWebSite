@@ -3,27 +3,19 @@ import { pageWrap, pageWrapNarrow } from "@/lib/layout"
 import {
   CTASection,
   FAQAccordion,
-  Gallery,
   InteriorHero,
   ProcessSteps,
 } from "@/components/blocks"
-import {
-  GALLERY_ITEMS,
-  getServiceDetail,
-  type ServiceDetail,
-} from "@/lib/marketing-content"
+import { ServiceOfferings } from "@/components/blocks/service-offerings"
+import { GoogleReviewsRotator } from "@/components/trust/google-reviews-rotator"
+import { getServiceDetail, type ServiceDetail } from "@/lib/marketing-content"
 
 export function ServiceDetailView({
   detail,
-  galleryCategory,
 }: {
   detail: ServiceDetail
   galleryCategory?: string
 }) {
-  const gallery = galleryCategory
-    ? GALLERY_ITEMS.filter((g) => g.category === galleryCategory)
-    : GALLERY_ITEMS.slice(0, 3)
-
   return (
     <div className="bg-paper">
       <InteriorHero
@@ -32,7 +24,7 @@ export function ServiceDetailView({
         description={detail.longDescription}
         mediaSlot={detail.mediaSlot}
         ctaHref={`/quote?service=${detail.id}`}
-        ctaLabel="Get a quote"
+        ctaLabel={detail.ctaLabel ?? "Get a quote"}
       />
 
       <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4rem)]`}>
@@ -56,22 +48,34 @@ export function ServiceDetailView({
         </ul>
       </section>
 
+      {detail.offerings?.length ? (
+        <section className={`${pageWrap} pb-[clamp(2.5rem,5vw,4rem)]`}>
+          <SectionHead
+            eyebrow={detail.offeringsEyebrow ?? "How we help"}
+            title={detail.offeringsTitle ?? "Pick the job. Get a quote."}
+            description={
+              detail.offeringsDescription ??
+              "Start with the problem. We will quote the right visit — not a generic package."
+            }
+          />
+          <ServiceOfferings offerings={detail.offerings} className="mt-8" />
+        </section>
+      ) : null}
+
       <section className="bg-cream py-[clamp(2.5rem,5vw,4rem)]">
         <div className={`${pageWrap}`}>
           <SectionHead
             eyebrow="How it works"
-            title="From quote to curb appeal."
+            title={detail.processTitle ?? "From quote to a finished job."}
+            description={detail.processDescription}
           />
-          <ProcessSteps />
+          <ProcessSteps steps={detail.processSteps} />
         </div>
       </section>
 
-      {gallery.length > 0 ? (
-        <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4rem)]`}>
-          <SectionHead eyebrow="Our work" title="Results on real properties." />
-          <Gallery items={gallery} className="mt-8" />
-        </section>
-      ) : null}
+      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4rem)]`}>
+        <GoogleReviewsRotator />
+      </section>
 
       <section className="bg-cream py-[clamp(2.5rem,5vw,4rem)]">
         <div className={`${pageWrapNarrow}`}>
@@ -81,13 +85,13 @@ export function ServiceDetailView({
       </section>
 
       <CTASection
-        title={
-          <>
-            Ready for {detail.title.toLowerCase()}?
-          </>
+        title={detail.ctaTitle ?? <>Ready for {detail.title.toLowerCase()}?</>}
+        description={
+          detail.ctaDescription ??
+          "Free planning quote. Local crew. No contracts."
         }
-        description="Free planning estimate in about two minutes. No contracts."
         ctaHref={`/quote?service=${detail.id}`}
+        ctaLabel={detail.ctaLabel ?? "Get a quote"}
       />
     </div>
   )

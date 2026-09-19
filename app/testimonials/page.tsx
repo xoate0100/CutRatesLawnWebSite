@@ -1,6 +1,5 @@
 import { ReviewsList } from "@/components/reviews/reviews-list"
 import { TestimonialsList } from "@/components/testimonials-list"
-import { MediaFrame } from "@/components/media/media-frame"
 import { mediaAlt, mediaSrc } from "@/lib/media"
 import Image from "next/image"
 import { Suspense } from "react"
@@ -82,37 +81,6 @@ export default function TestimonialsPage() {
             </p>
           </div>
           <TestimonialsList />
-        </div>
-      </section>
-
-      {/* Before & After Section */}
-      <section className="mb-16">
-        <div className="bg-white rounded-lg shadow-sm p-6">
-          <h2 className="text-2xl font-bold mb-6">See The Difference</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div>
-              <div className="mb-4 overflow-hidden rounded-lg">
-                <MediaFrame slot="gallery.before" aspect="16/9" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Neglected Lawn Transformation</h3>
-              <p className="text-gray-700">
-                "Cut Rates completely transformed our overgrown, patchy lawn into a lush green carpet that's the envy of
-                the neighborhood. The before and after is incredible!"
-              </p>
-              <p className="text-sm text-gray-500 mt-2">— Michael R., East Wichita</p>
-            </div>
-            <div>
-              <div className="mb-4 overflow-hidden rounded-lg">
-                <MediaFrame slot="gallery.after" aspect="16/9" />
-              </div>
-              <h3 className="font-semibold text-lg mb-2">Complete Yard Makeover</h3>
-              <p className="text-gray-700">
-                "We were embarrassed by our yard before Cut Rates stepped in. Now we're proud to host backyard
-                gatherings and our property value has increased!"
-              </p>
-              <p className="text-sm text-gray-500 mt-2">— Jennifer T., West Wichita</p>
-            </div>
-          </div>
         </div>
       </section>
 

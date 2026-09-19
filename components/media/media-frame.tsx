@@ -29,6 +29,7 @@ export function MediaFrame({
   const src = mediaSrc(slot)
   const alt = mediaAlt(slot, media.alt || "Cut Rates Lawn Care")
   const has = (t: MediaTreatment) => treatments.includes(t)
+  const isPlaceholder = !media.url || /placeholder/i.test(src)
 
   return (
     <div
@@ -41,18 +42,30 @@ export function MediaFrame({
       )}
       style={fill ? undefined : { aspectRatio: aspect }}
     >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        priority={priority}
-        sizes={sizes}
-        className={cn(
-          "pointer-events-none object-cover transition-transform duration-500",
-          has("duotone") && "contrast-110 saturate-75",
-        )}
-      />
-      {has("duotone") ? (
+      {isPlaceholder ? (
+        <div
+          className="absolute inset-0 flex items-end bg-[radial-gradient(120%_90%_at_80%_0%,#17512c_0%,#0b3a1e_70%)] p-4"
+          role="img"
+          aria-label={alt}
+        >
+          <p className="font-display max-w-[18ch] text-left text-lg font-bold leading-tight text-lime">
+            {alt}
+          </p>
+        </div>
+      ) : (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          priority={priority}
+          sizes={sizes}
+          className={cn(
+            "pointer-events-none object-cover transition-transform duration-500",
+            has("duotone") && "contrast-110 saturate-75",
+          )}
+        />
+      )}
+      {has("duotone") && !isPlaceholder ? (
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-green/25 mix-blend-multiply"

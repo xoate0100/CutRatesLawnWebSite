@@ -20,21 +20,69 @@ import {
   type ServiceType,
 } from "@/lib/pricing/estimate"
 import { useAnalytics } from "@/hooks/useAnalytics"
+import { TurnstileField } from "@/components/forms/turnstile-field"
 
 type Step = "details" | "estimate" | "contact" | "done"
 
-const SERVICE_LABELS: Record<ServiceType, string> = {
+const ESTIMATE_LABELS: Record<ServiceType, string> = {
   mowing: "Lawn Mowing",
   fertilization: "Fertilization",
   "weed-control": "Weed Control",
   "full-service": "Full Service Lawn Care",
 }
 
-/** Map marketing /services/[slug] query values onto estimator keys. */
-function serviceFromQuery(raw: string | null): ServiceType | "" {
+const CONSULT_LABELS = {
+  "pest-control": "Pest Control",
+  termites: "Termite Protection",
+  rodents: "Rodent Control",
+  exclusions: "Pest Exclusions",
+  trapping: "Wildlife Trapping",
+  bedbugs: "Bed Bug Treatment",
+  landscaping: "Landscaping",
+  planting: "Planting & Beds",
+  irrigation: "Irrigation",
+  "landscape-maintenance": "Landscape Maintenance",
+  "holiday-lights": "Holiday Lights",
+  "take-down": "Holiday Light Take-down",
+  "commercial-lights": "Commercial Holiday Lights",
+  "snow-removal": "Snow Removal",
+  "commercial-snow": "Commercial Snow Removal",
+  "seasonal-snow": "Seasonal Snow Contract",
+  "power-washing": "Power Washing",
+  driveway: "Driveway Power Washing",
+  siding: "Siding & Exterior Wash",
+  decks: "Deck & Fence Wash",
+  commercial: "Commercial Maintenance",
+  "landscape-beds": "Commercial Beds & Grounds",
+  "multi-property": "Multi-property Maintenance",
+  hardscaping: "Hardscaping",
+  patio: "Patio",
+  walkways: "Walks & Steps",
+  "retaining-walls": "Retaining Walls",
+  aeration: "Aeration & Overseeding",
+  overseeding: "Overseeding",
+  "gutter-cleaning": "Gutter Cleaning",
+  "flow-check": "Gutter Flow Check",
+  residential: "Residential Package",
+} as const
+
+type ConsultService = keyof typeof CONSULT_LABELS
+type QuoteService = ServiceType | ConsultService
+
+const SERVICE_LABELS: Record<QuoteService, string> = {
+  ...ESTIMATE_LABELS,
+  ...CONSULT_LABELS,
+}
+
+function isEstimateService(value: string): value is ServiceType {
+  return value in ESTIMATE_LABELS
+}
+
+/** Map marketing /services/[slug] query values onto quote keys. */
+function serviceFromQuery(raw: string | null): QuoteService | "" {
   if (!raw) return ""
   const key = raw.trim().toLowerCase()
-  const map: Record<string, ServiceType> = {
+  const map: Record<string, QuoteService> = {
     mowing: "mowing",
     "lawn-mowing": "mowing",
     "lawn-care": "mowing",
@@ -44,6 +92,55 @@ function serviceFromQuery(raw: string | null): ServiceType | "" {
     weeds: "weed-control",
     "full-service": "full-service",
     "full-service-lawn-care": "full-service",
+    "pest-control": "pest-control",
+    pest: "pest-control",
+    termites: "termites",
+    termite: "termites",
+    rodents: "rodents",
+    rodent: "rodents",
+    exclusions: "exclusions",
+    exclusion: "exclusions",
+    trapping: "trapping",
+    bedbugs: "bedbugs",
+    "bed-bugs": "bedbugs",
+    landscaping: "landscaping",
+    planting: "planting",
+    irrigation: "irrigation",
+    "landscape-maintenance": "landscape-maintenance",
+    "holiday-lights": "holiday-lights",
+    "holiday-lighting": "holiday-lights",
+    "take-down": "take-down",
+    takedown: "take-down",
+    "commercial-lights": "commercial-lights",
+    "snow-removal": "snow-removal",
+    snow: "snow-removal",
+    "driveway-snow": "snow-removal",
+    "commercial-snow": "commercial-snow",
+    "seasonal-snow": "seasonal-snow",
+    "power-washing": "power-washing",
+    driveway: "driveway",
+    siding: "siding",
+    decks: "decks",
+    commercial: "commercial",
+    "landscape-beds": "landscape-beds",
+    "multi-property": "multi-property",
+    "weekly-mowing": "commercial",
+    "snow-add-on": "commercial-snow",
+    hardscaping: "hardscaping",
+    patio: "patio",
+    walkways: "walkways",
+    "retaining-walls": "retaining-walls",
+    "outdoor-living": "hardscaping",
+    aeration: "aeration",
+    "core-aeration": "aeration",
+    overseeding: "overseeding",
+    "gutter-cleaning": "gutter-cleaning",
+    "flow-check": "flow-check",
+    "gutter-clean": "gutter-cleaning",
+    residential: "residential",
+    "full-yard": "full-service",
+    "seasonal-add-ons": "residential",
+    "pest-add-on": "pest-control",
   }
   return map[key] ?? ""
 }
@@ -58,7 +155,7 @@ export function QuoteFunnel() {
   const { onFunnelStep, onConversionLead } = useAnalytics()
   const [step, setStep] = useState<Step>("details")
   const [propertyType, setPropertyType] = useState<PropertyType>("residential")
-  const [serviceType, setServiceType] = useState<ServiceType | "">(() =>
+  const [serviceType, setServiceType] = useState<QuoteService | "">(() =>
     serviceFromQuery(searchParams.get("service")),
   )
   const [lawnSize, setLawnSize] = useState(2000)
@@ -80,6 +177,7 @@ export function QuoteFunnel() {
   const [submitError, setSubmitError] = useState<string | null>(null)
   const [requestId, setRequestId] = useState<string | null>(null)
   const [idempotencyKey, setIdempotencyKey] = useState(newIdempotencyKey)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
 
   const stepIndex = useMemo(() => {
     if (step === "details") return 1
@@ -99,9 +197,27 @@ export function QuoteFunnel() {
   }, [step, stepIndex, onFunnelStep])
 
   const calculateQuote = () => {
+    if (!serviceType) {
+      setDetailsError("Select a service type.")
+      return
+    }
+    if (!isEstimateService(serviceType)) {
+      setDetailsError(null)
+      setQuote({
+        amount: 0,
+        unit: "per visit",
+        displayAmount: "Custom quote",
+        notes: [
+          "This service is quoted after a look at the property — not a lawn-size calculator.",
+          "Share a few details and we’ll confirm a real plan.",
+        ],
+      })
+      setStep("contact")
+      return
+    }
     const outcome = calculateEstimate({
       propertyType,
-      serviceType: serviceType as ServiceType,
+      serviceType,
       lawnSizeSqFt: lawnSize,
       frequency,
     })
@@ -127,7 +243,7 @@ export function QuoteFunnel() {
 
   const submitLead = async (e: FormEvent) => {
     e.preventDefault()
-    if (!quote || !serviceType) return
+    if (!serviceType) return
     const errors = validateContact()
     if (Object.keys(errors).length > 0) {
       setContactErrors(errors)
@@ -151,8 +267,9 @@ export function QuoteFunnel() {
           source: "quote",
           idempotencyKey,
           companyWebsite: contact.companyWebsite,
-          estimateAmount: quote.amount,
-          estimateUnit: quote.unit,
+          turnstileToken: turnstileToken || undefined,
+          estimateAmount: quote?.amount || undefined,
+          estimateUnit: quote?.unit || undefined,
           lawnSizeSqFt: lawnSize,
           propertyType,
           frequency,
@@ -176,7 +293,7 @@ export function QuoteFunnel() {
       setStep("done")
       onConversionLead(
         data.requestId ?? idempotencyKey,
-        quote.amount,
+        quote?.amount ?? 0,
         "USD",
       )
       setIdempotencyKey(newIdempotencyKey())
@@ -215,7 +332,8 @@ export function QuoteFunnel() {
           <CardHeader>
             <CardTitle>Tell us about your property</CardTitle>
             <CardDescription>
-              Instant planning numbers first — then share your contact details so our team can confirm a real quote.
+              Lawn care gets an instant planning number. Pest control, lights, snow, and other jobs are quoted after we
+              look at the property.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -235,19 +353,22 @@ export function QuoteFunnel() {
 
             <div>
               <Label htmlFor="service-type">Service Type</Label>
-              <Select value={serviceType} onValueChange={(v) => setServiceType(v as ServiceType)}>
+              <Select value={serviceType} onValueChange={(v) => setServiceType(v as QuoteService)}>
                 <SelectTrigger id="service-type">
                   <SelectValue placeholder="Select a service" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="mowing">Lawn Mowing</SelectItem>
-                  <SelectItem value="fertilization">Fertilization</SelectItem>
-                  <SelectItem value="weed-control">Weed Control</SelectItem>
-                  <SelectItem value="full-service">Full Service Lawn Care</SelectItem>
+                  {Object.entries(SERVICE_LABELS).map(([value, label]) => (
+                    <SelectItem key={value} value={value}>
+                      {label}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>
 
+            {(!serviceType || isEstimateService(serviceType)) && (
+              <>
             <div>
               <Label>Lawn Size (sq ft)</Label>
               <Slider
@@ -273,6 +394,8 @@ export function QuoteFunnel() {
                 </div>
               </RadioGroup>
             </div>
+              </>
+            )}
 
             {detailsError && (
               <p role="alert" className="text-sm text-red-600">
@@ -282,7 +405,9 @@ export function QuoteFunnel() {
           </CardContent>
           <CardFooter>
             <Button onClick={calculateQuote} className="w-full">
-              Calculate Estimate
+              {serviceType && !isEstimateService(serviceType)
+                ? "Request a quote"
+                : "Calculate Estimate"}
             </Button>
           </CardFooter>
         </Card>
@@ -417,6 +542,7 @@ export function QuoteFunnel() {
                   {submitError}
                 </p>
               )}
+              <TurnstileField onToken={setTurnstileToken} />
             </CardContent>
             <CardFooter className="flex flex-col gap-3 sm:flex-row">
               <Button type="button" variant="outline" className="w-full" onClick={() => setStep("estimate")}>

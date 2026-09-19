@@ -33,6 +33,7 @@ export function ServiceCard({
         ) : null}
       </div>
       <div className="min-w-0 p-4 sm:p-5">
+        {service.tag ? <Tag className="mb-2">{service.tag}</Tag> : null}
         <h3 className="font-display text-[clamp(1.15rem,4vw,1.28rem)] font-bold">{service.title}</h3>
         <p className="mt-1.5 text-[0.94rem] text-sage">{service.description}</p>
         <Link

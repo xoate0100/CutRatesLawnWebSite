@@ -10,8 +10,11 @@ export function lazyLoadComponent<T extends ComponentType<any>>(
 ) {
   const LazyComponent = lazy(factory)
 
-  return (props: React.ComponentProps<T>) =>
-    createElement(Suspense, { fallback }, createElement(LazyComponent, props))
+  function LazyLoaded(props: React.ComponentProps<T>) {
+    return createElement(Suspense, { fallback }, createElement(LazyComponent, props))
+  }
+  LazyLoaded.displayName = "LazyLoadedComponent"
+  return LazyLoaded
 }
 
 /**

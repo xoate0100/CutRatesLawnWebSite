@@ -42,10 +42,7 @@ export function Gallery({ items = GALLERY_ITEMS, className }: GalleryProps) {
       <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {visible.map((item) => (
           <li key={item.id} className="overflow-hidden rounded-brand border border-line bg-white">
-            <div className="grid grid-cols-2">
-              <MediaFrame slot={item.beforeSlot} aspect="1/1" className="rounded-none" />
-              <MediaFrame slot={item.afterSlot} aspect="1/1" className="rounded-none" />
-            </div>
+            <MediaFrame slot={item.mediaSlot} aspect="4/3" className="rounded-none" />
             <div className="p-4">
               <p className="text-xs font-bold uppercase tracking-wider text-sage">{item.category}</p>
               <h3 className="font-display mt-1 text-lg font-bold">{item.title}</h3>

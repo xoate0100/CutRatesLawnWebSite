@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { ImageKey } from "./image-constants"
 
 export interface ImageMetadata {

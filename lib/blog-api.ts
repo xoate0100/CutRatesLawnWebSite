@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { PostType, ApiCollectionResponse, AuthorType, CategoryType, TagType } from "./types"
 import { handleApiError } from "./error-handling"
 

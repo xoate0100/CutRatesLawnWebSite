@@ -19,7 +19,7 @@ assets:
     alt: Residential lawn with watering system
     usage: hero
     notes: Legacy root-bucket object; home.hero now uses env-A9DYSMH
-    updated_at: 2026-08-02T22:06:16.727Z
+    updated_at: 2026-09-05T01:03:49.661Z
     author: Cut Rates Lawn Care
     license_notes: Legacy root-bucket object; home.hero now uses env-A9DYSMH
     envato_url: null
@@ -42,7 +42,7 @@ assets:
     alt: Cut Rates Lawn Care
     usage: logo
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T22:06:16.732Z
+    updated_at: 2026-09-05T01:03:49.664Z
     author: Cut Rates Lawn Care
     license_notes: Pre-existing GCS object (not Envato Elements)
     envato_url: null
@@ -112,7 +112,7 @@ assets:
     staged_path: media/staging/env-3J7CC29.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T22:06:16.732Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: env-NVY3VZW
     slug: home-sweet-home-real-estate-exterior
     status: published
@@ -175,7 +175,7 @@ assets:
     staged_path: media/staging/env-NVY3VZW.jpg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T22:06:16.733Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: env-A9DYSMH
     slug: house-with-a-green-lawn-under-blue-sky
     status: published
@@ -238,7 +238,7 @@ assets:
     staged_path: media/staging/env-A9DYSMH.jpeg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T22:06:16.733Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: sha-1a0ddae6797d
     slug: lawn-care-professional-sprays-fertilizer
     status: published
@@ -300,7 +300,7 @@ assets:
     staged_path: media/staging/sha-1a0ddae6797d.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T22:06:16.733Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: env-ETDTNU6
     slug: lawn-care-worker-mows-grass
     status: published
@@ -362,7 +362,7 @@ assets:
     staged_path: media/staging/env-ETDTNU6.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T22:06:16.733Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: env-WL6S6J5
     slug: lawn-mover-on-green-grass
     status: published
@@ -417,7 +417,7 @@ assets:
     staged_path: media/staging/env-WL6S6J5.jpg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T22:06:16.733Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: sha-5c1d1dd0095b
     slug: man-fertilizing-lawn-with-spreader-in-suburban-yard
     status: published
@@ -472,7 +472,7 @@ assets:
     staged_path: media/staging/sha-5c1d1dd0095b.jpg
     ingested_by: andre
     notes: Licensed inbox asset; Envato URL not captured at ingest
-    updated_at: 2026-08-02T22:06:16.733Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: sha-ba20accbcd23
     slug: man-mowing-the-lawn-in-his-backyard
     status: published
@@ -534,7 +534,7 @@ assets:
     staged_path: media/staging/sha-ba20accbcd23.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T22:06:16.734Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: env-J4XCY2H
     slug: man-pushing-lawn-mower
     status: published
@@ -596,7 +596,7 @@ assets:
     staged_path: media/staging/env-J4XCY2H.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T22:06:16.734Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: env-HBA9N9D
     slug: mowed-green-frontyard
     status: published
@@ -658,7 +658,7 @@ assets:
     staged_path: media/staging/env-HBA9N9D.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T22:06:16.734Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: sha-50ea64d6a870
     slug: residential-houses-in-suburban-neighborhood-in-summer
     status: published
@@ -721,7 +721,7 @@ assets:
     staged_path: media/staging/sha-50ea64d6a870.jpg
     ingested_by: andre
     notes: Licensed inbox asset; Envato URL not captured at ingest
-    updated_at: 2026-08-02T22:06:16.734Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: env-BQ2DHJ4
     slug: row-of-traditional-suburban-homes-with-lush-green-front-lawns
     status: published
@@ -784,7 +784,7 @@ assets:
     staged_path: media/staging/env-BQ2DHJ4.jpg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T22:06:16.734Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: sha-17ae8109f02b
     slug: suburban-home-exterior-with-manicured-lawn
     status: published
@@ -846,7 +846,7 @@ assets:
     staged_path: media/staging/sha-17ae8109f02b.jpg
     ingested_by: andre
     notes: Library alternate — not bound to a slot yet
-    updated_at: 2026-08-02T22:06:16.734Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: sha-df83cbfdd6a5
     slug: water-droplets-on-green-grass-field
     status: published
@@ -901,7 +901,7 @@ assets:
     staged_path: media/staging/sha-df83cbfdd6a5.jpg
     ingested_by: andre
     notes: Interim stand-in for aeration
-    updated_at: 2026-08-02T22:06:16.734Z
+    updated_at: 2026-09-05T01:03:49.664Z
   - asset_id: env-L66HWHJ
     slug: worker-spraying-pesticide-onto-green-lawn-outdoors
     status: published
@@ -956,7 +956,7 @@ assets:
     staged_path: media/staging/env-L66HWHJ.jpg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: legacy-logo-white
     slug: logo-white
     status: published
@@ -981,7 +981,7 @@ assets:
     usage: logo
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: legacy-service-cleanup
     slug: service-cleanup
     status: published
@@ -1005,7 +1005,7 @@ assets:
     usage: card
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: legacy-testimonial-1
     slug: testimonial-1
     status: published
@@ -1030,7 +1030,7 @@ assets:
     usage: avatar
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: legacy-testimonial-2
     slug: testimonial-2
     status: published
@@ -1055,7 +1055,7 @@ assets:
     usage: avatar
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: legacy-testimonial-3
     slug: testimonial-3
     status: published
@@ -1080,7 +1080,7 @@ assets:
     usage: avatar
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: legacy-partner-kwch
     slug: partner-kwch
     status: published
@@ -1105,7 +1105,7 @@ assets:
     usage: logo
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: legacy-partner-google
     slug: partner-google
     status: published
@@ -1130,7 +1130,7 @@ assets:
     usage: logo
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: legacy-partner-yelp
     slug: partner-yelp
     status: published
@@ -1155,7 +1155,7 @@ assets:
     usage: logo
     category: legacy
     notes: Registered for media:validate integrity
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: sha-bab7b1635fc6
     slug: cut-rates-lawn-care-logo-new
     status: published
@@ -1209,7 +1209,7 @@ assets:
     staged_path: media/staging/sha-bab7b1635fc6.svg
     ingested_by: andre
     notes: Inbox filename cutrateslogonew.svg; binds to header.logo
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: sha-1804e39e6138
     slug: cut-rates-lawn-care-logo-transparent
     status: published
@@ -1263,7 +1263,7 @@ assets:
     staged_path: media/staging/sha-1804e39e6138.svg
     ingested_by: andre
     notes: cutrateslogo_transparent.svg
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: sha-7b1c0a70183b
     slug: man-mows-the-lawn-on-a-sunny-day-2026-01-05-22-50-01-utc
     status: published
@@ -1324,7 +1324,7 @@ assets:
     staged_path: media/staging/sha-7b1c0a70183b.jpg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: sha-f22b5ee0b651
     slug: professional-landscaper-trimming-tall-grass-with-s-2026-07-09-19
     status: published
@@ -1385,7 +1385,7 @@ assets:
     staged_path: media/staging/sha-f22b5ee0b651.jpg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T22:06:16.735Z
+    updated_at: 2026-09-05T01:03:49.665Z
   - asset_id: sha-9a459a99270d
     slug: worker-spraying-pesticide-onto-green-bush-outdoors-2026-01-07-15
     status: published
@@ -1446,5 +1446,647 @@ assets:
     staged_path: media/staging/sha-9a459a99270d.jpg
     ingested_by: andre
     notes: ""
-    updated_at: 2026-08-02T22:06:16.735Z
-updated_at: 2026-08-02T22:06:16.736Z
+    updated_at: 2026-09-05T01:03:49.665Z
+  - asset_id: env-ANENAST
+    slug: professionals-standing-in-front-of-heavy-transport-truck
+    status: published
+    envato_item_id: ANENAST
+    envato_url: https://elements.envato.com/mixed-race-team-of-workers-at-a-landscape-company--ANENAST
+    title: Professionals Standing in Front of Heavy Transport Truck
+    author: Mint_Images
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-09-05T01:05:30.979Z
+    source_filename: professionals-standing-in-front-of-heavy-transport-2026-01-09-09-52-03-utc.jpg
+    sha256: 8647597d9659f36fbabb35aaf72e78adc17e47033b3a8b3ae1dfb383ae607d24
+    bytes: 6349325
+    width: 5120
+    height: 3413
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/careers/careers-hero/env-ANENAST
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-ANENAST/original.jpg
+        width: 5120
+        height: 3413
+        format: jpeg
+        bytes: 1242448
+        object: cutrateslawn/prod/careers/careers-hero/env-ANENAST/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-hero/env-ANENAST/original.jpg
+      - name: w1920
+        file: media/processed/env-ANENAST/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 142442
+        object: cutrateslawn/prod/careers/careers-hero/env-ANENAST/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-hero/env-ANENAST/w1920.webp
+      - name: w1280
+        file: media/processed/env-ANENAST/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 84690
+        object: cutrateslawn/prod/careers/careers-hero/env-ANENAST/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-hero/env-ANENAST/w1280.webp
+      - name: w768
+        file: media/processed/env-ANENAST/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 46300
+        object: cutrateslawn/prod/careers/careers-hero/env-ANENAST/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-hero/env-ANENAST/w768.webp
+    slots:
+      - careers.hero
+    alt: Landscape crew standing together in front of a work truck
+    tags: []
+    usage: hero
+    category: careers
+    staged_path: media/staging/env-ANENAST.jpg
+    ingested_by: Andy
+    notes: ""
+    updated_at: 2026-09-05T01:09:30.317Z
+  - asset_id: env-RL37PZY
+    slug: adult-mowing-a-green-lawn-in-the-suburbs
+    status: published
+    envato_item_id: RL37PZY
+    envato_url: https://elements.envato.com/gardener-worker-cutting-grass-with-mower-in-the-ba-RL37PZY
+    title: Adult Mowing a Green Lawn in the Suburbs
+    author: MikeShots
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-09-05T01:05:32.619Z
+    source_filename: adult-mowing-a-green-lawn-in-the-suburbs-2026-01-07-05-27-52-utc.JPG
+    sha256: fda99cfb47bd8398f7d33e250f48c5f4f60b5c385118dbc2547790fbf0dbc639
+    bytes: 3949512
+    width: 3000
+    height: 2001
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/careers/careers-crew/env-RL37PZY
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-RL37PZY/original.jpg
+        width: 3000
+        height: 2001
+        format: jpeg
+        bytes: 645680
+        object: cutrateslawn/prod/careers/careers-crew/env-RL37PZY/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-crew/env-RL37PZY/original.jpg
+      - name: w1920
+        file: media/processed/env-RL37PZY/w1920.webp
+        width: 1920
+        height: 1281
+        format: webp
+        bytes: 208196
+        object: cutrateslawn/prod/careers/careers-crew/env-RL37PZY/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-crew/env-RL37PZY/w1920.webp
+      - name: w1280
+        file: media/processed/env-RL37PZY/w1280.webp
+        width: 1280
+        height: 854
+        format: webp
+        bytes: 120882
+        object: cutrateslawn/prod/careers/careers-crew/env-RL37PZY/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-crew/env-RL37PZY/w1280.webp
+      - name: w768
+        file: media/processed/env-RL37PZY/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 59736
+        object: cutrateslawn/prod/careers/careers-crew/env-RL37PZY/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-crew/env-RL37PZY/w768.webp
+    slots:
+      - careers.crew
+    alt: Field crew member mowing a suburban lawn with a push mower
+    tags: []
+    usage: editorial
+    category: careers
+    staged_path: media/staging/env-RL37PZY.jpg
+    ingested_by: Andy
+    notes: ""
+    updated_at: 2026-09-05T01:09:30.710Z
+  - asset_id: env-2KTRVRB
+    slug: utility-vehicle-with-trailer-for-landscaping-work-on-green-lawn
+    status: published
+    envato_item_id: 2KTRVRB
+    envato_url: https://elements.envato.com/big-professional-riding-lawn-mower-with-an-operato-2KTRVRB
+    title: Utility Vehicle With Trailer For Landscaping Work On Green Lawn
+    author: nikolast1
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-09-05T01:05:38.514Z
+    source_filename: big-professional-riding-lawn-mower-with-an-operato-2026-06-25-18-18-25-utc.jpg
+    sha256: a64428c8a63028db6e61e7ffcbb0c07d99ed1dc423c2d77b77955f52315893aa
+    bytes: 7269707
+    width: 6000
+    height: 4000
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/careers/careers-equipment/env-2KTRVRB
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-2KTRVRB/original.jpg
+        width: 6000
+        height: 4000
+        format: jpeg
+        bytes: 3961634
+        object: cutrateslawn/prod/careers/careers-equipment/env-2KTRVRB/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-equipment/env-2KTRVRB/original.jpg
+      - name: w800
+        file: media/processed/env-2KTRVRB/w800.webp
+        width: 800
+        height: 533
+        format: webp
+        bytes: 72934
+        object: cutrateslawn/prod/careers/careers-equipment/env-2KTRVRB/w800.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-equipment/env-2KTRVRB/w800.webp
+      - name: w400
+        file: media/processed/env-2KTRVRB/w400.webp
+        width: 400
+        height: 267
+        format: webp
+        bytes: 21406
+        object: cutrateslawn/prod/careers/careers-equipment/env-2KTRVRB/w400.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-equipment/env-2KTRVRB/w400.webp
+    slots:
+      - careers.equipment
+    alt: Operator driving commercial landscaping utility vehicle with trailer equipment
+    tags: []
+    usage: card
+    category: careers
+    staged_path: media/staging/env-2KTRVRB.jpg
+    ingested_by: Andy
+    notes: ""
+    updated_at: 2026-09-05T01:09:31.099Z
+  - asset_id: env-D4R4EF5
+    slug: orange-truck-with-vegetation-in-the-truck-bed
+    status: published
+    envato_item_id: D4R4EF5
+    envato_url: https://elements.envato.com/municipal-professional-house-landscape-lawn-garden-D4R4EF5
+    title: Orange Truck with Vegetation in the Truck Bed
+    author: Gorlovkv
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-09-05T01:05:41.832Z
+    source_filename: orange-truck-with-vegetation-in-the-truck-bed-2026-03-17-06-54-59-utc.jpg
+    sha256: e88c04ff142dc5006bbc2b34a74ccc51c5d4401f6118feb3bca4b10a420b920c
+    bytes: 13761018
+    width: 5300
+    height: 3533
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/careers/careers-yard/env-D4R4EF5
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/env-D4R4EF5/original.jpg
+        width: 5300
+        height: 3533
+        format: jpeg
+        bytes: 3243305
+        object: cutrateslawn/prod/careers/careers-yard/env-D4R4EF5/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-yard/env-D4R4EF5/original.jpg
+      - name: w1920
+        file: media/processed/env-D4R4EF5/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 580034
+        object: cutrateslawn/prod/careers/careers-yard/env-D4R4EF5/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-yard/env-D4R4EF5/w1920.webp
+      - name: w1280
+        file: media/processed/env-D4R4EF5/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 291104
+        object: cutrateslawn/prod/careers/careers-yard/env-D4R4EF5/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-yard/env-D4R4EF5/w1280.webp
+      - name: w768
+        file: media/processed/env-D4R4EF5/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 119646
+        object: cutrateslawn/prod/careers/careers-yard/env-D4R4EF5/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-yard/env-D4R4EF5/w768.webp
+    slots:
+      - careers.yard
+    alt: Orange landscape work truck loaded with yard vegetation beside a paved path
+    tags: []
+    usage: editorial
+    category: careers
+    staged_path: media/staging/env-D4R4EF5.jpg
+    ingested_by: Andy
+    notes: ""
+    updated_at: 2026-09-05T01:09:31.466Z
+  - asset_id: sha-f2ed0b115ef2
+    slug: tractor-plows-snow-after-a-winter-storm-2026-03-13-04-14-28-utc
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: Tractor plows snow after a winter storm
+    author: null
+    license_notes: Envato Elements — licensed by Andy into media/inbox
+    downloaded_at: 2026-09-18T14:26:13.492Z
+    source_filename: tractor-plows-snow-after-a-winter-storm-2026-03-13-04-14-28-utc.jpg
+    sha256: f2ed0b115ef23b81e041cec8ed93812b3533ea75c9096f5e99120374fee70ed8
+    bytes: 2065956
+    width: 6016
+    height: 4000
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/services-snow-removal/sha-f2ed0b115ef2
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-f2ed0b115ef2/original.jpg
+        width: 6016
+        height: 4000
+        format: jpeg
+        bytes: 1335889
+        object: cutrateslawn/prod/services/services-snow-removal/sha-f2ed0b115ef2/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-snow-removal/sha-f2ed0b115ef2/original.jpg
+      - name: w1920
+        file: media/processed/sha-f2ed0b115ef2/w1920.webp
+        width: 1920
+        height: 1277
+        format: webp
+        bytes: 135118
+        object: cutrateslawn/prod/services/services-snow-removal/sha-f2ed0b115ef2/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-snow-removal/sha-f2ed0b115ef2/w1920.webp
+      - name: w1280
+        file: media/processed/sha-f2ed0b115ef2/w1280.webp
+        width: 1280
+        height: 851
+        format: webp
+        bytes: 80118
+        object: cutrateslawn/prod/services/services-snow-removal/sha-f2ed0b115ef2/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-snow-removal/sha-f2ed0b115ef2/w1280.webp
+      - name: w768
+        file: media/processed/sha-f2ed0b115ef2/w768.webp
+        width: 768
+        height: 511
+        format: webp
+        bytes: 41444
+        object: cutrateslawn/prod/services/services-snow-removal/sha-f2ed0b115ef2/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-snow-removal/sha-f2ed0b115ef2/w768.webp
+    slots:
+      - services.snow-removal
+    alt: Tractor plowing snow after a winter storm
+    tags: []
+    usage: hero
+    category: services
+    staged_path: media/staging/sha-f2ed0b115ef2.jpg
+    ingested_by: Andy
+    notes: Replacement snow-removal hero/card for services.snow-removal
+    updated_at: 2026-09-18T14:55:22.718Z
+  - asset_id: sha-69f6fa3730a4
+    slug: brick-house-with-christmas-lights-at-night-2026-03-24-00-32-14-u
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: brick-house-with-christmas-lights-at-night-2026-03-24-00-32-14-utc
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-09-18T14:41:21.783Z
+    source_filename: brick-house-with-christmas-lights-at-night-2026-03-24-00-32-14-utc.jpg
+    sha256: 69f6fa3730a433309602f4d05cf6386e3fbf126f2ffa873b111bac5e9cacce63
+    bytes: 11712496
+    width: 5472
+    height: 3648
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/services-holiday-lights/sha-69f6fa3730a4
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-69f6fa3730a4/original.jpg
+        width: 5472
+        height: 3648
+        format: jpeg
+        bytes: 2407201
+        object: cutrateslawn/prod/services/services-holiday-lights/sha-69f6fa3730a4/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-holiday-lights/sha-69f6fa3730a4/original.jpg
+      - name: w1920
+        file: media/processed/sha-69f6fa3730a4/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 388504
+        object: cutrateslawn/prod/services/services-holiday-lights/sha-69f6fa3730a4/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-holiday-lights/sha-69f6fa3730a4/w1920.webp
+      - name: w1280
+        file: media/processed/sha-69f6fa3730a4/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 211772
+        object: cutrateslawn/prod/services/services-holiday-lights/sha-69f6fa3730a4/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-holiday-lights/sha-69f6fa3730a4/w1280.webp
+      - name: w768
+        file: media/processed/sha-69f6fa3730a4/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 88328
+        object: cutrateslawn/prod/services/services-holiday-lights/sha-69f6fa3730a4/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-holiday-lights/sha-69f6fa3730a4/w768.webp
+    slots:
+      - services.holiday-lights
+    alt: Brick house with Christmas lights at night
+    tags: []
+    usage: hero
+    category: services
+    staged_path: media/staging/sha-69f6fa3730a4.jpg
+    ingested_by: Andy
+    notes: ""
+    updated_at: 2026-09-18T14:54:27.079Z
+  - asset_id: sha-a98723c52383
+    slug: man-power-washing-driveway-on-a-sunny-day-2026-03-24-04-41-05-ut
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: man-power-washing-driveway-on-a-sunny-day-2026-03-24-04-41-05-utc
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-09-18T14:41:25.836Z
+    source_filename: man-power-washing-driveway-on-a-sunny-day-2026-03-24-04-41-05-utc.jpg
+    sha256: a98723c523833f36236e920862d5475140e89873dca3ac0d1d0200fee1cbc953
+    bytes: 13276380
+    width: 6000
+    height: 4000
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/services-power-washing/sha-a98723c52383
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-a98723c52383/original.jpg
+        width: 6000
+        height: 4000
+        format: jpeg
+        bytes: 2185098
+        object: cutrateslawn/prod/services/services-power-washing/sha-a98723c52383/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-power-washing/sha-a98723c52383/original.jpg
+      - name: w1920
+        file: media/processed/sha-a98723c52383/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 198116
+        object: cutrateslawn/prod/services/services-power-washing/sha-a98723c52383/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-power-washing/sha-a98723c52383/w1920.webp
+      - name: w1280
+        file: media/processed/sha-a98723c52383/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 116134
+        object: cutrateslawn/prod/services/services-power-washing/sha-a98723c52383/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-power-washing/sha-a98723c52383/w1280.webp
+      - name: w768
+        file: media/processed/sha-a98723c52383/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 59260
+        object: cutrateslawn/prod/services/services-power-washing/sha-a98723c52383/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-power-washing/sha-a98723c52383/w768.webp
+    slots:
+      - services.power-washing
+      - page.services-all.powerwashing
+      - page.powerwashing.1
+    alt: Technician power washing a driveway on a sunny day
+    tags: []
+    usage: hero
+    category: services
+    staged_path: media/staging/sha-a98723c52383.jpg
+    ingested_by: Andy
+    notes: ""
+    updated_at: 2026-09-18T14:54:28.241Z
+  - asset_id: sha-4398ed96bbf2
+    slug: modern-apartment-building-with-landscaped-hedges-a-2026-03-25-04
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: modern-apartment-building-with-landscaped-hedges-a-2026-03-25-04-40-16-utc
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-09-18T14:41:29.679Z
+    source_filename: modern-apartment-building-with-landscaped-hedges-a-2026-03-25-04-40-16-utc.jpg
+    sha256: 4398ed96bbf2c4dbd0a154671a0acab0a2e66d68d9daa6b841a1de5f358f4d2a
+    bytes: 3379375
+    width: 3000
+    height: 2000
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/services-commercial/sha-4398ed96bbf2
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-4398ed96bbf2/original.jpg
+        width: 3000
+        height: 2000
+        format: jpeg
+        bytes: 1641668
+        object: cutrateslawn/prod/services/services-commercial/sha-4398ed96bbf2/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-commercial/sha-4398ed96bbf2/original.jpg
+      - name: w1920
+        file: media/processed/sha-4398ed96bbf2/w1920.webp
+        width: 1920
+        height: 1280
+        format: webp
+        bytes: 748860
+        object: cutrateslawn/prod/services/services-commercial/sha-4398ed96bbf2/w1920.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-commercial/sha-4398ed96bbf2/w1920.webp
+      - name: w1280
+        file: media/processed/sha-4398ed96bbf2/w1280.webp
+        width: 1280
+        height: 853
+        format: webp
+        bytes: 345122
+        object: cutrateslawn/prod/services/services-commercial/sha-4398ed96bbf2/w1280.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-commercial/sha-4398ed96bbf2/w1280.webp
+      - name: w768
+        file: media/processed/sha-4398ed96bbf2/w768.webp
+        width: 768
+        height: 512
+        format: webp
+        bytes: 123210
+        object: cutrateslawn/prod/services/services-commercial/sha-4398ed96bbf2/w768.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-commercial/sha-4398ed96bbf2/w768.webp
+    slots:
+      - services.commercial
+    alt: Modern apartment building with landscaped hedges
+    tags: []
+    usage: hero
+    category: services
+    staged_path: media/staging/sha-4398ed96bbf2.jpg
+    ingested_by: Andy
+    notes: ""
+    updated_at: 2026-09-18T14:54:28.642Z
+  - asset_id: sha-45366ca03313
+    slug: a-mouse-in-a-trap-looks-at-camera-2026-03-24-09-00-17-utc
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: a-mouse-in-a-trap-looks-at-camera-2026-03-24-09-00-17-utc
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-09-18T14:41:33.247Z
+    source_filename: a-mouse-in-a-trap-looks-at-camera-2026-03-24-09-00-17-utc.jpg
+    sha256: 45366ca03313130f2350cd0b4d6d37a6ffd37c406c2fa1e20d3ec6efe021df7b
+    bytes: 10877862
+    width: 5500
+    height: 3680
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/page-pest-trapping/sha-45366ca03313
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-45366ca03313/original.jpg
+        width: 5500
+        height: 3680
+        format: jpeg
+        bytes: 1619247
+        object: cutrateslawn/prod/services/page-pest-trapping/sha-45366ca03313/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-trapping/sha-45366ca03313/original.jpg
+      - name: w800
+        file: media/processed/sha-45366ca03313/w800.webp
+        width: 800
+        height: 535
+        format: webp
+        bytes: 40932
+        object: cutrateslawn/prod/services/page-pest-trapping/sha-45366ca03313/w800.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-trapping/sha-45366ca03313/w800.webp
+      - name: w400
+        file: media/processed/sha-45366ca03313/w400.webp
+        width: 400
+        height: 268
+        format: webp
+        bytes: 18046
+        object: cutrateslawn/prod/services/page-pest-trapping/sha-45366ca03313/w400.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-trapping/sha-45366ca03313/w400.webp
+    slots:
+      - page.pest.trapping
+      - page.pest.rodent
+    alt: Mouse captured in a trap
+    tags: []
+    usage: card
+    category: services
+    staged_path: media/staging/sha-45366ca03313.jpg
+    ingested_by: Andy
+    notes: ""
+    updated_at: 2026-09-18T14:54:29.407Z
+  - asset_id: sha-7f45c8b09070
+    slug: man-inspecting-bed-with-flashlight-for-bed-bugs-2026-04-10-20-26
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: man-inspecting-bed-with-flashlight-for-bed-bugs-2026-04-10-20-26-59-utc
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-09-18T14:41:36.080Z
+    source_filename: man-inspecting-bed-with-flashlight-for-bed-bugs-2026-04-10-20-26-59-utc.jpg
+    sha256: 7f45c8b09070ff68989c7a7abb7d522e68d152282002c601f093c197d9b04a5d
+    bytes: 7040667
+    width: 8192
+    height: 5464
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/page-pest-bedbugs/sha-7f45c8b09070
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-7f45c8b09070/original.jpg
+        width: 8192
+        height: 5464
+        format: jpeg
+        bytes: 1438870
+        object: cutrateslawn/prod/services/page-pest-bedbugs/sha-7f45c8b09070/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-bedbugs/sha-7f45c8b09070/original.jpg
+      - name: w800
+        file: media/processed/sha-7f45c8b09070/w800.webp
+        width: 800
+        height: 534
+        format: webp
+        bytes: 18902
+        object: cutrateslawn/prod/services/page-pest-bedbugs/sha-7f45c8b09070/w800.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-bedbugs/sha-7f45c8b09070/w800.webp
+      - name: w400
+        file: media/processed/sha-7f45c8b09070/w400.webp
+        width: 400
+        height: 267
+        format: webp
+        bytes: 8286
+        object: cutrateslawn/prod/services/page-pest-bedbugs/sha-7f45c8b09070/w400.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-bedbugs/sha-7f45c8b09070/w400.webp
+    slots:
+      - page.pest.bedbugs
+    alt: Technician inspecting a bed with a flashlight for bed bugs
+    tags: []
+    usage: card
+    category: services
+    staged_path: media/staging/sha-7f45c8b09070.jpg
+    ingested_by: Andy
+    notes: ""
+    updated_at: 2026-09-18T14:54:29.785Z
+  - asset_id: sha-0fa92ce0b938
+    slug: worker-installing-window-insulation-indoors-during-2026-03-27-02
+    status: published
+    envato_item_id: null
+    envato_url: null
+    title: worker-installing-window-insulation-indoors-during-2026-03-27-02-17-01-utc
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-09-18T14:41:38.394Z
+    source_filename: worker-installing-window-insulation-indoors-during-2026-03-27-02-17-01-utc.jpg
+    sha256: 0fa92ce0b938b1ab34401a85990059d46acea03693f0167ad2bc21c3f8f9778b
+    bytes: 5256280
+    width: 5288
+    height: 3525
+    mime: image/jpeg
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/services/page-pest-exclusion/sha-0fa92ce0b938
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-0fa92ce0b938/original.jpg
+        width: 5288
+        height: 3525
+        format: jpeg
+        bytes: 599522
+        object: cutrateslawn/prod/services/page-pest-exclusion/sha-0fa92ce0b938/original.jpg
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-exclusion/sha-0fa92ce0b938/original.jpg
+      - name: w800
+        file: media/processed/sha-0fa92ce0b938/w800.webp
+        width: 800
+        height: 533
+        format: webp
+        bytes: 18188
+        object: cutrateslawn/prod/services/page-pest-exclusion/sha-0fa92ce0b938/w800.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-exclusion/sha-0fa92ce0b938/w800.webp
+      - name: w400
+        file: media/processed/sha-0fa92ce0b938/w400.webp
+        width: 400
+        height: 266
+        format: webp
+        bytes: 7706
+        object: cutrateslawn/prod/services/page-pest-exclusion/sha-0fa92ce0b938/w400.webp
+        url: https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-exclusion/sha-0fa92ce0b938/w400.webp
+    slots:
+      - page.pest.exclusion
+    alt: Worker sealing a window for wildlife exclusion
+    tags: []
+    usage: card
+    category: services
+    staged_path: media/staging/sha-0fa92ce0b938.jpg
+    ingested_by: Andy
+    notes: ""
+    updated_at: 2026-09-18T14:54:30.399Z
+updated_at: 2026-09-18T14:55:22.722Z

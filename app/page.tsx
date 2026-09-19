@@ -2,7 +2,6 @@ import { SectionHead } from "@/components/ui/section-head"
 import { pageWrap, pageWrapNarrow, pageWrapMid } from "@/lib/layout"
 import {
   AreaChips,
-  BeforeAfterSlider,
   BundleCards,
   CTASection,
   FAQAccordion,
@@ -12,6 +11,9 @@ import {
   ServiceGrid,
   TestimonialMarquee,
 } from "@/components/blocks"
+import { GoogleReviewsRotator } from "@/components/trust/google-reviews-rotator"
+import { PressFeature } from "@/components/trust/press-feature"
+import { TrustBar } from "@/components/trust/trust-bar"
 
 export default function HomePage() {
   return (
@@ -23,7 +25,7 @@ export default function HomePage() {
         <SectionHead
           eyebrow="Popular services"
           title="The work your property actually needs."
-          description="Landscaping first — then the weekly care that keeps it looking sharp."
+          description="Landscaping and weekly lawn care — plus termites, rodents, bed bugs, and the seasonal jobs that keep a property finished."
         />
         <ServiceGrid />
       </section>
@@ -33,11 +35,15 @@ export default function HomePage() {
       <section className={`${pageWrapMid} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         <SectionHead
           eyebrow="Proof"
-          title="Before and after, side by side."
-          description="Drag the slider — real yards, local work."
+          title="4.8 stars on Google. Featured on KWCH."
+          description="Real Wichita-area customers — and a KWCH story featuring owner Chris Porter."
           align="center"
         />
-        <BeforeAfterSlider className="mt-8" />
+        <TrustBar className="mt-6 justify-center" />
+        <div className="mt-8 grid gap-4 lg:grid-cols-2">
+          <GoogleReviewsRotator />
+          <PressFeature />
+        </div>
       </section>
 
       <TestimonialMarquee />

@@ -72,7 +72,26 @@ check('Governance path drift', () => {
 });
 
 check('Production build', () => {
-  execSync('pnpm run build', { cwd: root, stdio: 'pipe', env: { ...process.env, CI: 'true' } });
+  const env = { ...process.env, CI: 'true' };
+  const guardPy = join(root, 'agentic', 'exec_guard.py');
+  let pythonOk = false;
+  try {
+    execSync('python -c "import agentic.exec_guard"', { cwd: root, stdio: 'pipe', env });
+    pythonOk = existsSync(guardPy);
+  } catch {
+    pythonOk = false;
+  }
+  // Prefer next binary via node so exec_guard CreateProcess works on Windows (no pnpm.cmd PATH).
+  const nextBin = join(root, 'node_modules', 'next', 'dist', 'bin', 'next');
+  if (pythonOk && existsSync(nextBin)) {
+    execSync(
+      `python -m agentic.exec_guard --quiet --timeout 600 --max-memory-mb 4096 -- node "${nextBin}" build`,
+      { cwd: root, stdio: 'pipe', env: { ...env, PYTHONIOENCODING: 'utf-8', PYTHONUTF8: '1' } },
+    );
+  } else {
+    console.warn('  (exec_guard unavailable — running pnpm run build directly)');
+    execSync('pnpm run build', { cwd: root, stdio: 'pipe', env });
+  }
 });
 
 if (failed) {

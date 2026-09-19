@@ -1,16 +1,14 @@
-export function GET() {
-  const apiKey = process.env.GOOGLE_PLACES_API_KEY
-  const placeId = process.env.GOOGLE_PLACE_ID
+import { NextResponse } from "next/server"
 
-  const debugInfo = {
-    apiKeyExists: !!apiKey,
-    apiKeyLength: apiKey ? apiKey.length : 0,
-    placeIdExists: !!placeId,
-    placeIdValue: placeId || "Not set",
-    timestamp: new Date().toISOString(),
+/** Production: 404. Dev: boolean flags only — never key material or place IDs. */
+export function GET() {
+  if (process.env.NODE_ENV === "production") {
+    return new NextResponse(null, { status: 404 })
   }
 
-  return new Response(JSON.stringify(debugInfo, null, 2), {
-    headers: { "Content-Type": "application/json" },
+  return NextResponse.json({
+    apiKeyExists: Boolean(process.env.GOOGLE_PLACES_API_KEY),
+    placeIdExists: Boolean(process.env.GOOGLE_PLACE_ID),
+    timestamp: new Date().toISOString(),
   })
 }

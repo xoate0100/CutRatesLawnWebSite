@@ -1,6 +1,6 @@
 # AI Execution Context — Auto-Generated
 
-**Generated:** 2026-08-01 19:39:58
+**Generated:** 2026-09-03 04:36:14
 **Authority:** `0_phase0_bootstrap/AI_SANDBOX_RULES.md`
 **Purpose:** Consolidated constraint context for AI sessions
 
@@ -46,11 +46,10 @@
 
 ## Accepted Decisions
 
-- **DEC-0001-LAYOUT-PRESET**: Keep flat nextjs_root layout (app/, components/, lib/, hooks/) at repo root.
-- **DEC-0002-VERIFY-GATE**: Use npm-based verify gate (scripts/verify.mjs) instead of full Python
-- **DEC-0004-AGENTIC-SPOKE-DEPTH**: Adopt slim L2.5 spoke: governance dirs, decision registry, cursor rules,
-- **DEC-0005-SHADCN-UI-PATTERN**: Continue using shadcn/ui components in components/ui/. New UI primitives
-- **DEC-0006-QUALITY-HARDENING**: Phase 2 quality hardening completed: strict TypeScript and ESLint during
+- **DEC-0001-REPO-MODEL**: (no summary)
+- **DEC-0003-ADAPTER-MODEL**: (no summary)
+- **DEC-0004-HOOK-RUNNER**: (no summary)
+- **DEC-0005-GOVERNANCE-RUNTIME-SPLIT**: (no summary)
 
 ---
 
@@ -62,12 +61,12 @@ _None._
 
 ## Drift vectors
 
-- `DV_RESTRUCTURE_WITHOUT_DECISION`
-- `DV_BUILD_STRICTNESS_CREEP`
-- `DV_GOVERNANCE_PATH_DRIFT`
-- `DV_POINTER_WITHOUT_DELIVERABLES`
-- `DV_BUSINESS_LOGIC_REWRITE`
-- `DV_DOC_LIFECYCLE_DRIFT`
+- `DV_HOOK_BYPASS`
+- `DV_GOVERNANCE_DIRECT_EDIT`
+- `DV_PREMATURE_ORCHESTRATION`
+- `DV_DB_FROM_API`
+- `DV_SPLIT_WITHOUT_CRITERIA`
+- `DV_CI_GUARDRAIL_BYPASS`
 
 ---
 
@@ -76,7 +75,8 @@ _None._
 1. Read `docs/DEV_COLD_START_KNOWLEDGE.md`
 2. Query decisions before architectural changes
 3. Stay within write paths above
-4. Run `npm run verify` before marking work complete
+4. Run `pnpm run verify` before marking work complete
+5. Read `6_ai_runtime_context/SESSION_NOTES.md` for careers/GHL/remediation status
 
 ---
 
@@ -95,22 +95,22 @@ _None._
 
 # AI Sandbox Execution Rules (L2.5 Single-Agent)
 
-You are the single authorized agent (Cursor). Execute multi-step plans end-to-end within scope.
+You are the single authorized agent (Cursor Code). You may execute multi-step plans end-to-end.
 
 ## Allowed
-
 - Read `6_ai_runtime_context/ACTIVE_PLAN.yaml` and execute tasks sequentially.
-- Write/refactor only in paths listed in `0_phase0_bootstrap/feature_flags.yml` → `permissions.write_to`.
-- Run `npm run verify` and fix failures autonomously before considering work complete.
-- Commit autonomously only when verification passes.
+- Write/refactor/delete only in: `frontend/`, `backend/`, `shared/`, `tests/`, `docs/`, `scripts/`, `4_docs_index/`, `3_bootstrap_scripts/` (for meta-framework upgrades only), `6_ai_runtime_context/`, `agentic/`, `proposals/`.
+- Run and fix pre-commit failures autonomously.
+- Commit autonomously **only** if all pre-commit hooks pass.
+- **State Transitions (GOVERNED):** Update `ACTIVE_TASK_POINTER.yaml` ONLY via `auto_advance_state.py` protocol:
+  - Task completion gate must pass
+  - Completion report must be generated
+  - Transition must be logged
+  - Pointer increments by exactly +1
+- Update `INTENT_DECLARATION.json` before code changes.
+- Append to `6_ai_runtime_context/ai_feedback_log.json` when guardrails fail.
+- Write completion reports under `6_ai_runtime_context/` (TASK_COMPLETION_REPORTS).
 
-## Required
+## Required (MANDATORY - BLOCKING)
 
-### Session start
-
-1. Read `6_ai_runtime_context/AI_CONTEXT.md`.
-2. Read `docs/DEV_COLD_START_KNOWLEDGE.md` before implementing features.
-3. Query `5_reference_architectures/DECISION_REGISTRY.yaml` before architectural changes.
-
-### Commits
 ...

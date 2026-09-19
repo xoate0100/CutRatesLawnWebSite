@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Eyebrow } from "@/components/ui/eyebrow"
 import { MediaFrame } from "@/components/media/media-frame"
 import { pageWrap } from "@/lib/layout"
+import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
 
 export type InteriorHeroProps = {
@@ -13,6 +14,8 @@ export type InteriorHeroProps = {
   mediaSlot?: string
   ctaHref?: string
   ctaLabel?: string
+  secondaryHref?: string
+  secondaryLabel?: string
   className?: string
 }
 
@@ -23,6 +26,8 @@ export function InteriorHero({
   mediaSlot = "services.hero",
   ctaHref = "/quote",
   ctaLabel = "Get a quote",
+  secondaryHref = `tel:${siteConfig.phone.e164}`,
+  secondaryLabel = `Call ${siteConfig.phone.display}`,
   className,
 }: InteriorHeroProps) {
   return (
@@ -46,11 +51,18 @@ export function InteriorHero({
           {description ? (
             <p className="mt-4 max-w-[40ch] text-base text-white/80 sm:text-lg">{description}</p>
           ) : null}
-          <Button asChild variant="lime" className="mt-6 max-w-full">
-            <Link href={ctaHref}>
-              {ctaLabel} <span aria-hidden>→</span>
-            </Link>
-          </Button>
+          <div className="mt-6 flex flex-wrap items-center gap-3">
+            <Button asChild variant="lime" className="max-w-full">
+              <Link href={ctaHref}>
+                {ctaLabel} <span aria-hidden>→</span>
+              </Link>
+            </Button>
+            {secondaryHref && secondaryLabel ? (
+              <Button asChild variant="ghost" className="max-w-full text-white">
+                <a href={secondaryHref}>{secondaryLabel}</a>
+              </Button>
+            ) : null}
+          </div>
         </div>
         <MediaFrame
           slot={mediaSlot}

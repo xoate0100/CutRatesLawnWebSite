@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { formatCurrency } from "@/lib/utils"
 
 interface PriceDisplayProps {

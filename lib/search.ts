@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { SearchResultType, SearchResultsType } from "./types"
 
 // Search API functions

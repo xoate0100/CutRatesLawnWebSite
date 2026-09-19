@@ -27,7 +27,8 @@ export function SearchBar({
     if (onSearch) {
       onSearch(query)
     } else {
-      router.push(`/search?q=${encodeURIComponent(query)}`)
+      // Legacy bar: no live search page — land on services (also /search redirects there).
+      router.push(`/services?q=${encodeURIComponent(query)}`)
     }
   }
 

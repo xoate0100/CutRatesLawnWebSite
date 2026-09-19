@@ -1,7 +1,8 @@
 "use client"
 
-import { useState, type FormEvent } from "react"
+import { useCallback, useState, type FormEvent } from "react"
 import { Button } from "@/components/ui/button"
+import { TurnstileField } from "@/components/forms/turnstile-field"
 import { cn } from "@/lib/utils"
 
 type FormState = {
@@ -22,6 +23,8 @@ export function ContactFormBlock({ className }: ContactFormBlockProps) {
   const [errors, setErrors] = useState<Partial<Record<keyof FormState | "form", string>>>({})
   const [submitting, setSubmitting] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const onToken = useCallback((token: string | null) => setTurnstileToken(token), [])
 
   const validate = () => {
     const next: typeof errors = {}
@@ -58,6 +61,7 @@ export function ContactFormBlock({ className }: ContactFormBlockProps) {
           message: values.message,
           source: "contact",
           idempotencyKey: crypto.randomUUID(),
+          turnstileToken: turnstileToken || undefined,
         }),
       })
       const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string }
@@ -126,6 +130,7 @@ export function ContactFormBlock({ className }: ContactFormBlockProps) {
         />
         {errors.message ? <p className="mt-1 text-sm text-red-600">{errors.message}</p> : null}
       </div>
+      <TurnstileField onToken={onToken} />
       {errors.form ? (
         <div className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-700">
           {errors.form}

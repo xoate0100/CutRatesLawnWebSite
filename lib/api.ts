@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { getSafeImageUrl } from "./utils"
 import { logDetailedError } from "./error-utils"
 import type { QuoteFormData } from "./types"

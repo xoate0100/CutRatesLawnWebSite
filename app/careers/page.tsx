@@ -2,7 +2,6 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { SectionHead } from "@/components/ui/section-head"
 import { MediaFrame } from "@/components/media/media-frame"
-import { CareersLangToggle } from "@/components/careers/lang-toggle"
 import { OpenJobCards } from "@/components/careers/job-cards"
 import { PaycheckEstimator } from "@/components/careers/paycheck-estimator"
 import { SchedulePreview } from "@/components/careers/schedule-preview"
@@ -99,7 +98,6 @@ export default function CareersPage() {
               </a>
             </nav>
             <div className="flex items-center gap-3">
-              <CareersLangToggle />
               <Button asChild variant="lime" size="sm">
                 <a href="#jobs">See open jobs</a>
               </Button>
@@ -143,7 +141,7 @@ export default function CareersPage() {
                 <a href="#jobs">See jobs near me</a>
               </Button>
               <Button asChild variant="ghost" className="border-white text-white">
-                <a href="#apply">Aplicar en Español</a>
+                <a href="#apply">Start application</a>
               </Button>
             </div>
             <p className="mt-4 text-sm text-white/65">
@@ -194,14 +192,14 @@ export default function CareersPage() {
       </section>
 
       {/* Open jobs */}
-      <section className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
+      <section id="jobs" className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
         <SectionHead
           eyebrow="Open field jobs"
           title="Find the job that fits what you can do now — and what you want to learn next."
           description="Every card answers practical questions first: pay status, schedule, location, experience, and what happens next."
         />
         <div className="mt-4 flex flex-wrap gap-2">
-          {["Wichita, KS", "Entry-level + skilled", "Full-time field roles", "EN | ES"].map((b) => (
+          {["Wichita, KS", "Entry-level + skilled", "Full-time field roles"].map((b) => (
             <span
               key={b}
               className="rounded-full border border-line bg-cream px-3 py-1 text-xs font-bold text-forest"
@@ -293,6 +291,29 @@ export default function CareersPage() {
             ))}
           </div>
           <ManagerExpectationsCard className="mt-8" />
+          <div className="mt-8 grid gap-4 sm:grid-cols-3">
+            <MediaFrame
+              slot="careers.crew"
+              aspect="4/3"
+              className="rounded-brand"
+              sizes="(max-width: 640px) 92vw, 30vw"
+            />
+            <MediaFrame
+              slot="careers.equipment"
+              aspect="4/3"
+              className="rounded-brand"
+              sizes="(max-width: 640px) 92vw, 30vw"
+            />
+            <MediaFrame
+              slot="careers.yard"
+              aspect="4/3"
+              className="rounded-brand"
+              sizes="(max-width: 640px) 92vw, 30vw"
+            />
+          </div>
+          <p className="mt-3 text-xs text-sage">
+            Crew, equipment, and yard imagery — interim licensed stock until Cut Rates photography replaces it.
+          </p>
         </div>
       </section>
 

@@ -5,6 +5,7 @@ import { useState } from "react"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { pageWrap } from "@/lib/layout"
+import { GoogleRatingBadge } from "@/components/trust/google-rating-badge"
 import { NAV_LINKS } from "@/lib/marketing-content"
 import { siteConfig } from "@/lib/site-config"
 import { trackPhoneClick } from "@/lib/analytics/core"
@@ -44,6 +45,8 @@ export function SiteHeader() {
             </Link>
           ))}
         </nav>
+
+        <GoogleRatingBadge tone="on-dark" className="hidden xl:inline-flex" />
 
         <a
           href={`tel:${siteConfig.phone.e164}`}

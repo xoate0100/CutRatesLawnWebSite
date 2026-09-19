@@ -36,6 +36,8 @@ const JOURNEY_ROUTES = [
   "/about",
   "/service-areas",
   "/service-areas/derby",
+  "/careers",
+  "/careers/apply",
 ]
 
 const findings = []

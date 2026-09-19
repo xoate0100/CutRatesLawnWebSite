@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T06:56:25.726Z",
+  "generated_at": "2026-09-18T14:55:23.159Z",
   "public_base_url": "https://storage.googleapis.com/site_photo_storage",
   "slots": {
     "home.hero": {
@@ -282,7 +282,7 @@
       "variant": "original",
       "url": "https://storage.googleapis.com/site_photo_storage/images/partners/kwch-logo.png",
       "fallback": "/placeholder.svg?height=40&width=120",
-      "alt": "KWCH 12 News",
+      "alt": "KWCH",
       "width": null,
       "height": null,
       "attribution": {
@@ -651,15 +651,20 @@
     },
     "services.power-washing": {
       "slot": "services.power-washing",
-      "asset_id": null,
-      "variant": null,
-      "url": "/placeholder.jpg?height=200&width=300",
+      "asset_id": "sha-a98723c52383",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-power-washing/sha-a98723c52383/w1920.webp",
       "fallback": "/placeholder.jpg?height=200&width=300",
-      "alt": "Power washing service",
-      "width": null,
-      "height": null,
-      "attribution": null,
-      "status": null
+      "alt": "Technician power washing a driveway on a sunny day",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "man-power-washing-driveway-on-a-sunny-day-2026-03-24-04-41-05-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "services.landscaping": {
       "slot": "services.landscaping",
@@ -801,15 +806,20 @@
     },
     "page.powerwashing.1": {
       "slot": "page.powerwashing.1",
-      "asset_id": null,
-      "variant": null,
-      "url": "/placeholder.jpg?height=200&width=300",
+      "asset_id": "sha-a98723c52383",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-power-washing/sha-a98723c52383/w1920.webp",
       "fallback": "/placeholder.jpg?height=200&width=300",
-      "alt": "House exterior washing",
-      "width": null,
-      "height": null,
-      "attribution": null,
-      "status": null
+      "alt": "Technician power washing a driveway on a sunny day",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "man-power-washing-driveway-on-a-sunny-day-2026-03-24-04-41-05-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "page.powerwashing.2": {
       "slot": "page.powerwashing.2",
@@ -904,6 +914,91 @@
       "height": 1280,
       "attribution": {
         "title": "worker-spraying-pesticide-onto-green-bush-outdoors-2026-01-07-15-33-30-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.pest.termite": {
+      "slot": "page.pest.termite",
+      "asset_id": "sha-9a459a99270d",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-9a459a99270d/w1920.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Termite inspection and treatment",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "worker-spraying-pesticide-onto-green-bush-outdoors-2026-01-07-15-33-30-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.pest.rodent": {
+      "slot": "page.pest.rodent",
+      "asset_id": "sha-45366ca03313",
+      "variant": "w800",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-trapping/sha-45366ca03313/w800.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Mouse captured in a trap",
+      "width": 800,
+      "height": 535,
+      "attribution": {
+        "title": "a-mouse-in-a-trap-looks-at-camera-2026-03-24-09-00-17-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.pest.exclusion": {
+      "slot": "page.pest.exclusion",
+      "asset_id": "sha-0fa92ce0b938",
+      "variant": "w800",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-exclusion/sha-0fa92ce0b938/w800.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Worker sealing a window for wildlife exclusion",
+      "width": 800,
+      "height": 533,
+      "attribution": {
+        "title": "worker-installing-window-insulation-indoors-during-2026-03-27-02-17-01-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.pest.trapping": {
+      "slot": "page.pest.trapping",
+      "asset_id": "sha-45366ca03313",
+      "variant": "w800",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-trapping/sha-45366ca03313/w800.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Mouse captured in a trap",
+      "width": 800,
+      "height": 535,
+      "attribution": {
+        "title": "a-mouse-in-a-trap-looks-at-camera-2026-03-24-09-00-17-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
+    },
+    "page.pest.bedbugs": {
+      "slot": "page.pest.bedbugs",
+      "asset_id": "sha-7f45c8b09070",
+      "variant": "w800",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/page-pest-bedbugs/sha-7f45c8b09070/w800.webp",
+      "fallback": "/placeholder.jpg?height=200&width=300",
+      "alt": "Technician inspecting a bed with a flashlight for bed bugs",
+      "width": 800,
+      "height": 534,
+      "attribution": {
+        "title": "man-inspecting-bed-with-flashlight-for-bed-bugs-2026-04-10-20-26-59-utc",
         "author": null,
         "envato_url": null,
         "envato_item_id": null
@@ -1026,15 +1121,20 @@
     },
     "page.services-all.powerwashing": {
       "slot": "page.services-all.powerwashing",
-      "asset_id": null,
-      "variant": null,
-      "url": "/placeholder.jpg?height=300&width=400",
+      "asset_id": "sha-a98723c52383",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-power-washing/sha-a98723c52383/w1920.webp",
       "fallback": "/placeholder.jpg?height=300&width=400",
-      "alt": "Power washing category",
-      "width": null,
-      "height": null,
-      "attribution": null,
-      "status": null
+      "alt": "Technician power washing a driveway on a sunny day",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "man-power-washing-driveway-on-a-sunny-day-2026-03-24-04-41-05-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "page.community.1": {
       "slot": "page.community.1",
@@ -1348,39 +1448,54 @@
     },
     "services.holiday-lights": {
       "slot": "services.holiday-lights",
-      "asset_id": null,
-      "variant": null,
-      "url": "/placeholder.jpg?height=480&width=720",
+      "asset_id": "sha-69f6fa3730a4",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-holiday-lights/sha-69f6fa3730a4/w1920.webp",
       "fallback": "/placeholder.jpg?height=480&width=720",
-      "alt": "Home exterior illuminated with holiday lights",
-      "width": null,
-      "height": null,
-      "attribution": null,
-      "status": null
+      "alt": "Brick house with Christmas lights at night",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "brick-house-with-christmas-lights-at-night-2026-03-24-00-32-14-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "services.snow-removal": {
       "slot": "services.snow-removal",
-      "asset_id": null,
-      "variant": null,
-      "url": "/placeholder.jpg?height=480&width=720",
+      "asset_id": "sha-f2ed0b115ef2",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-snow-removal/sha-f2ed0b115ef2/w1920.webp",
       "fallback": "/placeholder.jpg?height=480&width=720",
-      "alt": "Snow cleared from a residential driveway",
-      "width": null,
-      "height": null,
-      "attribution": null,
-      "status": null
+      "alt": "Tractor plowing snow after a winter storm",
+      "width": 1920,
+      "height": 1277,
+      "attribution": {
+        "title": "Tractor plows snow after a winter storm",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "services.commercial": {
       "slot": "services.commercial",
-      "asset_id": null,
-      "variant": null,
-      "url": "/placeholder.jpg?height=480&width=720",
+      "asset_id": "sha-4398ed96bbf2",
+      "variant": "w1920",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-commercial/sha-4398ed96bbf2/w1920.webp",
       "fallback": "/placeholder.jpg?height=480&width=720",
-      "alt": "Commercial property with maintained grounds",
-      "width": null,
-      "height": null,
-      "attribution": null,
-      "status": null
+      "alt": "Modern apartment building with landscaped hedges",
+      "width": 1920,
+      "height": 1280,
+      "attribution": {
+        "title": "modern-apartment-building-with-landscaped-hedges-a-2026-03-25-04-40-16-utc",
+        "author": null,
+        "envato_url": null,
+        "envato_item_id": null
+      },
+      "status": "published"
     },
     "pattern.leaf": {
       "slot": "pattern.leaf",
@@ -1492,69 +1607,69 @@
     },
     "careers.hero": {
       "slot": "careers.hero",
-      "asset_id": "env-ETDTNU6",
+      "asset_id": "env-ANENAST",
       "variant": "w1920",
-      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-ETDTNU6/w1920.webp",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-hero/env-ANENAST/w1920.webp",
       "fallback": "/placeholder.svg?height=720&width=1200",
-      "alt": "Lawn care worker mowing a residential lawn",
+      "alt": "Landscape crew standing together in front of a work truck",
       "width": 1920,
       "height": 1280,
       "attribution": {
-        "title": "Lawn care worker mows grass",
-        "author": "duallogic",
-        "envato_url": "https://elements.envato.com/lawn-care-worker-mows-grass-in-a-sunny-garden-duri-ETDTNU6",
-        "envato_item_id": "ETDTNU6"
+        "title": "Professionals Standing in Front of Heavy Transport Truck",
+        "author": "Mint_Images",
+        "envato_url": "https://elements.envato.com/mixed-race-team-of-workers-at-a-landscape-company--ANENAST",
+        "envato_item_id": "ANENAST"
       },
       "status": "published"
     },
     "careers.crew": {
       "slot": "careers.crew",
-      "asset_id": "sha-f22b5ee0b651",
+      "asset_id": "env-RL37PZY",
       "variant": "w1920",
-      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/w1920.webp",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-crew/env-RL37PZY/w1920.webp",
       "fallback": "/placeholder.svg?height=600&width=900",
-      "alt": "Field crew member trimming tall grass",
+      "alt": "Field crew member mowing a suburban lawn with a push mower",
       "width": 1920,
-      "height": 1280,
+      "height": 1281,
       "attribution": {
-        "title": "professional-landscaper-trimming-tall-grass-with-s-2026-07-09-19-44-04-utc",
-        "author": null,
-        "envato_url": null,
-        "envato_item_id": null
+        "title": "Adult Mowing a Green Lawn in the Suburbs",
+        "author": "MikeShots",
+        "envato_url": "https://elements.envato.com/gardener-worker-cutting-grass-with-mower-in-the-ba-RL37PZY",
+        "envato_item_id": "RL37PZY"
       },
       "status": "published"
     },
     "careers.equipment": {
       "slot": "careers.equipment",
-      "asset_id": "env-WL6S6J5",
+      "asset_id": "env-2KTRVRB",
       "variant": "w800",
-      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-mowing/env-WL6S6J5/w800.webp",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-equipment/env-2KTRVRB/w800.webp",
       "fallback": "/placeholder.svg?height=600&width=900",
-      "alt": "Commercial lawn mower on green grass",
+      "alt": "Operator driving commercial landscaping utility vehicle with trailer equipment",
       "width": 800,
-      "height": 534,
+      "height": 533,
       "attribution": {
-        "title": "Lawn mover on green grass",
-        "author": "erika8213",
-        "envato_url": "https://elements.envato.com/lawn-mover-on-green-grass-machine-for-cutting-lawn-WL6S6J5",
-        "envato_item_id": "WL6S6J5"
+        "title": "Utility Vehicle With Trailer For Landscaping Work On Green Lawn",
+        "author": "nikolast1",
+        "envato_url": "https://elements.envato.com/big-professional-riding-lawn-mower-with-an-operato-2KTRVRB",
+        "envato_item_id": "2KTRVRB"
       },
       "status": "published"
     },
     "careers.yard": {
       "slot": "careers.yard",
-      "asset_id": "env-J4XCY2H",
+      "asset_id": "env-D4R4EF5",
       "variant": "w1920",
-      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/env-J4XCY2H/w1920.webp",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/careers/careers-yard/env-D4R4EF5/w1920.webp",
       "fallback": "/placeholder.svg?height=600&width=900",
-      "alt": "Lawn care work in a suburban yard",
+      "alt": "Orange landscape work truck loaded with yard vegetation beside a paved path",
       "width": 1920,
-      "height": 1281,
+      "height": 1280,
       "attribution": {
-        "title": "Man pushing lawn mower",
-        "author": "Olena_Mykhaylova",
-        "envato_url": "https://elements.envato.com/man-pushing-lawn-mower-lawn-care-background-place--J4XCY2H",
-        "envato_item_id": "J4XCY2H"
+        "title": "Orange Truck with Vegetation in the Truck Bed",
+        "author": "Gorlovkv",
+        "envato_url": "https://elements.envato.com/municipal-professional-house-landscape-lawn-garden-D4R4EF5",
+        "envato_item_id": "D4R4EF5"
       },
       "status": "published"
     }

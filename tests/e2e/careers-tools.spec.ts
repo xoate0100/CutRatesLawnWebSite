@@ -20,7 +20,12 @@ test.describe("Careers portal tools", () => {
 
   test("schedule preview tabs switch days", async ({ page }) => {
     await page.goto("/careers")
-    await page.getByRole("tab", { name: "Wed" }).click()
+    const schedule = page.getByRole("heading", { name: /What could a normal week look like/i })
+    await schedule.scrollIntoViewIfNeeded()
+    const wed = page.getByRole("tab", { name: "Wed" })
+    await wed.scrollIntoViewIfNeeded()
+    await wed.click()
+    await expect(wed).toHaveAttribute("aria-selected", "true")
     await expect(page.getByRole("tabpanel")).toContainText(/Wed/i)
   })
 
@@ -42,10 +47,55 @@ test.describe("Careers portal tools", () => {
     expect(body.toLowerCase()).not.toContain("competitive pay")
     expect(body.toLowerCase()).not.toContain("work-life balance")
 
-    await page.getByLabel(/Full name/i).fill("Test Candidate")
-    await page.getByLabel(/Mobile number/i).fill("3165550100")
-    await page.getByRole("button", { name: /^Continue$/i }).click()
-    await expect(page.getByText(/2\.\s*Job/i)).toBeVisible()
+    const form = page.locator("#apply")
+    await form.scrollIntoViewIfNeeded()
+    await form.getByLabel(/^Full name$/i).fill("Test Candidate")
+    await form.getByLabel(/^Mobile number$/i).fill("3165550100")
+    await form.getByRole("button", { name: /^Continue$/i }).click()
+    await expect(form.getByText(/2\.\s*Job/i)).toBeVisible()
+  })
+
+  test("apply form posts to /api/lead with careers source", async ({ page }) => {
+    let leadBody: {
+      source?: string
+      phone?: string
+      message?: string
+    } | null = null
+    await page.route("**/api/lead", async (route) => {
+      leadBody = route.request().postDataJSON() as {
+        source?: string
+        phone?: string
+        message?: string
+      }
+      await route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify({ ok: true, requestId: "e2e-careers-1" }),
+      })
+    })
+
+    await page.goto("/careers")
+    const form = page.locator("#apply")
+    await form.scrollIntoViewIfNeeded()
+    await form.getByLabel(/^Full name$/i).fill("Test Candidate")
+    await form.getByLabel(/^Mobile number$/i).fill("3165550100")
+    await form.getByRole("button", { name: /^Continue$/i }).click()
+
+    await form.getByLabel(/^ZIP code$/i).fill("67202")
+    await form.getByRole("button", { name: /^Continue$/i }).click()
+
+    await form.getByLabel(/Availability/i).fill("Weekdays 6am–3pm")
+    await form.getByLabel(/Can you reliably reach/i).selectOption("Yes")
+    await form.getByRole("button", { name: /^Continue$/i }).click()
+
+    await form.getByRole("button", { name: /Submit application/i }).click()
+    await expect(page.getByText(/Application received/i)).toBeVisible()
+    await expect(page.getByText(/Reference: e2e-careers-1/i)).toBeVisible()
+
+    expect(leadBody).toBeTruthy()
+    expect(leadBody!.source).toBe("careers")
+    expect(leadBody!.phone).toBe("3165550100")
+    expect(String(leadBody!.message || "")).toMatch(/Availability/i)
   })
 
   test("mobile careers hero does not overflow document", async ({ page }) => {

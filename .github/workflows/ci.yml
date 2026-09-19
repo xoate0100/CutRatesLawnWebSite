@@ -25,11 +25,17 @@ jobs:
       - name: Generate AI context
         run: pnpm run agentic:context
 
+      - name: Typecheck
+        run: pnpm exec tsc --noEmit
+
+      - name: Lint
+        run: pnpm run lint
+
       - name: Verify (build + agentic gates)
         run: pnpm run verify
 
-      - name: Fail on critical npm advisories
-        run: pnpm audit --audit-level=critical || true
+      - name: Fail on high npm advisories
+        run: pnpm audit --audit-level=high
         continue-on-error: true
 
       - name: Start production server

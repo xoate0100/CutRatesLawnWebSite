@@ -55,6 +55,8 @@ export function SchedulePreview({ className }: { className?: string }) {
             type="button"
             role="tab"
             aria-selected={active === i}
+            aria-controls="careers-schedule-panel"
+            id={`careers-day-${d.day}`}
             className={cn(
               "min-w-[3rem] shrink-0 rounded-full px-3 py-2 text-sm font-bold",
               active === i ? "bg-forest text-lime" : "bg-cream text-ink",
@@ -65,7 +67,12 @@ export function SchedulePreview({ className }: { className?: string }) {
           </button>
         ))}
       </div>
-      <div className="mt-3 rounded-lg bg-cream px-4 py-3 text-sm text-ink" role="tabpanel">
+      <div
+        id="careers-schedule-panel"
+        className="mt-3 rounded-lg bg-cream px-4 py-3 text-sm text-ink"
+        role="tabpanel"
+        aria-labelledby={`careers-day-${DAYS[active].day}`}
+      >
         <strong>{DAYS[active].day}:</strong> {DAYS[active].label}
         <p className="mt-1 text-sage">{role.typicalHoursNote}</p>
       </div>

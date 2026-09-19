@@ -1,15 +1,13 @@
 import { SectionHead } from "@/components/ui/section-head"
-import { pageWrap, pageWrapMid } from "@/lib/layout"
-import {
-  BeforeAfterSlider,
-  CTASection,
-  Gallery,
-  InteriorHero,
-} from "@/components/blocks"
+import { pageWrap } from "@/lib/layout"
+import { CTASection, Gallery, InteriorHero } from "@/components/blocks"
+import { GoogleReviewsRotator } from "@/components/trust/google-reviews-rotator"
+import { PressFeature } from "@/components/trust/press-feature"
 
 export const metadata = {
   title: "Our Work",
-  description: "Before-and-after lawn and landscape projects from Cut Rates Lawn Care.",
+  description:
+    "Lawn, landscape, commercial, and pest-protection work from Cut Rates Lawn Care — Wichita to Kansas City.",
 }
 
 export default function OurWorkPage() {
@@ -17,8 +15,8 @@ export default function OurWorkPage() {
     <div className="bg-paper">
       <InteriorHero
         eyebrow="Portfolio"
-        title="Real yards. Local results."
-        description="Filter the gallery, then drag the slider — proof before you book."
+        title="Finished work on local properties."
+        description="Browse the kinds of jobs we run every week — lawn, landscape, commercial, and pest protection."
         mediaSlot="gallery.after"
       />
 
@@ -26,19 +24,15 @@ export default function OurWorkPage() {
         <SectionHead
           eyebrow="Gallery"
           title="Browse by category."
-          description="Lawn, hardscape, and commercial work across our service area."
+          description="Lawn, hardscape, commercial, landscaping, and pest protection."
         />
         <Gallery className="mt-8" />
       </section>
 
-      <section className="bg-cream py-[clamp(2.5rem,5vw,4.5rem)]">
-        <div className={`${pageWrapMid}`}>
-          <SectionHead
-            eyebrow="Compare"
-            title="Before and after."
-            align="center"
-          />
-          <BeforeAfterSlider className="mt-8" />
+      <section className={`${pageWrap} pb-[clamp(2.5rem,5vw,4.5rem)]`}>
+        <div className="grid gap-4 lg:grid-cols-2">
+          <GoogleReviewsRotator />
+          <PressFeature />
         </div>
       </section>
 

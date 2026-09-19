@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { Button } from "@/components/ui/button"
 
-export default function GlobalError({
+export default function Error({
   error,
   reset,
 }: {
@@ -11,30 +11,20 @@ export default function GlobalError({
   reset: () => void
 }) {
   useEffect(() => {
-    // Log the error directly to console
     console.error("Unhandled application error", error)
   }, [error])
 
   return (
-    <html>
-      <body>
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-          <div className="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-            <h2 className="text-2xl font-bold text-red-600 mb-4">Something went wrong!</h2>
-            <p className="text-gray-600 mb-6">
-              We're sorry, but an unexpected error occurred. Our team has been notified.
-            </p>
-            <div className="flex justify-center">
-              <Button
-                onClick={reset}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded"
-              >
-                Try again
-              </Button>
-            </div>
-          </div>
-        </div>
-      </body>
-    </html>
+    <div className="flex min-h-[50vh] items-center justify-center bg-paper p-6">
+      <div className="max-w-md text-center">
+        <h2 className="font-display text-2xl font-bold text-forest">Something went wrong</h2>
+        <p className="mt-3 text-sm text-sage">
+          We&apos;re sorry — an unexpected error occurred. You can try again.
+        </p>
+        <Button type="button" className="mt-6" onClick={reset}>
+          Try again
+        </Button>
+      </div>
+    </div>
   )
 }

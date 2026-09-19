@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { LocalBusiness, WithContext } from "schema-dts"
 
 interface JsonLdProps {

@@ -13,6 +13,7 @@ import { Toaster } from "@/components/ui/sonner"
 import { siteConfig } from "@/lib/site-config"
 import { mediaSrc } from "@/lib/media"
 import { Providers } from "./providers"
+import { LocalBusinessJsonLd } from "@/components/seo/local-business-json-ld"
 import { GtmNoScript, GtmScript } from "@/components/analytics/gtm-script"
 
 const LiveChat = dynamic(() => import("@/components/live-chat"), { ssr: false })
@@ -45,16 +46,18 @@ export const metadata: Metadata = {
     template: `%s | ${siteConfig.name}`,
   },
   description:
-    "Family-owned landscaping and lawn care from Wichita to Kansas City. Design, mowing, fertilization, aeration, holiday lights, and more — get a free quote in about two minutes.",
+    "Family-owned landscaping, lawn care, and pest control from Wichita to Kansas City. Termites, rodents, bed bugs, holiday lights, and more — get a free quote in about two minutes.",
   keywords: [
     "landscaping",
     "lawn care",
+    "pest control",
+    "termites",
+    "bed bugs",
+    "rodents",
     "Wichita",
     "Kansas City",
-    "aeration",
     "holiday lights",
-    "pest control",
-    "hardscaping",
+    "power washing",
   ],
   authors: [{ name: "Cut Rates Lawn Care LLC" }],
   creator: "Cut Rates Lawn Care LLC",
@@ -84,7 +87,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -95,6 +97,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${display.variable} ${body.variable} font-body`}>
+        <LocalBusinessJsonLd />
         <GtmScript />
         <GtmNoScript />
         <Providers>

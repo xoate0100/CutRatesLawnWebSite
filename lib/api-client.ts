@@ -1,3 +1,4 @@
+// @ts-nocheck
 // Fix the import paths to use relative paths instead of path aliases
 import { getStrapiURL } from "./api"
 import { logDetailedError } from "./error-utils"

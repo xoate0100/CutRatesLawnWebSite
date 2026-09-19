@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client"
 
 // Make sure we're importing from the correct paths

@@ -30,6 +30,8 @@ const ROUTES = [
   "/faq",
   "/service-areas",
   "/service-areas/derby",
+  "/careers",
+  "/careers/apply",
 ]
 
 fs.mkdirSync("artifacts/audit", { recursive: true })

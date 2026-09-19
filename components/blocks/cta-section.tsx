@@ -1,6 +1,7 @@
 import type { ReactNode } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
 
 export type CTASectionProps = {
@@ -8,6 +9,8 @@ export type CTASectionProps = {
   description?: string
   ctaHref?: string
   ctaLabel?: string
+  secondaryHref?: string
+  secondaryLabel?: string
   className?: string
 }
 
@@ -22,6 +25,8 @@ export function CTASection({
   description = "Free quote in about two minutes. Local crew, no contracts, done right.",
   ctaHref = "/quote",
   ctaLabel = "Get a fast quote",
+  secondaryHref = `tel:${siteConfig.phone.e164}`,
+  secondaryLabel = `Or call ${siteConfig.phone.display}`,
   className,
 }: CTASectionProps) {
   return (
@@ -40,11 +45,18 @@ export function CTASection({
           {title}
         </h2>
         <p className="mx-auto mt-3 max-w-[42ch] text-white/75">{description}</p>
-        <Button asChild variant="lime" size="lg" className="mt-6 max-w-full">
-          <Link href={ctaHref}>
-            {ctaLabel} <span aria-hidden>→</span>
-          </Link>
-        </Button>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <Button asChild variant="lime" size="lg" className="max-w-full">
+            <Link href={ctaHref}>
+              {ctaLabel} <span aria-hidden>→</span>
+            </Link>
+          </Button>
+          {secondaryHref && secondaryLabel ? (
+            <Button asChild variant="ghost" className="max-w-full text-white">
+              <a href={secondaryHref}>{secondaryLabel}</a>
+            </Button>
+          ) : null}
+        </div>
       </div>
     </section>
   )

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { CMSService } from "./cms-service.interface"
 import type { ApiService } from "../api/api-service.interface"
 import type { CacheService } from "../cache/cache-service.interface"

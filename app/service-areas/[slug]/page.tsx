@@ -10,7 +10,6 @@ import {
 import {
   getAreaBySlug,
   getAreaSlugs,
-  SERVICES,
   testimonialsForArea,
 } from "@/lib/marketing-content"
 import { AreaViewTracker } from "@/components/analytics/area-view-tracker"
@@ -72,7 +71,7 @@ export default function ServiceAreaSlugPage({ params }: Props) {
             eyebrow="Services in town"
             title={`What we offer in ${area.name}.`}
           />
-          <ServiceGrid services={SERVICES.slice(0, 7)} />
+          <ServiceGrid />
         </div>
       </section>
 

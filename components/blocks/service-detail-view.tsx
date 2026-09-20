@@ -12,10 +12,13 @@ import { getServiceDetail, type ServiceDetail } from "@/lib/marketing-content"
 
 export function ServiceDetailView({
   detail,
+  areaSlug,
 }: {
   detail: ServiceDetail
   galleryCategory?: string
+  areaSlug?: string
 }) {
+  const quoteHref = areaSlug ? `/quote/${detail.id}?area=${areaSlug}` : `/quote/${detail.id}`
   return (
     <div className="bg-paper">
       <InteriorHero
@@ -23,7 +26,7 @@ export function ServiceDetailView({
         title={detail.title}
         description={detail.longDescription}
         mediaSlot={detail.mediaSlot}
-        ctaHref={`/quote?service=${detail.id}`}
+        ctaHref={quoteHref}
         ctaLabel={detail.ctaLabel ?? "Get a quote"}
       />
 
@@ -90,7 +93,7 @@ export function ServiceDetailView({
           detail.ctaDescription ??
           "Free planning quote. Local crew. No contracts."
         }
-        ctaHref={`/quote?service=${detail.id}`}
+        ctaHref={quoteHref}
         ctaLabel={detail.ctaLabel ?? "Get a quote"}
       />
     </div>

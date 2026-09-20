@@ -8,7 +8,26 @@ export const ATTRIBUTION_KEYS = [
   "gclid",
 ] as const
 
+export const CLICK_ID_KEYS = ["gclid", "gbraid", "wbraid", "fbclid", "msclkid"] as const
+
+export const TOUCH_KEYS = [
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+  "gclid",
+  "gbraid",
+  "wbraid",
+  "fbclid",
+  "msclkid",
+  "landing_page",
+  "referrer",
+  "first_seen_at",
+] as const
+
 export type AttributionParams = Partial<Record<(typeof ATTRIBUTION_KEYS)[number], string>>
+export type TouchParams = Partial<Record<(typeof TOUCH_KEYS)[number], string>>
 
 export interface BaseAnalyticsEvent {
   event: string
@@ -18,6 +37,8 @@ export interface BaseAnalyticsEvent {
   page_location?: string
   session_id?: string
   device_type?: "desktop" | "mobile" | "tablet"
+  traffic_type?: "paid" | "organic" | "direct" | "referral" | "internal" | "unknown"
+  experiment_variant?: string
 }
 
 export interface PageViewEvent extends BaseAnalyticsEvent {
@@ -53,6 +74,46 @@ export interface ConversionLeadEvent extends BaseAnalyticsEvent {
   transaction_id: string
   conversion_value: number
   currency: string
+  service_id?: string
+  area_slug?: string
+}
+
+export interface FormStartEvent extends BaseAnalyticsEvent {
+  event: "form_start"
+  form_id: string
+}
+
+export interface FormFieldEngageEvent extends BaseAnalyticsEvent {
+  event: "form_field_engage"
+  form_id: string
+  field_name: string
+}
+
+export interface FormStepCompleteEvent extends BaseAnalyticsEvent {
+  event: "form_step_complete"
+  form_id: string
+  step_name: string
+  step_number: number
+}
+
+export interface FormAbandonEvent extends BaseAnalyticsEvent {
+  event: "form_abandon"
+  form_id: string
+  last_step?: string
+  last_field?: string
+}
+
+export interface PartialFormFillEvent extends BaseAnalyticsEvent {
+  event: "partial_form_fill"
+  form_id: string
+  last_step?: string
+}
+
+export interface FormErrorEvent extends BaseAnalyticsEvent {
+  event: "form_error"
+  form_id: string
+  field_name: string
+  error_type: string
 }
 
 export type AnalyticsEvent =
@@ -62,5 +123,20 @@ export type AnalyticsEvent =
   | FunnelStepViewEvent
   | PhoneClickEvent
   | ConversionLeadEvent
+  | FormStartEvent
+  | FormFieldEngageEvent
+  | FormStepCompleteEvent
+  | FormAbandonEvent
+  | PartialFormFillEvent
+  | FormErrorEvent
 
 export const CONVERSION_EVENTS = new Set(["conversion_lead", "lead_conversion", "conversion"])
+export const MARKETING_EVENTS = new Set(["conversion_lead", "lead_conversion", "conversion"])
+
+export const DATALAYER_CONTRACT_FIELDS = [
+  "event",
+  "page_path",
+  "timestamp",
+  "traffic_type",
+  "session_id",
+] as const

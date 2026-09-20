@@ -15,6 +15,8 @@ import { mediaSrc } from "@/lib/media"
 import { Providers } from "./providers"
 import { LocalBusinessJsonLd } from "@/components/seo/local-business-json-ld"
 import { GtmNoScript, GtmScript } from "@/components/analytics/gtm-script"
+import { ConsentBanner } from "@/components/consent/consent-banner"
+import { MarketingChrome } from "@/components/layout/marketing-chrome"
 
 const LiveChat = dynamic(() => import("@/components/live-chat"), { ssr: false })
 
@@ -101,12 +103,17 @@ export default function RootLayout({
         <GtmScript />
         <GtmNoScript />
         <Providers>
-          <AnnouncementMarquee />
-          <SiteHeader />
+          <MarketingChrome>
+            <AnnouncementMarquee />
+            <SiteHeader />
+          </MarketingChrome>
           <main className="relative z-0 pb-24 md:pb-0">{children}</main>
-          <SiteFooter />
-          <StickyQuoteBar />
-          <LiveChat />
+          <MarketingChrome>
+            <SiteFooter />
+            <StickyQuoteBar />
+            <LiveChat />
+          </MarketingChrome>
+          <ConsentBanner />
           <Toaster />
         </Providers>
       </body>

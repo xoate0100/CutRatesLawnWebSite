@@ -1,4 +1,5 @@
 import { ANNOUNCEMENT_ITEMS } from "@/lib/marketing-content"
+import { seasonalAnnouncement } from "@/lib/season"
 import { cn } from "@/lib/utils"
 
 export type AnnouncementMarqueeProps = {
@@ -10,7 +11,9 @@ export function AnnouncementMarquee({
   items = ANNOUNCEMENT_ITEMS,
   className,
 }: AnnouncementMarqueeProps) {
-  const doubled = [...items, ...items]
+  const seasonal = seasonalAnnouncement()
+  const base = seasonal ? [seasonal, ...items] : items
+  const doubled = [...base, ...base]
   return (
     <div
       className={cn(

@@ -6,6 +6,7 @@ import { siteConfig } from "@/lib/site-config"
 import { GOOGLE_MAPS_URL, GOOGLE_RATING_LABEL } from "@/lib/google-reviews"
 import { KWCH_FEATURE } from "@/lib/press"
 import { cn } from "@/lib/utils"
+import { AnalyticsPhoneLink } from "@/components/analytics/phone-link"
 
 const FOOTER_SERVICES = SERVICES.filter((s) =>
   ["landscaping", "lawn-care", "pest-control", "holiday-lights", "commercial", "power-washing"].includes(
@@ -97,9 +98,9 @@ export function SiteFooter({ className }: SiteFooterProps) {
             </p>
             <ul className="mt-3 space-y-2 text-sm text-white/80">
               <li>
-                <a href={`tel:${siteConfig.phone.e164}`} className="hover:text-lime">
+                <AnalyticsPhoneLink href={`tel:${siteConfig.phone.e164}`} location="footer" className="hover:text-lime">
                   {siteConfig.phone.display}
-                </a>
+                </AnalyticsPhoneLink>
               </li>
               <li>
                 <a href={`mailto:${siteConfig.email}`} className="hover:text-lime">

@@ -4,6 +4,7 @@ import { useState, type FormEvent } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { siteConfig } from "@/lib/site-config"
+import { trackConversionLead, trackFormStart } from "@/lib/analytics/core"
 
 type Status = "idle" | "submitting" | "success" | "error"
 
@@ -25,6 +26,7 @@ export function NewsletterSignup({ variant = "footer" }: { variant?: "footer" | 
     }
     setError(null)
     setStatus("submitting")
+    trackFormStart("newsletter")
 
     try {
       const res = await fetch("/api/newsletter", {
@@ -46,6 +48,7 @@ export function NewsletterSignup({ variant = "footer" }: { variant?: "footer" | 
       setStatus("success")
       setEmail("")
       setConsent(false)
+      trackConversionLead({ transactionId: crypto.randomUUID(), conversionValue: 0 })
     } catch {
       setStatus("error")
       setError(`Network error. Email us at ${siteConfig.email} instead.`)

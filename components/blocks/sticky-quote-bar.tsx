@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { useReducedMotion } from "@/hooks/use-reduced-motion"
+import { siteConfig } from "@/lib/site-config"
+import { trackPhoneClick } from "@/lib/analytics/core"
 import { cn } from "@/lib/utils"
 
 export type StickyQuoteBarProps = {
@@ -62,8 +64,13 @@ export function StickyQuoteBar({ className, threshold = 520 }: StickyQuoteBarPro
       aria-hidden={!visible}
     >
       {visible ? (
-        <div className="pointer-events-auto flex max-w-[min(18rem,calc(100vw-5.5rem))] items-center gap-2 rounded-full border border-line bg-paper/95 py-1.5 pl-3 pr-1.5 shadow-[0_12px_28px_-12px_rgba(11,58,30,0.45)] backdrop-blur">
+        <div className="pointer-events-auto flex max-w-[min(22rem,calc(100vw-5.5rem))] items-center gap-2 rounded-full border border-line bg-paper/95 py-1.5 pl-3 pr-1.5 shadow-[0_12px_28px_-12px_rgba(11,58,30,0.45)] backdrop-blur">
           <span className="min-w-0 truncate text-xs font-bold text-ink">Free quote · 2 min</span>
+          <Button asChild variant="outline" size="sm" className="shrink-0 shadow-none">
+            <a href={`tel:${siteConfig.phone.e164}`} onClick={() => trackPhoneClick("sticky_mobile")}>
+              Call
+            </a>
+          </Button>
           <Button asChild variant="lime" size="sm" className="shrink-0 shadow-none max-sm:shadow-none">
             <Link href="/quote">Quote →</Link>
           </Button>

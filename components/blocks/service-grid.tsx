@@ -2,6 +2,7 @@ import Link from "next/link"
 import { MediaFrame } from "@/components/media/media-frame"
 import { Tag } from "@/components/ui/tag"
 import { SERVICES, type ServiceItem } from "@/lib/marketing-content"
+import { orderServiceIds } from "@/lib/season"
 import { cn } from "@/lib/utils"
 
 export function ServiceCard({
@@ -36,12 +37,20 @@ export function ServiceCard({
         {service.tag ? <Tag className="mb-2">{service.tag}</Tag> : null}
         <h3 className="font-display text-[clamp(1.15rem,4vw,1.28rem)] font-bold">{service.title}</h3>
         <p className="mt-1.5 text-[0.94rem] text-sage">{service.description}</p>
-        <Link
-          href={service.href}
-          className="mt-3 inline-flex items-center gap-1.5 text-[0.9rem] font-bold text-green"
-        >
-          Learn more <span className="transition-transform group-hover:translate-x-1">→</span>
-        </Link>
+        <div className="mt-3 flex flex-wrap items-center gap-3">
+          <Link
+            href={service.href}
+            className="inline-flex items-center gap-1.5 text-[0.9rem] font-bold text-green"
+          >
+            Learn more <span className="transition-transform group-hover:translate-x-1">→</span>
+          </Link>
+          <Link
+            href={`/quote?service=${service.id}`}
+            className="inline-flex items-center gap-1.5 text-[0.9rem] font-bold text-forest"
+          >
+            Get a quote →
+          </Link>
+        </div>
       </div>
     </article>
   )
@@ -74,12 +83,17 @@ export function FeatureCard({
         {service.tag ? <Tag className="mb-3 self-start">{service.tag}</Tag> : null}
         <h3 className="font-display text-[clamp(1.35rem,4vw,1.7rem)] font-bold">{service.title}</h3>
         <p className="mt-2 text-sage">{service.description}</p>
-        <Link
-          href={service.href}
-          className="mt-4 inline-flex items-center gap-1.5 font-bold text-green"
-        >
-          Explore landscaping <span className="transition-transform group-hover:translate-x-1">→</span>
-        </Link>
+        <div className="mt-4 flex flex-wrap gap-3">
+          <Link
+            href={service.href}
+            className="inline-flex items-center gap-1.5 font-bold text-green"
+          >
+            Explore {service.title.split("&")[0].trim()} <span className="transition-transform group-hover:translate-x-1">→</span>
+          </Link>
+          <Link href={`/quote?service=${service.id}`} className="inline-flex items-center gap-1.5 font-bold text-forest">
+            Get a quote →
+          </Link>
+        </div>
       </div>
     </article>
   )
@@ -91,8 +105,9 @@ export type ServiceGridProps = {
 }
 
 export function ServiceGrid({ services = SERVICES, className }: ServiceGridProps) {
-  const featured = services.find((s) => s.featured) ?? services[0]
-  const rest = services.filter((s) => s.id !== featured.id)
+  const ordered = orderServiceIds(services)
+  const featured = ordered.find((s) => s.featured) ?? ordered[0]
+  const rest = ordered.filter((s) => s.id !== featured.id)
 
   return (
     <div className={cn("mt-8 grid gap-4 md:grid-cols-3", className)}>

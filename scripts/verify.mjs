@@ -41,6 +41,10 @@ check('Pricing estimator math', () => {
   execSync('pnpm run test:pricing', { cwd: root, stdio: 'pipe' });
 });
 
+check('CRO traffic + taxonomy', () => {
+  execSync('pnpm run test:analytics', { cwd: root, stdio: 'pipe' });
+});
+
 check('Careers paycheck math', () => {
   execSync('pnpm run test:careers-math', { cwd: root, stdio: 'pipe' });
 });

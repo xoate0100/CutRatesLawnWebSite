@@ -1,302 +1,338 @@
 "use client"
 
-import { useMemo, useState, useEffect, type FormEvent } from "react"
-import Link from "next/link"
-import { useSearchParams } from "next/navigation"
+import { useEffect, useMemo, useRef, useState, type FormEvent } from "react"
+import { useRouter, useSearchParams, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Slider } from "@/components/ui/slider"
-import { Textarea } from "@/components/ui/textarea"
+import { TurnstileField } from "@/components/forms/turnstile-field"
+import { ServicePicker } from "@/components/quote/service-picker"
+import { FieldRenderer } from "@/components/quote/field-renderer"
 import { siteConfig } from "@/lib/site-config"
 import {
   calculateEstimate,
+  LAWN_SIZE_UI,
   type EstimateResult,
   type Frequency,
+  type MowTier,
   type PropertyType,
   type ServiceType,
 } from "@/lib/pricing/estimate"
 import { useAnalytics } from "@/hooks/useAnalytics"
-import { TurnstileField } from "@/components/forms/turnstile-field"
+import { getAttributionPayload } from "@/lib/analytics/core"
+import {
+  mergeFunnelParams,
+  parseFunnelSearch,
+  readStoredFunnelParams,
+  writeStoredFunnelParams,
+} from "@/lib/funnel/params"
+import {
+  GHL_SERVICE_LABELS,
+  getQuoteService,
+  isEstimable,
+  resolveQuoteService,
+  type QuoteCategoryId,
+  type QuoteServiceId,
+} from "@/lib/quote/taxonomy"
+import { SHARED_FIELDS, fieldsForService, IDENTITY_FIELDS, crmKeysForService } from "@/lib/quote/service-schema"
+import { areaLabel, qualifyAddress } from "@/lib/quote/qualify-area"
+import { isValidMobile, maskUsPhone, normalizeE164, splitName } from "@/lib/quote/identity"
 
-type Step = "details" | "estimate" | "contact" | "done"
-
-const ESTIMATE_LABELS: Record<ServiceType, string> = {
-  mowing: "Lawn Mowing",
-  fertilization: "Fertilization",
-  "weed-control": "Weed Control",
-  "full-service": "Full Service Lawn Care",
-}
-
-const CONSULT_LABELS = {
-  "pest-control": "Pest Control",
-  termites: "Termite Protection",
-  rodents: "Rodent Control",
-  exclusions: "Pest Exclusions",
-  trapping: "Wildlife Trapping",
-  bedbugs: "Bed Bug Treatment",
-  landscaping: "Landscaping",
-  planting: "Planting & Beds",
-  irrigation: "Irrigation",
-  "landscape-maintenance": "Landscape Maintenance",
-  "holiday-lights": "Holiday Lights",
-  "take-down": "Holiday Light Take-down",
-  "commercial-lights": "Commercial Holiday Lights",
-  "snow-removal": "Snow Removal",
-  "commercial-snow": "Commercial Snow Removal",
-  "seasonal-snow": "Seasonal Snow Contract",
-  "power-washing": "Power Washing",
-  driveway: "Driveway Power Washing",
-  siding: "Siding & Exterior Wash",
-  decks: "Deck & Fence Wash",
-  commercial: "Commercial Maintenance",
-  "landscape-beds": "Commercial Beds & Grounds",
-  "multi-property": "Multi-property Maintenance",
-  hardscaping: "Hardscaping",
-  patio: "Patio",
-  walkways: "Walks & Steps",
-  "retaining-walls": "Retaining Walls",
-  aeration: "Aeration & Overseeding",
-  overseeding: "Overseeding",
-  "gutter-cleaning": "Gutter Cleaning",
-  "flow-check": "Gutter Flow Check",
-  residential: "Residential Package",
-} as const
-
-type ConsultService = keyof typeof CONSULT_LABELS
-type QuoteService = ServiceType | ConsultService
-
-const SERVICE_LABELS: Record<QuoteService, string> = {
-  ...ESTIMATE_LABELS,
-  ...CONSULT_LABELS,
-}
-
-function isEstimateService(value: string): value is ServiceType {
-  return value in ESTIMATE_LABELS
-}
-
-/** Map marketing /services/[slug] query values onto quote keys. */
-function serviceFromQuery(raw: string | null): QuoteService | "" {
-  if (!raw) return ""
-  const key = raw.trim().toLowerCase()
-  const map: Record<string, QuoteService> = {
-    mowing: "mowing",
-    "lawn-mowing": "mowing",
-    "lawn-care": "mowing",
-    fertilization: "fertilization",
-    fertilizing: "fertilization",
-    "weed-control": "weed-control",
-    weeds: "weed-control",
-    "full-service": "full-service",
-    "full-service-lawn-care": "full-service",
-    "pest-control": "pest-control",
-    pest: "pest-control",
-    termites: "termites",
-    termite: "termites",
-    rodents: "rodents",
-    rodent: "rodents",
-    exclusions: "exclusions",
-    exclusion: "exclusions",
-    trapping: "trapping",
-    bedbugs: "bedbugs",
-    "bed-bugs": "bedbugs",
-    landscaping: "landscaping",
-    planting: "planting",
-    irrigation: "irrigation",
-    "landscape-maintenance": "landscape-maintenance",
-    "holiday-lights": "holiday-lights",
-    "holiday-lighting": "holiday-lights",
-    "take-down": "take-down",
-    takedown: "take-down",
-    "commercial-lights": "commercial-lights",
-    "snow-removal": "snow-removal",
-    snow: "snow-removal",
-    "driveway-snow": "snow-removal",
-    "commercial-snow": "commercial-snow",
-    "seasonal-snow": "seasonal-snow",
-    "power-washing": "power-washing",
-    driveway: "driveway",
-    siding: "siding",
-    decks: "decks",
-    commercial: "commercial",
-    "landscape-beds": "landscape-beds",
-    "multi-property": "multi-property",
-    "weekly-mowing": "commercial",
-    "snow-add-on": "commercial-snow",
-    hardscaping: "hardscaping",
-    patio: "patio",
-    walkways: "walkways",
-    "retaining-walls": "retaining-walls",
-    "outdoor-living": "hardscaping",
-    aeration: "aeration",
-    "core-aeration": "aeration",
-    overseeding: "overseeding",
-    "gutter-cleaning": "gutter-cleaning",
-    "flow-check": "flow-check",
-    "gutter-clean": "gutter-cleaning",
-    residential: "residential",
-    "full-yard": "full-service",
-    "seasonal-add-ons": "residential",
-    "pest-add-on": "pest-control",
-  }
-  return map[key] ?? ""
-}
+type Step = "service" | "details" | "estimate" | "contact"
 
 function newIdempotencyKey() {
   if (typeof crypto !== "undefined" && crypto.randomUUID) return crypto.randomUUID()
   return `quote-${Date.now()}-${Math.random().toString(16).slice(2)}`
 }
 
-export function QuoteFunnel() {
-  const searchParams = useSearchParams()
-  const { onFunnelStep, onConversionLead } = useAnalytics()
-  const [step, setStep] = useState<Step>("details")
-  const [propertyType, setPropertyType] = useState<PropertyType>("residential")
-  const [serviceType, setServiceType] = useState<QuoteService | "">(() =>
-    serviceFromQuery(searchParams.get("service")),
+function consultExpectation(id: QuoteServiceId): { title: string; body: string; starting?: string } {
+  const map: Partial<Record<QuoteServiceId, { title: string; body: string; starting?: string }>> = {
+    termites: {
+      title: "On-site termite plan",
+      body: "We look at the foundation and activity, then confirm a treatment plan — usually within one business day.",
+    },
+    landscaping: {
+      title: "Design / build walkthrough",
+      body: "A crew lead will confirm scope from your photos and budget band. Typical start: Essentials landscaping from published bundle pricing.",
+      starting: "from $129/mo packages or a custom project quote",
+    },
+    "snow-removal": {
+      title: "Route check before the next freeze",
+      body: "We confirm driveway/lot size and trigger depth, then put you on the route. Per-push or seasonal.",
+    },
+    "holiday-lights": {
+      title: "Roofline measure",
+      body: "We’ll confirm linear footage, stories, and whether we supply lights. Install windows fill up in fall.",
+    },
+  }
+  return (
+    map[id] || {
+      title: "We’ll confirm the job on the property",
+      body: "This isn’t a lawn-size calculator. Share a few details and we text a real plan — usually the same day.",
+    }
   )
-  const [lawnSize, setLawnSize] = useState(2000)
-  const [frequency, setFrequency] = useState<Frequency>("weekly")
-  const [quote, setQuote] = useState<EstimateResult | null>(null)
-  const [detailsError, setDetailsError] = useState<string | null>(null)
+}
 
-  const [contact, setContact] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    address: "",
-    notes: "",
-    companyWebsite: "",
+export function QuoteFunnel() {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+  const pathname = usePathname()
+  const analytics = useAnalytics()
+  const engaged = useRef<Set<string>>(new Set())
+  const lastField = useRef("")
+  const started = useRef(false)
+  const submitted = useRef(false)
+
+  const initial = useMemo(() => {
+    const pathSvc = pathname?.match(/\/(?:quote|lp)\/([^/?]+)/)?.[1] || ""
+    const url = parseFunnelSearch(searchParams.toString())
+    const stored = readStoredFunnelParams()
+    return mergeFunnelParams(stored, url, { service: pathSvc })
+  }, [searchParams, pathname])
+
+  const resolved = resolveQuoteService(initial.service || initial.subservice)
+  const [category, setCategory] = useState<QuoteCategoryId | "">(
+    () => getQuoteService(resolved)?.category ?? "",
+  )
+  const [serviceId, setServiceId] = useState<QuoteServiceId | "">(resolved)
+  const [step, setStep] = useState<Step>(() => {
+    if (resolved && isEstimable(resolved) && initial.size && initial.property && initial.frequency) return "estimate"
+    if (resolved) return "details"
+    return "service"
   })
-  const [contactErrors, setContactErrors] = useState<Record<string, string>>({})
+  const [values, setValues] = useState<Record<string, string>>(() => ({
+    propertyType: initial.property || "residential",
+    lawnSizeSqFt: initial.size || String(LAWN_SIZE_UI.defaultValue),
+    frequency: initial.frequency || "weekly",
+    mowTier: initial.tier || "standard",
+    address: "",
+  }))
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [quote, setQuote] = useState<EstimateResult | null>(null)
+  const [areaSlug, setAreaSlug] = useState(initial.area)
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState<string | null>(null)
-  const [requestId, setRequestId] = useState<string | null>(null)
   const [idempotencyKey, setIdempotencyKey] = useState(newIdempotencyKey)
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const [partialSent, setPartialSent] = useState(false)
 
-  const stepIndex = useMemo(() => {
-    if (step === "details") return 1
-    if (step === "estimate") return 2
-    if (step === "contact") return 3
-    return 4
-  }, [step])
+  const def = serviceId ? getQuoteService(serviceId) : undefined
+  const serviceFields = serviceId ? fieldsForService(serviceId) : []
+  const estimable = serviceId ? isEstimable(serviceId) : false
+
+  const steps = useMemo(() => {
+    const list: { id: Step; label: string }[] = [{ id: "service", label: "Service" }]
+    list.push({ id: "details", label: "Property" })
+    if (estimable) list.push({ id: "estimate", label: "Estimate" })
+    list.push({ id: "contact", label: "Your details" })
+    return list
+  }, [estimable])
+
+  const stepIndex = Math.max(1, steps.findIndex((s) => s.id === step) + 1)
 
   useEffect(() => {
-    const stepNames: Record<Step, string> = {
-      details: "details",
-      estimate: "estimate",
-      contact: "contact",
-      done: "done",
-    }
-    onFunnelStep("quote", stepNames[step], stepIndex)
-  }, [step, stepIndex, onFunnelStep])
+    writeStoredFunnelParams({
+      service: serviceId,
+      area: areaSlug,
+      size: values.lawnSizeSqFt,
+      property: values.propertyType,
+      frequency: values.frequency,
+      tier: values.mowTier,
+    })
+  }, [serviceId, areaSlug, values.lawnSizeSqFt, values.propertyType, values.frequency, values.mowTier])
 
-  const calculateQuote = () => {
-    if (!serviceType) {
-      setDetailsError("Select a service type.")
-      return
+  useEffect(() => {
+    analytics.onFunnelStep("quote", step, stepIndex)
+    analytics.onFormStepComplete("quote", step, stepIndex)
+  }, [step, stepIndex, analytics])
+
+  useEffect(() => {
+    if (step === "estimate" && estimable && serviceId && !quote) {
+      computeEstimate()
     }
-    if (!isEstimateService(serviceType)) {
-      setDetailsError(null)
-      setQuote({
-        amount: 0,
-        unit: "per visit",
-        displayAmount: "Custom quote",
-        notes: [
-          "This service is quoted after a look at the property — not a lawn-size calculator.",
-          "Share a few details and we’ll confirm a real plan.",
-        ],
-      })
-      setStep("contact")
-      return
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
+    const onHide = () => {
+      if (submitted.current) return
+      if (!started.current) return
+      analytics.onFormAbandon("quote", step, lastField.current)
     }
+    document.addEventListener("visibilitychange", onHide)
+    window.addEventListener("pagehide", onHide)
+    return () => {
+      document.removeEventListener("visibilitychange", onHide)
+      window.removeEventListener("pagehide", onHide)
+    }
+  }, [analytics, step])
+
+  function engage(name: string) {
+    lastField.current = name
+    if (!started.current) {
+      started.current = true
+      analytics.onFormStart("quote")
+    }
+    if (!engaged.current.has(name)) {
+      engaged.current.add(name)
+      analytics.onFormFieldEngage("quote", name)
+    }
+  }
+
+  function setVal(key: string, v: string) {
+    engage(key)
+    if (key === "phone") v = maskUsPhone(v)
+    setValues((prev) => ({ ...prev, [key]: v }))
+    if (key === "address") {
+      const q = qualifyAddress(v, areaSlug)
+      if (q.matchedSlug) setAreaSlug(q.matchedSlug)
+    }
+  }
+
+  function computeEstimate(): EstimateResult | null {
+    if (!serviceId || !isEstimable(serviceId)) return null
     const outcome = calculateEstimate({
-      propertyType,
-      serviceType,
-      lawnSizeSqFt: lawnSize,
-      frequency,
+      propertyType: (values.propertyType as PropertyType) || "residential",
+      serviceType: serviceId as ServiceType,
+      lawnSizeSqFt: Number(values.lawnSizeSqFt) || LAWN_SIZE_UI.defaultValue,
+      frequency: (values.frequency as Frequency) || "weekly",
+      mowTier: (values.mowTier as MowTier) || "standard",
     })
     if (!outcome.ok) {
-      setDetailsError(outcome.error)
-      setQuote(null)
-      return
+      setErrors({ lawnSizeSqFt: outcome.error })
+      analytics.onFormError("quote", "lawnSizeSqFt", "estimate")
+      return null
     }
-    setDetailsError(null)
     setQuote(outcome.result)
-    setStep("estimate")
+    setErrors({})
+    return outcome.result
   }
 
-  const validateContact = () => {
-    const errors: Record<string, string> = {}
-    if (!contact.firstName.trim()) errors.firstName = "First name is required"
-    if (!contact.lastName.trim()) errors.lastName = "Last name is required"
-    if (!contact.email.trim()) errors.email = "Email is required"
-    else if (!/^\S+@\S+\.\S+$/.test(contact.email)) errors.email = "Invalid email format"
-    if (!contact.phone.trim()) errors.phone = "Phone helps us confirm your quote"
-    return errors
+  function validateFields(keys: string[]): Record<string, string> {
+    const next: Record<string, string> = {}
+    const all = [...SHARED_FIELDS.filter((f) => f.key === "address"), ...serviceFields]
+    for (const f of all) {
+      if (!keys.includes(f.key) && f.key !== "address") continue
+      if (f.required && !String(values[f.key] || "").trim()) {
+        next[f.key] = "Required"
+        analytics.onFormError("quote", f.key, "required")
+      }
+    }
+    if (keys.includes("address") && !String(values.address || "").trim()) {
+      next.address = "Service address helps us route the crew"
+      analytics.onFormError("quote", "address", "required")
+    }
+    return next
   }
 
-  const submitLead = async (e: FormEvent) => {
-    e.preventDefault()
-    if (!serviceType) return
-    const errors = validateContact()
-    if (Object.keys(errors).length > 0) {
-      setContactErrors(errors)
+  function goFromDetails() {
+    const keys = ["address", ...serviceFields.filter((f) => f.required).map((f) => f.key)]
+    const next = validateFields(keys)
+    if (Object.keys(next).length) {
+      setErrors(next)
+      document.getElementById("quote-error-summary")?.focus()
       return
     }
-    setContactErrors({})
+    setErrors({})
+    if (estimable) {
+      const r = computeEstimate()
+      if (r) setStep("estimate")
+    } else {
+      setQuote(null)
+      setStep("contact")
+    }
+  }
+
+  async function postLead(status: "complete" | "partial") {
+    if (!serviceId) return { ok: false as const, error: "Pick a service" }
+    const { firstName, lastName } = splitName(values.name || "")
+    const phone = normalizeE164(values.phone || "")
+    const attr = getAttributionPayload()
+    const allowed = crmKeysForService(serviceId)
+    const serviceDetails: Record<string, string> = {}
+    for (const [k, v] of Object.entries(values)) {
+      if (!v) continue
+      if (allowed.has(k) || k === "urgency" || k === "heardAboutUs" || k === "address") {
+        serviceDetails[k] = v
+      }
+    }
+    const qualified = qualifyAddress(values.address || "", areaSlug)
+    const body: Record<string, unknown> = {
+      firstName: firstName || "Guest",
+      lastName,
+      email: values.email?.trim() || `quote.${phone.replace(/\D/g, "").slice(-10) || "unknown"}@leads.cutrateslawn.com`,
+      phone,
+      service: GHL_SERVICE_LABELS[serviceId],
+      message: values.notes || `Quote request for ${GHL_SERVICE_LABELS[serviceId]}.`,
+      source: "quote",
+      idempotencyKey,
+      companyWebsite: values.companyWebsite || "",
+      turnstileToken: turnstileToken || undefined,
+      address: values.address,
+      areaSlug: qualified.matchedSlug || areaSlug || undefined,
+      serviceId,
+      leadStatus: status,
+      qualifiedArea: qualified.qualified,
+      pagePath: attr.pagePath,
+      sessionId: attr.sessionId,
+      deviceType: attr.deviceType,
+      firstTouch: attr.firstTouch,
+      lastTouch: attr.lastTouch,
+      serviceDetails,
+      urgency: values.urgency,
+      heardAboutUs: values.heardAboutUs,
+    }
+    if (estimable && quote) {
+      body.estimateAmount = quote.amount
+      body.estimateUnit = quote.unit
+      body.lawnSizeSqFt = Number(values.lawnSizeSqFt)
+      body.propertyType = values.propertyType
+      body.frequency = values.frequency
+    }
+    const res = await fetch("/api/lead", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+    })
+    const data = (await res.json()) as { ok?: boolean; error?: string; requestId?: string; queued?: boolean }
+    return { ok: res.ok && data.ok !== false, error: data.error, requestId: data.requestId, status: res.status }
+  }
+
+  async function maybePartial() {
+    if (partialSent) return
+    if (!isValidMobile(values.phone || "") || !(values.name || "").trim()) return
+    setPartialSent(true)
+    analytics.onPartialFormFill("quote", step)
+    try {
+      await postLead("partial")
+    } catch {
+      setPartialSent(false)
+    }
+  }
+
+  async function submitLead(e: FormEvent) {
+    e.preventDefault()
+    if (!serviceId) return
+    const next: Record<string, string> = {}
+    if (!(values.name || "").trim()) next.name = "Name is required"
+    if (!isValidMobile(values.phone || "")) next.phone = "Mobile number is required"
+    if (Object.keys(next).length) {
+      setErrors(next)
+      document.getElementById("quote-error-summary")?.focus()
+      return
+    }
     setSubmitting(true)
     setSubmitError(null)
-
     try {
-      const res = await fetch("/api/lead", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName: contact.firstName,
-          lastName: contact.lastName,
-          email: contact.email,
-          phone: contact.phone,
-          service: SERVICE_LABELS[serviceType],
-          message: contact.notes || `Quote funnel request for ${SERVICE_LABELS[serviceType]}.`,
-          source: "quote",
-          idempotencyKey,
-          companyWebsite: contact.companyWebsite,
-          turnstileToken: turnstileToken || undefined,
-          estimateAmount: quote?.amount || undefined,
-          estimateUnit: quote?.unit || undefined,
-          lawnSizeSqFt: lawnSize,
-          propertyType,
-          frequency,
-          address: contact.address || undefined,
-        }),
-      })
-      const data = (await res.json()) as {
-        ok?: boolean
-        error?: string
-        requestId?: string
-      }
-      setRequestId(data.requestId ?? null)
-      if (!res.ok || !data.ok) {
-        setSubmitError(
-          data.error ||
-            `We could not send your request automatically. Please call ${siteConfig.phone.display}.`,
-        )
-        setSubmitting(false)
+      const result = await postLead("complete")
+      if (!result.ok) {
+        setSubmitError(result.error || `We could not send this automatically. Call ${siteConfig.phone.display}.`)
         return
       }
-      setStep("done")
-      onConversionLead(
-        data.requestId ?? idempotencyKey,
-        quote?.amount ?? 0,
-        "USD",
-      )
+      submitted.current = true
       setIdempotencyKey(newIdempotencyKey())
+      router.push(
+        `/thank-you/${serviceId}?rid=${encodeURIComponent(result.requestId || "")}&area=${encodeURIComponent(areaSlug)}&amt=${quote?.amount ?? 0}`,
+      )
     } catch {
       setSubmitError(`Network error. Please call ${siteConfig.phone.display}.`)
     } finally {
@@ -304,133 +340,127 @@ export function QuoteFunnel() {
     }
   }
 
+  const errorList = Object.entries(errors)
+
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <nav
-        aria-label="Quote progress"
-        className="flex flex-wrap items-center justify-center gap-1.5 text-xs text-muted-foreground sm:gap-2 sm:text-sm"
-      >
-        {["Details", "Estimate", "Contact", "Done"].map((label, i) => {
+      <nav aria-label="Quote progress" className="flex flex-wrap items-center justify-center gap-1.5 text-xs sm:text-sm">
+        {steps.map((s, i) => {
           const n = i + 1
-          const active = stepIndex === n
-          const complete = stepIndex > n
+          const active = step === s.id
+          const complete = steps.findIndex((x) => x.id === step) > i
           return (
             <span
-              key={label}
-              className={`rounded-full px-2.5 py-1 whitespace-nowrap sm:px-3 ${
-                active ? "bg-primary text-primary-foreground" : complete ? "bg-primary/15 text-primary" : "bg-muted"
-              }`}
+              key={s.id}
+              className={`rounded-full px-2.5 py-1 ${active ? "bg-primary text-primary-foreground" : complete ? "bg-primary/15 text-primary" : "bg-muted"}`}
             >
-              {n}. {label}
+              {n}. {s.label}
             </span>
           )
         })}
       </nav>
 
-      {step === "details" && (
+      {areaSlug ? (
+        <p className="text-center text-sm font-semibold text-sage">Serving {areaLabel(areaSlug)}, KS</p>
+      ) : null}
+
+      {errorList.length ? (
+        <div
+          id="quote-error-summary"
+          tabIndex={-1}
+          role="alert"
+          className="rounded-xl border border-red-200 bg-red-50 p-3 text-sm text-red-800"
+        >
+          Please fix: {errorList.map(([k, v]) => `${k} (${v})`).join("; ")}
+        </div>
+      ) : null}
+
+      {step === "service" && (
         <Card>
           <CardHeader>
-            <CardTitle>Tell us about your property</CardTitle>
+            <CardTitle>What do you need?</CardTitle>
+            <CardDescription>Pick a category, then the specific job. Takes a few taps.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ServicePicker
+              category={category}
+              onCategory={(id) => {
+                engage("category")
+                setCategory(id)
+              }}
+              onService={(svc) => {
+                engage("service")
+                setServiceId(svc.id)
+                setCategory(svc.category)
+                setStep("details")
+              }}
+            />
+          </CardContent>
+        </Card>
+      )}
+
+      {step === "details" && def && (
+        <Card>
+          <CardHeader>
+            <CardTitle>{def.label}</CardTitle>
             <CardDescription>
-              Lawn care gets an instant planning number. Pest control, lights, snow, and other jobs are quoted after we
-              look at the property.
+              {estimable
+                ? "Lawn care gets an instant planning number from our published rates."
+                : consultExpectation(def.id).body}
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div>
-              <Label>Property Type</Label>
-              <RadioGroup value={propertyType} onValueChange={(v) => setPropertyType(v as PropertyType)}>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="residential" id="residential" />
-                  <Label htmlFor="residential">Residential</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="commercial" id="commercial" />
-                  <Label htmlFor="commercial">Commercial</Label>
-                </div>
-              </RadioGroup>
-            </div>
-
-            <div>
-              <Label htmlFor="service-type">Service Type</Label>
-              <Select value={serviceType} onValueChange={(v) => setServiceType(v as QuoteService)}>
-                <SelectTrigger id="service-type">
-                  <SelectValue placeholder="Select a service" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Object.entries(SERVICE_LABELS).map(([value, label]) => (
-                    <SelectItem key={value} value={value}>
-                      {label}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
-
-            {(!serviceType || isEstimateService(serviceType)) && (
-              <>
-            <div>
-              <Label>Lawn Size (sq ft)</Label>
-              <Slider
-                min={500}
-                max={10000}
-                step={100}
-                value={[lawnSize]}
-                onValueChange={(value) => setLawnSize(value[0])}
+          <CardContent className="space-y-5">
+            {SHARED_FIELDS.filter((f) => f.key === "address").map((f) => (
+              <FieldRenderer
+                key={f.key}
+                field={f}
+                value={values[f.key] || ""}
+                error={errors[f.key]}
+                onChange={(v) => setVal(f.key, v)}
+                onEngage={() => engage(f.key)}
               />
-              <div className="mt-2 text-center">{lawnSize} sq ft</div>
-            </div>
-
-            <div>
-              <Label>Service Frequency</Label>
-              <RadioGroup value={frequency} onValueChange={(v) => setFrequency(v as Frequency)}>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="weekly" id="weekly" />
-                  <Label htmlFor="weekly">Weekly</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="biweekly" id="biweekly" />
-                  <Label htmlFor="biweekly">Bi-weekly</Label>
-                </div>
-              </RadioGroup>
-            </div>
-              </>
-            )}
-
-            {detailsError && (
-              <p role="alert" className="text-sm text-red-600">
-                {detailsError}
-              </p>
-            )}
+            ))}
+            {serviceFields.map((f) => (
+              <FieldRenderer
+                key={f.key}
+                field={f}
+                value={values[f.key] || (f.key === "lawnSizeSqFt" ? String(LAWN_SIZE_UI.defaultValue) : "")}
+                error={errors[f.key]}
+                onChange={(v) => setVal(f.key, v)}
+                onEngage={() => engage(f.key)}
+              />
+            ))}
           </CardContent>
-          <CardFooter>
-            <Button onClick={calculateQuote} className="w-full">
-              {serviceType && !isEstimateService(serviceType)
-                ? "Request a quote"
-                : "Calculate Estimate"}
+          <CardFooter className="flex gap-3">
+            <Button type="button" variant="outline" className="w-full" onClick={() => setStep("service")}>
+              Back
+            </Button>
+            <Button className="w-full" onClick={goFromDetails}>
+              {estimable ? "Calculate Estimate" : "Continue"}
             </Button>
           </CardFooter>
         </Card>
       )}
 
-      {step === "estimate" && quote && (
+      {step === "estimate" && quote && def && (
         <Card>
           <CardHeader>
-            <CardTitle>Your planning estimate</CardTitle>
-            <CardDescription>Not a binding price — we confirm after reviewing your property.</CardDescription>
+            <CardTitle>Planning estimate</CardTitle>
+            <CardDescription>Not a final invoice — we confirm after we see the property.</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <p className="text-center text-3xl font-bold">{quote.displayAmount}</p>
-            <ul className="space-y-1 text-center text-sm text-muted-foreground">
-              {quote.notes.map((note) => (
-                <li key={note}>{note}</li>
+          <CardContent>
+            <p className="font-display text-3xl font-bold">{quote.displayAmount}</p>
+            <p className="mt-2 text-sm text-sage">
+              {GHL_SERVICE_LABELS[def.id]} · {values.propertyType} · {Number(values.lawnSizeSqFt).toLocaleString()} sq ft ·{" "}
+              {values.frequency}
+            </p>
+            <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-sage">
+              {quote.notes.map((n) => (
+                <li key={n}>{n}</li>
               ))}
             </ul>
-            <p className="text-center text-sm text-muted-foreground">
-              {SERVICE_LABELS[serviceType as ServiceType]} · {propertyType} · {lawnSize} sq ft · {frequency}
-            </p>
           </CardContent>
-          <CardFooter className="flex flex-col gap-3 sm:flex-row">
+          <CardFooter className="flex gap-3">
             <Button variant="outline" className="w-full" onClick={() => setStep("details")}>
               Back
             </Button>
@@ -441,111 +471,71 @@ export function QuoteFunnel() {
         </Card>
       )}
 
-      {step === "contact" && quote && (
+      {step === "contact" && def && (
         <Card>
           <CardHeader>
-            <CardTitle>Where should we send your quote?</CardTitle>
-            <CardDescription>
-              We’ll send your estimate and details to our team so they can confirm pricing and follow up.
-            </CardDescription>
+            <CardTitle>Where should we text you?</CardTitle>
+            <CardDescription>Name + mobile is enough. Email is optional.</CardDescription>
           </CardHeader>
           <form onSubmit={submitLead}>
             <CardContent className="space-y-4">
-              <p className="rounded-md bg-muted px-3 py-2 text-sm">
-                Estimate on file: <strong>{quote.displayAmount}</strong>
-              </p>
-              <div className="grid gap-4 sm:grid-cols-2">
-                <div>
-                  <Label htmlFor="firstName">First Name</Label>
-                  <Input
-                    id="firstName"
-                    name="firstName"
-                    value={contact.firstName}
-                    onChange={(e) => setContact({ ...contact, firstName: e.target.value })}
-                    autoComplete="given-name"
-                  />
-                  {contactErrors.firstName && (
-                    <p className="mt-1 text-sm text-red-600">{contactErrors.firstName}</p>
-                  )}
+              {!estimable ? (
+                <div className="rounded-md bg-muted px-3 py-2 text-sm">
+                  <strong>{consultExpectation(def.id).title}.</strong> {consultExpectation(def.id).body}
+                  {consultExpectation(def.id).starting ? (
+                    <span className="block mt-1">Starting at: {consultExpectation(def.id).starting}</span>
+                  ) : null}
                 </div>
-                <div>
-                  <Label htmlFor="lastName">Last Name</Label>
-                  <Input
-                    id="lastName"
-                    name="lastName"
-                    value={contact.lastName}
-                    onChange={(e) => setContact({ ...contact, lastName: e.target.value })}
-                    autoComplete="family-name"
-                  />
-                  {contactErrors.lastName && <p className="mt-1 text-sm text-red-600">{contactErrors.lastName}</p>}
-                </div>
-              </div>
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={contact.email}
-                  onChange={(e) => setContact({ ...contact, email: e.target.value })}
-                  autoComplete="email"
+              ) : quote ? (
+                <p className="rounded-md bg-muted px-3 py-2 text-sm">
+                  Estimate on file: <strong>{quote.displayAmount}</strong>
+                </p>
+              ) : null}
+              {IDENTITY_FIELDS.map((f) => (
+                <FieldRenderer
+                  key={f.key}
+                  field={f}
+                  value={values[f.key] || ""}
+                  error={errors[f.key]}
+                  onChange={(v) => {
+                    setVal(f.key, v)
+                    if (f.key === "phone" || f.key === "name") void maybePartial()
+                  }}
+                  onEngage={() => engage(f.key)}
                 />
-                {contactErrors.email && <p className="mt-1 text-sm text-red-600">{contactErrors.email}</p>}
-              </div>
-              <div>
-                <Label htmlFor="phone">Phone</Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={contact.phone}
-                  onChange={(e) => setContact({ ...contact, phone: e.target.value })}
-                  autoComplete="tel"
+              ))}
+              {SHARED_FIELDS.filter((f) => f.key !== "address").map((f) => (
+                <FieldRenderer
+                  key={f.key}
+                  field={f}
+                  value={values[f.key] || ""}
+                  onChange={(v) => setVal(f.key, v)}
+                  onEngage={() => engage(f.key)}
                 />
-                {contactErrors.phone && <p className="mt-1 text-sm text-red-600">{contactErrors.phone}</p>}
-              </div>
-              <div>
-                <Label htmlFor="address">Service address (optional)</Label>
-                <Input
-                  id="address"
-                  name="address"
-                  value={contact.address}
-                  onChange={(e) => setContact({ ...contact, address: e.target.value })}
-                  autoComplete="street-address"
-                  placeholder="Street, City, KS"
-                />
-              </div>
-              <div>
-                <Label htmlFor="notes">Anything else we should know?</Label>
-                <Textarea
-                  id="notes"
-                  name="notes"
-                  value={contact.notes}
-                  onChange={(e) => setContact({ ...contact, notes: e.target.value })}
-                  rows={3}
-                />
-              </div>
-              {/* Honeypot */}
+              ))}
               <div className="hidden" aria-hidden>
-                <Label htmlFor="companyWebsite">Company website</Label>
-                <Input
-                  id="companyWebsite"
+                <input
                   name="companyWebsite"
                   tabIndex={-1}
                   autoComplete="off"
-                  value={contact.companyWebsite}
-                  onChange={(e) => setContact({ ...contact, companyWebsite: e.target.value })}
+                  value={values.companyWebsite || ""}
+                  onChange={(e) => setVal("companyWebsite", e.target.value)}
                 />
               </div>
-              {submitError && (
+              {submitError ? (
                 <p role="alert" className="text-sm text-red-600">
                   {submitError}
                 </p>
-              )}
+              ) : null}
               <TurnstileField onToken={setTurnstileToken} />
             </CardContent>
-            <CardFooter className="flex flex-col gap-3 sm:flex-row">
-              <Button type="button" variant="outline" className="w-full" onClick={() => setStep("estimate")}>
+            <CardFooter className="flex gap-3">
+              <Button
+                type="button"
+                variant="outline"
+                className="w-full"
+                onClick={() => setStep(estimable ? "estimate" : "details")}
+              >
                 Back
               </Button>
               <Button type="submit" className="w-full" disabled={submitting}>
@@ -553,33 +543,6 @@ export function QuoteFunnel() {
               </Button>
             </CardFooter>
           </form>
-        </Card>
-      )}
-
-      {step === "done" && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Request received</CardTitle>
-            <CardDescription>
-              Thanks — our team will follow up to confirm your quote. You can also call{" "}
-              <a className="text-primary underline" href={`tel:${siteConfig.phone.e164}`}>
-                {siteConfig.phone.display}
-              </a>
-              .
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-2 text-sm text-muted-foreground">
-            {quote && <p>Planning estimate on file: {quote.displayAmount}</p>}
-            {requestId && <p>Reference: {requestId}</p>}
-          </CardContent>
-          <CardFooter className="flex flex-col gap-3 sm:flex-row">
-            <Button asChild className="w-full">
-              <Link href="/">Back to home</Link>
-            </Button>
-            <Button asChild variant="outline" className="w-full">
-              <Link href="/services">Browse services</Link>
-            </Button>
-          </CardFooter>
         </Card>
       )}
     </div>

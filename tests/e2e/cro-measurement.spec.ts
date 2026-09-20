@@ -7,12 +7,13 @@ test.describe("CRO measurement", () => {
     })
     await page.goto("/thank-you/mowing?rid=test-organic-1&amt=45")
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
-    const events = await page.evaluate(() => {
-      const dl = (window as unknown as { dataLayer?: Array<Record<string, unknown>> }).dataLayer || []
-      return dl.map((e) => e.event || e)
-    })
-    const hasConversion = JSON.stringify(events).includes("conversion_lead")
-    expect(hasConversion).toBeTruthy()
+    await page.waitForFunction(
+      () => {
+        const dl = (window as unknown as { dataLayer?: Array<Record<string, unknown>> }).dataLayer || []
+        return JSON.stringify(dl).includes("conversion_lead")
+      },
+      { timeout: 8000 },
+    )
   })
 
   test("paid conversion still fires with gclid", async ({ page }) => {
@@ -21,7 +22,7 @@ test.describe("CRO measurement", () => {
   })
 
   test("phone click on sticky is present on mobile homepage", async ({ page }, testInfo) => {
-    test.skip(testInfo.project.name !== "mobile", "sticky is md:hidden")
+    test.skip(testInfo.project.name !== "phone-390", "sticky is md:hidden")
     await page.goto("/")
     await page.evaluate(() => window.scrollTo(0, 800))
     await expect(page.getByRole("link", { name: /^Call$/ })).toBeVisible()
@@ -36,8 +37,8 @@ test.describe("CRO measurement", () => {
 test.describe("CRO continuity", () => {
   test("deep link lands on estimate with hydrated values", async ({ page }) => {
     await page.goto("/quote?service=mowing&size=7500&property=residential&frequency=biweekly")
-    await expect(page.getByText("Estimate")).toBeVisible()
-    await expect(page.getByText(/7,500|7500/)).toBeVisible()
+    await expect(page.getByText("3. Estimate")).toBeVisible()
+    await expect(page.getByText(/7,500|7500/).first()).toBeVisible()
     await expect(page.getByText(/\$\d+/).first()).toBeVisible()
   })
 })

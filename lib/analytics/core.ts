@@ -16,6 +16,7 @@ import { classifyTraffic } from "./traffic"
 import {
   ATTRIBUTION_KEYS,
   CONVERSION_EVENTS,
+  CONVERSION_GATED_ON_ATTRIBUTION,
   type AnalyticsEvent,
   type AttributionParams,
 } from "./types"
@@ -104,7 +105,7 @@ export function pushAnalyticsEvent(event: AnalyticsEvent): boolean {
     traffic_type: event.traffic_type ?? trafficType,
     experiment_variant: event.experiment_variant ?? experimentVariant(sid),
     gtm_configured: isAnalyticsEnabled(),
-    conversion_gated_on_attribution: false,
+    conversion_gated_on_attribution: CONVERSION_GATED_ON_ATTRIBUTION,
     ...Object.fromEntries(Object.entries(attribution).filter(([, v]) => v)),
     destinations_configured: notifyDestinations(),
   }

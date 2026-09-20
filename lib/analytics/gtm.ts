@@ -1,5 +1,6 @@
 import type { TouchParams } from "./types"
 import { allowMarketingTags, pushConsentToDataLayer, readConsent } from "./consent"
+import { isAnalyticsEnabled } from "./config"
 
 declare global {
   interface Window {
@@ -150,6 +151,11 @@ export function isGTMLoaded(): boolean {
 
 export function waitForGTM(callback: () => void, maxWaitMs = 5000): void {
   if (typeof window === "undefined") return
+  // No container in this env — first-party dataLayer must not wait 5s (thank-you bounce + e2e).
+  if (!isAnalyticsEnabled() || isGTMLoaded()) {
+    callback()
+    return
+  }
   const startTime = Date.now()
   const check = () => {
     if (isGTMLoaded()) callback()

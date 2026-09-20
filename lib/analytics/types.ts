@@ -133,6 +133,9 @@ export type AnalyticsEvent =
 export const CONVERSION_EVENTS = new Set(["conversion_lead", "lead_conversion", "conversion"])
 export const MARKETING_EVENTS = new Set(["conversion_lead", "lead_conversion", "conversion"])
 
+/** Runtime never drops conversions for missing UTM/gclid (F-CRO-101). Vendor suite may still require attribution. */
+export const CONVERSION_GATED_ON_ATTRIBUTION = false
+
 export const DATALAYER_CONTRACT_FIELDS = [
   "event",
   "page_path",

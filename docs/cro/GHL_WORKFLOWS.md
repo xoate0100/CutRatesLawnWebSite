@@ -26,3 +26,5 @@ Run `npx tsx scripts/ghl/ensure-custom-fields.ts` after PIT is in env. Paste pri
 ## MCP blocked steps
 
 If LeadConnector MCP cannot create workflows, finish the five steps above in GHL → Automation. Do not skip SMS because the API is awkward — that is the speed-to-lead promise on `/quote`.
+
+**Full click-by-click playbook (Vercel env, Redis, Cron, smoke test, merge gate):** [`HUMAN_FINISH_GUIDE.md`](./HUMAN_FINISH_GUIDE.md).

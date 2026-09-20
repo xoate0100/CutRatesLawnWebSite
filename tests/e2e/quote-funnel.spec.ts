@@ -3,18 +3,17 @@ import { test, expect } from "@playwright/test"
 test.describe("Get a Quote funnel", () => {
   test("hero and nav quote CTAs land on /quote", async ({ page }) => {
     await page.goto("/")
-    const heroQuote = page.locator('a[href="/quote"]').filter({ hasText: /quote/i }).first()
-    await expect(heroQuote).toBeVisible()
+    await expect(page.getByRole("link", { name: /free quote/i }).first()).toBeVisible()
     await page.goto("/quote")
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
   })
 
   test("runs estimate then contact steps", async ({ page }) => {
     await page.goto("/quote?service=mowing")
-    await expect(page.getByText("Property")).toBeVisible()
+    await expect(page.getByText("Property type")).toBeVisible()
     await page.getByLabel(/Service address/i).fill("100 Main St, Valley Center, KS")
     await page.getByRole("button", { name: "Calculate Estimate" }).click()
-    await expect(page.getByText("Estimate")).toBeVisible()
+    await expect(page.getByText("3. Estimate")).toBeVisible()
     await expect(page.getByText(/\$\d+/).first()).toBeVisible()
     await page.getByRole("button", { name: "Request a Confirmed Quote" }).click()
     await expect(page.getByRole("heading", { name: /Where should we text you/i })).toBeVisible()

@@ -9,11 +9,7 @@
 - Thank-you pages exist for Ads. Failed deliveries queue when Redis is configured.
 - GHL can receive area, click ids, and an opportunity — once secrets and workflows are in place.
 
-**What still needs a human (do not skip):**
-1. Paste GHL and Upstash keys into Vercel (`docs/cro/HUMAN_REQUIRED.md`).
-2. Build the GHL SMS workflow from `docs/cro/GHL_WORKFLOWS.md`.
-3. Legal glance at the consent banner.
-4. Confirm we actually serve every town × service combo we generated.
-5. Do not merge to production until 1–2 are done, or quotes 202/503 again.
+**What still needs a human (do not skip):**  
+Follow **[HUMAN_FINISH_GUIDE.md](./HUMAN_FINISH_GUIDE.md)** — Vercel secrets, Redis, Cron, GHL SMS workflow, smoke test, then you merge. Do not merge until GHL + Redis + the website-lead SMS are live, or quotes 202/503 again.
 
 **Watch weekly:** thank-you conversions by `traffic_type` and service; speed-to-first-text in GHL; queued leads in Redis; Google Ads URL conversions on `/thank-you`.

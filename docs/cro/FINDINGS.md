@@ -1,12 +1,55 @@
 # CRO lead-journey — Findings
 
-**Mode:** discovery (read-only) | **Date:** 2026-09-20 | **Branch:** `cro/phase-0-recon`
+**Mode:** discovery (read-only) | **Recon date:** 2026-09-20 (`cro/phase-0-recon`) | **Resolution date:** 2026-09-20 (`cro/phase-1-measurement`)
 
-Re-verification of Part A in `docs/cro/CURSOR_PROMPT_CRO_Lead_Journey.md` against current code. Status is **Confirmed** (still true), **Revised** (still open; detail changed), or **Already-fixed** (none).
+Sections below are the original recon write-up (evidence as of Phase 0). Use the resolution table for current status. **Resolved** = code on this branch. **Deferred — human** = code path exists but production still fails until Andy finishes `docs/cro/HUMAN_FINISH_GUIDE.md`.
 
-## Summary
+## Phase 6 resolution
 
-| Priority | Confirmed / revised (open) | Already-fixed |
+| ID | Priority | Status | Notes |
+|---|---|---|---|
+| F-CRO-101 | P0 | **Resolved** | Conversions emit with `traffic_type`; never dropped for missing UTM. Vendor `analytics.tracking` suite still requires attribution (intentional split). |
+| F-CRO-102 | P1 | **Resolved** | First-touch `localStorage` 90d + last-touch `sessionStorage`; click ids include gbraid/wbraid/fbclid/msclkid. |
+| F-CRO-103 | P0 | **Resolved in code / deferred — human** | Lead schema + GHL custom fields carry click ids. Live CRM still needs PIT, CF IDs, workflows. |
+| F-CRO-104 | P1 | **Resolved** | `/thank-you` and `/thank-you/[service]`. |
+| F-CRO-105 | P1 | **Resolved** | Quote, contact, newsletter, phone, thank-you instrumented. |
+| F-CRO-106 | P1 | **Resolved** | Funnel step / field / abandon / partial events. |
+| F-CRO-107 | P1 | **Resolved in code / deferred — human** | Consent Mode default deny; H-CRO-001 legal copy review. |
+| F-CRO-201 | P1 | **Resolved** | Quote-band + funnel params hydrate `/quote`. |
+| F-CRO-202 | P1 | **Resolved** | Area carried on quote URLs and lead payload. |
+| F-CRO-203 | P1 | **Resolved** | Shared `LAWN_SIZE_UI` (rates in `estimate.ts` untouched). |
+| F-CRO-204 | P1 | **Resolved** | Service grid quote CTAs. |
+| F-CRO-205 | P1 | **Resolved** | `/pricing` uses estimator “starting at”, not $99/$199 plans. H-CRO-014 CFO copy confirm. |
+| F-CRO-301 | P0 | **Resolved** | Two-stage category → service picker. |
+| F-CRO-302 | P0 | **Resolved** | Per-service schema; no lawn defaults on consults. |
+| F-CRO-303 | P1 | **Resolved** | Consult/pest/snow/lights fields in `service-schema.ts`. |
+| F-CRO-304 | P1 | **Resolved** | Address asked when the service needs a site. |
+| F-CRO-305 | P2 | **Resolved** | Phone-primary contact; lastName no longer `"—"`. |
+| F-CRO-306 | P1 | **Resolved** | Partial leads tagged `lead-status:partial`; must not complete the idempotency key. |
+| F-CRO-307 | P2 | **Resolved** | Stepper follows actual schema. |
+| F-CRO-308 | P2 | **Resolved** | Shared slider / field renderer. |
+| F-CRO-309 | P2 | **Resolved** | Urgency / timeline / heard-about fields. |
+| F-CRO-401 | P1 | **Resolved** | Indexed `/quote/[service]`; noindex `/lp/[service]`. |
+| F-CRO-402 | P2 | **Resolved** | Area × service SSG. H-CRO-009 confirm deliverable combos. |
+| F-CRO-403 | P2 | **Resolved** | `lib/season.ts` marquee/grid order. |
+| F-CRO-404 | P2 | **Resolved** | Dead v0 headers/footers/forms moved to `components/_graveyard/`. Live `cta-section.tsx` kept. |
+| F-CRO-406 | P2 | **Resolved** | Bundle/schedule query params flow into `/quote`. |
+| F-CRO-407 | P2 | **Resolved** | `AnalyticsPhoneLink` wired on footer, hero, CTA, LP, thank-you. |
+| F-CRO-408 | P1 | **Resolved** | Bundles no longer use fake `QuoteForm`; they link to `/quote`. |
+| F-CRO-409 | P2 | **Resolved** | Sticky chip left + Call; chat FAB right; `max-w` leaves FAB room. |
+| F-CRO-410 | P3 | **Resolved** | Newsletter fires `conversion_lead`. |
+| F-CRO-411 | P2 | **Resolved** | No lastName placeholder dash. |
+| F-CRO-501 | P0 | **Deferred — human** | Tags are written in code; SMS/email workflows are GHL UI (H-CRO-005). |
+| F-CRO-502 | P1 | **Deferred — human** | Opportunity POST exists; needs pipeline stage + owner IDs. |
+| F-CRO-503 | P2 | **Deferred — human** | Owner env keys; default is unset. |
+| F-CRO-504 | P1 | **Deferred — human** | Redis REST store env-gated (H-CRO-002). Unset = in-process Maps (lost on serverless). |
+| F-CRO-505 | P0 | **Deferred — human** | Queue + `/api/cron/lead-retry` (GET+POST). Needs Redis + `CRON_SECRET` + Vercel Cron. |
+
+Merge to `main` is **blocked** until H-CRO-002, H-CRO-003, H-CRO-004, H-CRO-005, H-CRO-017 (see the finish guide).
+
+## Summary (Phase 0 recon, historical)
+
+| Priority | Confirmed / revised (open at recon) | Already-fixed at recon |
 |----------|----------------------------|---------------|
 | P0 | 5 | 0 |
 | P1 | 12 | 0 |

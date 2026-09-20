@@ -1,8 +1,17 @@
 # CRO dead-code map
 
-**Mode:** discovery (read-only) · **Date:** 2026-09-20 · **Branch:** `cro/phase-0-recon`
+**Recon:** 2026-09-20 · `cro/phase-0-recon` (proposal)  
+**Executed:** 2026-09-20 · `cro/phase-1-measurement` — unused v0 copies live under `components/_graveyard/` (see README there). `npm run build` after the batch move.
 
-Proposal only. **Do not delete in Phase 0.** Execute quarantine in Phase 4 after measurement and funnel work, one file at a time, with `npm run build` green after each move.
+Live marketing chrome and the primary quote path live under `components/blocks/` and `components/quote/`. Do **not** resurrect graveyard files.
+
+**Still live (intentionally not moved):** `components/cta-section.tsx` (legacy page imports), `components/newsletter-signup.tsx`, `components/layout/marketing-chrome.tsx`.
+
+---
+
+## Original proposal (Phase 0)
+
+Proposal only at recon time. **Do not delete in Phase 0.** Execute quarantine in Phase 4 after measurement and funnel work, one file at a time, with `npm run build` green after each move.
 
 ## Rule of thumb
 

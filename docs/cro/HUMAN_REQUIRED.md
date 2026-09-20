@@ -2,6 +2,8 @@
 
 **Rule:** Do not silently skip. Log the need, apply a documented default, keep building.
 
+**Playbook (how to actually finish these):** [`HUMAN_FINISH_GUIDE.md`](./HUMAN_FINISH_GUIDE.md)
+
 Updated: 2026-09-20
 
 | ID | Needed from | What | Default used in code | Status |

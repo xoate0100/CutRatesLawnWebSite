@@ -4,7 +4,7 @@ import { dequeueFailedLeads, enqueueFailedLead } from "@/lib/lead/store"
 
 export const runtime = "nodejs"
 
-export async function POST(req: NextRequest) {
+async function runRetry(req: NextRequest) {
   const secret = process.env.CRON_SECRET?.trim()
   const auth = req.headers.get("authorization") || ""
   if (!secret) {
@@ -43,4 +43,13 @@ export async function POST(req: NextRequest) {
     }
   }
   return NextResponse.json({ ok: true, retried: retried.length, failed: failed.length })
+}
+
+/** Vercel Cron invokes GET. Manual retries may POST. */
+export async function GET(req: NextRequest) {
+  return runRetry(req)
+}
+
+export async function POST(req: NextRequest) {
+  return runRetry(req)
 }

@@ -45,6 +45,21 @@ async function sitemapPaths() {
 }
 
 const paths = await sitemapPaths()
+if (!paths.length) {
+  fail("SITEMAP", "no paths parsed")
+  const report = {
+    base: BASE,
+    crawledAt: new Date().toISOString(),
+    pathCount: 0,
+    ok: false,
+    failures,
+    pages: [],
+  }
+  fs.writeFileSync(OUT, JSON.stringify(report, null, 2))
+  console.error("PHASE9_CRAWL_FAIL empty sitemap")
+  await browser.close()
+  process.exit(1)
+}
 console.log(`Crawling ${paths.length} paths on ${BASE}`)
 
 for (const path of paths) {

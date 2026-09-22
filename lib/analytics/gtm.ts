@@ -188,13 +188,7 @@ export function gtmEvent(eventName: string, eventData?: Record<string, unknown>)
 
 export function initConsentDefaults(): void {
   if (typeof window === "undefined") return
-  const dl = (window.dataLayer = window.dataLayer || [])
-  // US opt-out: default granted; explicit opt-out updates via pushConsentToDataLayer.
-  dl.push({
-    event: "consent_default",
-    analytics_storage: "granted",
-    ad_storage: "granted",
-  })
+  // gtag consent default lives only in GtmScript (gtm-init). Here we sync stored choice.
   const existing = readConsent()
   pushConsentToDataLayer(existing)
 }

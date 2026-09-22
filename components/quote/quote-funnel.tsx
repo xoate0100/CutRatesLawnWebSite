@@ -114,6 +114,16 @@ export function QuoteFunnel() {
   const [idempotencyKey, setIdempotencyKey] = useState(newIdempotencyKey)
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
   const [partialSent, setPartialSent] = useState(false)
+  const turnstileRef = useRef<import("@/components/forms/turnstile-field").TurnstileFieldHandle | null>(null)
+  const viewedSteps = useRef(new Set<string>())
+  const skippedDetails = useRef(false)
+
+  // Track if we ever land on estimate without having collected address (deep-link edge).
+  useEffect(() => {
+    if (step === "estimate" && !String(values.address || "").trim()) {
+      skippedDetails.current = true
+    }
+  }, [step, values.address])
 
   const def = serviceId ? getQuoteService(serviceId) : undefined
   const serviceFields = serviceId ? fieldsForService(serviceId) : []
@@ -141,8 +151,10 @@ export function QuoteFunnel() {
   }, [serviceId, areaSlug, values.lawnSizeSqFt, values.propertyType, values.frequency, values.mowTier])
 
   useEffect(() => {
+    const key = `quote:${step}`
+    if (viewedSteps.current.has(key)) return
+    viewedSteps.current.add(key)
     analytics.onFunnelStep("quote", step, stepIndex)
-    analytics.onFormStepComplete("quote", step, stepIndex)
   }, [step, stepIndex, analytics])
 
   useEffect(() => {
@@ -236,6 +248,7 @@ export function QuoteFunnel() {
       return
     }
     setErrors({})
+    analytics.onFormStepComplete("quote", "details", 2)
     if (estimable) {
       const r = computeEstimate()
       if (r) setStep("estimate")
@@ -334,6 +347,7 @@ export function QuoteFunnel() {
       const result = await postLead("complete")
       if (!result.ok) {
         setSubmitError(result.error || `We could not send this automatically. Call ${siteConfig.phone.display}.`)
+        turnstileRef.current?.reset()
         return
       }
       submitted.current = true
@@ -400,6 +414,7 @@ export function QuoteFunnel() {
                 engage("service")
                 setServiceId(svc.id)
                 setCategory(svc.category)
+                analytics.onFormStepComplete("quote", "service", 1)
                 setStep("details")
               }}
             />
@@ -474,7 +489,13 @@ export function QuoteFunnel() {
             <Button variant="outline" className="w-full" onClick={() => setStep("details")}>
               Back
             </Button>
-            <Button className="w-full" onClick={() => setStep("contact")}>
+            <Button
+              className="w-full"
+              onClick={() => {
+                analytics.onFormStepComplete("quote", "estimate", 3)
+                setStep("contact")
+              }}
+            >
               Continue with this estimate
             </Button>
           </CardFooter>
@@ -514,6 +535,17 @@ export function QuoteFunnel() {
                   onEngage={() => engage(f.key)}
                 />
               ))}
+              {(skippedDetails.current || !String(values.address || "").trim()) &&
+                SHARED_FIELDS.filter((f) => f.key === "address").map((f) => (
+                  <FieldRenderer
+                    key={f.key}
+                    field={{ ...f, required: false, label: "Service address (optional)" }}
+                    value={values.address || ""}
+                    error={errors.address}
+                    onChange={(v) => setVal("address", v)}
+                    onEngage={() => engage("address")}
+                  />
+                ))}
               {SHARED_FIELDS.filter((f) => f.key !== "address").map((f) => (
                 <FieldRenderer
                   key={f.key}
@@ -537,7 +569,7 @@ export function QuoteFunnel() {
                   {submitError}
                 </p>
               ) : null}
-              <TurnstileField onToken={setTurnstileToken} />
+              <TurnstileField ref={turnstileRef} onToken={setTurnstileToken} />
             </CardContent>
             <CardFooter className="flex gap-3">
               <Button

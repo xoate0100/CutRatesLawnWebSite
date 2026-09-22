@@ -127,9 +127,14 @@ export default function SchedulePage() {
                   </Button>
                   <p className="text-xs text-gray-500 text-center">
                     Prefer an existing account?{" "}
-                    <Link href="/portal" className="text-green-700 underline">
+                    <a
+                      href={siteConfig.customerPortalUrl}
+                      className="text-green-700 underline"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       Open customer portal
-                    </Link>
+                    </a>
                   </p>
                 </CardFooter>
               </form>

@@ -4,16 +4,20 @@ export type ConsentState = {
   updatedAt: number
 }
 
+export type ConsentMode = "opt_in" | "us_opt_out"
+
 const KEY = "cro_consent_v1"
 export const CONSENT_COOKIE = "cro_consent"
 
-/**
- * US-only opt-out: analytics + ads on by default until the visitor turns them off.
- * `updatedAt: 0` means no explicit choice yet (banner may still show).
- */
+/** Code default is opt_in; Production uses NEXT_PUBLIC_CONSENT_MODE=us_opt_out (owner decision). */
+export function getConsentMode(): ConsentMode {
+  const raw = (process.env.NEXT_PUBLIC_CONSENT_MODE || "opt_in").trim().toLowerCase()
+  return raw === "us_opt_out" ? "us_opt_out" : "opt_in"
+}
+
 export const DEFAULT_CONSENT: ConsentState = {
-  analytics: true,
-  ads: true,
+  analytics: getConsentMode() === "us_opt_out",
+  ads: getConsentMode() === "us_opt_out",
   updatedAt: 0,
 }
 

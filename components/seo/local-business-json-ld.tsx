@@ -1,6 +1,5 @@
 import { siteConfig } from "@/lib/site-config"
 import { GOOGLE_RATING, GOOGLE_REVIEW_COUNT, GOOGLE_MAPS_URL } from "@/lib/google-reviews"
-import { KWCH_FEATURE } from "@/lib/press"
 
 /** Server-rendered LocalBusiness JSON-LD from siteConfig NAP. */
 export function LocalBusinessJsonLd() {
@@ -39,7 +38,7 @@ export function LocalBusinessJsonLd() {
       bestRating: 5,
       worstRating: 1,
     },
-    sameAs: [GOOGLE_MAPS_URL, KWCH_FEATURE.url],
+    sameAs: [GOOGLE_MAPS_URL],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Cut Rates services",

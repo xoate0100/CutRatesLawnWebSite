@@ -174,31 +174,36 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: true, requestId, duplicate: true })
   }
 
-  const turnstileOk = await verifyTurnstile(lead.turnstileToken, ip)
+  const turnstileOk =
+    lead.leadStatus === "partial" ? true : await verifyTurnstile(lead.turnstileToken, ip)
   if (!turnstileOk) {
     return NextResponse.json({ ok: false, error: "Spam check failed.", requestId }, { status: 400 })
   }
 
   const result = await deliverLead(lead, requestId)
   if (!result.ok) {
-    const queued = await enqueueFailedLead({
-      requestId,
-      body: lead,
-      queuedAt: new Date().toISOString(),
-      attempts: 0,
-    })
-    if (queued) {
-      return NextResponse.json(
-        {
-          ok: true,
-          queued: true,
-          requestId,
-          error: result.reason,
-          storeMode: leadStoreMode(),
-        },
-        { status: 202 },
-      )
+    // Only durable Redis queues may return 202 + thank-you. Memory queue is lost on cold start.
+    if (leadStoreMode() === "redis") {
+      const queued = await enqueueFailedLead({
+        requestId,
+        body: lead,
+        queuedAt: new Date().toISOString(),
+        attempts: 0,
+      })
+      if (queued) {
+        return NextResponse.json(
+          {
+            ok: true,
+            queued: true,
+            requestId,
+            error: result.reason,
+            storeMode: leadStoreMode(),
+          },
+          { status: 202 },
+        )
+      }
     }
+    console.error("lead_delivery_failed_no_durable_queue", { requestId, reason: result.reason })
     return NextResponse.json(
       {
         ok: false,

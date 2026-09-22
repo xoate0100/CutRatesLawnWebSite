@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react"
 
 declare global {
   interface Window {
@@ -26,14 +26,30 @@ type Props = {
   className?: string
 }
 
+export type TurnstileFieldHandle = {
+  reset: () => void
+}
+
 /**
  * Renders Cloudflare Turnstile when NEXT_PUBLIC_TURNSTILE_SITE_KEY is set.
  * When unset, renders nothing and leaves spam protection optional (server allows).
  */
-export function TurnstileField({ onToken, className }: Props) {
-  const ref = useRef<HTMLDivElement>(null)
+export const TurnstileField = forwardRef<TurnstileFieldHandle, Props>(function TurnstileField(
+  { onToken, className },
+  ref,
+) {
+  const elRef = useRef<HTMLDivElement>(null)
   const [ready, setReady] = useState(false)
   const widgetId = useRef<string | null>(null)
+
+  useImperativeHandle(ref, () => ({
+    reset: () => {
+      if (widgetId.current && window.turnstile) {
+        window.turnstile.reset(widgetId.current)
+        onToken(null)
+      }
+    },
+  }))
 
   useEffect(() => {
     if (!SITE_KEY) {
@@ -43,9 +59,9 @@ export function TurnstileField({ onToken, className }: Props) {
 
     const scriptId = "cf-turnstile-script"
     function mount() {
-      if (!ref.current || !window.turnstile || !SITE_KEY) return
+      if (!elRef.current || !window.turnstile || !SITE_KEY) return
       if (widgetId.current) return
-      widgetId.current = window.turnstile.render(ref.current, {
+      widgetId.current = window.turnstile.render(elRef.current, {
         sitekey: SITE_KEY,
         callback: (token) => onToken(token),
         "expired-callback": () => onToken(null),
@@ -71,8 +87,8 @@ export function TurnstileField({ onToken, className }: Props) {
 
   return (
     <div className={className}>
-      <div ref={ref} />
+      <div ref={elRef} />
       {!ready ? <p className="text-xs text-sage">Loading spam check…</p> : null}
     </div>
   )
-}
+})

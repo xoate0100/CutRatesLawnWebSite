@@ -2,17 +2,21 @@
 
 import Script from "next/script"
 import { analyticsConfig } from "@/lib/analytics/config"
+import { getConsentMode } from "@/lib/analytics/consent"
 
-/** Loads GTM only when NEXT_PUBLIC_GTM_CONTAINER_ID is set. */
+/** Loads GTM only when NEXT_PUBLIC_GTM_CONTAINER_ID is set. Single source for gtag consent default. */
 export function GtmScript() {
   const id = analyticsConfig.gtmContainerId
   if (!id) return null
+
+  const granted = getConsentMode() === "us_opt_out"
+  const storage = granted ? "granted" : "denied"
 
   return (
     <>
       <Script id="gtm-init" strategy="afterInteractive">
         {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
-gtag('consent','default',{ad_storage:'granted',analytics_storage:'granted',ad_user_data:'granted',ad_personalization:'granted',wait_for_update:500});
+gtag('consent','default',{ad_storage:'${storage}',analytics_storage:'${storage}',ad_user_data:'${storage}',ad_personalization:'${storage}',wait_for_update:500});
 (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=

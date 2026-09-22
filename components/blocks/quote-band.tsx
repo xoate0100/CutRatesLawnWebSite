@@ -117,7 +117,7 @@ export function QuoteEstimator({ className }: { className?: string }) {
 
       <Button asChild variant="lime" className="mt-4 w-full">
         <Link href={`/quote?size=${lawnSize}&property=${propertyType}&frequency=${frequency}&service=mowing`}>
-          Get my real quote <span aria-hidden>→</span>
+          Request a quote <span aria-hidden>→</span>
         </Link>
       </Button>
     </div>
@@ -152,7 +152,7 @@ export function QuoteBand({ className }: QuoteBandProps) {
             {[
               ["1", "Your property"],
               ["2", "Instant estimate"],
-              ["3", "We text you"],
+              ["3", "We follow up"],
               ["4", "Done"],
             ].map(([n, label]) => (
               <span

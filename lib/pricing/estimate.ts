@@ -140,7 +140,7 @@ export function calculateEstimate(input: EstimateInput): EstimateError | Estimat
   }
 
   const notes: string[] = [
-    "Planning estimate only — final price confirmed after property review.",
+    "Starting estimate — final price confirmed after we look at the property.",
   ]
 
   let amount: number
@@ -151,32 +151,30 @@ export function calculateEstimate(input: EstimateInput): EstimateError | Estimat
       amount = mowPerVisit(propertyType, lawnSizeSqFt, mowTier)
       unit = "per visit"
       if (propertyType === "residential" && lawnSizeSqFt <= QUARTER_ACRE_SQ_FT) {
-        notes.push(
-          `Based on published residential ${mowTier} mowing (up to ¼ acre). Bi-weekly uses the same per-visit rate.`,
-        )
+        notes.push("Based on published residential mowing rates for lots up to ¼ acre.")
       } else if (propertyType === "commercial") {
-        notes.push("Based on commercial crew productivity and loaded labor (~$30/hr).")
+        notes.push("Based on commercial property size and route pricing.")
       }
       break
     }
     case "fertilization": {
       amount = fertMonthlyDollars(lawnSizeSqFt)
       unit = "per month"
-      notes.push("KC-Fert program rate: $39/mo through 5,000 sq ft, then +$1.40 per 100 sq ft.")
+      notes.push(
+        "Monthly fertility program for lawns up to 5,000 sq ft; larger lawns are priced by size.",
+      )
       break
     }
     case "weed-control": {
       amount = weedPerTreatment(lawnSizeSqFt)
       unit = "per treatment"
-      notes.push("Standalone weed treatment planning rate; often bundled with fertilization.")
+      notes.push("Typical standalone treatment — often bundled with fertilization.")
       break
     }
     case "full-service": {
       amount = fullServiceMonthly(propertyType, lawnSizeSqFt, frequency)
       unit = "per month"
-      notes.push(
-        `Complete mowing (${frequency}) plus fertilization program. Frequency affects visit count, not per-mow rate.`,
-      )
+      notes.push("Complete mowing plus fertilization. Visit schedule affects the monthly total.")
       break
     }
     default:

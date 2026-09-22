@@ -34,7 +34,7 @@ test.describe("Prospect user journey", () => {
 
     await page.getByRole("button", { name: "Calculate Estimate" }).click()
     await expect(page.getByText(/\$\d+/).first()).toBeVisible()
-    await expect(page.getByRole("button", { name: "Request a Confirmed Quote" })).toBeVisible()
+    await expect(page.getByRole("button", { name: "Continue with this estimate" })).toBeVisible()
   })
 
   test("submits contact form as a valid prospect", async ({ page }) => {

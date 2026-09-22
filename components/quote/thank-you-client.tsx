@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -19,7 +19,6 @@ export function ThankYouClient({ service }: { service?: string }) {
   const label = svc && GHL_SERVICE_LABELS[svc] ? GHL_SERVICE_LABELS[svc] : "your request"
   const def = svc ? getQuoteService(svc) : undefined
 
-  const [fired, setFired] = useState(false)
   useEffect(() => {
     const key = `cro_conv_${rid}`
     if (sessionStorage.getItem(key)) return
@@ -30,21 +29,19 @@ export function ThankYouClient({ service }: { service?: string }) {
       serviceId: svc || undefined,
       areaSlug: area || undefined,
     })
-    setFired(true)
   }, [rid, amt, svc, area])
 
   return (
     <div className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
       <h1 className="font-display text-[clamp(1.8rem,6vw,3rem)] font-extrabold">You’re on the list.</h1>
       <p className="mt-3 max-w-[46ch] text-sage">
-        We got {label.toLowerCase()}. A local dispatcher texts or calls — usually the same day, often within a couple of
-        hours during business hours. Keep your phone handy.
+        We got {label.toLowerCase()}. A local dispatcher will call or text to confirm details — usually within one
+        business day during business hours. Keep your phone handy.
       </p>
       {def ? (
         <p className="mt-2 text-sm text-sage">
           Next: we confirm the property details
-          {area ? ` in ${area}` : ""} and send a real plan. This page is your receipt
-          {fired ? " — conversion recorded." : "."}
+          {area ? ` in ${area}` : ""} and share a clear next step. This page is your receipt.
         </p>
       ) : null}
       {rid !== "unknown" ? <p className="mt-2 text-xs text-sage">Reference: {rid}</p> : null}

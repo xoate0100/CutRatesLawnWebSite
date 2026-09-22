@@ -18,7 +18,7 @@ export default function QuotePage() {
         title="See a planning estimate in minutes."
         description={
           <>
-            Tell us about your property — we text back fast. Prefer to talk?{" "}
+            Tell us about your property — we’ll follow up after you submit. Prefer to talk?{" "}
             <a className="underline decoration-lime/60 underline-offset-2" href={`tel:${siteConfig.phone.e164}`}>
               Call {siteConfig.phone.display}
             </a>

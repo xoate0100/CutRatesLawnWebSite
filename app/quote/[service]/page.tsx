@@ -35,7 +35,7 @@ export default function QuoteServicePage({ params }: Props) {
       <InteriorHero
         eyebrow="Free quote"
         title={`${def?.label ?? "Service"} — planning estimate.`}
-        description="Tell us about the property. We text back with a real next step."
+        description="Tell us about the property. We’ll follow up with clear next steps."
         ctaHref="#quote-funnel"
         ctaLabel="Start below"
       />

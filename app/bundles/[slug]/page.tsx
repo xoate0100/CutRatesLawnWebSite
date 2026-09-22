@@ -245,10 +245,10 @@ export default async function BundleDetailPage({ params }: BundleDetailPageProps
                 </Badge>
               </div>
               <p className="text-sm text-gray-600 mb-4">
-                Planning numbers come from our published estimator — not a fake success screen.
+                Starting numbers from our published estimator — final price confirmed on the property.
               </p>
               <Button asChild className="w-full">
-                <Link href={`/quote?bundle=${slug}&service=${slug}`}>Get a real quote →</Link>
+                <Link href={`/quote?bundle=${slug}&service=${slug}`}>Request a quote →</Link>
               </Button>
             </div>
           </div>

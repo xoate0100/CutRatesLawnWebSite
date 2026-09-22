@@ -42,7 +42,7 @@ export default function PaidLandingPage({ params }: Props) {
         <h1 className="font-display mt-2 text-3xl font-extrabold">
           {detail?.title ?? def?.label ?? "Get a quote"}
         </h1>
-        <p className="mt-3 text-sage">{detail?.description ?? "Local crew. No contracts. We text back."}</p>
+        <p className="mt-3 text-sage">{detail?.description ?? "Local crew. No contracts. We’ll follow up after you submit."}</p>
         <div className="mt-6 rounded-brand border border-line bg-white p-4">
           <Suspense fallback={<p>Loading…</p>}>
             <QuoteFunnel />

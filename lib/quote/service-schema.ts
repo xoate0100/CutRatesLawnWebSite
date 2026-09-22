@@ -93,7 +93,7 @@ const landscapeFields: QuoteField[] = [
   { key: "budgetBand", label: "Budget band", type: "chips", sendToCrm: true, required: true, help: "Helps us quote the right crew — not a commitment.", options: [{ value: "lt2k", label: "Under $2k" }, { value: "2to5k", label: "$2–5k" }, { value: "5to15k", label: "$5–15k" }, { value: "15kplus", label: "$15k+" }, { value: "unsure", label: "Not sure" }] },
   { key: "timeline", label: "Timeline", type: "chips", sendToCrm: true, options: [{ value: "asap", label: "ASAP" }, { value: "month", label: "This month" }, { value: "season", label: "This season" }, { value: "planning", label: "Just planning" }] },
   { key: "designNeeded", label: "Design needed", type: "chips", sendToCrm: true, options: [{ value: "yes", label: "Yes" }, { value: "no", label: "No — I know what I want" }] },
-  { key: "photoNote", label: "Photos", type: "text", sendToCrm: false, placeholder: "We’ll text you for photos after we reply." },
+  { key: "photoNote", label: "Photos", type: "text", sendToCrm: false, placeholder: "You can share photos after we reply." },
 ]
 
 const commercialFields: QuoteField[] = [

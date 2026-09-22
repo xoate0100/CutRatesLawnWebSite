@@ -1440,8 +1440,8 @@ export const PROCESS_STEPS: ProcessStep[] = [
   },
   {
     step: 3,
-    title: "We text you",
-    description: "A real local crew follows up the same day in most cases.",
+    title: "We follow up",
+    description: "A local dispatcher calls or texts to confirm details and next steps.",
   },
   {
     step: 4,

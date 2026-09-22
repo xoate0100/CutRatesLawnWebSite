@@ -88,7 +88,7 @@ test.describe("Redesign — interactions", () => {
     await page.getByRole("button", { name: "Calculate Estimate" }).click()
     await expect(page.getByText(/\$\d+/).first()).toBeVisible()
 
-    await page.getByRole("button", { name: "Request a Confirmed Quote" }).click()
+    await page.getByRole("button", { name: "Continue with this estimate" }).click()
     await page.getByRole("textbox", { name: "First Name", exact: true }).fill("Casey")
     await page.getByRole("textbox", { name: "Last Name", exact: true }).fill("QuoteLead")
     await page.getByRole("textbox", { name: "Email", exact: true }).fill("casey.quote@cutrateslawn.com")

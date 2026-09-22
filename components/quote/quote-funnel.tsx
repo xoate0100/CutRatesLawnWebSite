@@ -67,7 +67,7 @@ function consultExpectation(id: QuoteServiceId): { title: string; body: string; 
   return (
     map[id] || {
       title: "We’ll confirm the job on the property",
-      body: "This isn’t a lawn-size calculator. Share a few details and we text a real plan — usually the same day.",
+      body: "This isn’t a lawn-size calculator. Share a few details and we’ll follow up with next steps — usually within one business day.",
     }
   )
 }
@@ -472,7 +472,7 @@ export function QuoteFunnel() {
               Back
             </Button>
             <Button className="w-full" onClick={() => setStep("contact")}>
-              Request a Confirmed Quote
+              Continue with this estimate
             </Button>
           </CardFooter>
         </Card>
@@ -481,7 +481,7 @@ export function QuoteFunnel() {
       {step === "contact" && def && (
         <Card>
           <CardHeader>
-            <CardTitle>Where should we text you?</CardTitle>
+            <CardTitle>How can we reach you?</CardTitle>
             <CardDescription>Name + mobile is enough. Email is optional.</CardDescription>
           </CardHeader>
           <form onSubmit={submitLead}>

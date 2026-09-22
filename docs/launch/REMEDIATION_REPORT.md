@@ -42,11 +42,11 @@ See `docs/launch/HUMAN_INPUTS.md`.
 | `pnpm verify` (includes production build) | **PASS** |
 | Analytics unit tests | **PASS** |
 | Playwright `no-debug-routes` + `no-empty-html` | **PASS** (42) |
-| Production crawl `scripts/phase9-prod-crawl.mjs` | **FAIL → fix in flight** — CSP `gstatic.com/wcm/loader.js`; missing `link[rel=canonical]` (middleware + generateMetadata on this branch) |
-| Lighthouse mobile SEO ≥95 | Pending after preview deploy |
+| Production crawl `scripts/phase9-prod-crawl.mjs` | **PASS** on preview `dpl_…eoj9sbyrn` — 147/147 paths, 0 CSP/localhost/canonical failures, `gtm_configured:true` + `gtm.js` |
+| Lighthouse mobile SEO ≥95 | Pending (non-blocking Performance; run on preview after merge if desired) |
 | GHL nurture workflow | **HUMAN** — copy + click path in `docs/cro/GHL_WORKFLOWS.md` |
 | Apps Script clasp | **HUMAN** — `apps-script/weekly-report/SETUP.md` |
 | Upstash Redis | **HUMAN** H-3 |
 | Phase 3.6 test lead | **HUMAN** H-4 (owner mobile) |
 
-Merge only when crawl + Lighthouse are green on preview.
+Preview Phase 9 crawl is green. Merge when you accept remaining HUMAN items (Upstash + GHL workflow + report emails).

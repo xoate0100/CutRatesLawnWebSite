@@ -98,9 +98,9 @@
 - **fix:** Human Envato/own photography + `media:publish`
 
 ### ALL-F-203 — Consent defaults analytics/ads off
-- **status:** Owner-decision
-- **actual:** `DEFAULT_CONSENT` denies until Accept — hides GA/Ads for most traffic
-- **fix:** Legal call: US-only opt-out vs keep opt-in
+- **status:** Closed (owner chose US opt-out 2026-09-22)
+- **actual:** Was deny-until-Accept; now default granted with banner opt-out
+- **fix:** `DEFAULT_CONSENT` + gtm-init consent default + banner “Got it” / “Turn off ads & analytics”
 
 ### ALL-F-204 — Blog dead links / Strapi 504 / empty portal
 - **status:** Open

@@ -7,9 +7,13 @@ export type ConsentState = {
 const KEY = "cro_consent_v1"
 export const CONSENT_COOKIE = "cro_consent"
 
+/**
+ * US-only opt-out: analytics + ads on by default until the visitor turns them off.
+ * `updatedAt: 0` means no explicit choice yet (banner may still show).
+ */
 export const DEFAULT_CONSENT: ConsentState = {
-  analytics: false,
-  ads: false,
+  analytics: true,
+  ads: true,
   updatedAt: 0,
 }
 

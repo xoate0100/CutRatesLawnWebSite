@@ -189,11 +189,12 @@ export function gtmEvent(eventName: string, eventData?: Record<string, unknown>)
 export function initConsentDefaults(): void {
   if (typeof window === "undefined") return
   const dl = (window.dataLayer = window.dataLayer || [])
+  // US opt-out: default granted; explicit opt-out updates via pushConsentToDataLayer.
   dl.push({
     event: "consent_default",
-    analytics_storage: "denied",
-    ad_storage: "denied",
+    analytics_storage: "granted",
+    ad_storage: "granted",
   })
   const existing = readConsent()
-  if (existing.updatedAt) pushConsentToDataLayer(existing)
+  pushConsentToDataLayer(existing)
 }

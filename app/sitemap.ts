@@ -1,5 +1,7 @@
 import type { MetadataRoute } from "next"
 import { siteConfig } from "@/lib/site-config"
+import { getAreaSlugs, getServiceSlugs } from "@/lib/marketing-content"
+import { QUOTE_SERVICES } from "@/lib/quote/taxonomy"
 
 const STATIC_PATHS = [
   "/",
@@ -22,10 +24,18 @@ const STATIC_PATHS = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date()
-  return STATIC_PATHS.map((path) => ({
+  const extras = [
+    ...getServiceSlugs().map((s) => `/services/${s}`),
+    ...QUOTE_SERVICES.map((s) => `/quote/${s.id}`),
+    ...getAreaSlugs().map((a) => `/service-areas/${a}`),
+    ...getAreaSlugs().flatMap((a) =>
+      getServiceSlugs().map((s) => `/service-areas/${a}/${s}`),
+    ),
+  ]
+  return [...STATIC_PATHS, ...Array.from(new Set(extras))].map((path) => ({
     url: `${siteConfig.url}${path === "/" ? "" : path}`,
     lastModified,
-    changeFrequency: path === "/" || path === "/quote" ? "weekly" : "monthly",
-    priority: path === "/" ? 1 : path === "/quote" || path === "/careers" ? 0.9 : 0.7,
+    changeFrequency: path === "/" || path.startsWith("/quote") ? "weekly" : "monthly",
+    priority: path === "/" ? 1 : path.startsWith("/quote") ? 0.9 : 0.7,
   }))
 }

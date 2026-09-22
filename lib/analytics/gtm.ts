@@ -1,69 +1,147 @@
-import type { AttributionParams } from "./types"
+import type { TouchParams } from "./types"
+import { allowMarketingTags, pushConsentToDataLayer, readConsent } from "./consent"
+import { isAnalyticsEnabled } from "./config"
 
 declare global {
   interface Window {
     dataLayer?: Record<string, unknown>[]
     google_tag_manager?: unknown
+    gtag?: (...args: unknown[]) => void
   }
 }
 
-export function getUtmParams(): AttributionParams {
+const FIRST_KEY = "cro_first_touch_v1"
+const LAST_KEY = "cro_last_touch_v1"
+const TTL_MS = 90 * 24 * 60 * 60 * 1000
+
+function searchParams(): URLSearchParams {
+  if (typeof window === "undefined") return new URLSearchParams()
+  return new URLSearchParams(window.location.search)
+}
+
+function captureNow(): TouchParams {
+  const sp = searchParams()
+  const touch: TouchParams = {}
+  const keys: Array<keyof TouchParams> = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content",
+    "gclid",
+    "gbraid",
+    "wbraid",
+    "fbclid",
+    "msclkid",
+  ]
+  for (const k of keys) {
+    const v = sp.get(k)
+    if (v) touch[k] = v
+  }
+  if (typeof window !== "undefined") {
+    touch.landing_page = `${window.location.pathname}${window.location.search}`
+    touch.referrer = document.referrer || undefined
+    touch.first_seen_at = new Date().toISOString()
+  }
+  return touch
+}
+
+function hasTouchSignal(t: TouchParams): boolean {
+  return Boolean(
+    t.utm_source || t.gclid || t.gbraid || t.wbraid || t.fbclid || t.msclkid || t.referrer || t.landing_page,
+  )
+}
+
+function readJson(storage: Storage, key: string): TouchParams | null {
+  try {
+    const raw = storage.getItem(key)
+    if (!raw) return null
+    const parsed = JSON.parse(raw) as TouchParams & { _exp?: number }
+    if (parsed._exp && Date.now() > parsed._exp) {
+      storage.removeItem(key)
+      return null
+    }
+    return parsed
+  } catch {
+    return null
+  }
+}
+
+function writeFirst(touch: TouchParams): void {
+  if (typeof window === "undefined") return
+  const existing = readJson(localStorage, FIRST_KEY)
+  if (existing) return
+  localStorage.setItem(FIRST_KEY, JSON.stringify({ ...touch, _exp: Date.now() + TTL_MS }))
+}
+
+function writeLast(touch: TouchParams): void {
+  if (typeof window === "undefined") return
+  sessionStorage.setItem(LAST_KEY, JSON.stringify(touch))
+}
+
+export function getUtmParams(): TouchParams {
   if (typeof window === "undefined") return {}
-  const searchParams = new URLSearchParams(window.location.search)
+  const sp = searchParams()
   return {
-    utm_source: searchParams.get("utm_source") || undefined,
-    utm_medium: searchParams.get("utm_medium") || undefined,
-    utm_campaign: searchParams.get("utm_campaign") || undefined,
-    utm_term: searchParams.get("utm_term") || undefined,
-    utm_content: searchParams.get("utm_content") || undefined,
+    utm_source: sp.get("utm_source") || undefined,
+    utm_medium: sp.get("utm_medium") || undefined,
+    utm_campaign: sp.get("utm_campaign") || undefined,
+    utm_term: sp.get("utm_term") || undefined,
+    utm_content: sp.get("utm_content") || undefined,
   }
 }
 
 export function getGclid(): string | undefined {
   if (typeof window === "undefined") return undefined
-  return new URLSearchParams(window.location.search).get("gclid") || undefined
+  return searchParams().get("gclid") || undefined
 }
 
 export function storeUtmParams(): void {
-  if (typeof window === "undefined") return
-  const utmParams = getUtmParams()
-  if (utmParams.utm_source) {
-    sessionStorage.setItem("utm_params", JSON.stringify(utmParams))
-  }
+  storePaidClickParams()
 }
 
 export function storeGclid(): void {
-  if (typeof window === "undefined") return
-  const gclid = getGclid()
-  if (gclid) sessionStorage.setItem("gclid", gclid)
+  storePaidClickParams()
 }
 
-/** Capture UTM and gclid from URL on first page load of paid journey. */
+/** Dual first-touch (localStorage 90d) + last-touch (session). */
 export function storePaidClickParams(): void {
-  storeUtmParams()
-  storeGclid()
-}
-
-export function getStoredUtmParams(): AttributionParams {
-  if (typeof window === "undefined") return {}
-  const stored = sessionStorage.getItem("utm_params")
-  if (!stored) return {}
-  try {
-    return JSON.parse(stored) as AttributionParams
-  } catch {
-    return {}
+  if (typeof window === "undefined") return
+  const touch = captureNow()
+  if (hasTouchSignal(touch)) {
+    writeFirst(touch)
+    writeLast(touch)
+  } else {
+    writeFirst({
+      landing_page: `${window.location.pathname}${window.location.search}`,
+      referrer: document.referrer || undefined,
+      first_seen_at: new Date().toISOString(),
+    })
   }
 }
 
-export function getStoredGclid(): string | undefined {
-  if (typeof window === "undefined") return undefined
-  return sessionStorage.getItem("gclid") || undefined
+export function getFirstTouch(): TouchParams {
+  if (typeof window === "undefined") return {}
+  return readJson(localStorage, FIRST_KEY) || {}
 }
 
-export function getStoredAttribution(): AttributionParams {
-  const utm = getStoredUtmParams()
-  const gclid = getStoredGclid()
-  return { ...utm, ...(gclid ? { gclid } : {}) }
+export function getLastTouch(): TouchParams {
+  if (typeof window === "undefined") return {}
+  return readJson(sessionStorage, LAST_KEY) || getUtmParams()
+}
+
+export function getStoredUtmParams(): TouchParams {
+  const last = getLastTouch()
+  const first = getFirstTouch()
+  return { ...first, ...last }
+}
+
+export function getStoredGclid(): string | undefined {
+  return getLastTouch().gclid || getFirstTouch().gclid
+}
+
+export function getStoredAttribution(): TouchParams {
+  return { ...getFirstTouch(), ...getLastTouch() }
 }
 
 export function isGTMLoaded(): boolean {
@@ -73,6 +151,11 @@ export function isGTMLoaded(): boolean {
 
 export function waitForGTM(callback: () => void, maxWaitMs = 5000): void {
   if (typeof window === "undefined") return
+  // No container in this env — first-party dataLayer must not wait 5s (thank-you bounce + e2e).
+  if (!isAnalyticsEnabled() || isGTMLoaded()) {
+    callback()
+    return
+  }
   const startTime = Date.now()
   const check = () => {
     if (isGTMLoaded()) callback()
@@ -82,12 +165,35 @@ export function waitForGTM(callback: () => void, maxWaitMs = 5000): void {
   check()
 }
 
+/**
+ * First-party dataLayer always. Marketing tag *consumers* in GTM should honor Consent Mode.
+ * We still push conversion events with zero UTMs (F-CRO-101).
+ */
 export function gtmEvent(eventName: string, eventData?: Record<string, unknown>): void {
   if (typeof window === "undefined") return
+  const consent = readConsent()
   const fire = () => {
     const dl = (window.dataLayer = window.dataLayer || [])
-    if (eventData && Object.keys(eventData).length > 0) dl.push(eventData)
+    const payload = {
+      ...(eventData || {}),
+      analytics_consent: consent.analytics,
+      ads_consent: consent.ads,
+      marketing_tags_allowed: allowMarketingTags(),
+    }
+    if (Object.keys(payload).length > 0) dl.push(payload)
     setTimeout(() => dl.push({ event: eventName }), 50)
   }
   waitForGTM(fire)
+}
+
+export function initConsentDefaults(): void {
+  if (typeof window === "undefined") return
+  const dl = (window.dataLayer = window.dataLayer || [])
+  dl.push({
+    event: "consent_default",
+    analytics_storage: "denied",
+    ad_storage: "denied",
+  })
+  const existing = readConsent()
+  if (existing.updatedAt) pushConsentToDataLayer(existing)
 }

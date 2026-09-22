@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useState } from "react"
 import { Menu, X } from "lucide-react"
+import { BrandLogo } from "@/components/brand/brand-logo"
 import { Button } from "@/components/ui/button"
 import { pageWrap } from "@/lib/layout"
 import { GoogleRatingBadge } from "@/components/trust/google-rating-badge"
@@ -21,16 +22,13 @@ export function SiteHeader() {
       )}
     >
       <div className={cn(pageWrap, "flex h-[70px] items-center gap-3 sm:gap-4")}>
-        <Link href="/" className="mr-auto flex items-center gap-2.5" onClick={() => setOpen(false)}>
-          <span className="grid h-[42px] w-[42px] place-items-center rounded-xl bg-gradient-to-br from-lime to-green-soft font-display text-[1.15rem] font-extrabold text-forest-2 shadow-[0_6px_18px_-6px_rgba(200,241,53,0.6)]">
-            CR
-          </span>
-          <span className="leading-none">
-            <b className="font-display text-[1.15rem] font-extrabold tracking-[-0.01em]">Cut Rates</b>
-            <small className="block text-[0.62rem] font-semibold uppercase tracking-[0.22em] opacity-70">
-              Lawn Care
-            </small>
-          </span>
+        <Link
+          href="/"
+          className="mr-auto flex shrink-0 items-center"
+          onClick={() => setOpen(false)}
+          aria-label="Cut Rates Lawn Care — home"
+        >
+          <BrandLogo height={58} priority className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]" />
         </Link>
 
         <nav className="hidden items-center gap-5 font-semibold md:flex" aria-label="Primary">

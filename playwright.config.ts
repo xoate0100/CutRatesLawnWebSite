@@ -20,14 +20,27 @@ export default defineConfig({
   },
   projects: [
     {
-      name: "chromium",
-      use: { ...devices["Desktop Chrome"] },
-    },
-    {
-      name: "mobile",
+      name: "phone-390",
       use: {
         ...devices["Pixel 5"],
+        viewport: { width: 390, height: 844 },
         defaultBrowserType: "chromium",
+      },
+    },
+    {
+      name: "tablet-768",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 768, height: 1024 },
+        isMobile: true,
+        hasTouch: true,
+      },
+    },
+    {
+      name: "desktop-1440",
+      use: {
+        ...devices["Desktop Chrome"],
+        viewport: { width: 1440, height: 900 },
       },
     },
   ],

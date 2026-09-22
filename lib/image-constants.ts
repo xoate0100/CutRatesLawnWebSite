@@ -27,7 +27,7 @@ export const IMAGES = {
   TEAM_CREW: `${CLOUD_STORAGE_BASE_URL}/images/team/crew.jpg`,
 
   // Logo and branding
-  LOGO: `${CLOUD_STORAGE_BASE_URL}/images/branding/logo.svg`,
+  LOGO: `/branding/cut-rates-logo.png`,
   LOGO_WHITE: `${CLOUD_STORAGE_BASE_URL}/images/branding/logo-white.svg`,
 
   // Partners and credentials

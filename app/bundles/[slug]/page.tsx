@@ -6,7 +6,6 @@ import Link from "next/link"
 import { getBundleBySlug } from "@/lib/api-helpers"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { QuoteForm } from "@/components/quote-form"
 import { ServicesList } from "@/components/services-list"
 import { companyInfo } from "@/lib/static-data"
 import { mediaAlt, mediaSrc } from "@/lib/media"
@@ -245,7 +244,12 @@ export default async function BundleDetailPage({ params }: BundleDetailPageProps
                   Response in 2 hours
                 </Badge>
               </div>
-              <QuoteForm defaultServiceType={slug} />
+              <p className="text-sm text-gray-600 mb-4">
+                Planning numbers come from our published estimator — not a fake success screen.
+              </p>
+              <Button asChild className="w-full">
+                <Link href={`/quote?bundle=${slug}&service=${slug}`}>Get a real quote →</Link>
+              </Button>
             </div>
           </div>
         </div>

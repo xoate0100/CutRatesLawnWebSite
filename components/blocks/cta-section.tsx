@@ -3,6 +3,7 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
+import { AnalyticsPhoneLink } from "@/components/analytics/phone-link"
 
 export type CTASectionProps = {
   title?: ReactNode
@@ -53,7 +54,13 @@ export function CTASection({
           </Button>
           {secondaryHref && secondaryLabel ? (
             <Button asChild variant="ghost" className="max-w-full text-white">
-              <a href={secondaryHref}>{secondaryLabel}</a>
+              {secondaryHref.startsWith("tel:") ? (
+                <AnalyticsPhoneLink href={secondaryHref} location="cta_section">
+                  {secondaryLabel}
+                </AnalyticsPhoneLink>
+              ) : (
+                <Link href={secondaryHref}>{secondaryLabel}</Link>
+              )}
             </Button>
           ) : null}
         </div>

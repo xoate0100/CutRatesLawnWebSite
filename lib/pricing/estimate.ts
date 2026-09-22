@@ -38,6 +38,13 @@ export type EstimateResult = {
 export const QUARTER_ACRE_SQ_FT = 10_890
 export const ACRE_SQ_FT = 43_560
 export const MIN_LAWN_SQ_FT = 500
+/** Shared UI range for homepage band + quote funnel. Does not change published rates. */
+export const LAWN_SIZE_UI = {
+  min: MIN_LAWN_SQ_FT,
+  max: 15_000,
+  step: 250,
+  defaultValue: 2000,
+} as const
 
 /** Updated_Services_Pricing_Model.csv — residential ≤¼ acre */
 export const RESIDENTIAL_MOW_PER_VISIT: Record<MowTier, number> = {

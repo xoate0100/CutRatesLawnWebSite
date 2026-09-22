@@ -1,10 +1,8 @@
 /**
  * Go High Level / LeadConnector server-side client.
- * Used by /api/lead to upsert contacts that trigger GHL workflows via tags.
- *
- * Auth: Private Integration Token (sub-account) — never expose to the browser.
- * Docs: https://marketplace.gohighlevel.com/docs/
  */
+import { routeLead, resolveOwnerId } from "@/lib/quote/routing"
+import type { LeadBody } from "@/lib/lead/schema"
 
 const GHL_BASE = "https://services.leadconnectorhq.com"
 const GHL_VERSION = "2021-07-28"
@@ -18,6 +16,15 @@ export type GhlLeadInput = {
   message?: string
   source: string
   requestId: string
+  extraTags?: string[]
+  customFieldValues?: Record<string, string>
+  estimateAmount?: number
+  areaSlug?: string
+  leadStatus?: "complete" | "partial"
+  serviceId?: string
+  qualifiedArea?: boolean
+  propertyType?: string
+  urgency?: string
 }
 
 export type GhlUpsertResult =
@@ -43,7 +50,7 @@ function headers(token: string): HeadersInit {
   }
 }
 
-function slugTag(prefix: string, value: string): string {
+export function slugTag(prefix: string, value: string): string {
   const slug = value
     .trim()
     .toLowerCase()
@@ -53,8 +60,9 @@ function slugTag(prefix: string, value: string): string {
   return slug ? `${prefix}:${slug}` : prefix
 }
 
-/** Tags used by GHL workflows (add via /tags so upsert does not wipe existing tags). */
-export function leadWorkflowTags(lead: Pick<GhlLeadInput, "source" | "service">): string[] {
+export function leadWorkflowTags(
+  lead: Pick<GhlLeadInput, "source" | "service" | "extraTags" | "areaSlug" | "leadStatus">,
+): string[] {
   const extra = (process.env.GHL_LEAD_TAGS || "")
     .split(",")
     .map((t) => t.trim())
@@ -64,8 +72,11 @@ export function leadWorkflowTags(lead: Pick<GhlLeadInput, "source" | "service">)
       "website-lead",
       slugTag("source", lead.source || "contact"),
       slugTag("service", lead.service || "general"),
+      lead.areaSlug ? slugTag("area", lead.areaSlug) : "",
+      lead.leadStatus === "partial" ? "lead-status:partial" : "lead-status:complete",
+      ...(lead.extraTags || []),
       ...extra,
-    ]),
+    ].filter(Boolean)),
   )
 }
 
@@ -83,10 +94,27 @@ async function addTags(token: string, contactId: string, tags: string[]): Promis
   return true
 }
 
-/**
- * Upsert contact in the configured location, then add workflow tags.
- * GHL automations should trigger on tag `website-lead` (and optionally source/service tags).
- */
+function envCustomFields(lead: GhlLeadInput): Array<{ id: string; field_value: string }> {
+  const customFields: Array<{ id: string; field_value: string }> = []
+  const pairs: Array<[string | undefined, string | undefined]> = [
+    [process.env.GHL_CF_SERVICE_ID, lead.service],
+    [process.env.GHL_CF_MESSAGE_ID, lead.message?.slice(0, 1000)],
+    [process.env.GHL_CF_REQUEST_ID, lead.requestId],
+    [process.env.GHL_CF_AREA_ID, lead.areaSlug],
+    [process.env.GHL_CF_GCLID_ID, lead.customFieldValues?.gclid],
+    [process.env.GHL_CF_LANDING_ID, lead.customFieldValues?.landing_page],
+    [process.env.GHL_CF_URGENCY_ID, lead.customFieldValues?.urgency],
+    [process.env.GHL_CF_SOURCE_SELF_ID, lead.customFieldValues?.heardAboutUs],
+    [process.env.GHL_CF_DETAILS_ID, lead.customFieldValues?.serviceDetails],
+    [process.env.GHL_CF_FIRST_TOUCH_ID, lead.customFieldValues?.firstTouch],
+    [process.env.GHL_CF_LAST_TOUCH_ID, lead.customFieldValues?.lastTouch],
+  ]
+  for (const [id, value] of pairs) {
+    if (id && value) customFields.push({ id, field_value: value })
+  }
+  return customFields
+}
+
 export async function upsertLeadContact(lead: GhlLeadInput): Promise<GhlUpsertResult> {
   const { token, locationId, configured } = ghlConfig()
   if (!configured || !token || !locationId) {
@@ -94,24 +122,19 @@ export async function upsertLeadContact(lead: GhlLeadInput): Promise<GhlUpsertRe
   }
 
   const name = `${lead.firstName} ${lead.lastName}`.trim()
+  const fakeEmail = /@leads\.cutrateslawn\.com$/i.test(lead.email) || /@applicants\.cutrateslawn\.com$/i.test(lead.email)
   const body: Record<string, unknown> = {
     locationId,
     firstName: lead.firstName,
-    lastName: lead.lastName,
+    lastName: lead.lastName || "Lead",
     name,
-    email: lead.email,
     source: `website:${lead.source}`,
   }
+  if (lead.email && !fakeEmail) body.email = lead.email
+  else if (lead.email) body.email = lead.email
   if (lead.phone) body.phone = lead.phone
 
-  // Custom fields are optional — set GHL_CF_* env vars to field IDs from Locations → Custom Fields.
-  const customFields: Array<{ id: string; field_value: string }> = []
-  const serviceCf = process.env.GHL_CF_SERVICE_ID?.trim()
-  const messageCf = process.env.GHL_CF_MESSAGE_ID?.trim()
-  const requestCf = process.env.GHL_CF_REQUEST_ID?.trim()
-  if (serviceCf) customFields.push({ id: serviceCf, field_value: lead.service })
-  if (messageCf && lead.message) customFields.push({ id: messageCf, field_value: lead.message.slice(0, 1000) })
-  if (requestCf) customFields.push({ id: requestCf, field_value: lead.requestId })
+  const customFields = envCustomFields(lead)
   if (customFields.length) body.customFields = customFields
 
   const res = await fetch(`${GHL_BASE}/contacts/upsert`, {
@@ -126,17 +149,16 @@ export async function upsertLeadContact(lead: GhlLeadInput): Promise<GhlUpsertRe
     return { ok: false, reason: "Go High Level rejected the contact upsert.", status: res.status }
   }
 
-  const data = (await res.json()) as {
-    contact?: { id?: string }
-    new?: boolean
-  }
+  const data = (await res.json()) as { contact?: { id?: string }; new?: boolean }
   const contactId = data.contact?.id
-  if (!contactId) {
-    return { ok: false, reason: "GHL upsert returned no contact id." }
-  }
+  if (!contactId) return { ok: false, reason: "GHL upsert returned no contact id." }
 
   const tags = leadWorkflowTags(lead)
   await addTags(token, contactId, tags)
+
+  if (lead.leadStatus !== "partial") {
+    await createLeadOpportunity(token, locationId, contactId, lead)
+  }
 
   console.info("ghl_lead_upserted", {
     contactId,
@@ -147,3 +169,79 @@ export async function upsertLeadContact(lead: GhlLeadInput): Promise<GhlUpsertRe
 
   return { ok: true, contactId, new: Boolean(data.new) }
 }
+
+export async function createLeadOpportunity(
+  token: string,
+  locationId: string,
+  contactId: string,
+  lead: GhlLeadInput,
+): Promise<void> {
+  const pipelineId = process.env.GHL_PIPELINE_ID?.trim() || "F0DVnJbjW0nJMm8HlYpG"
+  const stageId = process.env.GHL_PIPELINE_STAGE_ID?.trim()
+  const routing = routeLead({
+    serviceId: lead.serviceId,
+    propertyType: lead.propertyType,
+    qualifiedArea: lead.qualifiedArea,
+    urgency: lead.urgency,
+  })
+  const owner = resolveOwnerId(routing.ownerEnvKey)
+  const monetary = lead.estimateAmount && lead.estimateAmount > 0 ? lead.estimateAmount : 0
+  const payload: Record<string, unknown> = {
+    locationId,
+    contactId,
+    pipelineId,
+    name: `${lead.service} — ${lead.firstName} ${lead.lastName}`.slice(0, 80),
+    status: "open",
+    monetaryValue: monetary,
+  }
+  if (stageId) payload.pipelineStageId = stageId
+  if (owner) payload.assignedTo = owner
+
+  const res = await fetch(`${GHL_BASE}/opportunities/`, {
+    method: "POST",
+    headers: headers(token),
+    body: JSON.stringify(payload),
+  })
+  if (!res.ok) {
+    const text = await res.text().catch(() => "")
+    console.error("ghl_opportunity_failed", { status: res.status, body: text.slice(0, 300) })
+    return
+  }
+  if (routing.tags.length) await addTags(token, contactId, routing.tags)
+}
+
+export function leadToGhlInput(lead: LeadBody, requestId: string): GhlLeadInput {
+  const last = lead.lastTouch || {}
+  const first = lead.firstTouch || {}
+  return {
+    firstName: lead.firstName,
+    lastName: lead.lastName || "Lead",
+    email: lead.email,
+    phone: lead.phone,
+    service: lead.service,
+    message: lead.message,
+    source: lead.source,
+    requestId,
+    areaSlug: lead.areaSlug,
+    leadStatus: lead.leadStatus,
+    serviceId: lead.serviceId,
+    qualifiedArea: lead.qualifiedArea,
+    propertyType: lead.propertyType,
+    urgency: lead.urgency,
+    estimateAmount: lead.estimateAmount,
+    extraTags: [
+      lead.qualifiedArea === false ? "unqualified:out-of-area" : "",
+    ].filter(Boolean),
+    customFieldValues: {
+      gclid: last.gclid || first.gclid || "",
+      landing_page: first.landing_page || last.landing_page || "",
+      urgency: lead.urgency || "",
+      heardAboutUs: lead.heardAboutUs || "",
+      serviceDetails: JSON.stringify(lead.serviceDetails || {}).slice(0, 1000),
+      firstTouch: JSON.stringify(first).slice(0, 500),
+      lastTouch: JSON.stringify(last).slice(0, 500),
+    },
+  }
+}
+
+export { GHL_BASE, GHL_VERSION, headers as ghlHeaders, ghlConfig }

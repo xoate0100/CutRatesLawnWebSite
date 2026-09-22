@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Pill } from "@/components/ui/pill"
 import {
   calculateEstimate,
+  LAWN_SIZE_UI,
   type Frequency,
   type PropertyType,
   type ServiceType,
@@ -46,7 +47,7 @@ function Seg({
 export function QuoteEstimator({ className }: { className?: string }) {
   const [propertyType, setPropertyType] = useState<PropertyType>("residential")
   const [frequency, setFrequency] = useState<Frequency>("weekly")
-  const [lawnSize, setLawnSize] = useState(2000)
+  const [lawnSize, setLawnSize] = useState<number>(LAWN_SIZE_UI.defaultValue)
   const serviceType: ServiceType = "mowing"
 
   const estimate = useMemo(() => {
@@ -83,14 +84,14 @@ export function QuoteEstimator({ className }: { className?: string }) {
       <input
         id="quote-band-lawn-size"
         type="range"
-        min={500}
-        max={15000}
-        step={250}
+        min={LAWN_SIZE_UI.min}
+        max={LAWN_SIZE_UI.max}
+        step={LAWN_SIZE_UI.step}
         value={lawnSize}
         onChange={(e) => setLawnSize(Number(e.target.value))}
         className="mt-1 w-full accent-forest"
-        aria-valuemin={500}
-        aria-valuemax={15000}
+        aria-valuemin={LAWN_SIZE_UI.min}
+        aria-valuemax={LAWN_SIZE_UI.max}
         aria-valuenow={lawnSize}
       />
 
@@ -115,7 +116,7 @@ export function QuoteEstimator({ className }: { className?: string }) {
       </div>
 
       <Button asChild variant="lime" className="mt-4 w-full">
-        <Link href={`/quote?size=${lawnSize}&property=${propertyType}&frequency=${frequency}`}>
+        <Link href={`/quote?size=${lawnSize}&property=${propertyType}&frequency=${frequency}&service=mowing`}>
           Get my real quote <span aria-hidden>→</span>
         </Link>
       </Button>

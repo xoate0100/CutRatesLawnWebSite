@@ -15,13 +15,13 @@ related:
 tasks:
   - id: GHL-OPS-001
     name: Add GHL_* secrets to Vercel production env
-    status: pending
+    status: completed
     outputs:
       - Vercel env for v0-cut-rates-lawn-main-page
 
   - id: GHL-WF-001
     name: Website lead nurture workflow (tag website-lead)
-    status: pending
+    status: blocked
     outputs:
       - GHL workflow triggered by website-lead
       - Opportunity in New Leads / Fresh Lead
@@ -34,7 +34,7 @@ tasks:
 
   - id: GHL-WF-003
     name: Map service tags / custom fields into staff-visible CRM data
-    status: pending
+    status: in_progress
     outputs:
       - Service + message custom fields populated from site leads
 

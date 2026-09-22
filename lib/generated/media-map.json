@@ -21,20 +21,20 @@
     },
     "header.logo": {
       "slot": "header.logo",
-      "asset_id": "sha-1804e39e6138",
-      "variant": "w512",
-      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/branding/header-logo/sha-1804e39e6138/w512.webp",
-      "fallback": "/placeholder.svg?height=40&width=180",
-      "alt": "Cut Rates Lawn Care",
-      "width": 512,
-      "height": 408,
+      "asset_id": "sha-d8dd853e8e2e",
+      "variant": "original",
+      "url": "/branding/cut-rates-logo.png",
+      "fallback": "/branding/cut-rates-logo.png",
+      "alt": "Cut Rates Lawn Care LLC",
+      "width": 775,
+      "height": 703,
       "attribution": {
-        "title": "Cut Rates Lawn Care logo (transparent)",
+        "title": "Cut Rates Lawn Care stylized logo",
         "author": "Cut Rates Lawn Care",
         "envato_url": null,
         "envato_item_id": null
       },
-      "status": "published"
+      "status": "local"
     },
     "branding.logo-white": {
       "slot": "branding.logo-white",

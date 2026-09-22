@@ -1,9 +1,13 @@
 "use client"
 
 import { useCallback, useState, type FormEvent } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { TurnstileField } from "@/components/forms/turnstile-field"
 import { cn } from "@/lib/utils"
+import { useAnalytics } from "@/hooks/useAnalytics"
+import { getAttributionPayload } from "@/lib/analytics/core"
+import { splitName } from "@/lib/quote/identity"
 
 type FormState = {
   name: string
@@ -19,6 +23,8 @@ export type ContactFormBlockProps = {
 }
 
 export function ContactFormBlock({ className }: ContactFormBlockProps) {
+  const router = useRouter()
+  const analytics = useAnalytics()
   const [values, setValues] = useState<FormState>(initial)
   const [errors, setErrors] = useState<Partial<Record<keyof FormState | "form", string>>>({})
   const [submitting, setSubmitting] = useState(false)
@@ -31,8 +37,7 @@ export function ContactFormBlock({ className }: ContactFormBlockProps) {
     if (!values.name.trim()) next.name = "Name is required"
     if (!values.email.trim()) next.email = "Email is required"
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) next.email = "Invalid email format"
-    if (!values.message.trim()) next.message = "Message is required"
-    else if (values.message.length < 10) next.message = "Message must be at least 10 characters"
+    if (!values.message.trim()) next.message = "Tell us how we can help"
     return next
   }
 
@@ -46,9 +51,9 @@ export function ContactFormBlock({ className }: ContactFormBlockProps) {
     setErrors({})
     setSubmitting(true)
     try {
-      const nameParts = values.name.trim().split(/\s+/)
-      const firstName = nameParts[0] || values.name
-      const lastName = nameParts.slice(1).join(" ") || "—"
+      const { firstName, lastName } = splitName(values.name)
+      const attr = getAttributionPayload()
+      analytics.onFormStart("contact")
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -62,15 +67,20 @@ export function ContactFormBlock({ className }: ContactFormBlockProps) {
           source: "contact",
           idempotencyKey: crypto.randomUUID(),
           turnstileToken: turnstileToken || undefined,
+          ...attr,
+          leadStatus: "complete",
         }),
       })
-      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string }
+      const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string; requestId?: string }
       if (!res.ok || data.ok === false) {
         setErrors({ form: data.error || "Something went wrong. Please try again." })
+        analytics.onFormError("contact", "form", "submit")
         return
       }
+      analytics.onConversionLead(data.requestId || "contact", 0, "USD")
       setSuccess(true)
       setValues(initial)
+      router.push(`/thank-you?rid=${encodeURIComponent(data.requestId || "")}&source=contact`)
     } catch {
       setErrors({ form: "Network error. Please try again." })
     } finally {

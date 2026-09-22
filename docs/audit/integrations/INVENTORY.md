@@ -16,7 +16,7 @@ The site is a Next.js 14 marketing app with **server-side lead delivery** as the
 
 | Integration | Role | Auth | Config / env | Code touchpoints | Status |
 |-------------|------|------|--------------|------------------|--------|
-| **Go High Level (LeadConnector)** | CRM contact upsert + workflow tags | Private Integration Token (server) | `GHL_PRIVATE_INTEGRATION_TOKEN`, `GHL_LOCATION_ID`, optional `GHL_CF_*`, `GHL_LEAD_TAGS` | `lib/ghl.ts`, `app/api/lead/route.ts`, `app/api/newsletter/route.ts` | Code complete; **Vercel prod env pending** (GHL-OPS-001) |
+| **Go High Level (LeadConnector)** | CRM contact upsert + workflow tags | Private Integration Token (server) | `GHL_PRIVATE_INTEGRATION_TOKEN`, `GHL_LOCATION_ID`, `GHL_PIPELINE_*`, optional `GHL_CF_*`, `GHL_LEAD_TAGS` | `lib/ghl.ts`, `app/api/lead/route.ts`, `app/api/newsletter/route.ts` | Code complete; **Vercel GHL env set 2026-09-22** (GHL-OPS-001). Do not edit live GHL automations. |
 | **FieldPortals** | Customer portal (billing/account) | External SaaS session | `NEXT_PUBLIC_CUSTOMER_PORTAL_URL` | `app/portal/page.tsx`, `lib/site-config.ts`, header/footer CTAs | Redirect/link only; **authz unvalidated** |
 | **Vercel** | Hosting + serverless API routes | Dashboard / git deploy | `vercel.json`, project `v0-cut-rates-lawn-main-page` | All `app/api/*` | Active; install command mismatch with pnpm (see infra audit) |
 | **Google Analytics 4** | Site analytics | N/A (not configured) | `NEXT_PUBLIC_GA_MEASUREMENT_ID` (commented in `.env.example`) | None found | **Not integrated** |

@@ -6,6 +6,7 @@ import { MediaFrame } from "@/components/media/media-frame"
 import { pageWrap } from "@/lib/layout"
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
+import { AnalyticsPhoneLink } from "@/components/analytics/phone-link"
 
 export type InteriorHeroProps = {
   eyebrow?: string
@@ -59,7 +60,13 @@ export function InteriorHero({
             </Button>
             {secondaryHref && secondaryLabel ? (
               <Button asChild variant="ghost" className="max-w-full text-white">
-                <a href={secondaryHref}>{secondaryLabel}</a>
+                {secondaryHref.startsWith("tel:") ? (
+                  <AnalyticsPhoneLink href={secondaryHref} location="interior_hero">
+                    {secondaryLabel}
+                  </AnalyticsPhoneLink>
+                ) : (
+                  <Link href={secondaryHref}>{secondaryLabel}</Link>
+                )}
               </Button>
             ) : null}
           </div>

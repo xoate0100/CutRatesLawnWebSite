@@ -6,10 +6,17 @@ slots:
     fallback: /placeholder.svg?height=800&width=1920
     alt: House with a green lawn under blue sky
   header.logo:
-    asset_id: sha-1804e39e6138
-    variant: w512
-    fallback: /placeholder.svg?height=40&width=180
-    alt: Cut Rates Lawn Care
+    asset_id: sha-d8dd853e8e2e
+    variant: original
+    fallback: /branding/cut-rates-logo.png
+    alt: Cut Rates Lawn Care LLC
+    notes: >
+      Owned stylized lockup from Downloads/webstylizedlogo.png (black knocked out to
+      transparent). Live via public/branding/cut-rates-logo.png. Staged as
+      sha-d8dd853e8e2e; GCS upload blocked until `gcloud auth login`. Then:
+      pnpm run media:publish -- --slot header.logo --category branding --usage logo --force
+      && pnpm run media:sync-site
+
   branding.logo-white:
     asset_id: legacy-logo-white
     variant: original

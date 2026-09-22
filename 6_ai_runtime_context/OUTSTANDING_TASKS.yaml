@@ -2,7 +2,7 @@
 # Status: pending | in_progress | blocked | completed | cancelled
 # Do not put secrets here.
 
-updated: "2026-09-18"
+updated: "2026-09-22"
 source_docs:
   - docs/integrations/GOHIGHLEVEL.md
   - proposals/DEC-GHL-LEADCONNECTOR.yaml
@@ -92,7 +92,7 @@ items:
     title: Website lead nurture workflow (tag website-lead)
     area: gohighlevel
     priority: high
-    status: pending
+    status: blocked
     depends_on: []
     acceptance:
       - Workflow trigger is Contact Tag Added → website-lead
@@ -100,8 +100,13 @@ items:
       - Sends internal staff notification (email and/or SMS)
       - Sends customer thank-you SMS or email (TCPA-safe copy)
     notes: >
-      API upsert + tags already work (lib/ghl.ts). Automation not built yet.
-      Pipeline id F0DVnJbjW0nJMm8HlYpG (New Leads), stage Fresh Lead.
+      2026-09-22: Site-side nurture is live (upsert, website-lead tags, existing
+      Service Requested / Your Message CFs, opportunity on New Leads / Fresh Lead).
+      After PIT rotation + workflows.readonly, get-workflow lists 31 automations.
+      None is named for website-lead. There is no create-workflow API. Do not edit
+      published FB/appointment flows or the draft Form Submission -> Confirmation.
+      Human creates NEW `Website Lead Nurture (cutrateslawn.com)` in GHL UI. See
+      docs/cro/GHL_WORKFLOWS.md.
 
   - id: GHL-WF-002
     title: Source-specific branching (contact vs quote vs newsletter)
@@ -117,17 +122,21 @@ items:
     title: Map website service tags to opportunity naming / pipeline fields
     area: gohighlevel
     priority: medium
-    status: pending
+    status: in_progress
     depends_on: [GHL-WF-001]
     acceptance:
       - service:* tags from site appear on contact and are visible to staff
       - Optional custom fields Service Requested + Your Message populated from env CF IDs
+    notes: >
+      2026-09-22: GHL_CF_SERVICE_ID and GHL_CF_MESSAGE_ID set on Vercel Production
+      + Preview using existing fields (no new custom fields created). Confirm on
+      GHL-TEST-001 that production forms populate them.
 
   - id: GHL-OPS-001
     title: Add GHL_* secrets to Vercel production env
     area: deploy
     priority: high
-    status: pending
+    status: completed
     depends_on: []
     acceptance:
       - GHL_PRIVATE_INTEGRATION_TOKEN and GHL_LOCATION_ID set on Vercel for v0-cut-rates-lawn-main-page
@@ -135,9 +144,11 @@ items:
       - Production contact form creates a tagged contact in GHL
       - Production careers apply (source:careers) creates a tagged contact in GHL
     notes: >
-      2026-09-02 agent: site code paths ready — /api/lead handles contact, quote, and careers.
-      Debug APIs gated in production; /api/contact returns 410. Human must still set Vercel secrets
-      and confirm E2E contact visibility in GHL UI. Do not commit token values.
+      2026-09-22: Production + Preview env set on v0-cut-rates-lawn-main-page
+      (token, location, pipeline, Fresh Lead stage, Service Requested + Your Message
+      CF IDs). PIT rotated the same day; Vercel token upserted and production
+      redeployed (dpl_7W5tE1tGqaUxfK2UPvmZ3P1swwC3 READY). Unrelated env left
+      unchanged. Form/careers E2E remains GHL-TEST-001. Do not commit token values.
 
   - id: GHL-OPS-002
     title: Grant Locations View scope on Private Integration (optional cleanup)
@@ -147,6 +158,9 @@ items:
     depends_on: []
     acceptance:
       - GET /locations/{id} succeeds with PIT (currently returns scope unauthorized; contacts already work)
+    notes: >
+      2026-09-22: workflows.readonly works (get-workflow 200). MCP list_locations
+      still 500 (tool dependency, not the REST locations call). Optional.
 
   - id: GHL-DEC-001
     title: Accept or revise DEC-GHL-LEADCONNECTOR proposal

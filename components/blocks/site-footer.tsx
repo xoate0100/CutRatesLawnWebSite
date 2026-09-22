@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { BrandLogo } from "@/components/brand/brand-logo"
 import { Button } from "@/components/ui/button"
 import { pageWrap } from "@/lib/layout"
 import { NAV_LINKS, SERVICES } from "@/lib/marketing-content"
@@ -6,6 +7,7 @@ import { siteConfig } from "@/lib/site-config"
 import { GOOGLE_MAPS_URL, GOOGLE_RATING_LABEL } from "@/lib/google-reviews"
 import { KWCH_FEATURE } from "@/lib/press"
 import { cn } from "@/lib/utils"
+import { AnalyticsPhoneLink } from "@/components/analytics/phone-link"
 
 const FOOTER_SERVICES = SERVICES.filter((s) =>
   ["landscaping", "lawn-care", "pest-control", "holiday-lights", "commercial", "power-washing"].includes(
@@ -25,16 +27,8 @@ export function SiteFooter({ className }: SiteFooterProps) {
       <div className={cn(pageWrap, "py-12")}>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div className="min-w-0">
-            <Link href="/" className="flex items-center gap-2.5">
-              <span className="grid h-[42px] w-[42px] shrink-0 place-items-center rounded-xl bg-gradient-to-br from-lime to-green-soft font-display text-[1.15rem] font-extrabold text-forest-2">
-                CR
-              </span>
-              <span className="min-w-0 leading-none">
-                <b className="font-display text-[1.15rem] font-extrabold">Cut Rates</b>
-                <small className="block text-[0.62rem] font-semibold uppercase tracking-[0.22em] opacity-70">
-                  Lawn Care
-                </small>
-              </span>
+            <Link href="/" className="inline-flex" aria-label="Cut Rates Lawn Care — home">
+              <BrandLogo height={72} />
             </Link>
             <p className="mt-3 max-w-[34ch] text-[0.9rem] text-white/70">
               Family-owned lawn, landscape, and pest protection for homes and businesses across
@@ -97,9 +91,9 @@ export function SiteFooter({ className }: SiteFooterProps) {
             </p>
             <ul className="mt-3 space-y-2 text-sm text-white/80">
               <li>
-                <a href={`tel:${siteConfig.phone.e164}`} className="hover:text-lime">
+                <AnalyticsPhoneLink href={`tel:${siteConfig.phone.e164}`} location="footer" className="hover:text-lime">
                   {siteConfig.phone.display}
-                </a>
+                </AnalyticsPhoneLink>
               </li>
               <li>
                 <a href={`mailto:${siteConfig.email}`} className="hover:text-lime">

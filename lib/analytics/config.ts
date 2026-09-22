@@ -1,18 +1,21 @@
 /**
  * Env-gated analytics platform IDs. Unset → no-op silently.
+ *
+ * IMPORTANT: Next.js only inlines NEXT_PUBLIC_* into the client bundle when
+ * accessed as a static property (process.env.NEXT_PUBLIC_FOO). Dynamic
+ * process.env[key] stays empty in the browser even when Vercel has the var.
  */
-function readEnv(key: string): string | undefined {
-  const v = process.env[key]
+function trim(v: string | undefined): string | undefined {
   if (!v || !v.trim()) return undefined
   return v.trim()
 }
 
 export const analyticsConfig = {
-  gtmContainerId: readEnv("NEXT_PUBLIC_GTM_CONTAINER_ID"),
-  ga4MeasurementId: readEnv("NEXT_PUBLIC_GA4_MEASUREMENT_ID"),
-  googleAdsConversionId: readEnv("NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID"),
-  googleAdsConversionLabel: readEnv("NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL"),
-  metaPixelId: readEnv("NEXT_PUBLIC_META_PIXEL_ID"),
+  gtmContainerId: trim(process.env.NEXT_PUBLIC_GTM_CONTAINER_ID),
+  ga4MeasurementId: trim(process.env.NEXT_PUBLIC_GA4_MEASUREMENT_ID),
+  googleAdsConversionId: trim(process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_ID),
+  googleAdsConversionLabel: trim(process.env.NEXT_PUBLIC_GOOGLE_ADS_CONVERSION_LABEL),
+  metaPixelId: trim(process.env.NEXT_PUBLIC_META_PIXEL_ID),
 } as const
 
 export function isAnalyticsEnabled(): boolean {
@@ -29,14 +32,14 @@ export function configuredDestinations(): Record<string, string | undefined> {
 
 /** Server-side weekly report credentials (never exposed to client). */
 export const reportConfig = {
-  ga4PropertyId: readEnv("GA4_PROPERTY_ID"),
-  credentialsJson: readEnv("GA4_DATA_API_CREDENTIALS_JSON"),
-  emailTo: readEnv("WEEKLY_REPORT_EMAIL_TO"),
-  emailFrom: readEnv("WEEKLY_REPORT_EMAIL_FROM"),
-  smtpHost: readEnv("SMTP_HOST"),
-  smtpPort: readEnv("SMTP_PORT"),
-  smtpUser: readEnv("SMTP_USER"),
-  smtpPass: readEnv("SMTP_PASS"),
+  ga4PropertyId: trim(process.env.GA4_PROPERTY_ID),
+  credentialsJson: trim(process.env.GA4_DATA_API_CREDENTIALS_JSON),
+  emailTo: trim(process.env.WEEKLY_REPORT_EMAIL_TO),
+  emailFrom: trim(process.env.WEEKLY_REPORT_EMAIL_FROM),
+  smtpHost: trim(process.env.SMTP_HOST),
+  smtpPort: trim(process.env.SMTP_PORT),
+  smtpUser: trim(process.env.SMTP_USER),
+  smtpPass: trim(process.env.SMTP_PASS),
   monthlyLineItemUsd: 449,
 } as const
 

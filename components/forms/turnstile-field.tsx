@@ -22,8 +22,9 @@ declare global {
 /**
  * Renders Cloudflare Turnstile when NEXT_PUBLIC_TURNSTILE_SITE_KEY is set.
  * Static env access required for client-bundle inlining (same rule as GTM).
+ * Do not use optional chaining on process.env.NEXT_PUBLIC_* — Next won't inline it.
  */
-const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() || undefined
+const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
 
 type Props = {
   onToken: (token: string | null) => void

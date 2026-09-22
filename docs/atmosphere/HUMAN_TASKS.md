@@ -39,8 +39,8 @@ Duplicates from the second inbox drop are in `media/archive/already_in_registry/
 
 | ID | Task | Why you | Done when |
 |----|------|---------|-----------|
-| H-GHL-01 | Add Vercel env on project `v0-cut-rates-lawn-main-page`: `GHL_PRIVATE_INTEGRATION_TOKEN`, `GHL_LOCATION_ID`, optional `GHL_CF_SERVICE_ID`, `GHL_CF_MESSAGE_ID` | Secrets | Prod contact creates tagged contact |
-| H-GHL-02 | Build workflow: Contact Tag Added → `website-lead` → opportunity New Leads / Fresh Lead + staff notify + thank-you | GHL UI | Workflow active |
+| H-GHL-01 | Add Vercel env on project `v0-cut-rates-lawn-main-page`: `GHL_PRIVATE_INTEGRATION_TOKEN`, `GHL_LOCATION_ID`, optional `GHL_CF_SERVICE_ID`, `GHL_CF_MESSAGE_ID` | Secrets | **Done 2026-09-22** (env set; E2E is H-GHL-06) |
+| H-GHL-02 | Build **new** workflow only: Contact Tag Added → `website-lead` → staff notify + thank-you. Do not edit existing production automations | GHL UI | Workflow active; confirm no duplicate `website-lead` trigger first |
 | H-GHL-03 | Source branching for `source:contact` / `source:quote` / `source:newsletter` | GHL UI | Paths distinct |
 | H-GHL-04 | Accept or revise `proposals/DEC-GHL-LEADCONNECTOR.yaml` | Governance | Decision recorded |
 | H-GHL-05 | Optional: grant Locations View on Private Integration | GHL admin | `GET /locations/{id}` works |

@@ -1,14 +1,15 @@
 plan_id: ghl-lead-workflows
-current_task: GHL-OPS-001
+current_task: GHL-WF-001
 status: active
-last_run: "2026-08-01"
+last_run: "2026-09-22"
 notes: >
-  Atmosphere S1–S3 code path completed 2026-08-01 (SYSTEM, tokens, home/about/services/chrome,
-  mediaSrc cutover, Envato proposals). Human list: docs/atmosphere/HUMAN_TASKS.md.
-  GHL API + Cursor MCP verified. Outstanding work is workflows, Vercel env, and E2E.
+  GHL-OPS-001 completed; PIT rotated 2026-09-22 and production redeployed
+  (dpl_7W5tE1tGqaUxfK2UPvmZ3P1swwC3 READY). GHL-WF-001 blocked: no create-workflow
+  API. get-workflow listed 31 automations; none named website-lead. Do not edit
+  existing production automations. Human creates NEW workflow in GHL UI. E2E is
+  GHL-TEST-001.
   Full backlog: 6_ai_runtime_context/OUTSTANDING_TASKS.yaml
 next_suggested:
-  - GHL-OPS-001
-  - ATM-MEDIA-001
   - GHL-WF-001
   - GHL-TEST-001
+  - GHL-WF-003

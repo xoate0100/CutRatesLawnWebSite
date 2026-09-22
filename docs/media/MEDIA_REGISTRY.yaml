@@ -2089,4 +2089,51 @@ assets:
     ingested_by: Andy
     notes: ""
     updated_at: 2026-09-18T14:54:30.399Z
-updated_at: 2026-09-18T14:55:22.722Z
+  - asset_id: sha-d8dd853e8e2e
+    slug: webstylizedlogo
+    status: staged
+    envato_item_id: null
+    envato_url: null
+    title: webstylizedlogo
+    author: null
+    license_notes: Envato Elements — confirm license before publish
+    downloaded_at: 2026-09-22T20:19:14.102Z
+    source_filename: webstylizedlogo.png
+    sha256: d8dd853e8e2e4f0731cffa010e1201074dd1ede4c6d0e9e9ee1607b0469f15ea
+    bytes: 52878
+    width: 775
+    height: 703
+    mime: image/png
+    bucket: site_photo_storage
+    object_prefix: cutrateslawn/prod/branding/header-logo/sha-d8dd853e8e2e
+    public_base_url: https://storage.googleapis.com/site_photo_storage
+    variants:
+      - name: original
+        file: media/processed/sha-d8dd853e8e2e/original.png
+        width: 775
+        height: 703
+        format: png
+        bytes: 52878
+      - name: w512
+        file: media/processed/sha-d8dd853e8e2e/w512.webp
+        width: 512
+        height: 464
+        format: webp
+        bytes: 55056
+      - name: w256
+        file: media/processed/sha-d8dd853e8e2e/w256.webp
+        width: 256
+        height: 232
+        format: webp
+        bytes: 23558
+    slots:
+      - header.logo
+    alt: Cut Rates Lawn Care LLC
+    tags: []
+    usage: logo
+    category: branding
+    staged_path: media/staging/sha-d8dd853e8e2e.png
+    ingested_by: Andy
+    notes: ""
+    updated_at: 2026-09-22T20:20:27.068Z
+updated_at: 2026-09-22T20:20:27.069Z

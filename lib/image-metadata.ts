@@ -138,11 +138,11 @@ export const IMAGE_METADATA: Record<ImageKey, ImageMetadata> = {
   },
   LOGO: {
     key: "LOGO",
-    alt: "Cut Rates Lawn Care logo",
-    width: 200,
-    height: 80,
+    alt: "Cut Rates Lawn Care LLC",
+    width: 775,
+    height: 703,
     priority: true,
-    description: "Company logo with green color scheme and lawn imagery",
+    description: "Stylized circular brand lockup with arched company name",
     emotionalPurpose: "Brand recognition and professionalism",
   },
   LOGO_WHITE: {

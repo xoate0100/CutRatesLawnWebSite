@@ -37,7 +37,7 @@ export function createLocalBusinessData(companyInfo: any): WithContext<LocalBusi
       longitude: companyInfo.longitude || "-74.0060",
     },
     openingHours: companyInfo.hours || "Mo-Fr 08:00-18:00, Sa 09:00-16:00",
-    image: companyInfo.logo?.data?.attributes?.url || "/images/logo.png",
+    image: companyInfo.logo?.data?.attributes?.url || "/branding/cut-rates-logo.png",
     priceRange: "$$",
     paymentAccepted: "Cash, Credit Card",
     currenciesAccepted: "USD",
@@ -65,7 +65,7 @@ export function createServiceData(service: any): any {
       price: service.attributes.price,
       priceCurrency: "USD",
     },
-    image: service.attributes.image?.data?.attributes?.url || "/images/logo.png",
+    image: service.attributes.image?.data?.attributes?.url || "/branding/cut-rates-logo.png",
     url: `https://cutrateslawn.com/services/${service.attributes.slug}`,
   }
 }

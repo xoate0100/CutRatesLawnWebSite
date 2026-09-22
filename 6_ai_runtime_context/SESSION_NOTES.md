@@ -1,6 +1,6 @@
 # Session notes (durable; AI_CONTEXT.md is regenerated)
 
-updated: "2026-09-18"
+updated: "2026-09-22"
 
 ## Package manager
 Use **pnpm** (`pnpm@10.26.0`). Vercel install/build use pnpm (`vercel.json`).
@@ -24,11 +24,24 @@ Published preferred Envato licenses from inbox:
 `pnpm run media:validate` ok. Commit `docs/media/*` + `lib/generated/media-map.json` for prod to pick up.
 
 ## Still blocked without interactive auth
-- **GHL-OPS-001 / Vercel env:** no local `.env`, Vercel CLI needs `vercel login`, then set `GHL_*` (and optional Turnstile) on `v0-cut-rates-lawn-main-page`.
-- **GHL-WF-001–003:** HighLevel workflow UI (or LeadConnector MCP — not connected in this workspace).
+- **GHL-WF-001:** HighLevel has no create-workflow API. After PIT rotation, `get-workflow` listed 31 automations; none is named for `website-lead`. Do **not** edit published FB/appointment flows or draft `Form Submission -> Confirmation`. Human creates NEW `Website Lead Nurture (cutrateslawn.com)` in GHL UI (`docs/cro/GHL_WORKFLOWS.md`).
+- **GHL-TEST-001:** E2E form → GHL after production redeploy `dpl_7W5tE1tGqaUxfK2UPvmZ3P1swwC3` is READY (rotated PIT).
 
-## Done 2026-09-04 (agent)
-- **QUALITY-TS-001:** `tsc --noEmit` clean; `ignoreBuildErrors: false`; CI Typecheck required. Legacy Strapi/admin/auth files quarantined with leading `// @ts-nocheck`.
+## GHL PIT rotation — 2026-09-22
+- New token written in `.env.local` (no repo `.env` file). Synced to Vercel Production + Preview, Cursor user `mcp.json` LeadConnector header, and Windows User env. Old token must not be used.
+- LeadConnector MCP re-authenticated after header change. No GHL workflow/pipeline/tag/field was created or edited.
+
+## GHL Vercel env (GHL-OPS-001) — completed 2026-09-22
+- Project `v0-cut-rates-lawn-main-page` Production + Preview: `GHL_PRIVATE_INTEGRATION_TOKEN`, `GHL_LOCATION_ID`, `GHL_PIPELINE_ID`, `GHL_PIPELINE_STAGE_ID` (existing Fresh Lead), `GHL_CF_SERVICE_ID`, `GHL_CF_MESSAGE_ID` (existing Service Requested / Your Message).
+- Unrelated Vercel env left unchanged. `cutrates-homepage-preview` not touched.
+- No HighLevel workflows, pipelines, tags, or custom fields were created or edited. Tag `website-lead` already existed (test contacts only).
+- Production redeploy of current `main` started so serverless picks up stage + CF IDs.
+
+## Brand logo — 2026-09-22
+- Operator asset `Downloads/webstylizedlogo.png` → transparent PNG at `public/branding/cut-rates-logo.png`.
+- Header + footer use `BrandLogo` (`header.logo` slot → local branding path). Favicon: `app/icon.png`.
+- GCS `media:publish` blocked on expired gcloud auth; staged as `sha-d8dd853e8e2e`. After `gcloud auth login`, republish to CDN.
+
 
 ## Verify
 `pnpm run verify`, `pnpm run media:validate`, `pnpm run test:e2e`

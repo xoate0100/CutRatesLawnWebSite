@@ -11,15 +11,14 @@
 ## P0
 
 ### ALL-F-101 — GTM not active in production browser bundle
-- **status:** Patched-unshipped (env set; needs force rebuild)
+- **status:** Patched-unshipped (root cause: dynamic `process.env[key]` blocked Next inlining; fix `1c4afc8`)
 - **severity:** critical · **priority:** P0
 - **affected:** all pages; measurement for Ads/$449 line
-- **method:** test (live dataLayer `gtm_configured: false`) + examine (Vercel env)
-- **actual:** GTM ID in SSR fallback only; client lacked `NEXT_PUBLIC_GTM_CONTAINER_ID` at last build
-- **evidence:** Vercel `NEXT_PUBLIC_GTM_CONTAINER_ID=GTM-KGVZJ93G` (prod+preview); `NEXT_PUBLIC_SITE_URL=https://cutrateslawn.com` added 2026-09-22
-- **fix:** Force Production redeploy with build cache off; verify client config + network hit to googletagmanager.com
-- **regression:** Playwright/dataLayer assert `gtm_configured: true` on `/`
-
+- **method:** test (live dataLayer `gtm_configured: false`) + examine (Vercel env + client chunks)
+- **actual:** Env present on Vercel; SSR noscript had GTM-KGVZJ93G; client JS lacked ID because `lib/analytics/config.ts` used dynamic env lookup
+- **evidence:** Client chunk search post-f8a6500 found no `GTM-KGVZJ93G`; `isAnalyticsEnabled()` false in dataLayer
+- **fix:** Static `process.env.NEXT_PUBLIC_GTM_CONTAINER_ID` access (`1c4afc8`); redeploy and confirm gtm.js + `gtm_configured: true`
+- **regression:** Playwright/dataLayer assert `gtm_configured: true` on `/` after Accept
 ### ALL-F-102 — Canonicals / sitemap use localhost
 - **status:** Patched-unshipped (env set; needs redeploy)
 - **severity:** critical · **priority:** P0

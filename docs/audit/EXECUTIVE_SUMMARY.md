@@ -2,15 +2,15 @@
 
 **Date:** 2026-09-22  
 **Mode:** `/audit-all` discovery + Critical/High production confirmation (live site + Vercel env + code)  
-**Verdict:** **Not release-ready** — open P0/P1 remain (lead E2E unverified; Redis/Turnstile ops; measurement incomplete until redeploy)
+**Verdict:** **Not release-ready** — lead E2E + Upstash still open; Critical measurement/SSR/GTM **closed live**
 
 ## Gate counts (de-duplicated)
 
 | Priority | Open | Closed this pass | Notes |
 |----------|-----:|-----------------:|-------|
-| **P0** | **2** | 2 patched in tree | Empty SSR HTML; GTM/SITE_URL bake — need force redeploy |
-| **P1** | **5** | 6 patched in tree | Lead path, CSP, conversions, debug routes, fake emails |
-| P2 | 8+ | — | Media/content/consent decisions |
+| **P0** | **0** | 3 closed live | GTM, SITE_URL, SSR HTML |
+| **P1** | **2** | 6+ shipped | Lead E2E + Turnstile/Upstash ops remain |
+| P2 | 6+ | — | Consent owner decision; content/media polish |
 | P3 | — | — | Docs/polish |
 
 **Security gate:** Not security-ready until Turnstile/Upstash posture is decided and public debug surface stays gone after deploy. See [security/FINDINGS.md](security/FINDINGS.md).

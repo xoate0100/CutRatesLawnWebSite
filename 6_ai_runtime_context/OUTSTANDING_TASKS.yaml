@@ -190,14 +190,16 @@ items:
     title: Force Production redeploy after NEXT_PUBLIC_* + SSR/CSP patches
     area: deploy
     priority: critical
-    status: pending
+    status: completed
     depends_on: []
     acceptance:
       - Production redeploy with build cache cleared
       - Client dataLayer gtm_configured true; sitemap host cutrateslawn.com
       - View Source shows H1 on an area×service page
     notes: >
-      2026-09-22: SITE_URL + GTM already on Vercel; code patches in working tree.
+      2026-09-22: Shipped f8a6500. Prod verify: sitemap cutrateslawn.com, SSR H1 on
+      /service-areas/wichita/lawn-care, GTM-KGVZJ93G in HTML, /debug+/api-test 404.
+      Deploy dpl_FFzBzAsrCqk13B2u3mRckHD4gsuJ READY (+ force rebuild dpl_6tqJw7…).
 
   - id: LEAD-OPS-001
     title: Upstash Redis for durable lead retry (optional Turnstile pair)

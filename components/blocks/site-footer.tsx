@@ -77,21 +77,22 @@ export function SiteFooter({ className }: SiteFooterProps) {
             <ul className="mt-3 space-y-2 text-sm text-white/80">
               {NAV_LINKS.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="hover:text-lime">
-                    {l.label}
-                  </Link>
+                  {l.external ? (
+                    <a
+                      href={l.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-lime"
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link href={l.href} className="hover:text-lime">
+                      {l.label}
+                    </Link>
+                  )}
                 </li>
               ))}
-              <li>
-                <a
-                  href={siteConfig.customerPortalUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-lime"
-                >
-                  Customer Portal
-                </a>
-              </li>
             </ul>
           </div>
 

@@ -92,10 +92,16 @@ test.describe("Prospect user journey", () => {
     await expect(page.getByRole("link", { name: /Go to contact|Contact form/i }).first()).toBeVisible()
   })
 
-  test("customer portal link is present in header", async ({ page }) => {
+  test("customer portal link is in primary nav and footer", async ({ page }) => {
     await page.goto("/")
-    const portalLink = page.getByRole("link", { name: /Customer Portal/i }).first()
-    await expect(portalLink).toBeVisible()
-    await expect(portalLink).toHaveAttribute("href", /pestportals|portal/)
+    const primaryNav = page.getByRole("navigation", { name: "Primary" })
+    const portalInNav = primaryNav.getByRole("link", { name: /Customer Portal/i })
+    await expect(portalInNav).toBeVisible()
+    await expect(portalInNav).toHaveAttribute("href", /pestportals\.com/)
+
+    const footer = page.locator("footer")
+    const portalInFooter = footer.getByRole("link", { name: /Customer Portal/i })
+    await expect(portalInFooter).toBeVisible()
+    await expect(portalInFooter).toHaveAttribute("href", /pestportals\.com/)
   })
 })

@@ -1,3 +1,5 @@
+import { siteConfig } from "@/lib/site-config"
+
 export type ServiceItem = {
   id: string
   title: string
@@ -1488,7 +1490,14 @@ export const RIBBON_ITEMS = [
   "Commercial",
 ]
 
-export const NAV_LINKS = [
+export type NavLink = {
+  label: string
+  href: string
+  /** Opens in a new tab (external customer systems). */
+  external?: boolean
+}
+
+export const NAV_LINKS: readonly NavLink[] = [
   { label: "Services", href: "/services" },
   { label: "Areas", href: "/service-areas" },
   { label: "Our Work", href: "/our-work" },
@@ -1496,4 +1505,9 @@ export const NAV_LINKS = [
   { label: "Careers", href: "/careers" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
-] as const
+  {
+    label: "Customer Portal",
+    href: siteConfig.customerPortalUrl,
+    external: true,
+  },
+]

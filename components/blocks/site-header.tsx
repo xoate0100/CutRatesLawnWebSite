@@ -7,10 +7,51 @@ import { BrandLogo } from "@/components/brand/brand-logo"
 import { Button } from "@/components/ui/button"
 import { pageWrap } from "@/lib/layout"
 import { GoogleRatingBadge } from "@/components/trust/google-rating-badge"
-import { NAV_LINKS } from "@/lib/marketing-content"
+import { NAV_LINKS, type NavLink } from "@/lib/marketing-content"
 import { siteConfig } from "@/lib/site-config"
 import { trackPhoneClick } from "@/lib/analytics/core"
 import { cn } from "@/lib/utils"
+
+function NavItem({
+  link,
+  className,
+  onNavigate,
+  withUnderline = false,
+}: {
+  link: NavLink
+  className?: string
+  onNavigate?: () => void
+  withUnderline?: boolean
+}) {
+  const label = withUnderline ? (
+    <>
+      {link.label}
+      <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-lime transition-transform duration-200 group-hover:scale-x-100" />
+    </>
+  ) : (
+    link.label
+  )
+
+  if (link.external) {
+    return (
+      <a
+        href={link.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={className}
+        onClick={onNavigate}
+      >
+        {label}
+      </a>
+    )
+  }
+
+  return (
+    <Link href={link.href} className={className} onClick={onNavigate}>
+      {label}
+    </Link>
+  )
+}
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
@@ -31,16 +72,17 @@ export function SiteHeader() {
           <BrandLogo height={58} priority className="drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]" />
         </Link>
 
-        <nav className="hidden items-center gap-5 font-semibold md:flex" aria-label="Primary">
+        <nav
+          className="hidden items-center gap-4 font-semibold lg:gap-5 md:flex"
+          aria-label="Primary"
+        >
           {NAV_LINKS.map((link) => (
-            <Link
+            <NavItem
               key={link.href}
-              href={link.href}
+              link={link}
+              withUnderline
               className="group relative py-1 text-[0.92rem] opacity-85 hover:opacity-100"
-            >
-              {link.label}
-              <span className="absolute bottom-0 left-0 h-0.5 w-full origin-left scale-x-0 bg-lime transition-transform duration-200 group-hover:scale-x-100" />
-            </Link>
+            />
           ))}
         </nav>
 
@@ -52,15 +94,6 @@ export function SiteHeader() {
           onClick={() => trackPhoneClick("header_desktop")}
         >
           {siteConfig.phone.display}
-        </a>
-
-        <a
-          href={siteConfig.customerPortalUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hidden text-[0.9rem] font-semibold opacity-85 hover:opacity-100 md:inline"
-        >
-          Customer Portal
         </a>
 
         <Button asChild variant="lime" size="sm" className="hidden md:inline-flex">
@@ -88,14 +121,12 @@ export function SiteHeader() {
         >
           <nav className="flex flex-col gap-3 font-semibold" aria-label="Mobile">
             {NAV_LINKS.map((link) => (
-              <Link
+              <NavItem
                 key={link.href}
-                href={link.href}
+                link={link}
                 className="py-2 opacity-90"
-                onClick={() => setOpen(false)}
-              >
-                {link.label}
-              </Link>
+                onNavigate={() => setOpen(false)}
+              />
             ))}
             <a
               href={`tel:${siteConfig.phone.e164}`}
@@ -103,15 +134,6 @@ export function SiteHeader() {
               onClick={() => trackPhoneClick("header_mobile")}
             >
               {siteConfig.phone.display}
-            </a>
-            <a
-              href={siteConfig.customerPortalUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="py-2 opacity-90"
-              onClick={() => setOpen(false)}
-            >
-              Customer Portal
             </a>
             <Button asChild variant="lime" className="mt-2 w-full">
               <Link href="/quote" onClick={() => setOpen(false)}>

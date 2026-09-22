@@ -11,29 +11,21 @@
 ## P0
 
 ### ALL-F-101 — GTM not active in production browser bundle
-- **status:** Patched-unshipped (root cause: dynamic `process.env[key]` blocked Next inlining; fix `1c4afc8`)
+- **status:** Closed (verified live 2026-09-22)
 - **severity:** critical · **priority:** P0
-- **affected:** all pages; measurement for Ads/$449 line
-- **method:** test (live dataLayer `gtm_configured: false`) + examine (Vercel env + client chunks)
-- **actual:** Env present on Vercel; SSR noscript had GTM-KGVZJ93G; client JS lacked ID because `lib/analytics/config.ts` used dynamic env lookup
-- **evidence:** Client chunk search post-f8a6500 found no `GTM-KGVZJ93G`; `isAnalyticsEnabled()` false in dataLayer
-- **fix:** Static `process.env.NEXT_PUBLIC_GTM_CONTAINER_ID` access (`1c4afc8`); redeploy and confirm gtm.js + `gtm_configured: true`
-- **regression:** Playwright/dataLayer assert `gtm_configured: true` on `/` after Accept
+- **root_cause:** Dynamic `process.env[key]` prevented Next from inlining `NEXT_PUBLIC_GTM_CONTAINER_ID` into client JS (SSR noscript still worked)
+- **fix:** Static env access (`1c4afc8`); deploy `dpl_5FqorFgARtrrDm7ezEABjzXjmnk5`
+- **evidence:** Live `gtm_configured: true`; network `gtm.js?id=GTM-KGVZJ93G` + GA4 `G-5X2990G1ZP` + Ads `AW-16564037616`
+
 ### ALL-F-102 — Canonicals / sitemap use localhost
-- **status:** Patched-unshipped (env set; needs redeploy)
-- **severity:** critical · **priority:** P0
-- **affected:** sitemap.xml, robots, og:url, LocalBusiness JSON-LD
-- **actual:** `NEXT_PUBLIC_SITE_URL` missing at last build → `http://localhost:3000`
-- **fix:** Same force redeploy as ALL-F-101
-- **regression:** Fetch prod `/sitemap.xml` — host must be `cutrateslawn.com`
+- **status:** Closed (verified live)
+- **fix:** `NEXT_PUBLIC_SITE_URL=https://cutrateslawn.com` + redeploy
+- **evidence:** Prod `/sitemap.xml` hosts `cutrateslawn.com`
 
 ### ALL-F-103 — Empty SSR HTML (Suspense around entire tree)
-- **status:** Patched-unshipped
-- **severity:** critical · **priority:** P0
-- **affected:** 77 area×service pages + sitewide H1/copy
-- **root_cause:** `AnalyticsProvider` used `useSearchParams` and wrapped `{children}` in Suspense
-- **fix:** Provider returns `null`; Suspense only around provider sibling (`app/providers.tsx`)
-- **regression:** `curl` / View Source must show H1 on `/service-areas/wichita/lawn-care`
+- **status:** Closed (verified live)
+- **fix:** AnalyticsProvider side-effect sibling under Suspense (`f8a6500`)
+- **evidence:** Fetch of `/service-areas/wichita/lawn-care` contains H1; `/debug` and `/api-test` return 404
 
 ---
 

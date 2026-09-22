@@ -12,7 +12,8 @@ import { pageWrap } from "@/lib/layout"
 
 export function ThankYouClient({ service }: { service?: string }) {
   const sp = useSearchParams()
-  const rid = sp.get("rid") || "unknown"
+  const ridRaw = sp.get("rid")
+  const rid = ridRaw && ridRaw !== "unknown" ? ridRaw : null
   const area = sp.get("area") || ""
   const amt = Number(sp.get("amt") || 0)
   const svc = (service || sp.get("service") || "") as QuoteServiceId | ""
@@ -20,6 +21,8 @@ export function ThankYouClient({ service }: { service?: string }) {
   const def = svc ? getQuoteService(svc) : undefined
 
   useEffect(() => {
+    // Only count real submits — direct visits / refreshes without rid must not convert.
+    if (!rid) return
     const key = `cro_conv_${rid}`
     if (sessionStorage.getItem(key)) return
     sessionStorage.setItem(key, "1")
@@ -44,7 +47,7 @@ export function ThankYouClient({ service }: { service?: string }) {
           {area ? ` in ${area}` : ""} and share a clear next step. This page is your receipt.
         </p>
       ) : null}
-      {rid !== "unknown" ? <p className="mt-2 text-xs text-sage">Reference: {rid}</p> : null}
+      {rid ? <p className="mt-2 text-xs text-sage">Reference: {rid}</p> : null}
 
       <div className="mt-8 flex flex-wrap gap-3">
         <Button asChild variant="lime">
@@ -53,7 +56,7 @@ export function ThankYouClient({ service }: { service?: string }) {
           </AnalyticsPhoneLink>
         </Button>
         <Button asChild variant="outline">
-          <Link href="/referral">Refer a neighbor</Link>
+          <Link href="/contact">Contact us</Link>
         </Button>
         <Button asChild variant="ghost">
           <Link href="/">Back home</Link>

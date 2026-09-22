@@ -1471,7 +1471,7 @@ export function testimonialsForArea(areaName: string): TestimonialItem[] {
 }
 
 export const ANNOUNCEMENT_ITEMS = [
-  "4.8★ on Google from 24 reviews",
+  "4.8★ on Google from 32 reviews",
   "As seen on KWCH",
   "Termites · rodents · exclusions · bed bugs",
   "Free quotes in about 2 minutes — no contracts",

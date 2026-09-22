@@ -13,8 +13,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <ThemeProvider attribute="class" defaultTheme="light">
       <AuthProvider>
         <ReviewsProvider>
+          {children}
           <Suspense fallback={null}>
-            <AnalyticsProvider>{children}</AnalyticsProvider>
+            <AnalyticsProvider />
           </Suspense>
         </ReviewsProvider>
       </AuthProvider>

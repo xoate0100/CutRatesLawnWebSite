@@ -35,11 +35,25 @@ test.describe("CRO measurement", () => {
 })
 
 test.describe("CRO continuity", () => {
-  test("deep link lands on estimate with hydrated values", async ({ page }) => {
+  test("deep link lands on property step with address (not estimate)", async ({ page }) => {
     await page.goto("/quote?service=mowing&size=7500&property=residential&frequency=biweekly")
+    await expect(page.getByText("2. Property")).toBeVisible()
+    await expect(page.getByLabel(/address/i).or(page.getByText(/address/i).first())).toBeVisible()
     await expect(page.getByText("3. Estimate")).toBeVisible()
-    await expect(page.getByText(/7,500|7500/).first()).toBeVisible()
-    await expect(page.getByText(/\$\d+/).first()).toBeVisible()
+  })
+
+  test("thank-you without rid does not fire conversion_lead", async ({ page }) => {
+    await page.addInitScript(() => {
+      ;(window as unknown as { dataLayer: unknown[] }).dataLayer = []
+    })
+    await page.goto("/thank-you/mowing")
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible()
+    await page.waitForTimeout(1500)
+    const fired = await page.evaluate(() => {
+      const dl = (window as unknown as { dataLayer?: Array<Record<string, unknown>> }).dataLayer || []
+      return dl.some((e) => e.event === "conversion_lead")
+    })
+    expect(fired).toBe(false)
   })
 })
 

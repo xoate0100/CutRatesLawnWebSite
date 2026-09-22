@@ -157,15 +157,15 @@
     },
     "services.aeration": {
       "slot": "services.aeration",
-      "asset_id": "sha-df83cbfdd6a5",
+      "asset_id": "sha-5c1d1dd0095b",
       "variant": "w800",
-      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-aeration/sha-df83cbfdd6a5/w800.webp",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-fertilization/sha-5c1d1dd0095b/w800.webp",
       "fallback": "/placeholder.svg?height=480&width=720",
-      "alt": "Water droplets on green grass",
+      "alt": "Crew treating lawn soil — interim stand-in until core-aeration photo ships",
       "width": 800,
       "height": 533,
       "attribution": {
-        "title": "Water droplets on green grass field",
+        "title": "Man fertilizing lawn with spreader in suburban yard",
         "author": "Envato Elements (attribution pending)",
         "envato_url": null,
         "envato_item_id": null
@@ -685,16 +685,16 @@
     },
     "services.hardscaping": {
       "slot": "services.hardscaping",
-      "asset_id": "sha-17ae8109f02b",
+      "asset_id": "sha-f22b5ee0b651",
       "variant": "w1920",
-      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/library/unassigned/sha-17ae8109f02b/w1920.webp",
+      "url": "https://storage.googleapis.com/site_photo_storage/cutrateslawn/prod/services/services-cleanup/sha-f22b5ee0b651/w1920.webp",
       "fallback": "/placeholder.jpg?height=200&width=300",
-      "alt": "Hardscaping service",
+      "alt": "Crew shaping outdoor landscape — interim stand-in until patio hardscape photo ships",
       "width": 1920,
-      "height": 1341,
+      "height": 1280,
       "attribution": {
-        "title": "Suburban home exterior with manicured lawn",
-        "author": "Envato Elements (attribution pending)",
+        "title": "professional-landscaper-trimming-tall-grass-with-s-2026-07-09-19-44-04-utc",
+        "author": null,
         "envato_url": null,
         "envato_item_id": null
       },

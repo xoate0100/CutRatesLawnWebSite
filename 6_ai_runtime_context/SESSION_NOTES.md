@@ -37,11 +37,17 @@ Published preferred Envato licenses from inbox:
 - No HighLevel workflows, pipelines, tags, or custom fields were created or edited. Tag `website-lead` already existed (test contacts only).
 - Production redeploy of current `main` started so serverless picks up stage + CF IDs.
 
-## Brand logo — 2026-09-22
-- Operator asset `Downloads/webstylizedlogo.png` → transparent PNG at `public/branding/cut-rates-logo.png`.
-- Header + footer use `BrandLogo` (`header.logo` slot → local branding path). Favicon: `app/icon.png`.
-- GCS `media:publish` blocked on expired gcloud auth; staged as `sha-d8dd853e8e2e`. After `gcloud auth login`, republish to CDN.
+## Production cutover — 2026-09-22
+- Merged `cro/phase-1-measurement` → `main` (`7381930`); Vercel production READY.
+- Cloudflare DNS: apex `cutrateslawn.com` A → `76.76.21.21` (Vercel); `www` CNAME → `cname.vercel-dns.com` (308 to apex). Old AWS origin was `3.21.117.17`.
+- Vercel domains added: `cutrateslawn.com`, `www.cutrateslawn.com`. Cache purged. `new.cutrateslawn.com` left as preview.
 
+## /audit-all Critical pass — 2026-09-22
+- Confirmed live: GTM off (`gtm_configured: false`), SITE_URL missing at last build, SSR emptied by AnalyticsProvider+Suspense, no TURNSTILE_*/UPSTASH_* on Vercel, GHL_* present.
+- Env: `NEXT_PUBLIC_SITE_URL=https://cutrateslawn.com`; GTM ID confirmed Production+Preview.
+- Code patched for force redeploy: SSR provider, CSP, funnel memo, thank-you rid gate, partial Turnstile, deep-link address, debug route removal, review count 32, no fake emails, referral/certs honesty, interim media remaps.
+- Human still: GHL-TEST-001; Upstash; Turnstile both-or-neither; consent default owner decision.
+- Audit SoT: `docs/audit/{EXECUTIVE_SUMMARY,FINDINGS,INDEX,COVERAGE_MATRIX,REMEDIATION_PROMPT,LAYOUT}.md`.
 
 ## Verify
 `pnpm run verify`, `pnpm run media:validate`, `pnpm run test:e2e`

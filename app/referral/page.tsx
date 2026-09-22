@@ -37,9 +37,8 @@ export default function ReferralPage() {
           <div className="container mx-auto px-4">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">Refer a Friend</h1>
             <p className="text-xl mb-8 max-w-3xl">
-              {/* TODO(owner-approval): Confirm referral discount amounts ($50 / 20%) before advertising as policy. */}
-              Share Cut Rates Lawn Care with neighbors. Rewards listed below are pending owner confirmation — ask us
-              when you refer someone.
+              Share Cut Rates Lawn Care with neighbors. Ask us about referral rewards when someone you send becomes a
+              customer — we confirm amounts with you personally.
             </p>
           </div>
         </section>
@@ -65,7 +64,7 @@ export default function ReferralPage() {
                     icon: DollarSign,
                     title: "Ask About Rewards",
                     description:
-                      "TODO(owner-approval): Published credit amounts require owner approval before we promise them.",
+                      "We’ll confirm any referral credit with you after your neighbor books — amounts are not advertised as fixed policy.",
                   },
                 ].map((step, index) => (
                   <Card key={index} className="text-center">

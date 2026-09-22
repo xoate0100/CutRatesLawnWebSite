@@ -95,7 +95,7 @@ export function QuoteFunnel() {
   )
   const [serviceId, setServiceId] = useState<QuoteServiceId | "">(resolved)
   const [step, setStep] = useState<Step>(() => {
-    if (resolved && isEstimable(resolved) && initial.size && initial.property && initial.frequency) return "estimate"
+    // Never skip Property/address — deep links (e.g. homepage mowing) used to jump to estimate.
     if (resolved) return "details"
     return "service"
   })
@@ -259,17 +259,20 @@ export function QuoteFunnel() {
       }
     }
     const qualified = qualifyAddress(values.address || "", areaSlug)
+    const email = values.email?.trim() || ""
     const body: Record<string, unknown> = {
       firstName: firstName || "Guest",
       lastName,
-      email: values.email?.trim() || `quote.${phone.replace(/\D/g, "").slice(-10) || "unknown"}@leads.cutrateslawn.com`,
+      // Never invent @leads.cutrateslawn.com — empty email is fine for GHL phone-first leads.
+      email,
       phone,
       service: GHL_SERVICE_LABELS[serviceId],
       message: values.notes || `Quote request for ${GHL_SERVICE_LABELS[serviceId]}.`,
       source: "quote",
       idempotencyKey,
       companyWebsite: values.companyWebsite || "",
-      turnstileToken: turnstileToken || undefined,
+      // Partial capture must not spend the one-shot Turnstile token.
+      turnstileToken: status === "complete" ? turnstileToken || undefined : undefined,
       address: values.address,
       areaSlug: qualified.matchedSlug || areaSlug || undefined,
       serviceId,

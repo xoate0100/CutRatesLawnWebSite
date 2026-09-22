@@ -4,7 +4,7 @@
  * these 5-star quotes are the production fallback (from the current Google listing).
  */
 export const GOOGLE_RATING = 4.8
-export const GOOGLE_REVIEW_COUNT = 24
+export const GOOGLE_REVIEW_COUNT = 32
 export const GOOGLE_MAPS_URL = "https://maps.app.goo.gl/hzNhwvqRi3TMVGTE8"
 export const GOOGLE_RATING_LABEL = `${GOOGLE_RATING}★ Google`
 

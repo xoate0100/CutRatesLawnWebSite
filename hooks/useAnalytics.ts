@@ -1,4 +1,4 @@
-import { useCallback } from "react"
+import { useCallback, useMemo } from "react"
 import {
   trackAreaView,
   trackConversionLead,
@@ -63,17 +63,32 @@ export function useAnalytics() {
     [],
   )
 
-  return {
-    onServiceView,
-    onAreaView,
-    onFunnelStep,
-    onPhoneClick,
-    onConversionLead,
-    onFormStart,
-    onFormFieldEngage,
-    onFormStepComplete,
-    onFormAbandon,
-    onPartialFormFill,
-    onFormError,
-  }
+  return useMemo(
+    () => ({
+      onServiceView,
+      onAreaView,
+      onFunnelStep,
+      onPhoneClick,
+      onConversionLead,
+      onFormStart,
+      onFormFieldEngage,
+      onFormStepComplete,
+      onFormAbandon,
+      onPartialFormFill,
+      onFormError,
+    }),
+    [
+      onServiceView,
+      onAreaView,
+      onFunnelStep,
+      onPhoneClick,
+      onConversionLead,
+      onFormStart,
+      onFormFieldEngage,
+      onFormStepComplete,
+      onFormAbandon,
+      onPartialFormFill,
+      onFormError,
+    ],
+  )
 }

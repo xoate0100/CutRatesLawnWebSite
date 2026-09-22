@@ -122,7 +122,10 @@ export async function upsertLeadContact(lead: GhlLeadInput): Promise<GhlUpsertRe
   }
 
   const name = `${lead.firstName} ${lead.lastName}`.trim()
-  const fakeEmail = /@leads\.cutrateslawn\.com$/i.test(lead.email) || /@applicants\.cutrateslawn\.com$/i.test(lead.email)
+  const fakeEmail =
+    !lead.email ||
+    /@leads\.cutrateslawn\.com$/i.test(lead.email) ||
+    /@applicants\.cutrateslawn\.com$/i.test(lead.email)
   const body: Record<string, unknown> = {
     locationId,
     firstName: lead.firstName,
@@ -130,8 +133,8 @@ export async function upsertLeadContact(lead: GhlLeadInput): Promise<GhlUpsertRe
     name,
     source: `website:${lead.source}`,
   }
+  // Omit placeholder / invented emails so GHL workflows never mailbounce sender reputation.
   if (lead.email && !fakeEmail) body.email = lead.email
-  else if (lead.email) body.email = lead.email
   if (lead.phone) body.phone = lead.phone
 
   const customFields = envCustomFields(lead)

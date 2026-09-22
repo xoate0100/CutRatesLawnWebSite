@@ -1,135 +1,131 @@
 # Merged Findings Register
 
-**Orchestrator:** `/audit-all` (discovery)  
-**Date:** 2026-09-01  
-**De-duplication rule:** One root issue per row even if multiple domain audits surfaced it.  
-**Detail:** See per-domain `docs/audit/<domain>/FINDINGS.md`.
+**Orchestrator:** `/audit-all`  
+**Date:** 2026-09-22  
+**SoT:** This file for open/closed after merge. Domain packs may lag until next domain refresh.
+
+**Status legend:** `Open` | `Patched-unshipped` | `Closed` | `Owner-decision`
 
 ---
 
-## P0 — Immediate risk
+## P0
 
-### ALL-F-001 — Unauthenticated diagnostic endpoints leak configuration metadata
-- **Domains:** security (F-001), observability (F-OBS-007)
-- **status:** Confirmed
-- **affected:** `/api/google-reviews-debug`, `/api-debug`, `/api/health`, `/admin/diagnostics`
-- **actual:** Public JSON exposes place IDs, partial API key hints, Strapi connectivity, token validity
-- **fix:** Remove or gate behind `NODE_ENV !== 'production'` + admin secret; strip health payloads in prod
-- **evidence:** `app/api/google-reviews-debug/route.ts`, `app/api-debug/route.ts`, `app/api/health/route.ts`
+### ALL-F-101 — GTM not active in production browser bundle
+- **status:** Patched-unshipped (env set; needs force rebuild)
+- **severity:** critical · **priority:** P0
+- **affected:** all pages; measurement for Ads/$449 line
+- **method:** test (live dataLayer `gtm_configured: false`) + examine (Vercel env)
+- **actual:** GTM ID in SSR fallback only; client lacked `NEXT_PUBLIC_GTM_CONTAINER_ID` at last build
+- **evidence:** Vercel `NEXT_PUBLIC_GTM_CONTAINER_ID=GTM-KGVZJ93G` (prod+preview); `NEXT_PUBLIC_SITE_URL=https://cutrateslawn.com` added 2026-09-22
+- **fix:** Force Production redeploy with build cache off; verify client config + network hit to googletagmanager.com
+- **regression:** Playwright/dataLayer assert `gtm_configured: true` on `/`
 
----
+### ALL-F-102 — Canonicals / sitemap use localhost
+- **status:** Patched-unshipped (env set; needs redeploy)
+- **severity:** critical · **priority:** P0
+- **affected:** sitemap.xml, robots, og:url, LocalBusiness JSON-LD
+- **actual:** `NEXT_PUBLIC_SITE_URL` missing at last build → `http://localhost:3000`
+- **fix:** Same force redeploy as ALL-F-101
+- **regression:** Fetch prod `/sitemap.xml` — host must be `cutrateslawn.com`
 
-## P1 — Core workflow / security / ops blockers
-
-### ALL-F-002 — GHL production secrets not on Vercel
-- **Domains:** integrations (INT-F-001), infra (INF-F-003), completeness (F-003), conversion (F-CONV-001)
-- **status:** Confirmed (backlog `GHL-OPS-001`)
-- **affected:** `/api/lead`, `/api/newsletter` in production
-- **actual:** Code path fails closed (503) without `GHL_*` env; human ops step pending
-- **fix:** Set `GHL_PRIVATE_INTEGRATION_TOKEN`, `GHL_LOCATION_ID` on Vercel; run GHL-TEST-001
-
-### ALL-F-003 — GHL nurture workflows not built
-- **Domains:** integrations (INT-F-002)
-- **status:** Confirmed (`GHL-WF-001` … `GHL-WF-003` pending)
-- **actual:** Tags upsert; no staff/customer automation in GHL product
-- **fix:** Build workflows per `docs/integrations/GOHIGHLEVEL.md`
-
-### ALL-F-004 — Next.js 14.2.35 — multiple high CVEs
-- **Domains:** dependencies (DEP-F-001), security (related)
-- **status:** Confirmed (`pnpm audit` 2026-09-01)
-- **actual:** 11+ high advisories; patched line ≥15.5.16
-- **fix:** Planned upgrade with full `verify` + E2E regression
-
-### ALL-F-005 — Vercel install uses npm; repo uses pnpm lockfile
-- **Domains:** infra (INF-F-001), dependencies (DEP-F-008)
-- **status:** Confirmed
-- **affected:** `vercel.json` vs `packageManager: pnpm@10.26.0`
-- **fix:** Switch Vercel to `pnpm install --frozen-lockfile`; remove `--legacy-peer-deps`
-
-### ALL-F-006 — TypeScript and ESLint ignored at production build
-- **Domains:** infra (INF-F-002), security (F-011)
-- **status:** Confirmed
-- **evidence:** `next.config.mjs` `ignoreBuildErrors`, `ignoreDuringBuilds`
-- **fix:** Re-enable gates incrementally; add CI `tsc --noEmit` hard fail
-
-### ALL-F-007 — Mock authentication with known demo credentials
-- **Domains:** security (F-002), completeness (F-001)
-- **status:** Confirmed
-- **affected:** `lib/auth.ts`, `/login`, `/register`, `/account`
-- **actual:** `user@example.com` / `password` returns mock JWT
-- **fix:** Remove mock auth; redirect to FieldPortals only
-
-### ALL-F-008 — Auth middleware vs localStorage mismatch
-- **Domains:** security (F-003), completeness (F-007)
-- **status:** Confirmed
-- **actual:** Cookie gate in middleware; client uses `localStorage`; `/account` RSC always redirects
-- **fix:** Single session model or delete local auth entirely
-
-### ALL-F-009 — Legacy `/api/contact` logs PII and fakes success
-- **Domains:** security (F-004), observability (F-OBS-001), completeness (F-004)
-- **status:** Confirmed
-- **fix:** Delete or 410; route all forms to `/api/lead`; redact logs
-
-### ALL-F-010 — No global HTTP security headers
-- **Domains:** security (F-005)
-- **status:** Confirmed
-- **fix:** Add `headers()` in `next.config.mjs` or middleware (CSP, HSTS, X-Frame-Options, nosniff)
-
-### ALL-F-011 — Turnstile bypassed / not wired in lead UI
-- **Domains:** security (F-006), completeness (F-005)
-- **status:** Confirmed
-- **actual:** Server skips when secret unset; contact/quote UI may not send token
-- **fix:** Set `TURNSTILE_SECRET_KEY`; wire widget on lead forms
-
-### ALL-F-012 — Careers apply uses mailto only — no CRM capture
-- **Domains:** journey (F-001, F-002), conversion (F-CONV-003)
-- **status:** Confirmed
-- **affected:** `components/careers/apply-form.tsx`
-- **fix:** POST to `/api/lead` with `source:careers` + role fields; keep mailto as optional fallback
-
-### ALL-F-013 — No XML sitemap or robots.ts
-- **Domains:** seo (F-SEO-001)
-- **status:** Confirmed
-- **fix:** Add `app/sitemap.ts`, `app/robots.ts` for live routes
-
-### ALL-F-014 — JSON-LD structured data not wired
-- **Domains:** seo (F-SEO-002)
-- **status:** Confirmed
-- **fix:** Wire LocalBusiness schema with real NAP; server-render where possible
-
-### ALL-F-015 — High media placeholder rate + careers.crew attribution gap
-- **Domains:** media (F-001, F-002)
-- **status:** Confirmed
-- **actual:** ~39% slots `asset_id: null`; `careers.crew` on CDN without Envato metadata
-- **fix:** Complete `CAREERS-MEDIA-001` ingest; backfill registry attribution
+### ALL-F-103 — Empty SSR HTML (Suspense around entire tree)
+- **status:** Patched-unshipped
+- **severity:** critical · **priority:** P0
+- **affected:** 77 area×service pages + sitewide H1/copy
+- **root_cause:** `AnalyticsProvider` used `useSearchParams` and wrapped `{children}` in Suspense
+- **fix:** Provider returns `null`; Suspense only around provider sibling (`app/providers.tsx`)
+- **regression:** `curl` / View Source must show H1 on `/service-areas/wichita/lawn-care`
 
 ---
 
-## P2 — Notable (summary)
+## P1
 
-| ID | Title | Primary domain |
-|----|-------|----------------|
-| ALL-F-020 | Mock site search (`lib/search.ts`) | completeness |
-| ALL-F-021 | Orphan/duplicate API routes | completeness |
-| ALL-F-022 | Careers missing from responsive audit matrix | uiux / journey |
-| ALL-F-023 | ES language toggle cosmetic only | uiux / journey |
-| ALL-F-024 | Sticky chrome mobile occlusion (47 TEXT-UNDER hits) | optimization |
-| ALL-F-025 | In-memory rate limit / idempotency on serverless | security / data |
-| ALL-F-026 | Strapi CMS orphaned; mock fallback content | integrations / completeness |
-| ALL-F-027 | FieldPortals authz unvalidated in-repo | integrations |
-| ALL-F-028 | No production error tracking (Sentry etc.) | observability |
-| ALL-F-029 | `verify.mjs` uncapped build; scripts bypass exec_guard | runtime-safety |
-| ALL-F-030 | AI_CONTEXT / README stale vs current stack | docs |
+### ALL-F-104 — Lead delivery / durable queue unverified
+- **status:** Open
+- **severity:** high · **priority:** P1
+- **affected:** `/api/lead`, GHL, Upstash
+- **actual:** GHL env present on Vercel; no `UPSTASH_*`; no labeled E2E lead this pass; in-memory fallback loses leads
+- **fix:** Human `GHL-TEST-001`; add Upstash + ensure cron `/api/cron/lead-retry` authorized with `CRON_SECRET`
+- **regression:** Test lead appears in GHL with tags `website-lead` / `source:quote`
+
+### ALL-F-105 — Turnstile mismatch risk
+- **status:** Open (currently both unset — consistent)
+- **severity:** high · **priority:** P1
+- **affected:** quote/contact submit
+- **actual:** Widget absent live; no `TURNSTILE_*` / `NEXT_PUBLIC_TURNSTILE_SITE_KEY` on Vercel (safe). If secret alone is added later, every submit fails "Spam check failed."
+- **fix:** Set site key + secret together, or leave both unset
+- **code:** Partial leads no longer send Turnstile token (`quote-funnel.tsx`)
+
+### ALL-F-106 — CSP blocked analytics / ads / CF Insights
+- **status:** Patched-unshipped
+- **severity:** high · **priority:** P1
+- **fix:** CSP allowlist expanded in `next.config.mjs` for GTM/GA/Ads/CF Insights/Turnstile
+- **regression:** No CSP console violations on `/` after deploy
+
+### ALL-F-107 — Funnel events inflated (~5×)
+- **status:** Patched-unshipped
+- **severity:** high · **priority:** P1
+- **root_cause:** `useAnalytics()` returned a new object each render → effect re-fired
+- **fix:** Memoize hook return
+
+### ALL-F-108 — Fake conversions on thank-you
+- **status:** Patched-unshipped
+- **severity:** high · **priority:** P1
+- **actual:** `rid` defaulted to `unknown` and still fired `conversion_lead`
+- **fix:** Fire only when real `rid` present; E2E covers negative case
+
+### ALL-F-109 — Public debug / test pages
+- **status:** Patched-unshipped
+- **severity:** high · **priority:** P1
+- **fix:** Removed page routes + debug API stubs (`google-reviews-debug`, `api-debug`, `api/test`, etc.)
+- **regression:** Prod 404 for `/debug`, `/api-test`, `/api/google-reviews-debug`
+
+### ALL-F-110 — Fake `@leads.cutrateslawn.com` emails
+- **status:** Patched-unshipped
+- **severity:** high · **priority:** P1
+- **fix:** Stop inventing emails; omit from GHL upsert when empty/placeholder
+
+### ALL-F-111 — Deep link skips address
+- **status:** Patched-unshipped
+- **severity:** high · **priority:** P1
+- **fix:** Resolved service always starts on `details` step
+
+### ALL-F-112 — Stale Google review count (24 vs 32)
+- **status:** Patched-unshipped
+- **fix:** `GOOGLE_REVIEW_COUNT = 32`
 
 ---
 
-## Counts
+## P2
 
-| Priority | De-duplicated open |
-|----------|-------------------:|
-| P0 | 1 |
-| P1 | 14 |
-| P2 | 24+ (see domain registers) |
-| P3 | 12+ |
+### ALL-F-201 — Referral / certifications / thin content
+- **status:** Patched-unshipped (referral + certs); Open (case-studies, community)
+- **fix:** Softened public copy; unpublish or rewrite `/case-studies` + `/community`
 
-**Release gate:** Do not mark release-ready while ALL-F-001 (P0) or any P1 above remains open.
+### ALL-F-202 — Media slot quality (hardscape/aeration)
+- **status:** Patched-unshipped (interim remaps)
+- **fix:** Human Envato/own photography + `media:publish`
+
+### ALL-F-203 — Consent defaults analytics/ads off
+- **status:** Owner-decision
+- **actual:** `DEFAULT_CONSENT` denies until Accept — hides GA/Ads for most traffic
+- **fix:** Legal call: US-only opt-out vs keep opt-in
+
+### ALL-F-204 — Blog dead links / Strapi 504 / empty portal
+- **status:** Open
+- **affected:** blog redirects to `/blog`; Strapi health 504; `/schedule` → `/portal` empty
+- **fix:** Remove dead blog cards; fix or drop Strapi; portal truthfulness
+
+### ALL-F-205 — GA4 measurement ID not on Vercel
+- **status:** Open (may be OK if GTM-only)
+- **fix:** Confirm GA4 loads via GTM; else set `NEXT_PUBLIC_GA4_MEASUREMENT_ID`
+
+---
+
+## Closed / superseded from 2026-09-01 register
+
+| Prior ID | Note |
+|----------|------|
+| ALL-F-001 debug APIs | Routes removed (confirm after deploy) |
+| ALL-F-002 GHL not on Vercel | **Closed** — GHL PIT/location/pipeline present |
+| ALL-F-010 no security headers | Superseded — headers+CSP now in `next.config.mjs` (CSP hosts expanded this pass) |

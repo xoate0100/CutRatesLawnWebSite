@@ -4,8 +4,11 @@ import { useEffect } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
 import { initAnalyticsCapture, trackPageView } from "@/lib/analytics/core"
 
-/** Initializes attribution capture + page_view on route changes. */
-export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
+/**
+ * Side-effect-only: do NOT wrap page trees.
+ * Wrapping children inside Suspense(useSearchParams) emptied SSR HTML sitewide.
+ */
+export function AnalyticsProvider() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
@@ -17,5 +20,5 @@ export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
     trackPageView()
   }, [pathname, searchParams])
 
-  return <>{children}</>
+  return null
 }

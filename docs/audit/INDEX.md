@@ -1,52 +1,52 @@
-# Audit Suite Index
+# Audit INDEX — `/audit-all` 2026-09-22
 
-**Orchestrator:** `/audit-all` (discovery mode)  
-**Date:** 2026-09-01  
-**Stack:** `next` (Next.js 14.2.35, React 18, pnpm, Vercel)  
-**Repo:** Cut Rates Lawn WebSite
+**Stack:** Next.js 14 App Router (treated as `next` / `any`)  
+**Mode:** discovery register refresh + Critical/High confirmation against production + Vercel env. Code remediations applied in-tree (awaiting ship).
 
-## Commands run
+## Commands
 
-| ID | Domain | Ran | Output |
-|----|--------|:---:|--------|
-| audit-security-nist | Security (NIST-aligned) | ✅ | [security/](security/) |
-| audit-completeness | Incomplete / disconnected | ✅ | [completeness/](completeness/) |
-| audit-uiux | Design system + UI/UX | ✅ | [uiux/](uiux/) |
-| audit-media | Envato / GCS media pipeline | ✅ | [media/](media/) |
-| audit-optimization | Performance / CWV | ✅ | [optimization/](optimization/) |
-| audit-journey | User journey coherence | ✅ | [journey/](journey/) |
-| audit-conversion | Funnel + copy | ✅ | [conversion/](conversion/) |
-| audit-seo | SEO + AI discoverability | ✅ | [seo/](seo/) |
-| audit-integrations | Third-party integrations | ✅ | [integrations/](integrations/) |
-| audit-data | Database + storage | ✅ | [data/](data/) |
-| audit-infra | Infra + deployment | ✅ | [infra/](infra/) |
-| audit-dependencies | Dependencies + currency | ✅ | [dependencies/](dependencies/) |
-| audit-observability | Logging + errors | ✅ | [observability/](observability/) |
-| audit-docs | Documentation coverage | ✅ | [docs/](docs/) |
-| audit-runtime-safety | Script execution safety | ✅ | [runtime-safety/](runtime-safety/) |
+| Command | Ran? | Why / notes |
+|---------|------|-------------|
+| audit-security-nist | Partial | Confirmed CSP, debug surface, Turnstile posture; full NIST pack not re-walked end-to-end |
+| audit-completeness | Partial | Deep-link address, referral TODO, certs, portal/schedule |
+| audit-uiux | Skipped deep | No new UIUX crawl this pass |
+| audit-media | Partial | Duplicate slots + aeration asset confirmed via `media-map.json` |
+| audit-optimization | Skipped deep | SSR Suspense issue covered under journey/seo |
+| audit-journey | Partial | Quote funnel, thank-you conversion gate |
+| audit-conversion | Partial | GTM bake, consent default-off, funnel inflation |
+| audit-seo | Partial | `NEXT_PUBLIC_SITE_URL`, empty SSR HTML |
+| audit-integrations | Partial | GHL present; Turnstile/Upstash absent; Strapi 504 noted prior |
+| audit-data | Skipped deep | No schema change this pass |
+| audit-infra | Partial | Vercel env inventory |
+| audit-dependencies | Skipped | Prior CVE notes retained |
+| audit-observability | Partial | Debug routes removed |
+| audit-docs | Skipped | |
+| audit-runtime-safety | Partial | `npm run verify` / next build exercised |
 
-**Skipped:** None — all registry commands match the `next` stack.
+## Domain outputs
 
-## Skipped (stack gate)
+| Domain | Path |
+|--------|------|
+| security | [security/](security/) |
+| completeness | [completeness/](completeness/) |
+| uiux | [uiux/](uiux/) |
+| media | [media/](media/) |
+| optimization | [optimization/](optimization/) |
+| journey | [journey/](journey/) |
+| conversion | [conversion/](conversion/) |
+| seo | [seo/](seo/) |
+| integrations | [integrations/](integrations/) |
+| data | [data/](data/) |
+| infra | [infra/](infra/) |
+| dependencies | [dependencies/](dependencies/) |
+| observability | [observability/](observability/) |
+| docs | [docs/](docs/) |
+| runtime-safety | [runtime-safety/](runtime-safety/) |
 
-None.
+## Merged SoT
 
-## Live evidence run this session
-
-| Check | Result |
-|-------|--------|
-| `pnpm run verify` | ✅ PASS (build + governance + math tests) |
-| `pnpm run media:validate` | ✅ OK (3 attribution warnings) |
-| `pnpm run audit:links` | ❌ FAIL — no server on `127.0.0.1:3000` (needs running `next start`) |
-| `pnpm audit --audit-level=high` | ❌ 11+ high advisories on `next@14.2.35` |
-
-## Merged outputs (this folder)
-
-- [FINDINGS.md](FINDINGS.md) — de-duplicated register across domains
-- [COVERAGE_MATRIX.md](COVERAGE_MATRIX.md) — domain × ran × key areas
-- [EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md) — release-readiness verdict
-- [REMEDIATION_PROMPT.md](REMEDIATION_PROMPT.md) — phased fix prompt for `--fix` run
-
-## Historical artifacts (pre-orchestrator)
-
-Older single-pass audits remain for reference: `FINDINGS_REGISTER.md`, `REMEDIATION_PLAN.md`, `SYSTEM_INVENTORY.md`, `artifacts/audit/`.
+- [EXECUTIVE_SUMMARY.md](EXECUTIVE_SUMMARY.md)
+- [FINDINGS.md](FINDINGS.md)
+- [COVERAGE_MATRIX.md](COVERAGE_MATRIX.md)
+- [REMEDIATION_PROMPT.md](REMEDIATION_PROMPT.md)
+- [LAYOUT.md](LAYOUT.md)

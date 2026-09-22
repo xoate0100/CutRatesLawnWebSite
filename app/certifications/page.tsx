@@ -1,28 +1,4 @@
-import Image from "next/image"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import CTASection from "@/components/cta-section"
-import { mediaAlt, mediaSrc } from "@/lib/media"
-
-const certifications = [
-  {
-    name: "Certified Lawn Care Professional",
-    organization: "National Association of Landscape Professionals",
-    description: "Demonstrates expertise in lawn care techniques and best practices.",
-    slot: "page.certifications.1",
-  },
-  {
-    name: "Certified Arborist",
-    organization: "International Society of Arboriculture",
-    description: "Specialized knowledge in tree care and maintenance.",
-    slot: "page.certifications.2",
-  },
-  {
-    name: "Environmental Landscape Certification",
-    organization: "Ecological Landscaping Association",
-    description: "Focuses on sustainable and eco-friendly landscaping practices.",
-    slot: "page.certifications.3",
-  },
-]
 
 export default function CertificationsPage() {
   return (
@@ -30,45 +6,30 @@ export default function CertificationsPage() {
       <main className="flex-grow">
         <section className="bg-green-600 text-white py-20">
           <div className="container mx-auto px-4">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Our Certifications</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Training &amp; standards</h1>
             <p className="text-xl mb-8 max-w-3xl">
-              At Cut Rates Lawn Care, we're committed to excellence. Our team's certifications ensure we bring the
-              highest level of expertise to every job.
+              Our crews follow Kansas Best Management Practices for lawn care and are trained on safe equipment use,
+              customer communication, and seasonal service standards. We do not currently list third-party association
+              certifications on this site.
             </p>
           </div>
         </section>
 
         <section className="py-16">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {certifications.map((cert, index) => (
-                <Card key={index} className="flex flex-col">
-                  <CardHeader>
-                    <Image
-                      src={mediaSrc(cert.slot)}
-                      alt={mediaAlt(cert.slot, cert.name)}
-                      width={100}
-                      height={100}
-                      className="mb-4"
-                    />
-                    <CardTitle>{cert.name}</CardTitle>
-                    <CardDescription>{cert.organization}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p>{cert.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+          <div className="container mx-auto px-4 max-w-2xl space-y-4 text-sage">
+            <p>
+              If you need proof of insurance, licensing, or a specific credential for a commercial bid, call us and we
+              will send documentation that matches the job.
+            </p>
           </div>
         </section>
 
         <CTASection
-          title="Experience Our Expertise"
-          description="Let our certified professionals take care of your lawn and landscape needs."
-          primaryButtonText="Schedule a Service"
-          primaryButtonLink="/schedule"
-          secondaryButtonText="Learn More"
+          title="Talk with a local dispatcher"
+          description="Tell us about your property — we will confirm scope and next steps."
+          primaryButtonText="Get a quote"
+          primaryButtonLink="/quote"
+          secondaryButtonText="About us"
           secondaryButtonLink="/about"
         />
       </main>

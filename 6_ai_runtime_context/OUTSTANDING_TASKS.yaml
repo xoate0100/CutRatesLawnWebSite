@@ -177,11 +177,40 @@ items:
     area: qa
     priority: high
     status: pending
-    depends_on: [GHL-WF-001, GHL-OPS-001]
+    depends_on: [GHL-OPS-001]
     acceptance:
-      - Submit contact form locally and on production
+      - Submit labeled test quote/contact on production (prefix name with TEST)
       - Contact appears with website-lead (+ source/service tags)
-      - Workflow fires within expected SLA
+      - Optional: nurture workflow once GHL-WF-001 exists
+    notes: >
+      2026-09-22 audit: do not invent @leads emails; Turnstile both-or-neither;
+      Upstash recommended before relying on retry queue.
+
+  - id: TRACK-OPS-001
+    title: Force Production redeploy after NEXT_PUBLIC_* + SSR/CSP patches
+    area: deploy
+    priority: critical
+    status: pending
+    depends_on: []
+    acceptance:
+      - Production redeploy with build cache cleared
+      - Client dataLayer gtm_configured true; sitemap host cutrateslawn.com
+      - View Source shows H1 on an area×service page
+    notes: >
+      2026-09-22: SITE_URL + GTM already on Vercel; code patches in working tree.
+
+  - id: LEAD-OPS-001
+    title: Upstash Redis for durable lead retry (optional Turnstile pair)
+    area: deploy
+    priority: high
+    status: pending
+    depends_on: []
+    acceptance:
+      - UPSTASH_REDIS_REST_URL + TOKEN on Production
+      - Cron lead-retry exercises queued leads
+      - If enabling Turnstile: NEXT_PUBLIC_TURNSTILE_SITE_KEY + TURNSTILE_SECRET_KEY together
+    notes: >
+      2026-09-22 audit: neither Turnstile nor Upstash present (consistent / fragile).
       - Remove or archive test contacts afterward
 
   - id: QUALITY-TS-001

@@ -219,7 +219,8 @@ export function QuoteFunnel() {
       propertyType,
       serviceType,
       lawnSizeSqFt: lawnSize,
-      frequency,
+      // Weekly/bi-weekly cadence is mowing-only; other services ignore frequency in pricing.
+      frequency: serviceType === "mowing" ? frequency : "weekly",
     })
     if (!outcome.ok) {
       setDetailsError(outcome.error)
@@ -272,7 +273,7 @@ export function QuoteFunnel() {
           estimateUnit: quote?.unit || undefined,
           lawnSizeSqFt: lawnSize,
           propertyType,
-          frequency,
+          frequency: serviceType === "mowing" ? frequency : undefined,
           address: contact.address || undefined,
         }),
       })
@@ -381,19 +382,21 @@ export function QuoteFunnel() {
               <div className="mt-2 text-center">{lawnSize} sq ft</div>
             </div>
 
-            <div>
-              <Label>Service Frequency</Label>
-              <RadioGroup value={frequency} onValueChange={(v) => setFrequency(v as Frequency)}>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="weekly" id="weekly" />
-                  <Label htmlFor="weekly">Weekly</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="biweekly" id="biweekly" />
-                  <Label htmlFor="biweekly">Bi-weekly</Label>
-                </div>
-              </RadioGroup>
-            </div>
+            {serviceType === "mowing" && (
+              <div>
+                <Label>Service Frequency</Label>
+                <RadioGroup value={frequency} onValueChange={(v) => setFrequency(v as Frequency)}>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="weekly" id="weekly" />
+                    <Label htmlFor="weekly">Weekly</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="biweekly" id="biweekly" />
+                    <Label htmlFor="biweekly">Bi-weekly</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            )}
               </>
             )}
 
@@ -427,7 +430,8 @@ export function QuoteFunnel() {
               ))}
             </ul>
             <p className="text-center text-sm text-muted-foreground">
-              {SERVICE_LABELS[serviceType as ServiceType]} · {propertyType} · {lawnSize} sq ft · {frequency}
+              {SERVICE_LABELS[serviceType as ServiceType]} · {propertyType} · {lawnSize} sq ft
+              {serviceType === "mowing" ? ` · ${frequency}` : ""}
             </p>
           </CardContent>
           <CardFooter className="flex flex-col gap-3 sm:flex-row">

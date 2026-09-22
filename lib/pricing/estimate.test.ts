@@ -36,10 +36,10 @@ assertClose(residentialMowPerVisit(10890, "complete"), 65, "res mow ¼ acre comp
 assertClose(residentialMowPerVisit(10890, "premier"), 85, "res mow ¼ acre premier")
 
 // --- KC-Fert monthly (CRL_Lights_Landing) ---
-assertClose(fertMonthlyDollars(4000), 35, "fert ≤5k = $35")
-assertClose(fertMonthlyDollars(5000), 35, "fert 5k = $35")
-assertClose(fertMonthlyDollars(6000), 49, "fert 6k = $49")
-assertClose(fertMonthlyDollars(8000), 77, "fert 8k = $77")
+assertClose(fertMonthlyDollars(4000), 39, "fert ≤5k = $39")
+assertClose(fertMonthlyDollars(5000), 39, "fert 5k = $39")
+assertClose(fertMonthlyDollars(6000), 53, "fert 6k = $53")
+assertClose(fertMonthlyDollars(8000), 81, "fert 8k = $81")
 
 // --- Commercial crew model (greenbriermc) ---
 // 8,847 sq ft → min 1 person-hr → 30/0.2476 * 0.85 ≈ 103
@@ -48,9 +48,9 @@ assertClose(commercialMowPerVisit(8847), 103, "Garden Pines-scale commercial rec
 assertClose(commercialMowPerVisit(32104), 298, "Golf Park-scale commercial recurring", 1)
 
 // --- Weed / full-service sanity ---
-assertClose(weedPerTreatment(5000), 35, "weed treatment ~ fert base")
-assertClose(fullServiceMonthly("residential", 5000, "weekly"), Math.round(65 * 4.33 + 35), "full-service weekly 5k")
-assertClose(fullServiceMonthly("residential", 5000, "biweekly"), Math.round(65 * 2.17 + 35), "full-service biweekly 5k")
+assertClose(weedPerTreatment(5000), 39, "weed treatment ~ fert base")
+assertClose(fullServiceMonthly("residential", 5000, "weekly"), Math.round(65 * 4.33 + 39), "full-service weekly 5k")
+assertClose(fullServiceMonthly("residential", 5000, "biweekly"), Math.round(65 * 2.17 + 39), "full-service biweekly 5k")
 
 // --- calculateEstimate API ---
 {
@@ -78,7 +78,7 @@ assertClose(fullServiceMonthly("residential", 5000, "biweekly"), Math.round(65 *
     lawnSizeSqFt: 5000,
     frequency: "weekly",
   })
-  assert(r.ok === true && r.result.amount === 35 && r.result.unit === "per month", "API fert $35/mo")
+  assert(r.ok === true && r.result.amount === 39 && r.result.unit === "per month", "API fert $39/mo")
 }
 {
   const r = calculateEstimate({
@@ -111,7 +111,7 @@ assertClose(fullServiceMonthly("residential", 5000, "biweekly"), Math.round(65 *
     frequency: "weekly",
   })
   assert(legacy === 300, `legacy fert planning was $300/visit-ish (got ${legacy})`)
-  assert(fertMonthlyDollars(5000) === 35, "CFO fert is $35/month")
+  assert(fertMonthlyDollars(5000) === 39, "CFO fert is $39/month")
 }
 
 // --- Realistic range checks (Wichita residential planning band) ---

@@ -7,7 +7,7 @@
  * - Commercial mowing: CRL_ProposalGeneration greenbriermc.md crew model
  *   (0.00009 person-hrs/sq ft × $30 loaded labor ÷ 0.2476, ×0.85 recurring)
  * - Fertilization: CRL_Lights_Landing KC-Fert
- *   ($35/mo ≤5k sq ft; +$1.40/mo per 100 sq ft over 5k)
+ *   ($39/mo ≤5k sq ft; +$1.40/mo per 100 sq ft over 5k)
  * - Financial_Operating_Structure_2026.md — loaded labor ~$30/hr, Price = costs/(1−GM)
  */
 
@@ -54,8 +54,8 @@ export const COMMERCIAL_PRICE_DENOMINATOR = 0.2476
 export const MIN_PERSON_HOURS = 1
 export const RECURRING_EFFICIENCY = 0.85
 
-/** KC-Fert monthly base (cents) */
-export const FERT_BASE_MONTHLY_CENTS = 3500
+/** KC-Fert monthly base (cents) — Kansas City areas, ≤5,000 sq ft */
+export const FERT_BASE_MONTHLY_CENTS = 3900
 export const FERT_OVERAGE_PER_100_CENTS = 140
 export const FERT_THRESHOLD_SQ_FT = 5000
 
@@ -96,7 +96,7 @@ export function commercialMowPerVisit(sqFt: number): number {
 
 /** Standalone weed treatment — same size curve as fert program monthly (planning). */
 export function weedPerTreatment(sqFt: number): number {
-  return Math.max(35, Math.round(fertMonthlyDollars(sqFt)))
+  return Math.max(FERT_BASE_MONTHLY_CENTS / 100, Math.round(fertMonthlyDollars(sqFt)))
 }
 
 export function mowPerVisit(
@@ -155,7 +155,7 @@ export function calculateEstimate(input: EstimateInput): EstimateError | Estimat
     case "fertilization": {
       amount = fertMonthlyDollars(lawnSizeSqFt)
       unit = "per month"
-      notes.push("KC-Fert program rate: $35/mo through 5,000 sq ft, then +$1.40 per 100 sq ft.")
+      notes.push("KC-Fert program rate: $39/mo through 5,000 sq ft, then +$1.40 per 100 sq ft.")
       break
     }
     case "weed-control": {

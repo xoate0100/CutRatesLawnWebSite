@@ -3,8 +3,8 @@ import type { NextRequest } from "next/server"
 import { siteConfig } from "@/lib/site-config"
 
 /**
- * Redirect legacy auth/account routes to the customer portal.
- * No local session cookies — accounts live in PestPortals.
+ * - Redirect legacy auth/account routes to the customer portal.
+ * - Forward pathname so root generateMetadata can emit per-URL canonicals.
  */
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname
@@ -16,9 +16,19 @@ export function middleware(request: NextRequest) {
   ) {
     return NextResponse.redirect(siteConfig.customerPortalUrl)
   }
-  return NextResponse.next()
+
+  const requestHeaders = new Headers(request.headers)
+  requestHeaders.set("x-pathname", path)
+  return NextResponse.next({
+    request: { headers: requestHeaders },
+  })
 }
 
 export const config = {
-  matcher: ["/account/:path*", "/dashboard/:path*", "/login", "/register"],
+  matcher: [
+    /*
+     * Skip static assets and Next internals; run on pages + account redirects.
+     */
+    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|txt|xml)$).*)",
+  ],
 }

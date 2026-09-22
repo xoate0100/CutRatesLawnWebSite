@@ -1,6 +1,7 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import dynamic from "next/dynamic"
+import { headers } from "next/headers"
 import { Bricolage_Grotesque, Hanken_Grotesk } from "next/font/google"
 import "./globals.css"
 import {
@@ -41,54 +42,63 @@ export const viewport: Viewport = {
   ],
 }
 
-export const metadata: Metadata = {
-  metadataBase: new URL(siteConfig.url),
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
-  },
-  description:
-    "Family-owned landscaping, lawn care, and pest control from Wichita to Kansas City. Termites, rodents, bed bugs, holiday lights, and more — get a free quote in about two minutes.",
-  keywords: [
-    "landscaping",
-    "lawn care",
-    "pest control",
-    "termites",
-    "bed bugs",
-    "rodents",
-    "Wichita",
-    "Kansas City",
-    "holiday lights",
-    "power washing",
-  ],
-  authors: [{ name: "Cut Rates Lawn Care LLC" }],
-  creator: "Cut Rates Lawn Care LLC",
-  openGraph: {
-    type: "website",
-    locale: "en_US",
-    url: siteConfig.url,
-    siteName: siteConfig.name,
-    images: [{ url: mediaSrc("og.default"), width: 1200, height: 630, alt: siteConfig.name }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteConfig.name,
+export async function generateMetadata(): Promise<Metadata> {
+  const h = await headers()
+  const pathname = h.get("x-pathname") || "/"
+  const canonicalPath = pathname.startsWith("/") ? pathname : `/${pathname}`
+
+  return {
+    metadataBase: new URL(siteConfig.url),
+    alternates: {
+      canonical: canonicalPath,
+    },
+    title: {
+      default: siteConfig.name,
+      template: `%s | ${siteConfig.name}`,
+    },
     description:
-      "Landscaping flagship care from Wichita to KC — free online quotes, no contracts.",
-    creator: siteConfig.twitterHandle,
-    images: [mediaSrc("og.default")],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
+      "Family-owned landscaping, lawn care, and pest control from Wichita to Kansas City. Termites, rodents, bed bugs, holiday lights, and more — get a free quote in about two minutes.",
+    keywords: [
+      "landscaping",
+      "lawn care",
+      "pest control",
+      "termites",
+      "bed bugs",
+      "rodents",
+      "Wichita",
+      "Kansas City",
+      "holiday lights",
+      "power washing",
+    ],
+    authors: [{ name: "Cut Rates Lawn Care LLC" }],
+    creator: "Cut Rates Lawn Care LLC",
+    openGraph: {
+      type: "website",
+      locale: "en_US",
+      url: siteConfig.url,
+      siteName: siteConfig.name,
+      images: [{ url: mediaSrc("og.default"), width: 1200, height: 630, alt: siteConfig.name }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteConfig.name,
+      description:
+        "Landscaping flagship care from Wichita to KC — free online quotes, no contracts.",
+      creator: siteConfig.twitterHandle,
+      images: [mediaSrc("og.default")],
+    },
+    robots: {
       index: true,
       follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
+      googleBot: {
+        index: true,
+        follow: true,
+        "max-video-preview": -1,
+        "max-image-preview": "large",
+        "max-snippet": -1,
+      },
     },
-  },
+  }
 }
 
 export default function RootLayout({

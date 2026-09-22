@@ -5,7 +5,7 @@ Owner-only decisions and secrets. Agents must not invent these values.
 | ID | Item | Status | Notes |
 |----|------|--------|-------|
 | H-1 | Consent mode | **Decided** | Owner chose `us_opt_out` (2026-09-22). Set `NEXT_PUBLIC_CONSENT_MODE=us_opt_out` on Vercel. |
-| H-2 | Turnstile site + secret keys | **Needed** | Neither key on Vercel today (safe pair). Create Cloudflare Turnstile widget for `cutrateslawn.com` and set both, or leave both unset. |
+| H-2 | Turnstile site + secret keys | **Done (agent)** | Cloudflare widget created; `NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAAFAajSF3xINA13bR` + `TURNSTILE_SECRET_KEY` set on Vercel Production+Preview. **Redeploy required** so the public site key bakes into the client bundle. Secret never committed. |
 | H-3 | Upstash Redis REST URL + token | **Needed** | Absent. Without Redis, failed leads must not thank-you (503 + call CTA). |
 | H-4 | Owner test mobile for Phase 3.6 | **Needed** | Required to submit the single labeled production test lead. |
 | H-5 | GA4 measurement ID / property ID | Optional | Live GTM already loads `G-5X2990G1ZP`. Confirm property ID for Apps Script weekly report. |
@@ -24,4 +24,6 @@ Owner-only decisions and secrets. Agents must not invent these values.
 
 **Present:** `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_GTM_CONTAINER_ID`, `GHL_PRIVATE_INTEGRATION_TOKEN`, `GHL_LOCATION_ID`, `GHL_PIPELINE_ID`, `GHL_PIPELINE_STAGE_ID`, `GHL_CF_SERVICE_ID`, `GHL_CF_MESSAGE_ID`, `CRON_SECRET`, `GOOGLE_PLACES_API_KEY`, `GOOGLE_PLACE_ID`, `STRAPI_API_URL`, `STRAPI_API_TOKEN`, `NEXT_PUBLIC_STRAPI_API_URL`, `ENABLE_DEBUG`, `VERCEL`, `NEXT_VERSION`
 
-**Absent:** `NEXT_PUBLIC_GA4_MEASUREMENT_ID`, `NEXT_PUBLIC_GOOGLE_ADS_*`, `NEXT_PUBLIC_META_PIXEL_ID`, `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY`, `UPSTASH_REDIS_REST_*`, `CONTACT_FORM_WEBHOOK_URL`, `RESEND_API_KEY`, `LEAD_NOTIFY_EMAIL`, `NEXT_PUBLIC_CONSENT_MODE` (to be set)
+**Present (added this remediation):** `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` (redeploy so site key is in client bundle), `NEXT_PUBLIC_CONSENT_MODE=us_opt_out` (confirm on Vercel if not yet).
+
+**Absent:** `NEXT_PUBLIC_GA4_MEASUREMENT_ID`, `NEXT_PUBLIC_GOOGLE_ADS_*`, `NEXT_PUBLIC_META_PIXEL_ID`, `UPSTASH_REDIS_REST_*`, `CONTACT_FORM_WEBHOOK_URL`, `RESEND_API_KEY`, `LEAD_NOTIFY_EMAIL`

@@ -19,7 +19,11 @@ declare global {
   }
 }
 
-const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
+/**
+ * Renders Cloudflare Turnstile when NEXT_PUBLIC_TURNSTILE_SITE_KEY is set.
+ * Static env access required for client-bundle inlining (same rule as GTM).
+ */
+const SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY?.trim() || undefined
 
 type Props = {
   onToken: (token: string | null) => void

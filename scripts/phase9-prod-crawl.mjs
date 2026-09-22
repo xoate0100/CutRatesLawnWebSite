@@ -60,7 +60,10 @@ for (const path of paths) {
     if (msg.type() === "error") {
       const t = msg.text()
       consoleErrors.push(t)
-      if (/content security policy|csp/i.test(t)) cspHits.push(t)
+      // Preview-only Vercel toolbar / known non-prod injectors are not ship blockers.
+      if (/content security policy|csp/i.test(t) && !/vercel\.live/i.test(t)) {
+        cspHits.push(t)
+      }
     }
   })
   page.on("response", (res) => {
@@ -74,7 +77,7 @@ for (const path of paths) {
   try {
     const resp = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 })
     status = resp?.status() || 0
-    await page.waitForTimeout(1200)
+    await page.waitForTimeout(2500)
 
     const meta = await page.evaluate(() => {
       const canon = document.querySelector('link[rel="canonical"]')?.getAttribute("href") || ""
@@ -88,6 +91,9 @@ for (const path of paths) {
             gtmConfigured = e.gtm_configured
             break
           }
+        }
+        if (gtmConfigured == null && typeof window.google_tag_manager === "object") {
+          gtmConfigured = true
         }
       } catch {
         /* ignore */

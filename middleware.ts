@@ -4,7 +4,7 @@ import { siteConfig } from "@/lib/site-config"
 
 /**
  * Redirect legacy auth/account routes to the customer portal.
- * No local session cookies — accounts live in FieldPortals.
+ * No local session cookies — accounts live in PestPortals.
  */
 export function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname

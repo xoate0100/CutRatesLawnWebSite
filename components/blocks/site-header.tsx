@@ -54,6 +54,15 @@ export function SiteHeader() {
           {siteConfig.phone.display}
         </a>
 
+        <a
+          href={siteConfig.customerPortalUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hidden text-[0.9rem] font-semibold opacity-85 hover:opacity-100 md:inline"
+        >
+          Customer Portal
+        </a>
+
         <Button asChild variant="lime" size="sm" className="hidden md:inline-flex">
           <Link href="/quote">
             Get a quote <span aria-hidden>→</span>
@@ -94,6 +103,15 @@ export function SiteHeader() {
               onClick={() => trackPhoneClick("header_mobile")}
             >
               {siteConfig.phone.display}
+            </a>
+            <a
+              href={siteConfig.customerPortalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="py-2 opacity-90"
+              onClick={() => setOpen(false)}
+            >
+              Customer Portal
             </a>
             <Button asChild variant="lime" className="mt-2 w-full">
               <Link href="/quote" onClick={() => setOpen(false)}>

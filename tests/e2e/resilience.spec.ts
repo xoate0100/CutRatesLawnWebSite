@@ -88,8 +88,8 @@ test.describe("Resilience — try to break the site", () => {
 
   test("portal route redirects to external customer portal", async ({ page }) => {
     await page.goto("/portal")
-    await page.waitForURL(/fieldportals\.com|cutrateslawn/, { timeout: 15_000 })
-    expect(page.url()).toMatch(/fieldportals|portal/)
+    await page.waitForURL(/pestportals\.com|cutrateslawn/, { timeout: 15_000 })
+    expect(page.url()).toMatch(/pestportals|portal/)
   })
 
   test("footer dead links: privacy, terms, sitemap return 404", async ({ page }) => {

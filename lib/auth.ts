@@ -1,5 +1,5 @@
 /**
- * Auth helpers — customer accounts live in FieldPortals.
+ * Auth helpers — customer accounts live in PestPortals.
  * Local mock login/register has been removed.
  */
 import { siteConfig } from "@/lib/site-config"

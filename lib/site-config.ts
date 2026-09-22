@@ -35,6 +35,6 @@ export const siteConfig = {
   },
   customerPortalUrl:
     process.env.NEXT_PUBLIC_CUSTOMER_PORTAL_URL ??
-    "https://cutrateslawn.fieldportals.com/landing/index",
+    "https://cutrateslawn.pestportals.com",
   twitterHandle: process.env.NEXT_PUBLIC_TWITTER_HANDLE ?? "@cutratelawn",
 } as const

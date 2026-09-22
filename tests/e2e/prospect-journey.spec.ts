@@ -96,6 +96,6 @@ test.describe("Prospect user journey", () => {
     await page.goto("/")
     const portalLink = page.getByRole("link", { name: /Customer Portal/i }).first()
     await expect(portalLink).toBeVisible()
-    await expect(portalLink).toHaveAttribute("href", /fieldportals|portal/)
+    await expect(portalLink).toHaveAttribute("href", /pestportals|portal/)
   })
 })

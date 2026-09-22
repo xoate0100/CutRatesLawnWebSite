@@ -82,6 +82,16 @@ export function SiteFooter({ className }: SiteFooterProps) {
                   </Link>
                 </li>
               ))}
+              <li>
+                <a
+                  href={siteConfig.customerPortalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-lime"
+                >
+                  Customer Portal
+                </a>
+              </li>
             </ul>
           </div>
 

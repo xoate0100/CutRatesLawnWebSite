@@ -145,8 +145,9 @@ export const QUOTE_CATEGORIES: Array<{
 }> = [
   { id: "lawn", label: "Lawn Care", icon: "🌿" },
   { id: "fert-weed", label: "Fertilization & Weed", icon: "🌱" },
-  { id: "pest", label: "Pest & Termite", icon: "🪲" },
-  { id: "landscape", label: "Landscaping & Hardscape", icon: "🪨" },
+  // Use Unicode 6–era emoji — 🪲/🪨 often fail to render on Windows Segoe UI Emoji.
+  { id: "pest", label: "Pest & Termite", icon: "🐛" },
+  { id: "landscape", label: "Landscaping & Hardscape", icon: "🌳" },
   { id: "snow", label: "Snow & Ice", icon: "❄️" },
   { id: "lights", label: "Holiday Lights", icon: "✨" },
   { id: "exterior", label: "Exterior Cleaning", icon: "🚿" },

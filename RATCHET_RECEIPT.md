@@ -150,3 +150,20 @@ Classification per docs/factory/FLEET_TRIAGE.md.
 - **Change:** Added `.github/workflows/pr_checks.yml` (GAP-INVERT — capability-drift without merge gate).
 - **Authorization:** auth-wave1-closeout-normalization-20260923
 - **Merge:** human only — agent does not merge.
+
+
+## Fleet normalization task 6 (2026-09-23T22:28:05Z)
+
+**Plan:** `fleet-normalization-v1`  
+**Repo:** `xoate0100/CutRatesLawnWebSite`  
+**Change:** un-neuter / spoke_partial gap close
+
+### Files
+
+- `.github/workflows/ci.yml`
+- `RATCHET_RECEIPT.md`
+
+### Notes
+
+- ci.yml: stripped 1 swallows
+- No `--no-verify`; no force-merge; no swallowed steps restored.

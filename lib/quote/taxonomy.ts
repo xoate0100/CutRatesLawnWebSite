@@ -88,6 +88,47 @@ export const GHL_SERVICE_LABELS: Record<QuoteServiceId, string> = {
   residential: "Residential Package",
 }
 
+/**
+ * Allowed values on GHL "Service Requested" (f1Sn1OZOXVB5VwI2xHBB / contact.service_requested).
+ * Kept in sync with the live picklist (site labels + phone-only extras). Updated 2026-09-23.
+ */
+export const GHL_SERVICE_REQUESTED_OPTIONS = [
+  ...Object.values(GHL_SERVICE_LABELS),
+  // Phone / legacy intake — not top-level quote picks
+  "Sod",
+  "Drainage",
+  "Tree / Shrub work",
+  "Hardscape (Patio/Driveway/Walls)",
+  "Outdoor Lighting",
+  "Snow / Ice",
+  "Fertilization / Weed Control",
+  "Other",
+] as const
+
+export type GhlServiceRequestedOption = (typeof GHL_SERVICE_REQUESTED_OPTIONS)[number]
+
+const SERVICE_REQUESTED_SET = new Set<string>(GHL_SERVICE_REQUESTED_OPTIONS)
+
+/**
+ * Value safe to write to contact.service_requested.
+ * Prefer the site's canonical label for the quote service id (exact picklist match).
+ */
+export function mapToGhlServiceRequested(
+  serviceId?: string | null,
+  serviceLabel?: string | null,
+): GhlServiceRequestedOption {
+  const id = resolveQuoteService(serviceId || "") || resolveQuoteService(serviceLabel || "")
+  if (id) {
+    const label = GHL_SERVICE_LABELS[id]
+    if (SERVICE_REQUESTED_SET.has(label)) return label as GhlServiceRequestedOption
+  }
+
+  const label = (serviceLabel || "").trim()
+  if (SERVICE_REQUESTED_SET.has(label)) return label as GhlServiceRequestedOption
+
+  return "Other"
+}
+
 export type QuoteServiceDef = {
   id: QuoteServiceId
   label: string

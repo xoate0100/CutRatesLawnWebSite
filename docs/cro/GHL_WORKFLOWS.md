@@ -104,7 +104,12 @@ Msg: {{contact.your_message}}
 Call/text within 5 min.
 ```
 
-If custom field merge keys differ in your account, use the UI picker for **Service Requested** and **Your Message** instead of `{{contact.your_message}}`.
+Merge fields (live fieldKeys):
+
+- Service Requested → `{{contact.service_requested}}` (picklist aligned to site `GHL_SERVICE_LABELS` + phone extras; updated 2026-09-23)
+- Your Message → `{{contact.your_message}}`
+
+Prefer the UI custom-field picker if a template still shows blank.
 
 ### Internal email (to office)
 

@@ -2,6 +2,7 @@
  * Go High Level / LeadConnector server-side client.
  */
 import { routeLead, resolveOwnerId } from "@/lib/quote/routing"
+import { mapToGhlServiceRequested } from "@/lib/quote/taxonomy"
 import type { LeadBody } from "@/lib/lead/schema"
 
 const GHL_BASE = "https://services.leadconnectorhq.com"
@@ -96,8 +97,10 @@ async function addTags(token: string, contactId: string, tags: string[]): Promis
 
 function envCustomFields(lead: GhlLeadInput): Array<{ id: string; field_value: string }> {
   const customFields: Array<{ id: string; field_value: string }> = []
+  // Service Requested is MULTIPLE_OPTIONS — value must match GHL picklist exactly.
+  const serviceRequested = mapToGhlServiceRequested(lead.serviceId, lead.service)
   const pairs: Array<[string | undefined, string | undefined]> = [
-    [process.env.GHL_CF_SERVICE_ID, lead.service],
+    [process.env.GHL_CF_SERVICE_ID, serviceRequested],
     [process.env.GHL_CF_MESSAGE_ID, lead.message?.slice(0, 1000)],
     [process.env.GHL_CF_REQUEST_ID, lead.requestId],
     [process.env.GHL_CF_AREA_ID, lead.areaSlug],

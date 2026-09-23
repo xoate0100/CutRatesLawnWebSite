@@ -141,3 +141,12 @@ Fleet remediation applied.
 - synced hub file: 3_bootstrap_scripts/architecture_check.py
 
 Classification per docs/factory/FLEET_TRIAGE.md.
+
+
+---
+
+## wave1-closeout-and-normalization Task 7 (2026-09-23)
+
+- **Change:** Added `.github/workflows/pr_checks.yml` (GAP-INVERT — capability-drift without merge gate).
+- **Authorization:** auth-wave1-closeout-normalization-20260923
+- **Merge:** human only — agent does not merge.

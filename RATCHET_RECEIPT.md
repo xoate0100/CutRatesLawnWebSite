@@ -150,3 +150,13 @@ Classification per docs/factory/FLEET_TRIAGE.md.
 - **Change:** Added `.github/workflows/pr_checks.yml` (GAP-INVERT — capability-drift without merge gate).
 - **Authorization:** auth-wave1-closeout-normalization-20260923
 - **Merge:** human only — agent does not merge.
+
+
+## fleet-normalization-v1 task 7 — cron/Dependabot (2026-09-23)
+
+- Dependabot: grouped patch/minor, ignore majors + next>=16, auto-merge on green only
+
+Changed:
+- `.github/dependabot.yml`
+- `.github/workflows/dependabot-auto-merge.yml`
+- `RATCHET_RECEIPT.md`

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "leadconnector": {
+      "url": "https://services.leadconnectorhq.com/mcp/cursor/v2",
+      "headers": {
+        "Authorization": "Bearer ${env:GHL_PRIVATE_INTEGRATION_TOKEN}",
+        "locationId": "${env:GHL_LOCATION_ID}"
+      }
+    }
+  }
+}

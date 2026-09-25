@@ -57,3 +57,6 @@ media/archive/*
 media/archive/already_in_registry/**
 .vercel
 .env*.local
+# MCP configs may hold literal secrets
+.cursor/mcp.json
+.trae/mcp.json

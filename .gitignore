@@ -57,6 +57,6 @@ media/archive/*
 media/archive/already_in_registry/**
 .vercel
 .env*.local
-# MCP configs may hold literal secrets
-.cursor/mcp.json
+# Cursor MCP config uses ${env:...} references and is tracked.
+# Trae MCP config may still hold literal secrets.
 .trae/mcp.json

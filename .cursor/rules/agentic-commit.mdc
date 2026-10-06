@@ -1,6 +1,5 @@
 ---
-description: Commit discipline and traceability for plan-tracked work
-globs: "**/*"
+description: Commit discipline and traceability for plan-tracked work. Use when creating a git commit for plan-tracked work.
 alwaysApply: false
 ---
 

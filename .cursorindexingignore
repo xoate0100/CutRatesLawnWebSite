@@ -1,0 +1,8 @@
+pnpm-lock.yaml
+CURSOR_PROMPT_*.md
+Cursor_Prompt_*.md
+public/**/*.png
+public/**/*.jpg
+public/**/*.jpeg
+public/**/*.webp
+public/**/*.mp4

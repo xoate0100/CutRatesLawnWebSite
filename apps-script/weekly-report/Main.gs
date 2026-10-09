@@ -1,22 +1,39 @@
 /**
  * Entry points for triggers and manual runs.
- * After clasp push: run setupProperties once, then createWeeklyTrigger.
+ * After push: set Script Properties, run dryRunWeeklyReport, then createWeeklyTrigger.
  */
 
 function runWeeklyReport() {
-  var r = Report.send(0);
-  Logger.log('Sent week ' + r.label + ' contacts=' + r.contacts);
+  try {
+    var r = Report.send(0);
+    Logger.log('Sent week ' + r.label + ' contacts=' + r.contacts + ' to ' + r.recipient);
+  } catch (e) {
+    var to = Config.prop('ALERT_TO', '') || Session.getEffectiveUser().getEmail();
+    MailApp.sendEmail({
+      to: to,
+      subject: 'FAILED: Cut Rates weekly report',
+      body: 'The Monday report did not send.\n\n' + (e && e.stack ? e.stack : String(e)),
+    });
+    throw e;
+  }
 }
 
-/** Preview HTML in Logs without sending email. */
+/** Preview HTML in Logs without sending email (still upserts the Sheet row). */
 function dryRunWeeklyReport() {
   var r = Report.build(0);
   Logger.log(Report.html(r));
   return r;
 }
 
+/** Sends last week's report ONLY to ALERT_TO (you) so you can eyeball it before Chris/Jason see one. */
+function testSendToMe() {
+  var r = Report.build(0);
+  var to = Config.prop('ALERT_TO', '') || Session.getEffectiveUser().getEmail();
+  MailApp.sendEmail({ to: to, subject: '[TEST] Cut Rates weekly report — ' + r.label, htmlBody: Report.html(r) });
+  Logger.log('Test sent to ' + to);
+}
+
 function createWeeklyTrigger() {
-  // Monday 7:00 America/Chicago — adjust as needed
   ScriptApp.getProjectTriggers().forEach(function (t) {
     if (t.getHandlerFunction() === 'runWeeklyReport') ScriptApp.deleteTrigger(t);
   });
@@ -30,17 +47,22 @@ function createWeeklyTrigger() {
 }
 
 function setupProperties() {
-  // Fill real values in Project Settings → Script properties, or edit below once then clear.
   var props = PropertiesService.getScriptProperties();
-  var defaults = {
-    GA4_PROPERTY_ID: props.getProperty('GA4_PROPERTY_ID') || '',
-    GSC_SITE_URL: props.getProperty('GSC_SITE_URL') || 'https://cutrateslawn.com/',
-    GHL_LOCATION_ID: props.getProperty('GHL_LOCATION_ID') || '',
-    GHL_PRIVATE_TOKEN: props.getProperty('GHL_PRIVATE_TOKEN') || '',
-    REPORT_RECIPIENT: props.getProperty('REPORT_RECIPIENT') || 'info@cutrateslawn.com',
-    TRACKED_QUERIES: props.getProperty('TRACKED_QUERIES') || 'lawn mowing wichita,lawn care derby ks,snow removal wichita',
+  var keys = {
+    GA4_PROPERTY_ID: '',
+    GSC_SITE_URL: '',
+    GHL_LOCATION_ID: '',
+    GHL_PRIVATE_TOKEN: '',
+    REPORT_RECIPIENT: '',
+    ALERT_TO: '',
+    EVT_LEAD: 'conversion_lead',
+    EVT_PHONE: 'phone_click',
+    EVT_QUOTE_START: 'form_start',
+    EVT_QUOTE_COMPLETE: 'conversion_lead',
+    GA4_SERVICE_DIM: 'customEvent:service_id',
   };
-  props.setProperties(defaults, false);
-  Logger.log('Properties present. Set empty ones in Project Settings → Script properties.');
-  Logger.log(JSON.stringify(Object.keys(defaults)));
+  var out = {};
+  Object.keys(keys).forEach(function (k) { out[k] = props.getProperty(k) || keys[k]; });
+  props.setProperties(out, false);
+  Logger.log('Seeded: ' + JSON.stringify(Object.keys(out)) + ' — fill blanks in Project Settings.');
 }

@@ -17,21 +17,43 @@ var Report = (function () {
     return { start: start, endExclusive: end };
   }
 
+  /** Event names + service dimension come from Script Properties so they can match GA4 exactly. */
+  function names() {
+    return {
+      lead: Config.prop('EVT_LEAD', 'conversion_lead'),
+      phone: Config.prop('EVT_PHONE', 'phone_click'),
+      quoteStart: Config.prop('EVT_QUOTE_START', 'form_start'),
+      quoteComplete: Config.prop('EVT_QUOTE_COMPLETE', 'conversion_lead'),
+      serviceDim: Config.prop('GA4_SERVICE_DIM', 'customEvent:service_id'),
+    };
+  }
+
   function build(offsetWeeks) {
     var cfg = Config.requireConfigured();
+    var n = names();
     var win = weekWindow(offsetWeeks || 0);
     var start = win.start;
     var end = win.endExclusive;
     var label = Ga4.ymd(start) + ' → ' + Ga4.ymd(new Date(end.getTime() - 86400000));
+    var health = [];
 
     var ov = Ga4.overview(cfg.ga4PropertyId, start, end);
     var channels = Ga4.byChannel(cfg.ga4PropertyId, start, end);
-    var landings = Ga4.topLandings(cfg.ga4PropertyId, start, end, 8);
-    var leadGa4 = Ga4.eventCount(cfg.ga4PropertyId, start, end, 'conversion_lead');
-    var phoneClicks = Ga4.eventCount(cfg.ga4PropertyId, start, end, 'conversion_phone_click');
-    var quoteStarts = Ga4.eventCount(cfg.ga4PropertyId, start, end, 'funnel_quote_start');
-    var quoteCompletes = Ga4.eventCount(cfg.ga4PropertyId, start, end, 'funnel_quote_complete');
-    var leadsByService = Ga4.eventByDim(cfg.ga4PropertyId, start, end, 'conversion_lead', 'customEvent:service');
+    var landings = Ga4.topLandings(cfg.ga4PropertyId, start, end, 50)
+      .sort(function (a, b) { return b.sessions - a.sessions; })
+      .slice(0, 8);
+    var leadGa4 = Ga4.eventCount(cfg.ga4PropertyId, start, end, n.lead);
+    var phoneClicks = Ga4.eventCount(cfg.ga4PropertyId, start, end, n.phone);
+    var quoteStarts = Ga4.eventCount(cfg.ga4PropertyId, start, end, n.quoteStart);
+    var quoteCompletes = Ga4.eventCount(cfg.ga4PropertyId, start, end, n.quoteComplete);
+
+    // Custom dimension must be registered in GA4 Admin; never let it kill the whole report.
+    var leadsByService = [];
+    try {
+      leadsByService = Ga4.eventByDim(cfg.ga4PropertyId, start, end, n.lead, n.serviceDim);
+    } catch (e) {
+      health.push('GA4: "' + n.serviceDim + '" not registered as a custom dimension — leads-by-service skipped');
+    }
 
     var gsc = SearchConsole.totals(cfg.gscSiteUrl, start, end);
     var gscTop = SearchConsole.topQueries(cfg.gscSiteUrl, start, end, 10);
@@ -39,7 +61,11 @@ var Report = (function () {
 
     var ghl = { complete: 0, partial: 0, error: 'token_missing' };
     if (cfg.ghlToken && cfg.ghlLocationId) {
-      ghl = Ghl.websiteLeads(cfg.ghlToken, cfg.ghlLocationId, start, end);
+      try {
+        ghl = Ghl.websiteLeads(cfg.ghlToken, cfg.ghlLocationId, start, end);
+      } catch (e) {
+        ghl = { complete: 0, partial: 0, error: 'api_error ' + String(e).slice(0, 120) };
+      }
     }
 
     var contacts = (ghl.complete || 0) + (ghl.partial || 0);
@@ -47,10 +73,9 @@ var Report = (function () {
     var spend = Ads.spendUsd(start, end);
     var cpc = spend != null && contacts ? (spend / contacts) : null;
 
-    var health = [];
     if (ghl.error) health.push('GHL: ' + ghl.error + ' (using GA4 lead count as contact proxy if needed)');
     if (!ov.sessions && !leadGa4) health.push('GA4: zero sessions/leads — check property ID + Analytics Data API');
-    if (!gsc.impressions && !gsc.clicks) health.push('GSC: zero clicks/impressions — verify site URL property + Search Console API');
+    if (!gsc.impressions && !gsc.clicks) health.push('GSC: zero clicks/impressions — verify GSC_SITE_URL matches the property exactly');
     if (spend == null) health.push('Ads: spend not connected (optional)');
 
     var sheetUrl = Sheet.upsertWeek({
@@ -110,7 +135,7 @@ var Report = (function () {
       '<h3>North-star</h3>',
       '<ul>',
       '<li>Contacts (GHL website-lead / GA4 fallback): <b>' + r.contacts + '</b></li>',
-      '<li>GA4 conversion_lead: ' + r.leadGa4 + '</li>',
+      '<li>GA4 leads: ' + r.leadGa4 + '</li>',
       '<li>Phone clicks: ' + r.phoneClicks + '</li>',
       '<li>Quote start → complete: ' + r.quoteStarts + ' → ' + r.quoteCompletes + '</li>',
       r.costPerContact != null ? '<li>Cost / contact: $' + r.costPerContact.toFixed(2) + '</li>' : '',
@@ -137,7 +162,7 @@ var Report = (function () {
         return x.query + (x.missing ? ' (not in top 250)' : ' — clicks ' + x.clicks + ', pos ' + (Math.round(x.position * 10) / 10));
       }),
       '<h3>Leads by service (GA4)</h3>',
-      li(r.leadsByService, function (x) { return x.key + ': ' + x.count; }),
+      li(r.leadsByService.length ? r.leadsByService : [{ key: 'n/a', count: '—' }], function (x) { return x.key + ': ' + x.count; }),
       '<h3>Health</h3>',
       li(r.health.length ? r.health : ['OK'], function (x) { return x; }),
       '<p>Sheet: <a href="' + r.sheetUrl + '">' + r.sheetUrl + '</a></p>',
@@ -148,7 +173,7 @@ var Report = (function () {
   function send(offsetWeeks) {
     var r = build(offsetWeeks || 0);
     MailApp.sendEmail({
-      to: r.recipient,
+      to: r.recipient, // comma-separated list is fine: "chris@...,jason@..."
       subject: 'Cut Rates weekly report — ' + r.label,
       htmlBody: html(r),
     });

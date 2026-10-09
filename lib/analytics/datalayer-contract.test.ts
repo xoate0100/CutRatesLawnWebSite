@@ -8,6 +8,8 @@ import {
   CONVERSION_EVENTS,
   CONVERSION_GATED_ON_ATTRIBUTION,
   DATALAYER_CONTRACT_FIELDS,
+  MARKETING_EVENTS,
+  NEWSLETTER_EVENTS,
 } from "./types"
 
 let failed = 0
@@ -27,6 +29,9 @@ for (const field of required) {
 }
 
 assert(CONVERSION_EVENTS.has("conversion_lead"), "conversion_lead is a conversion event")
+assert(!CONVERSION_EVENTS.has("newsletter_signup"), "newsletter_signup is not a conversion")
+assert(!MARKETING_EVENTS.has("newsletter_signup"), "newsletter_signup is not a marketing event")
+assert(NEWSLETTER_EVENTS.has("newsletter_signup"), "newsletter_signup is a newsletter event")
 assert(
   CONVERSION_GATED_ON_ATTRIBUTION === false,
   "runtime must not drop conversions for missing UTM/gclid (F-CRO-101)",
@@ -41,6 +46,7 @@ const organicPayload: Record<string, unknown> = {
   transaction_id: "rid-organic",
   conversion_value: 45,
   currency: "USD",
+  lead_source: "quote",
   conversion_gated_on_attribution: CONVERSION_GATED_ON_ATTRIBUTION,
 }
 
@@ -60,6 +66,10 @@ const paidPayload = {
   gclid: "TesTclId",
 }
 assert(paidPayload.traffic_type === "paid", "gclid still classifies as paid")
+assert(organicPayload.lead_source === "quote", "conversion_lead requires lead_source")
+
+const contactPayload = { ...organicPayload, lead_source: "contact" }
+assert(contactPayload.lead_source === "contact", "contact lead_source allowed")
 
 if (failed) {
   console.error(`\n${failed} failed`)

@@ -77,7 +77,7 @@ export function ContactFormBlock({ className }: ContactFormBlockProps) {
         analytics.onFormError("contact", "form", "submit")
         return
       }
-      analytics.onConversionLead(data.requestId || "contact", 0, "USD")
+      analytics.onConversionLead(data.requestId || "contact", 0, "contact", "USD")
       setSuccess(true)
       setValues(initial)
       router.push(`/thank-you?rid=${encodeURIComponent(data.requestId || "")}&source=contact`)

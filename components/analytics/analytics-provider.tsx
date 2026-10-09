@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useRef } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
 import { initAnalyticsCapture, trackPageView } from "@/lib/analytics/core"
 
@@ -11,12 +11,16 @@ import { initAnalyticsCapture, trackPageView } from "@/lib/analytics/core"
 export function AnalyticsProvider() {
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const lastKey = useRef("")
 
   useEffect(() => {
     initAnalyticsCapture()
   }, [])
 
   useEffect(() => {
+    const key = `${pathname}?${searchParams?.toString() || ""}`
+    if (lastKey.current === key) return
+    lastKey.current = key
     trackPageView()
   }, [pathname, searchParams])
 

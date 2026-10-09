@@ -40,7 +40,7 @@ Agents cannot invent tokens or click GTM/GA4 UIs. Complete these in order so the
 | `GSC_SITE_URL` | Andy | Exact GSC property string |
 | `REPORT_RECIPIENT` | Andy | Chris + Jason (comma-separated). **Required** — missing value fails the run |
 | `ALERT_TO` | Andy | Andy's email |
-| `GHL_LOCATION_ID` / `GHL_PRIVATE_TOKEN` | Andy | Contacts Read PIT |
+| `GHL_LOCATION_ID` / `GHL_PRIVATE_TOKEN` | Andy | Contacts Read PIT. Alias `GHL_PRIVATE_INTEGRATION_TOKEN` also accepted. **2026-10-09:** the PIT currently in `.env.local` returns `401 Invalid Private Integration token` on all LeadConnector endpoints — regenerate in GHL and update Script Properties + `.env.local` + Vercel. |
 | `MONTHLY_FEE_USD` | Andy | `449` |
 
 ### Run in Apps Script (after `clasp push`)

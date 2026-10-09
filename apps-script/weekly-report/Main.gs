@@ -53,14 +53,30 @@ function testSendToMe() {
  * Live GHL smoke check — logs counts only, never PII.
  */
 function debugGhl() {
-  var token = Config.prop('GHL_PRIVATE_TOKEN', '') || Config.prop('GHL_TOKEN', '');
+  var token = Config.ghlToken();
   var locationId = Config.prop('GHL_LOCATION_ID', '');
   if (!token || !locationId) {
-    Logger.log('debugGhl: missing GHL_PRIVATE_TOKEN or GHL_LOCATION_ID');
+    Logger.log('debugGhl: missing GHL_PRIVATE_TOKEN (or GHL_PRIVATE_INTEGRATION_TOKEN) or GHL_LOCATION_ID');
     return { error: 'token_missing' };
+  }
+  // Fingerprint only — never log the secret. pit- + len=40 is the expected shape.
+  Logger.log(
+    'debugGhl auth fingerprint startsPit=' + (token.indexOf('pit-') === 0) +
+    ' tokenLen=' + token.length +
+    ' locationLen=' + locationId.length
+  );
+  if (token.indexOf('pit-') !== 0 || token.length < 20) {
+    Logger.log('debugGhl: token shape looks wrong — re-paste PIT without quotes or "Bearer "');
   }
   var win = Report.weekWindow(0);
   var ghl = Ghl.websiteLeads(token, locationId, win.start, win.endExclusive);
+  if (ghl.error === '401') {
+    Logger.log(
+      'debugGhl: GHL rejected the PIT (Invalid Private Integration token). ' +
+      'Regenerate in GHL → Settings → Integrations → Private Integrations (Contacts Read), ' +
+      'then update Script Property + .env.local GHL_PRIVATE_INTEGRATION_TOKEN + Vercel.'
+    );
+  }
   Logger.log(
     'debugGhl complete=' + ghl.complete +
     ' partial=' + ghl.partial +

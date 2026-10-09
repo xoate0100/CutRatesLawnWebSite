@@ -7,7 +7,7 @@ var SearchConsole = (function () {
       endDate: endDate,
       dimensions: dimensions || ['query'],
       rowLimit: rowLimit || 25,
-      dataState: 'final',
+      dataState: 'all',
     };
     var res = UrlFetchApp.fetch(url, {
       method: 'post',
@@ -16,29 +16,43 @@ var SearchConsole = (function () {
       payload: JSON.stringify(body),
       muteHttpExceptions: true,
     });
-    if (res.getResponseCode() >= 300) {
-      Logger.log('GSC error ' + res.getResponseCode() + ' ' + res.getContentText().slice(0, 300));
-      return { rows: [] };
+    var code = res.getResponseCode();
+    if (code >= 300) {
+      Logger.log('GSC error ' + code + ' ' + res.getContentText().slice(0, 300));
+      return { rows: [], error: code, siteUrl: siteUrl };
     }
-    return JSON.parse(res.getContentText()) || { rows: [] };
+    var parsed = JSON.parse(res.getContentText()) || { rows: [] };
+    parsed.siteUrl = siteUrl;
+    return parsed;
   }
 
   function totals(siteUrl, start, endExclusive) {
     var startS = Ga4.ymd(start);
     var endS = Ga4.ymd(new Date(endExclusive.getTime() - 86400000));
     var res = query(siteUrl, startS, endS, ['date'], 100);
-    var clicks = 0, impressions = 0, positionSum = 0, n = 0;
+    if (res.error) {
+      return {
+        clicks: 0,
+        impressions: 0,
+        ctr: 0,
+        position: 0,
+        error: res.error,
+        siteUrl: siteUrl,
+      };
+    }
+    var clicks = 0, impressions = 0, weightedPos = 0;
     (res.rows || []).forEach(function (r) {
+      var imp = r.impressions || 0;
       clicks += r.clicks || 0;
-      impressions += r.impressions || 0;
-      positionSum += (r.position || 0);
-      n++;
+      impressions += imp;
+      weightedPos += (r.position || 0) * imp;
     });
     return {
       clicks: clicks,
       impressions: impressions,
       ctr: impressions ? clicks / impressions : 0,
-      position: n ? positionSum / n : 0,
+      position: impressions ? weightedPos / impressions : 0,
+      siteUrl: siteUrl,
     };
   }
 
@@ -50,6 +64,7 @@ var SearchConsole = (function () {
       ['query'],
       limit || 10
     );
+    if (res.error) return [];
     return (res.rows || []).map(function (r) {
       return {
         query: r.keys[0],
@@ -71,5 +86,5 @@ var SearchConsole = (function () {
     });
   }
 
-  return { totals: totals, topQueries: topQueries, tracked: tracked };
+  return { totals: totals, topQueries: topQueries, tracked: tracked, query: query };
 })();

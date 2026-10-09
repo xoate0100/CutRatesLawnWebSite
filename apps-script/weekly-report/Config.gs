@@ -1,14 +1,17 @@
 /**
  * Script Properties (Project Settings → Script properties):
  *   GA4_PROPERTY_ID          e.g. 123456789 (numeric only, no "properties/")
- *   GSC_SITE_URL             e.g. https://cutrateslawn.com/
+ *   GSC_SITE_URL             e.g. sc-domain:cutrateslawn.com or https://cutrateslawn.com/
  *   GHL_LOCATION_ID          GHL sub-account location id
  *   GHL_PRIVATE_TOKEN        Private Integration token (Contacts Read)
- *   REPORT_RECIPIENT         email for Monday report
+ *   REPORT_RECIPIENT         required; comma-separated Chris,Jason emails
+ *   ALERT_TO                 failure alerts
  *   TRACKED_QUERIES          comma-separated queries (optional)
  *   SHEET_ID                 created automatically on first run
  *   GOOGLE_ADS_CUSTOMER_ID   optional; spend omitted until Ads query wired
- *   MONTHLY_FEE_USD          optional display only
+ *   MONTHLY_FEE_USD          default 449
+ *   LAST_SENT_WEEK           set automatically after a successful send
+ *   GTM_ROLLBACK_VERSION     set by ensureGtmEventForwarding before publish
  */
 var Config = (function () {
   var TZ = 'America/Chicago';
@@ -31,7 +34,7 @@ var Config = (function () {
       gscSiteUrl: prop('GSC_SITE_URL', 'https://cutrateslawn.com/'),
       ghlLocationId: prop('GHL_LOCATION_ID', ''),
       ghlToken: prop('GHL_PRIVATE_TOKEN', '') || prop('GHL_TOKEN', ''),
-      recipient: prop('REPORT_RECIPIENT', '') || prop('REPORT_TO', 'info@cutrateslawn.com'),
+      recipient: required('REPORT_RECIPIENT'),
       trackedQueries: (prop('TRACKED_QUERIES', '') || trackedTerms().join(','))
         .split(',')
         .map(function (s) { return s.trim(); })

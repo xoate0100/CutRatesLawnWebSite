@@ -27,3 +27,43 @@ Owner-only decisions and secrets. Agents must not invent these values.
 **Present (added this remediation):** `NEXT_PUBLIC_TURNSTILE_SITE_KEY`, `TURNSTILE_SECRET_KEY` (redeploy so site key is in client bundle), `NEXT_PUBLIC_CONSENT_MODE=us_opt_out` (confirm on Vercel if not yet).
 
 **Absent:** `NEXT_PUBLIC_GA4_MEASUREMENT_ID`, `NEXT_PUBLIC_GOOGLE_ADS_*`, `NEXT_PUBLIC_META_PIXEL_ID`, `UPSTASH_REDIS_REST_*`, `CONTACT_FORM_WEBHOOK_URL`, `RESEND_API_KEY`, `LEAD_NOTIFY_EMAIL`
+
+## Weekly report wiring (2026-10-09)
+
+Agents cannot invent tokens or click GTM/GA4 UIs. Complete these in order so the **2026-10-12 07:00 America/Chicago** email is truthful.
+
+### Script properties (Apps Script project)
+
+| Key | Who | Notes |
+|-----|-----|--------|
+| `GA4_PROPERTY_ID` | Andy | Numeric id for property behind `G-5X2990G1ZP` |
+| `GSC_SITE_URL` | Andy | Exact GSC property string |
+| `REPORT_RECIPIENT` | Andy | Chris + Jason (comma-separated). **Required** — missing value fails the run |
+| `ALERT_TO` | Andy | Andy's email |
+| `GHL_LOCATION_ID` / `GHL_PRIVATE_TOKEN` | Andy | Contacts Read PIT |
+| `MONTHLY_FEE_USD` | Andy | `449` |
+
+### Run in Apps Script (after `clasp push`)
+
+`clasp push -f` already succeeded (2026-10-09) including `Wiring.gs`.  
+`clasp run runAllWiring` failed with storage `NOT_FOUND` — the script is **not** linked for API executable runs. Run functions from the Apps Script editor UI instead:
+
+1. Enable GCP APIs listed in `apps-script/weekly-report/SETUP.md`.
+2. In the editor, run **`runAllWiring`** — creates GA4 dimensions + GTM event forwarder; publishes workspace `weekly-report-wiring`.
+3. Run **`debugGhl`** — confirm counts only (no PII in logs).
+4. Run **`testSendToMe`** — Andy receives a dry email; read Health.
+5. Run **`createWeeklyTrigger`** — Mondays 7am Chicago; failure notifications **immediately**.
+6. Share `weekly_kpis` Sheet with Chris and Jason (view).
+
+### If Advanced Services / APIs are blocked
+
+Manual GTM (`GTM-KGVZJ93G`) click-path (same as `ensureGtmEventForwarding`):
+
+1. Workspace named `weekly-report-wiring`.
+2. Data Layer Variables (v2): `DLV - <key>` for `service_id`, `service_name`, `area_slug`, `area_name`, `form_id`, `click_location`, `lead_source`, `funnel_id`, `step_name`, `step_number`, `transaction_id`, `conversion_value`, `currency`, `traffic_type`, `utm_source`, `utm_medium`, `utm_campaign`, `gclid`.
+3. Custom Event trigger `CE - CRL site events` regex: `^(phone_click|conversion_lead|newsletter_signup|form_start|form_step_complete|form_abandon|partial_form_fill|form_error|funnel_step_view|service_view|area_view)$` (exclude `page_view`).
+4. GA4 Event tag `GA4 Event - CRL site events` → `G-5X2990G1ZP`, event name `{{Event}}`, map all DLVs, consent require `analytics_storage`.
+5. Publish version; note prior live version for rollback.
+6. GA4 Admin → Custom definitions (event-scoped): `service_id`, `area_slug`, `form_id`, `click_location`, `lead_source`, `funnel_id`, `step_name`. Mark `conversion_lead` and `phone_click` as key events.
+
+Until wiring runs, the report Health section must say GA4 lead/phone/funnel numbers will be **0**. Do not fake numbers.

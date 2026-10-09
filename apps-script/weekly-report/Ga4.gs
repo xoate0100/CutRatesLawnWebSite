@@ -1,12 +1,14 @@
 var Ga4 = (function () {
-  function runReport(propertyId, startDate, endDate, dimensions, metrics, dimensionFilter) {
+  function runReport(propertyId, startDate, endDate, dimensions, metrics, dimensionFilter, options) {
+    options = options || {};
     var body = {
       dateRanges: [{ startDate: startDate, endDate: endDate }],
       dimensions: (dimensions || []).map(function (n) { return { name: n }; }),
       metrics: (metrics || []).map(function (n) { return { name: n }; }),
-      limit: 10000,
+      limit: options.limit != null ? options.limit : 10000,
     };
     if (dimensionFilter) body.dimensionFilter = dimensionFilter;
+    if (options.orderBys) body.orderBys = options.orderBys;
     var res = AnalyticsData.Properties.runReport(body, 'properties/' + propertyId);
     return res || { rows: [] };
   }
@@ -25,6 +27,21 @@ var Ga4 = (function () {
     return sum;
   }
 
+  function eventNameFilter(eventName) {
+    return {
+      filter: {
+        fieldName: 'eventName',
+        stringFilter: { matchType: 'EXACT', value: eventName },
+      },
+    };
+  }
+
+  function andFilters(expressions) {
+    if (!expressions || !expressions.length) return null;
+    if (expressions.length === 1) return expressions[0];
+    return { andGroup: { expressions: expressions } };
+  }
+
   function eventCount(propertyId, start, endExclusive, eventName) {
     var report = runReport(
       propertyId,
@@ -32,12 +49,29 @@ var Ga4 = (function () {
       ymd(new Date(endExclusive.getTime() - 86400000)),
       ['eventName'],
       ['eventCount'],
-      {
+      eventNameFilter(eventName)
+    );
+    return metricSum(report, 0);
+  }
+
+  /** eventName + optional exact customEvent dimension filters. */
+  function eventCountFiltered(propertyId, start, endExclusive, eventName, dimFilters) {
+    var expressions = [eventNameFilter(eventName)];
+    (dimFilters || []).forEach(function (df) {
+      expressions.push({
         filter: {
-          fieldName: 'eventName',
-          stringFilter: { matchType: 'EXACT', value: eventName },
+          fieldName: df.field,
+          stringFilter: { matchType: 'EXACT', value: df.value },
         },
-      }
+      });
+    });
+    var report = runReport(
+      propertyId,
+      ymd(start),
+      ymd(new Date(endExclusive.getTime() - 86400000)),
+      ['eventName'],
+      ['eventCount'],
+      andFilters(expressions)
     );
     return metricSum(report, 0);
   }
@@ -75,14 +109,20 @@ var Ga4 = (function () {
   }
 
   function topLandings(propertyId, start, endExclusive, limit) {
+    var lim = limit || 10;
     var report = runReport(
       propertyId,
       ymd(start),
       ymd(new Date(endExclusive.getTime() - 86400000)),
       ['landingPagePlusQueryString'],
-      ['sessions']
+      ['sessions'],
+      null,
+      {
+        orderBys: [{ metric: { metricName: 'sessions' }, desc: true }],
+        limit: lim,
+      }
     );
-    return (report.rows || []).slice(0, limit || 10).map(function (r) {
+    return (report.rows || []).map(function (r) {
       return { page: r.dimensionValues[0].value, sessions: Number(r.metricValues[0].value) || 0 };
     });
   }
@@ -94,12 +134,7 @@ var Ga4 = (function () {
       ymd(new Date(endExclusive.getTime() - 86400000)),
       ['eventName', dim],
       ['eventCount'],
-      {
-        filter: {
-          fieldName: 'eventName',
-          stringFilter: { matchType: 'EXACT', value: eventName },
-        },
-      }
+      eventNameFilter(eventName)
     );
     return (report.rows || []).map(function (r) {
       return { key: r.dimensionValues[1].value, count: Number(r.metricValues[0].value) || 0 };
@@ -108,6 +143,7 @@ var Ga4 = (function () {
 
   return {
     eventCount: eventCount,
+    eventCountFiltered: eventCountFiltered,
     overview: overview,
     byChannel: byChannel,
     topLandings: topLandings,

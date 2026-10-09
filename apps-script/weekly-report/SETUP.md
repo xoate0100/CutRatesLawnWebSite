@@ -1,73 +1,70 @@
-# Apps Script weekly report — human setup
+# Apps Script weekly report — setup (pwsh)
 
-Source files live in `apps-script/weekly-report/`. Deploy once with [clasp](https://github.com/google/clasp) or paste into a new Apps Script project.
+Source: `apps-script/weekly-report/`. First real send: **Monday 2026-10-12, 7:00 AM America/Chicago** to Chris and Jason.
 
-## What you get
+Offline gate (no Google APIs):
 
-- Monday 7:00 AM America/Chicago email to `REPORT_RECIPIENT`
-- KPI row appended/updated in a Google Sheet (`weekly_kpis`)
-- Pulls: GA4 (Analytics Data API), Search Console, optional GHL contacts tagged `website-lead`
-- Does **not** invent Ads spend until Ads is wired
+```powershell
+pnpm run report:test
+```
 
-## One-time setup (clasp — preferred)
+## Deploy with clasp
 
-1. Install: `npm i -g @google/clasp` and `clasp login`.
-2. Create a standalone script:
-   ```bash
-   cd apps-script/weekly-report
-   clasp create --title "Cut Rates Weekly Website Report" --type standalone --rootDir .
-   clasp push
-   ```
-3. Open the script: `clasp open` → **Project Settings** → note the Script ID.
-4. **Services** (left sidebar → Services → Add):
-   - Google Analytics Data API (`AnalyticsData`) — already declared in `appsscript.json`; confirm it shows as enabled.
-5. **Script properties** (Project Settings → Script properties). Add:
+```powershell
+npm i -g @google/clasp
+clasp login --status   # if not logged in: clasp login
+cd apps-script/weekly-report
+# If .clasp.json exists, reuse that script. Otherwise:
+clasp create --title "Cut Rates Weekly Website Report" --type standalone --rootDir .
+clasp push -f
+```
+
+`.claspignore` excludes `test/**` and `*.md`. Never commit `.clasp.json`.
+
+## Andy's one-time list
+
+1. In Apps Script, open **Project Settings**, link a **standard GCP project**, and enable:
+   - Google Analytics Data API
+   - Google Analytics Admin API
+   - Search Console API
+   - Tag Manager API
+2. Confirm **Services** shows: `AnalyticsData`, `AnalyticsAdmin`, `TagManager` (from `appsscript.json`).
+3. **Script properties:**
 
 | Key | Value |
 |-----|--------|
-| `GA4_PROPERTY_ID` | Numeric GA4 property id (Admin → Property settings) |
-| `GSC_SITE_URL` | `https://cutrateslawn.com/` (must match Search Console property exactly) |
-| `REPORT_RECIPIENT` | Owner email (e.g. your inbox) |
-| `GHL_LOCATION_ID` | GHL location / sub-account id |
-| `GHL_PRIVATE_TOKEN` | GHL Private Integration token with **Contacts → Read** |
-| `TRACKED_QUERIES` | Optional comma list; defaults cover Wichita/Derby terms |
+| `GA4_PROPERTY_ID` | Numeric GA4 property id |
+| `GSC_SITE_URL` | Exactly as in Search Console (`sc-domain:cutrateslawn.com` or `https://cutrateslawn.com/`) |
+| `REPORT_RECIPIENT` | Chris and Jason emails, comma-separated (required — no fallback) |
+| `ALERT_TO` | Andy's email for FAILED alerts |
+| `GHL_LOCATION_ID` | GHL location id |
+| `GHL_PRIVATE_TOKEN` | Private Integration token (Contacts Read) |
+| `MONTHLY_FEE_USD` | `449` |
 
-6. **OAuth / APIs** (first run will prompt):
-   - Run `setupProperties` once (optional seed).
-   - Run `dryRunWeeklyReport` — approve Analytics, Search Console, Sheets, Gmail, external request.
-   - In [Google Cloud Console](https://console.cloud.google.com/) for this Apps Script’s GCP project, enable:
-     - **Google Analytics Data API**
-     - **Google Search Console API**
-7. **Search Console access**: the Google account that owns the script must be a full user on the `https://cutrateslawn.com/` GSC property.
-8. **GA4 access**: same account needs Viewer (or higher) on the GA4 property.
-9. Create trigger: run `createWeeklyTrigger` once (Mondays 7am Chicago). Or: Triggers → Add → `runWeeklyReport` → Week timer → Monday 7–8am.
-10. Confirm: run `runWeeklyReport` once; check email + Sheet URL in the log.
+4. Run `runAllWiring` and approve OAuth. Confirm the log shows GTM version published and custom dimensions created (or `already_present`).
+5. Run `debugGhl` (counts only), then `testSendToMe`, and read the Health section.
+6. Run `createWeeklyTrigger`. In Triggers, set failure notifications to **immediately**.
+7. Share the `weekly_kpis` Sheet with Chris and Jason as viewers.
 
-## Paste-only setup (no clasp)
+If Advanced Services or APIs are blocked by org policy, follow the UI click-path in `docs/launch/HUMAN_INPUTS.md` (Weekly report wiring) and keep the report running with Health notes.
 
-1. [script.google.com](https://script.google.com) → New project → rename **Cut Rates Weekly Website Report**.
-2. Delete `Code.gs`. Create files with the same names/contents as this folder:
-   - `appsscript.json` (View → Show manifest file), then `Config.gs`, `Ga4.gs`, `SearchConsole.gs`, `Ghl.gs`, `Sheet.gs`, `Ads.gs`, `Report.gs`, `Main.gs`
-3. Continue from step 4 in the clasp section above.
+## Rollback GTM
 
-## Smoke test checklist
+After `runAllWiring`, Script Property `GTM_ROLLBACK_VERSION` holds the prior live version id. Run `rollbackGtm()` to re-publish it.
 
-- [ ] `dryRunWeeklyReport` logs HTML with non-error GA4 sessions (or a clear Health note)
-- [ ] Sheet `weekly_kpis` exists and has a row for last week
-- [ ] Email arrives with subject `Cut Rates weekly report — …`
-- [ ] Health mentions Ads only as “not connected” (expected)
-- [ ] If GHL token missing: Health says so; contacts fall back to GA4 `conversion_lead`
+## Local verification before merge
 
-## Troubleshooting
+```powershell
+pnpm run report:test
+pnpm run lint
+pnpm exec tsc --noEmit
+pnpm run test:analytics
+pnpm run build
+```
 
-| Symptom | Fix |
-|---------|-----|
-| `Missing Script Property: GA4_PROPERTY_ID` | Set property; no `properties/` prefix |
-| GSC zero forever | Site URL must include trailing slash if that’s how the property was added; account must own property |
-| GHL 401 | Rotate Private Integration token; scopes Contacts Read |
-| Trigger wrong day | Project timezone must be `America/Chicago` (`appsscript.json`) |
+Live GA4 collect proof (after GTM publish): Playwright `tests/e2e/analytics-wiring.spec.ts` against production or a preview with the same container. Do **not** submit real quote/contact/newsletter leads in production — intercept API routes.
 
 ## Security
 
-- Never commit `GHL_PRIVATE_TOKEN` or clasp `.clasp.json` with tokens into git if it contains secrets.
-- Prefer Script Properties over hardcoding in `Main.gs`.
+- Never commit `GHL_PRIVATE_TOKEN` or `.clasp.json`.
+- Prefer Script Properties over hardcoding.

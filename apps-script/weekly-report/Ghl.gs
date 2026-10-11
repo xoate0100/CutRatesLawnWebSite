@@ -4,6 +4,9 @@ var Ghl = (function () {
   // Official Search Contacts (advanced filters + searchAfter pagination):
   // https://marketplace.gohighlevel.com/docs/ghl/contacts/search-contacts-advanced
   //
+  // dateAdded does NOT accept top-level gte/lt filters. Use operator "range" with
+  // value { gte|gt, lte|lt } (ISO or epoch ms). Verified live 2026-10-11.
+  //
   // lib/ghl.ts writes estimateAmount to opportunity monetaryValue only — there is
   // no contact custom-field key for estimates, so estimateSum stays null (not 0).
   var ESTIMATE_FIELD_KEY = null;
@@ -33,8 +36,14 @@ var Ghl = (function () {
         pageLimit: pageLimit,
         filters: [
           { field: 'tags', operator: 'contains', value: 'website-lead' },
-          { field: 'dateAdded', operator: 'gte', value: start.toISOString() },
-          { field: 'dateAdded', operator: 'lt', value: endExclusive.toISOString() },
+          {
+            field: 'dateAdded',
+            operator: 'range',
+            value: {
+              gte: start.toISOString(),
+              lt: endExclusive.toISOString(),
+            },
+          },
         ],
       };
       if (searchAfter) body.searchAfter = searchAfter;

@@ -12,7 +12,7 @@ Every number in the Monday email must map to a real query. Missing dimensions pr
 | Quote starts | GA4 `form_start` where `customEvent:form_id == quote` | Not all `form_start` |
 | Quote funnel steps | GA4 `funnel_step_view` by `customEvent:step_name` | Drop-off shown step-to-step |
 | Quote completes | GA4 `conversion_lead` + `lead_source == quote` | Distinct from newsletter |
-| GHL complete / partial | LeadConnector Search Contacts: tag `website-lead` + `dateAdded` range; paginated | Undated contacts skipped |
+| GHL complete / partial | LeadConnector Search Contacts: tag `website-lead` + `dateAdded` `operator:range` value `{gte,lt}`; paginated | Undated contacts skipped |
 | GHL estimate sum | Contact custom field if present in `lib/ghl.ts`; else `null` (not 0) | Opportunity monetaryValue is not a contact field |
 | Sessions / users / engaged | GA4 standard metrics | |
 | Channel split | `sessionDefaultChannelGroup` sessions | |

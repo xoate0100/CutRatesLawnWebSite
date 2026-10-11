@@ -478,6 +478,25 @@ t('zero contacts prints Not yet measurable', () => {
   assert(/Not yet measurable/.test(h.sent[0].htmlBody));
 });
 
+t('GHL search uses dateAdded range operator not gte/lt filters', () => {
+  const h = makeCtx(
+    { ...base(), GHL_PRIVATE_TOKEN: 'tok', GHL_LOCATION_ID: 'loc' },
+    { ghlContacts: [] },
+  );
+  h.run('debugGhl()');
+  const hit = h.calls.find((c) => c.url && String(c.url).includes('leadconnector') && c.payload);
+  assert(hit, 'GHL search called');
+  const body = JSON.parse(hit.payload);
+  const dateFilter = (body.filters || []).find((f) => f.field === 'dateAdded');
+  assert(dateFilter, 'dateAdded filter present');
+  assert.strictEqual(dateFilter.operator, 'range');
+  assert(dateFilter.value && dateFilter.value.gte && dateFilter.value.lt, 'range value has gte+lt');
+  assert(
+    !(body.filters || []).some((f) => f.operator === 'gte' || f.operator === 'lt'),
+    'no top-level gte/lt operators',
+  );
+});
+
 t('250-contact paginated GHL mock counts across pages', () => {
   const mk = (n, tag) => {
     const out = [];

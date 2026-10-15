@@ -22,6 +22,16 @@ Every number in the Monday email must map to a real query. Missing dimensions pr
 | Tracking cost / contact | `MONTHLY_FEE_USD * 12 / 52 / contacts` | Omitted if contacts = 0 |
 | Value block | Real contacts + cost/contact + optional estimateSum + WoW / 4-week avg from Sheet | "Not yet measurable" if inputs missing |
 
+## Sheet tab `weekly_kpis` (longitudinal)
+
+One row per Monday `week_key`. Re-runs upsert. See `docs/launch/WEEKLY_KPIS_SHEET_GAP.md`.
+
+**Persisted for trends:** contacts (filtered), quote funnel, sessions/engaged, GSC clicks/CTR/position, won_jobs/value, device + in-area users, `tracking_dark`, short `health_flags`.
+
+**Intentionally blank / reserved:** `leads_contact` (sales source disposition is FieldRoutes), `estimate_sum` (no contact CF yet), phone/quote blanks when `tracking_dark`.
+
+**Not stored (by design):** multi-channel sales lead source — FieldRoutes is system of record (confirmed with Chris 2026-10-15).
+
 ## Health notes (expected early)
 
 - Unregistered custom dimensions → unsplit totals + "run ensureGa4CustomDimensions()"

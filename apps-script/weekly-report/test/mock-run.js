@@ -24,14 +24,19 @@ function makeCtx(props, opts = {}) {
     getSheetByName: () => sh,
     insertSheet: () =>
       (sh = {
-        appendRow: (r) => rows.push(r),
-        getDataRange: () => ({ getValues: () => (rows.length ? rows : []) }),
+        appendRow: (r) => rows.push(Array.isArray(r) ? r.slice() : r),
+        getDataRange: () => ({ getValues: () => rows.map((r) => (Array.isArray(r) ? r.slice() : r)) }),
         getRange: (r, _c, _rr, _cc) => ({
           setValues: (v) => {
-            if (!rows.length) rows.push(v[0]);
-            else rows[r - 1] = v[0];
+            while (rows.length < r) rows.push([]);
+            rows[r - 1] = v[0].slice();
           },
+          clearContent: () => {
+            if (rows[r - 1]) rows[r - 1] = rows[r - 1].map(() => '');
+          },
+          setFontWeight: () => {},
         }),
+        setFrozenRows: () => {},
       }),
   });
 
@@ -347,12 +352,14 @@ t('manifest is valid JSON with send_mail scope', () => {
   assert(syms.includes('AnalyticsAdmin'));
 });
 
+const clientMail = (h) => h.sent.filter((m) => m.to === 'chris@example.com,jason@example.com');
+const techMail = (h) => h.sent.filter((m) => m.to === 'andy@example.com' && /\[Tech notes\]/.test(m.subject));
+
 t('sends to Chris+Jason for the prior Mon-Sun week', () => {
   const h = makeCtx(base());
   h.run('runWeeklyReport()');
-  assert.strictEqual(h.sent.length, 1);
-  assert.strictEqual(h.sent[0].to, 'chris@example.com,jason@example.com');
-  assert(/Cut Rates website: \d+ contacts, week of /.test(h.sent[0].subject));
+  assert.strictEqual(clientMail(h).length, 1);
+  assert(/^Cut Rates website: .+ \(week of /.test(clientMail(h)[0].subject));
 });
 
 t('queries the event names the site actually emits', () => {
@@ -367,12 +374,11 @@ t('queries the event names the site actually emits', () => {
   }
 });
 
-t('newsletter is excluded from leads (own line, not a lead)', () => {
+t('newsletter is excluded from leads', () => {
   const h = makeCtx(base(), { ga4Events: { newsletter_signup: 7, conversion_lead: 2 } });
   h.run('runWeeklyReport()');
-  assert(/Newsletter signups \(not a lead\)/.test(h.sent[0].htmlBody));
-  assert(!/Newsletter signups \(not a lead\)<\/td><td[^>]*>0</.test(h.sent[0].htmlBody) || true);
-  assert(/not a lead/.test(h.sent[0].htmlBody));
+  // no GHL token in base() -> lead tile falls back to GA4 conversion_lead (2), never adds newsletter (7)
+  assert(clientMail(h)[0].htmlBody.includes('<!--tile:leads=2-->'));
 });
 
 t('quote starts are filtered by form_id', () => {
@@ -386,15 +392,15 @@ t('quote starts are filtered by form_id', () => {
   assert(filtered, 'expected form_start + form_id filter');
 });
 
-t('landing request has orderBys', () => {
+t('pages request has orderBys by views', () => {
   const h = makeCtx(base());
   h.run('dryRunWeeklyReport()');
-  const land = h.calls.find(
-    (c) => c.ga4 && (c.ga4.dimensions || []).some((d) => d.name === 'landingPagePlusQueryString'),
+  const pg = h.calls.find(
+    (c) => c.ga4 && (c.ga4.dimensions || []).some((d) => d.name === 'pagePath'),
   );
-  assert(land, 'landing query present');
-  assert(land.ga4.orderBys && land.ga4.orderBys.length, 'orderBys set');
-  assert.strictEqual(land.ga4.orderBys[0].metric.metricName, 'sessions');
+  assert(pg, 'pagePath query present');
+  assert(pg.ga4.orderBys && pg.ga4.orderBys.length, 'orderBys set');
+  assert.strictEqual(pg.ga4.orderBys[0].metric.metricName, 'screenPageViews');
 });
 
 t('GSC body has dataState all', () => {
@@ -406,17 +412,12 @@ t('GSC body has dataState all', () => {
   assert.strictEqual(body.dataState, 'all');
 });
 
-t('top landing pages sorted by sessions desc', () => {
-  const h = makeCtx(base());
+t('unregistered custom dimension: client still gets email, fix goes to tech notes', () => {
+  const h = makeCtx(base(), { badDim: 'customEvent:step_name' });
   h.run('runWeeklyReport()');
-  assert(/Top landings<\/b><\/p><ul><li>\/ — 90/.test(h.sent[0].htmlBody));
-});
-
-t('unregistered custom dimension degrades to a Health note, still sends', () => {
-  const h = makeCtx(base(), { badDim: 'customEvent:service_id' });
-  h.run('runWeeklyReport()');
-  assert.strictEqual(h.sent.length, 1);
-  assert(/not registered|ensureGa4CustomDimensions/.test(h.sent[0].htmlBody));
+  assert.strictEqual(clientMail(h).length, 1);
+  assert(!/ensureGa4CustomDimensions|customEvent/.test(clientMail(h)[0].htmlBody));
+  assert(/ensureGa4CustomDimensions/.test(techMail(h)[0].htmlBody));
 });
 
 t('missing REPORT_RECIPIENT sends the FAILED alert', () => {
@@ -440,13 +441,14 @@ t('missing GA4_PROPERTY_ID emails a FAILED alert to ALERT_TO', () => {
 t('second run in the same week sends no email', () => {
   const h = makeCtx(base());
   h.run('runWeeklyReport()');
-  assert.strictEqual(h.sent.length, 1);
+  const n = h.sent.length;
+  assert(n >= 1);
   h.run('runWeeklyReport()');
-  assert.strictEqual(h.sent.length, 1);
+  assert.strictEqual(h.sent.length, n);
   assert(h.props.LAST_SENT_WEEK);
 });
 
-t('zero contacts prints Not yet measurable', () => {
+t('zero-lead week has no NaN and no cost line', () => {
   const h = makeCtx(base(), {
     ga4Events: {
       conversion_lead: 0,
@@ -475,7 +477,9 @@ t('zero contacts prints Not yet measurable', () => {
     return { rows: [{ dimensionValues: [{ value: 'x' }, { value: 'y' }], metricValues: [{ value: '0' }] }] };
   };
   h.run('runWeeklyReport()');
-  assert(/Not yet measurable/.test(h.sent[0].htmlBody));
+  const body = clientMail(h)[0].htmlBody;
+  assert(!/NaN|Infinity|undefined/.test(body));
+  assert(!/per lead/.test(body), 'no cost line when there are zero leads');
 });
 
 t('GHL search uses dateAdded range operator not gte/lt filters', () => {
@@ -715,6 +719,21 @@ t('re-running dryRun updates the Sheet row instead of appending forever', () => 
   h.run('dryRunWeeklyReport()');
   // header + one week row (upsert)
   assert(h.rows.length <= 3, 'expected upsert not unbounded append, got ' + h.rows.length);
+});
+
+t('weekly_kpis headers include longitudinal columns', () => {
+  const h = makeCtx(base());
+  const headers = h.run('Sheet.HEADERS');
+  for (const col of [
+    'week_key', 'contacts', 'sessions', 'engaged_rate', 'gsc_position',
+    'won_jobs', 'quote_complete_rate', 'tracking_dark', 'applicants_excluded',
+  ]) {
+    assert(headers.includes(col), 'missing column ' + col);
+  }
+  h.run('dryRunWeeklyReport()');
+  const dataRow = h.rows.find((r) => r && r[0] && r[0] !== 'week_key');
+  assert(dataRow, 'data row written');
+  assert.strictEqual(dataRow.length, headers.length, 'row width matches headers');
 });
 
 t('createWeeklyTrigger targets runWeeklyReport', () => {

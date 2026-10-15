@@ -67,3 +67,7 @@ Manual GTM (`GTM-KGVZJ93G`) click-path (same as `ensureGtmEventForwarding`):
 6. GA4 Admin → Custom definitions (event-scoped): `service_id`, `area_slug`, `form_id`, `click_location`, `lead_source`, `funnel_id`, `step_name`. Mark `conversion_lead` and `phone_click` as key events.
 
 Until wiring runs, the report Health section must say GA4 lead/phone/funnel numbers will be **0**. Do not fake numbers.
+
+### FieldRoutes vs weekly_kpis (2026-10-15)
+
+Chris confirmed: **sales lead sources are tracked in FieldRoutes** by the sales team. The Apps Script `weekly_kpis` Sheet is for **website marketing KPIs** (traffic, forms, GHL website-lead counts, SEO) — not a second sales-attribution system. See `docs/launch/WEEKLY_KPIS_SHEET_GAP.md`.

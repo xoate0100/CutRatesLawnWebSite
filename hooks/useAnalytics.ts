@@ -8,10 +8,12 @@ import {
   trackFormStart,
   trackFormStepComplete,
   trackFunnelStep,
+  trackNewsletterSignup,
   trackPartialFormFill,
   trackPhoneClick,
   trackServiceView,
 } from "@/lib/analytics/core"
+import type { LeadSource } from "@/lib/analytics/types"
 
 export function useAnalytics() {
   const onServiceView = useCallback((serviceId: string, serviceName: string) => {
@@ -34,11 +36,22 @@ export function useAnalytics() {
   }, [])
 
   const onConversionLead = useCallback(
-    (transactionId: string, conversionValue: number, currency = "USD", serviceId?: string, areaSlug?: string) => {
-      trackConversionLead({ transactionId, conversionValue, currency, serviceId, areaSlug })
+    (
+      transactionId: string,
+      conversionValue: number,
+      leadSource: LeadSource,
+      currency = "USD",
+      serviceId?: string,
+      areaSlug?: string,
+    ) => {
+      trackConversionLead({ transactionId, conversionValue, currency, serviceId, areaSlug, leadSource })
     },
     [],
   )
+
+  const onNewsletterSignup = useCallback(() => {
+    trackNewsletterSignup()
+  }, [])
 
   const onFormStart = useCallback((formId: string) => trackFormStart(formId), [])
   const onFormFieldEngage = useCallback(
@@ -70,6 +83,7 @@ export function useAnalytics() {
       onFunnelStep,
       onPhoneClick,
       onConversionLead,
+      onNewsletterSignup,
       onFormStart,
       onFormFieldEngage,
       onFormStepComplete,
@@ -83,6 +97,7 @@ export function useAnalytics() {
       onFunnelStep,
       onPhoneClick,
       onConversionLead,
+      onNewsletterSignup,
       onFormStart,
       onFormFieldEngage,
       onFormStepComplete,

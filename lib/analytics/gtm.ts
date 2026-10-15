@@ -165,23 +165,49 @@ export function waitForGTM(callback: () => void, maxWaitMs = 5000): void {
   check()
 }
 
+/** Volatile event keys cleared before each push so GTM's merged model cannot leak. */
+export const GTM_VOLATILE_KEYS = [
+  "service_id",
+  "service_name",
+  "area_slug",
+  "area_name",
+  "form_id",
+  "field_name",
+  "step_name",
+  "step_number",
+  "click_location",
+  "lead_source",
+  "transaction_id",
+  "conversion_value",
+  "error_type",
+  "last_step",
+  "last_field",
+] as const
+
+function volatileResets(): Record<string, undefined> {
+  const resets: Record<string, undefined> = {}
+  for (const k of GTM_VOLATILE_KEYS) resets[k] = undefined
+  return resets
+}
+
 /**
  * First-party dataLayer always. Marketing tag *consumers* in GTM should honor Consent Mode.
  * We still push conversion events with zero UTMs (F-CRO-101).
+ * One object per event (event name + payload); volatile keys reset first.
  */
 export function gtmEvent(eventName: string, eventData?: Record<string, unknown>): void {
   if (typeof window === "undefined") return
   const consent = readConsent()
   const fire = () => {
     const dl = (window.dataLayer = window.dataLayer || [])
-    const payload = {
+    dl.push(volatileResets())
+    dl.push({
+      event: eventName,
       ...(eventData || {}),
       analytics_consent: consent.analytics,
       ads_consent: consent.ads,
       marketing_tags_allowed: allowMarketingTags(),
-    }
-    if (Object.keys(payload).length > 0) dl.push(payload)
-    setTimeout(() => dl.push({ event: eventName }), 50)
+    })
   }
   waitForGTM(fire)
 }

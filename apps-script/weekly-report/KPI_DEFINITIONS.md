@@ -1,18 +1,39 @@
 # KPI definitions — weekly website report
 
-| KPI | Definition | Source |
-|-----|------------|--------|
-| Website leads (complete) | Contacts created in-week with tag `website-lead` and without `lead-status:partial` | GHL |
-| Website leads (partial) | Same with `lead-status:partial` | GHL |
-| GA4 conversion_lead | Count of `conversion_lead` events in week | GA4 |
-| Phone clicks | Count of `conversion_phone_click` (or `phone_click` if renamed in GTM) | GA4 |
-| Contacts (north-star) | complete+partial GHL leads; falls back to GA4 conversion_lead if GHL API fails | GHL/GA4 |
-| Sessions / users / engaged rate | Standard GA4 metrics | GA4 |
-| Channel split | `sessionDefaultChannelGroup` sessions | GA4 |
-| Top landings | `landingPagePlusQueryString` by sessions | GA4 |
-| Quote funnel | `funnel_quote_start` → `funnel_quote_complete` | GA4 |
-| GSC clicks/impressions/CTR/position | Search Analytics totals for property | GSC |
-| Tracked queries | Configurable list in Script Properties / Config defaults | GSC |
-| Cost per contact | `MONTHLY_FEE_USD × 12 / 52 ÷ contacts` when fee set; else omitted until Ads wired | Config |
+Every number in the Monday email must map to a real query. Missing dimensions print a Health note and fall back to an unsplit total — never invent zeros as success.
 
-Missing inputs print a Health line — never invent zeros as “success”.
+| KPI | Exact source / filter | Notes |
+|-----|----------------------|--------|
+| Website contacts (north-star) | GHL `website-lead` in window (complete + partial); fallback GA4 `conversion_lead` if GHL errors | Used in subject line and value block |
+| Quote leads | GA4 `conversion_lead` where `customEvent:lead_source == quote` | Requires dimension registration |
+| Contact leads | GA4 `conversion_lead` where `customEvent:lead_source == contact` | Same |
+| Newsletter signups | GA4 `newsletter_signup` | Labeled **not a lead** |
+| Phone taps | GA4 `phone_click`, split by `customEvent:click_location` when available | |
+| Quote starts | GA4 `form_start` where `customEvent:form_id == quote` | Not all `form_start` |
+| Quote funnel steps | GA4 `funnel_step_view` by `customEvent:step_name` | Drop-off shown step-to-step |
+| Quote completes | GA4 `conversion_lead` + `lead_source == quote` | Distinct from newsletter |
+| GHL complete / partial | LeadConnector Search Contacts: tag `website-lead` + `dateAdded` `operator:range` value `{gte,lt}`; paginated | Undated contacts skipped |
+| GHL estimate sum | Contact custom field if present in `lib/ghl.ts`; else `null` (not 0) | Opportunity monetaryValue is not a contact field |
+| Sessions / users / engaged | GA4 standard metrics | |
+| Channel split | `sessionDefaultChannelGroup` sessions | |
+| Top landings | `landingPagePlusQueryString`, `orderBys` sessions desc, server `limit` | |
+| GSC clicks / impressions / CTR | Search Analytics `dataState: all` | Includes recent non-final days |
+| GSC avg position | Weighted: `sum(position * impressions) / sum(impressions)` | |
+| Tracking cost / contact | `MONTHLY_FEE_USD * 12 / 52 / contacts` | Omitted if contacts = 0 |
+| Value block | Real contacts + cost/contact + optional estimateSum + WoW / 4-week avg from Sheet | "Not yet measurable" if inputs missing |
+
+## Sheet tab `weekly_kpis` (longitudinal)
+
+One row per Monday `week_key`. Re-runs upsert. See `docs/launch/WEEKLY_KPIS_SHEET_GAP.md`.
+
+**Persisted for trends:** contacts (filtered), quote funnel, sessions/engaged, GSC clicks/CTR/position, won_jobs/value, device + in-area users, `tracking_dark`, short `health_flags`.
+
+**Intentionally blank / reserved:** `leads_contact` (sales source disposition is FieldRoutes), `estimate_sum` (no contact CF yet), phone/quote blanks when `tracking_dark`.
+
+**Not stored (by design):** multi-channel sales lead source — FieldRoutes is system of record (confirmed with Chris 2026-10-15).
+
+## Health notes (expected early)
+
+- Unregistered custom dimensions → unsplit totals + "run ensureGa4CustomDimensions()"
+- GTM not publishing site events → leads/phone/funnel read 0 until `runAllWiring`
+- First email week (2026-10-05..11) may have partial splits if dimensions/GTM went live mid-week

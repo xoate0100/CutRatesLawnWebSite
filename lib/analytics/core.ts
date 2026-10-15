@@ -19,6 +19,7 @@ import {
   CONVERSION_GATED_ON_ATTRIBUTION,
   type AnalyticsEvent,
   type AttributionParams,
+  type LeadSource,
 } from "./types"
 import { experimentVariant } from "./experiment"
 
@@ -124,13 +125,24 @@ export function initAnalyticsCapture(): void {
   storePaidClickParams()
 }
 
+/** Survives React Strict Mode remount so one navigation → one dataLayer page_view. */
+let lastPageViewKey = ""
+
 export function trackPageView(pageTitle?: string): void {
   if (typeof window === "undefined") return
+  const key = `${window.location.pathname}${window.location.search}`
+  if (lastPageViewKey === key) return
+  lastPageViewKey = key
   pushAnalyticsEvent({
     event: "page_view",
     page_path: window.location.pathname,
     page_title: pageTitle ?? document.title,
   })
+}
+
+/** Test-only: clear page_view dedupe key. */
+export function __resetPageViewDedupeForTests(): void {
+  lastPageViewKey = ""
 }
 
 export function trackServiceView(serviceId: string, serviceName: string): void {
@@ -181,6 +193,7 @@ export function trackConversionLead(params: {
   transactionId: string
   conversionValue: number
   currency?: string
+  leadSource: LeadSource
   serviceId?: string
   areaSlug?: string
 }): boolean {
@@ -191,8 +204,19 @@ export function trackConversionLead(params: {
     transaction_id: params.transactionId,
     conversion_value: params.conversionValue,
     currency: params.currency ?? "USD",
+    lead_source: params.leadSource,
     service_id: params.serviceId,
     area_slug: params.areaSlug,
+  })
+}
+
+/** Newsletter signup — not a CRM lead; excluded from CONVERSION_EVENTS / MARKETING_EVENTS. */
+export function trackNewsletterSignup(): boolean {
+  if (typeof window === "undefined") return false
+  return pushAnalyticsEvent({
+    event: "newsletter_signup",
+    page_path: window.location.pathname,
+    form_id: "newsletter",
   })
 }
 

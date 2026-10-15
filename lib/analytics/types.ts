@@ -69,13 +69,22 @@ export interface PhoneClickEvent extends BaseAnalyticsEvent {
   click_location: string
 }
 
+export type LeadSource = "quote" | "contact"
+
 export interface ConversionLeadEvent extends BaseAnalyticsEvent {
   event: "conversion_lead"
   transaction_id: string
   conversion_value: number
   currency: string
+  /** Required: which site form produced the lead. Newsletter must use newsletter_signup. */
+  lead_source: LeadSource
   service_id?: string
   area_slug?: string
+}
+
+export interface NewsletterSignupEvent extends BaseAnalyticsEvent {
+  event: "newsletter_signup"
+  form_id?: string
 }
 
 export interface FormStartEvent extends BaseAnalyticsEvent {
@@ -123,6 +132,7 @@ export type AnalyticsEvent =
   | FunnelStepViewEvent
   | PhoneClickEvent
   | ConversionLeadEvent
+  | NewsletterSignupEvent
   | FormStartEvent
   | FormFieldEngageEvent
   | FormStepCompleteEvent
@@ -132,6 +142,8 @@ export type AnalyticsEvent =
 
 export const CONVERSION_EVENTS = new Set(["conversion_lead", "lead_conversion", "conversion"])
 export const MARKETING_EVENTS = new Set(["conversion_lead", "lead_conversion", "conversion"])
+/** Newsletter is engagement, not a CRM lead / conversion. */
+export const NEWSLETTER_EVENTS = new Set(["newsletter_signup"])
 
 /** Runtime never drops conversions for missing UTM/gclid (F-CRO-101). Vendor suite may still require attribution. */
 export const CONVERSION_GATED_ON_ATTRIBUTION = false

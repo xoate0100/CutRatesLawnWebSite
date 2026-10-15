@@ -57,3 +57,8 @@ media/archive/*
 media/archive/already_in_registry/**
 .vercel
 .env*.local
+
+# clasp local script ids (never commit)
+.clasp.json
+apps-script/weekly-report/.clasp.json
+/appsscript.json

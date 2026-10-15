@@ -23,16 +23,19 @@ export function ThankYouClient({ service }: { service?: string }) {
   useEffect(() => {
     // Only count real submits — direct visits / refreshes without rid must not convert.
     if (!rid) return
+    // Contact form already fires conversion_lead with lead_source=contact.
+    if (sp.get("source") === "contact") return
     const key = `cro_conv_${rid}`
     if (sessionStorage.getItem(key)) return
     sessionStorage.setItem(key, "1")
     trackConversionLead({
       transactionId: rid,
       conversionValue: Number.isFinite(amt) ? amt : 0,
+      leadSource: "quote",
       serviceId: svc || undefined,
       areaSlug: area || undefined,
     })
-  }, [rid, amt, svc, area])
+  }, [rid, amt, svc, area, sp])
 
   return (
     <div className={`${pageWrap} py-[clamp(2.5rem,5vw,4.5rem)]`}>
